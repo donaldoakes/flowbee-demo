@@ -1,0 +1,43 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  Documentation: "Scenario:\n\n1. In mdw.yaml, the following appears under `application`:\n    ```yaml\n    application:\n      name: my-mdw\n      configs:\n        - one.properties\n        - two.properties\n        - three.yaml\n    ``` \n\n2. The following files exist in the location pointed to by -Dmdw.config.location.  \n    **one.properties**\n    ```\n    one.prop=oneValue\n    ```\n    **two.properties**\n    ```\n    two.prop=twoValue\n    ```\n    **three.yaml**\n    ```yaml\n    flat.config: threeFlatValue\n    structured:\n      config: threeStructuredValue\n    ```\n\n3. The `Log Props` activity produces this output:\n    ```\n    one: oneValue\n    two: twoValue\n    three.flat: threeFlatValue\n    three.structured: threeStructuredValue\n    ``` "
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=46,y=56,w=96,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=60,y=260,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=219,y=232,xs=124&244,ys=280&280
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=480,y=260,w=60,h=40
+- id: S3
+  name: Log Props
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      import com.centurylink.mdw.config.PropertyManager
+
+      println 'one: ' + PropertyManager.getProperty("one.prop")
+      println 'two: ' + runtimeContext.getProperty("two.prop")
+
+      println 'three.flat: ' + PropertyManager.getProperty("three.flat.config")
+      println 'three.structured: ' + runtimeContext.getProperty("three.structured.config")
+    SCRIPT: Groovy
+    display: x=248,y=249,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=414,y=280,xs=352&476,ys=280&280
+    event: FINISH
+    to: S2

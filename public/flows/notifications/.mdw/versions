@@ -1,0 +1,11 @@
+Emails.flow=1
+Emails.proc=2
+MsTeams.flow=1
+MsTeams.proc=2
+MsTeamsTask.task=1
+SendgridTask.task=1
+Slack.flow=1
+Slack.proc=2
+SlackTask.task=1
+SmtpTask.task=1
+readme.md=2

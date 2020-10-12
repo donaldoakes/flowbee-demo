@@ -1,0 +1,108 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  ERROR_PROCESS_ID: '-3'
+  ERROR_TRANSITION_ID: '68528'
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  SLA: '20'
+  SLA_UNIT: Minutes
+  START_TRANSITION_ID: '2327302'
+  Transition with no Label: Acts as Default
+  display: x=38,y=63,w=248,h=27
+steps:
+- id: S2
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=36,y=208,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=188,y=195,xs=100&230,ys=228&228
+    event: FINISH
+    to: S3
+- id: S4
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=490,y=212,w=60,h=40
+- id: S1
+  name: Check
+  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  attributes:
+    TIMER_WAIT: '2'
+    Unit: Minutes
+    display: x=159,y=363,w=100,h=60
+  links:
+  - id: L4
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=Elbow,x=325,y=316,xs=263&263&320&320,ys=359&307&307&262
+    event: FINISH
+    to: S3
+- id: S3
+  name: Event Wait
+  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  attributes:
+    $+Id: '472083'
+    STATUS_AFTER_EVENT: Hold
+    STATUS_AFTER_TIMEOUT: Hold
+    WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},NonTaskAction,false
+    display: x=234,y=200,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=390,y=233,xs=338&486,ys=232&232
+    event: FINISH
+    to: S4
+  - id: L3
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=Elbow,x=200,y=293,xs=246&246,ys=264&359
+    event: DELAY
+    to: S1
+subflows:
+- id: F2
+  name: Exception Handler
+  attributes:
+    ENTRY_TRANSITION_ID: '2327303'
+    PROCESS_VISIBILITY: EMBEDDED
+    START_TRANSITION_ID: '2327293'
+    display: x=358,y=31,w=440,h=120
+  steps:
+  - id: S5
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=398,y=71,w=60,h=40
+    links:
+    - id: L6
+      attributes:
+        display: type=Elbow,x=491,y=91,xs=462&519,ys=91&91
+      event: FINISH
+      to: S7
+  - id: S6
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=698,y=71,w=60,h=40
+  - id: S7
+    name: Event Wait Fallout
+    specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+    attributes:
+      STATUS_AFTER_EVENT: Cancelled
+      TASK_TEMPLATE: com.centurylink.mdw.tests.workflow/Event Wait Fallout.task
+      TASK_TEMPLATE_assetVersion: '[0.2,1)'
+      Wait for Task: 'TRUE'
+      display: x=523,y=61,w=105,h=61
+    links:
+    - id: L5
+      attributes:
+        display: type=Elbow,x=663,y=91,xs=632&694,ys=91&91
+      event: FINISH
+      to: S6
+  variables:
+    EmbeddedSubProcessTaskAction:
+      type: java.lang.String

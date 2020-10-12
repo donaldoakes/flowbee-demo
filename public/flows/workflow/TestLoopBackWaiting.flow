@@ -1,0 +1,86 @@
+attributes:
+  ERROR_PROCESS_ID: '262002'
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  START_TRANSITION_ID: '2325804'
+  display: x=27,y=26,w=239,h=27
+steps:
+- id: S2
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=144,y=76,w=60,h=40
+  links:
+  - id: L3
+    attributes:
+      display: type=Straight,x=199,y=185,xs=174&226,ys=116&259
+    event: FINISH
+    to: S4
+- id: S3
+  name: Loop Back
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    RETURN_CODE: comp
+    Rule: return "BACK"
+    SCRIPT: Groovy
+    display: x=498,y=281,w=100,h=60
+  links:
+  - id: L7
+    attributes:
+      display: type=Curve,x=382,y=328,xs=494&350&280,ys=292&331&323
+    event: FINISH
+    to: S4
+    result: BACK
+- id: S1
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=146,y=431,w=60,h=40
+- id: S4
+  name: Loop Control
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Expression: |-
+      N = N + 1;
+      if (N==3) {
+          comp = "TEMP";
+      } else if (N>5) {
+          comp = "DONE";
+      } else {
+          comp = "RETRY";
+      }
+    RETURN_CODE: comp
+    Rule: |-
+      n++
+      if (n == 3)
+          return "TEMP"
+      else if (n > 5)
+          return "DONE"
+      else
+          return "BACK"
+    SCRIPT: Groovy
+    display: x=176,y=259,w=100,h=60
+  links:
+  - id: L4
+    attributes:
+      display: type=Straight,x=201,y=375,xs=226&176,ys=319&431
+    event: FINISH
+    to: S1
+    result: DONE
+  - id: L5
+    attributes:
+      TRANSITION_DELAY: '1'
+      TRANSITION_RETRY_COUNT: '3'
+      display: type=Curve,x=242,y=149,xs=226&247,ys=289&176
+    event: FINISH
+    to: S4
+    result: BACK
+  - id: L6
+    attributes:
+      display: type=Curve,x=374,y=205,xs=280&365&494,ys=255&230&277
+    event: FINISH
+    to: S3
+    result: TEMP
+variables:
+  n:
+    type: java.lang.Integer

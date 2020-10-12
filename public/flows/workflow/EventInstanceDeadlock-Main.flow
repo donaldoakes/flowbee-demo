@@ -1,0 +1,94 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=34,y=34,w=257,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=25,y=104,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=28,y=-41,xs=89&144,ys=124&124
+    event: FINISH
+    to: S5
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=590,y=103,w=60,h=40
+- id: S3
+  name: Invoke Subs
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  attributes:
+    DELAY_BETWEEN: '6'
+    Execution Plan: plan
+    Force Parallel Execution: 'true'
+    STATUS_AFTER_EVENT: Hold
+    display: x=431,y=91,w=99,h=60
+    processmap: '[["sub1","com.centurylink.mdw.tests.workflow/EventInstanceDeadlock-Sub1","[0.1,1)",""],["sub2","com.centurylink.mdw.tests.workflow/EventInstanceDeadlock-Sub2","[0.1,1)",""],["notify","com.centurylink.mdw.tests.workflow/EventInstanceDeadlock-Notify","[0.1,1)",""]]'
+    synchronous: 'false'
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=561,y=123,xs=534&586,ys=123&123
+    event: FINISH
+    to: S2
+- id: S4
+  name: Build Plan
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: plan
+    Rule: "import com.centurylink.mdw.model.ExecutionPlan\r\nimport com.centurylink.mdw.model.Subprocess\r\nimport com.centurylink.mdw.model.workflow.WorkStatus\r\n\r\n// request is of type com.centurylink.tom.model.Order\r\nruntimeContext.logDebug 'serviceSummary:\\n' + serviceSummary.json.toString(2)\r\n\r\n// build the servicePlan\r\n// three of each subproc to force contention\r\nplan = new ExecutionPlan()\r\nList<Subprocess> subprocs = new ArrayList<>()\r\nSubprocess subproc\r\nfor (int i = 0; i < subCount; i++) {\r\n    subproc = new Subprocess()\r\n    subproc.setLogicalName(\"sub1\")\r\n    subproc.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue())\r\n    subproc.getParameters().put('serviceSummary', '$serviceSummary')\r\n    subprocs.add(subproc)\r\n    subproc = new Subprocess()\r\n    subproc.setLogicalName(\"sub2\")\r\n    subproc.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue())\r\n    subproc.getParameters().put('serviceSummary', '$serviceSummary')\r\n    subprocs.add(subproc)\r\n}\r\nif (!publishFirst) {\r\n    subproc = new Subprocess()\r\n    subproc.setLogicalName(\"notify\")\r\n    subproc.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue())\r\n    subprocs.add(subproc)\r\n    plan.setSubprocesses(subprocs)\r\n}\r\n\r\n\r\n\r\n"
+    SCRIPT: Groovy
+    display: x=284,y=91,w=103,h=61
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=415,y=121,xs=391&427,ys=121&121
+    event: FINISH
+    to: S3
+- id: S5
+  name: "Publish\r\nFirst?"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: publishFirst
+    SCRIPT: Groovy
+    display: x=148,y=97,w=80,h=57
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=235,y=127,xs=232&280,ys=124&124
+    event: FINISH
+    to: S4
+    result: 'false'
+  - id: L6
+    attributes:
+      display: type=Elbow,x=191,y=179,xs=190&190,ys=158&215
+    event: FINISH
+    to: S8
+    result: 'true'
+- id: S8
+  name: Broadcast Update Message
+  specifier: com.centurylink.mdw.workflow.activity.event.PublishEventMessage
+  attributes:
+    Event Name: servicesummary-update-${masterRequestId}
+    display: x=153,y=219,w=161,h=61
+  links:
+  - id: L7
+    attributes:
+      display: type=Elbow,x=318,y=175,xs=299&299,ys=215&156
+    event: FINISH
+    to: S4
+variables:
+  plan:
+    type: org.yaml.snakeyaml.Yaml
+  publishFirst:
+    type: java.lang.Boolean
+  serviceSummary:
+    type: com.centurylink.mdw.model.Jsonable
+  subCount:
+    type: java.lang.Integer

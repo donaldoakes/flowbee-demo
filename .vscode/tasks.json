@@ -11,6 +11,13 @@
 			"problemMatcher": [],
 			"label": "npm: build",
 			"detail": "tsc"
-		}
+		},
+        {
+            "type": "npm",
+            "script": "start",
+            "isBackground": true,
+            "problemMatcher": [],
+            "label": "npm: start"
+        }
 	]
 }

@@ -1,0 +1,80 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=31,y=28,w=149,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=38,y=107,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=122,y=127,xs=103&142,ys=127&127
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=766,y=111,w=60,h=40
+- id: S3
+  name: |-
+    Custom
+    Activity
+  specifier: com.centurylink.mdw.tests.workflow.LoggingActivity
+  attributes:
+    display: x=145,y=96,w=104,h=68
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=278,y=130,xs=254&302,ys=130&130
+    event: FINISH
+    to: S4
+- id: S4
+  name: Dynamic Java
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: ActivityLogging_A4
+    Java: "package com.centurylink.mdw.tests.workflow;\n\nimport java.util.Map;\n\nimport com.centurylink.mdw.java.JavaExecutionException;\nimport com.centurylink.mdw.java.JavaExecutor;\nimport com.centurylink.mdw.java.MdwJavaException;\nimport com.centurylink.mdw.model.workflow.ActivityRuntimeContext;\n\npublic class ActivityLogging_A4 implements JavaExecutor {\n    private ActivityRuntimeContext context;\n\n    public void initialize(ActivityRuntimeContext context) throws MdwJavaException {\n        this.context = context;\n    }\n\n    public Object execute(Map<String,Object> variables) throws JavaExecutionException  {\n        // context\n        context.logInfo(\"context.logInfo()\");\n        context.logDebug(\"context.logDebug()\");\n        context.logError(\"context.logError()\", new Exception(\"context.logError()\"));\n        \n        return null;\n    }\n}\n"
+    display: x=305,y=97,w=103,h=66
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=433,y=129,xs=412&454,ys=129&129
+    event: FINISH
+    to: S5
+- id: S5
+  name: Groovy
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      runtimeContext.logInfo("context.logInfo()");
+      runtimeContext.logDebug("context.logDebug()");
+      runtimeContext.logError("context.logError()", new Exception("context.logError()"));
+    SCRIPT: Groovy
+    display: x=458,y=98,w=104,h=62
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=586,y=130,xs=566&606,ys=130&130
+    event: FINISH
+    to: S6
+- id: S6
+  name: Kotlin
+  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  attributes:
+    Rule: |
+      runtimeContext.logInfo("context.logInfo()");
+      runtimeContext.logDebug("context.logDebug()");
+      runtimeContext.logError("context.logError()", Exception("context.logError()"));
+    SCRIPT: Kotlin Script
+    display: x=611,y=101,w=100,h=60
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=738,y=131,xs=714&762,ys=131&131
+    event: FINISH
+    to: S2

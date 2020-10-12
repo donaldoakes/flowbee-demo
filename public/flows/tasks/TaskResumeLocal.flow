@@ -1,0 +1,80 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=26,y=22,w=165,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=77,y=85,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=197,y=81,xs=141&191,ys=105&105
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=492,y=84,w=60,h=40
+- id: S3
+  name: custom
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: custom
+    SCRIPT: Groovy
+    display: x=195,y=85,w=60,h=40
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=269,y=82,xs=259&313,ys=105&105
+    event: FINISH
+    to: S4
+    result: 'false'
+  - id: L3
+    attributes:
+      display: type=Elbow,x=260,y=151,xs=259&316,ys=105&208
+    event: FINISH
+    to: S5
+    result: 'true'
+- id: S4
+  name: "autoform task\r\nfor local resume"
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/autoform task for local resume.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'TRUE'
+    display: x=317,y=78,w=108,h=73
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=460,y=104,xs=429&488,ys=104&104
+    event: FINISH
+    to: S2
+- id: S5
+  name: "custom task for\r\nlocal resume"
+  specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/custom task for local resume.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=320,y=172,w=105,h=72
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=459,y=158,xs=429&488,ys=208&104
+    event: FINISH
+    to: S2
+variables:
+  custom:
+    type: java.lang.Boolean
+  inputString:
+    type: java.lang.String
+  requiredString:
+    type: java.lang.String

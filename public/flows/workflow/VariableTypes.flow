@@ -1,0 +1,45 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=29,y=27,w=130,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=57,y=140,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=233,y=184,xs=121&232,ys=160&160
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=477,y=140,w=60,h=40
+- id: S3
+  name: Update Vars
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: inputJsonable#inputYaml#localJsonable#localYaml
+    Rule: "import com.centurylink.mdw.tests.workflow.Person\r\n\r\n// assign local variables\r\nlocalJsonable = new Person()\r\nlocalJsonable.firstName = 'donald'\r\nlocalJsonable.lastName = 'oakes'\r\n\r\nlocalYaml = new Person()\r\nlocalYaml.firstName = 'manoj'\r\nlocalYaml.lastName = 'agrawal'\r\n\r\n// update input variables\r\ninputJsonable.lastName = 'Torvalds'\r\ninputYaml.lastName = 'Richards'"
+    SCRIPT: Groovy
+    display: x=236,y=134,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=411,y=160,xs=340&473,ys=160&160
+    event: FINISH
+    to: S2
+variables:
+  inputJsonable:
+    type: com.centurylink.mdw.common.service.Jsonable
+  inputYaml:
+    type: org.yaml.snakeyaml.Yaml
+  localJsonable:
+    type: com.centurylink.mdw.common.service.Jsonable
+  localYaml:
+    type: org.yaml.snakeyaml.Yaml

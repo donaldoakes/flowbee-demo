@@ -1,0 +1,67 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=50,y=50,w=0,h=0
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=75,y=153,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=199,y=128,xs=139&260,ys=173&84
+    event: FINISH
+    to: S3
+  - id: L3
+    attributes:
+      display: type=Elbow,x=199,y=220,xs=139&260,ys=173&268
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=450,y=64,w=60,h=40
+- id: S3
+  name: |-
+    Wait
+    Here
+  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  attributes:
+    SLA_DISPLAY_UNITS: Hours
+    STATUS_AFTER_TIMEOUT: Cancelled
+    WAIT_EVENT_NAMES: '[["never",""]]'
+    display: x=264,y=50,w=111,h=70
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=413,y=84,xs=379&447,ys=84&84
+    event: FINISH
+    to: S2
+- id: S4
+  name: |-
+    Task
+    Here
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/An AutoForm Task.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=264,y=233,w=110,h=68
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=410,y=260,xs=378&443,ys=260&260
+    event: FINISH
+    to: S5
+- id: S5
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=448,y=240,w=60,h=40
+variables:
+  testCase:
+    type: java.lang.String

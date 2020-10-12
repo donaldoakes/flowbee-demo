@@ -1,19 +1,19 @@
 import * as flowbee from 'flowbee';
+import { Specs } from './specs';
 
 export class Flow {
 
-    options: flowbee.DiagramOptions;
-
-    constructor(base: string, readonly specs: flowbee.Specifier[]) {
-        // TODO: switch between light/dark
-        this.options = flowbee.DefaultOptions.diagram.light;
-        this.options.iconBase = `${base}/img/icons`;
+    constructor(private readonly base: string) {
     }
 
-    render(text: string, file: string, readonly = false) {
+    async render(text: string, file: string, dark = false, readonly = false) {
+        // TODO: switch between light/dark
+        const options = dark ? flowbee.DefaultOptions.diagram.dark : flowbee.DefaultOptions.diagram.light;
+        options.iconBase = `${this.base}/icons`;
         const canvas = document.getElementById('diagram-canvas') as HTMLCanvasElement;
-        console.info(`rendering ${file} to canvas: ${canvas}`);
-        const flow = new flowbee.FlowDiagram(canvas, this.options, this.specs, readonly);
+        console.debug(`rendering ${file} to canvas: ${canvas}`);
+        const specs = await Specs.getSpecs(this.base);
+        const flow = new flowbee.FlowDiagram(canvas, options, specs, readonly);
 
         const instance = undefined;
         const step: string | undefined = undefined;

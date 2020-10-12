@@ -1,0 +1,117 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=25,y=32,w=189,h=27
+steps:
+- id: S3
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=33,y=102,w=67,h=38
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=146,y=121,xs=104&175,ys=121&121
+    event: FINISH
+    to: S4
+- id: S6
+  name: Finish
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=674,y=100,w=60,h=40
+- id: S4
+  name: Perform Validation
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    OsgiBundleSymbolicName: com.centurylink.myservicemix
+    Rule: "import org.w3c.dom.Node;\r\n\r\nNode orderNumNode   =   orderDoc.getFirstChild().getFirstChild().getNextSibling();\r\nprintln(\"orderNum Node: \"+orderNumNode);\r\norderNumber         =   orderNumNode.getFirstChild().getNodeValue();\r\nprintln(\"orderNumber: \"+orderNumber);\r\nvalidationResult    =   orderNumNode.getLocalName().equals(\"orderNumber\") && !Character.isDigit(orderNumber.charAt(0));\r\ncustomerId          =   orderNumNode.getNextSibling().getNextSibling().getFirstChild().getNodeValue();\r\nreturn validationResult;\r\n"
+    SCRIPT: Groovy
+    display: x=179,y=93,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=298,y=103,xs=283&341,ys=123&123
+    event: FINISH
+    to: S8
+    result: 'true'
+  - id: L3
+    attributes:
+      display: type=Elbow,x=237,y=163,xs=233&233,ys=157&197
+    event: FINISH
+    to: S7
+    result: 'false'
+- id: S7
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=203,y=201,w=60,h=40
+- id: S8
+  name: Check Employee
+  specifier: com.centurylink.mdw.workflow.adapter.soap.DocumentWebServiceAdapter
+  attributes:
+    DO_LOGGING: 'True'
+    OsgiBundleSymbolicName: com.centurylink.mdw.workflow
+    PostScript: "import org.w3c.dom.Node;\r\nimport org.w3c.dom.NodeList;\r\n\r\nString firstName    =   null;\r\nString lastName     =   null;\r\n\r\nprintln(\"employeeServiceResponse: \"+employeeServiceResponse);\r\nNodeList nodes  =   employeeServiceResponse.getFirstChild().getChildNodes();\r\nfor(int i=0;i<nodes.getLength();i++)\r\n{\r\n    Node node   =   nodes.item(i);\r\n    println(\"Node Local Name: \"+node.getLocalName());\r\n    if(node.getLocalName()!=null) {\r\n     if(\"firstName\".equals(node.getLocalName()))\r\n     {\r\n      firstName=node.getFirstChild().getNodeValue();\r\n     }else if(\"lastName\".equals(node.getLocalName()))\r\n     {\r\n         lastName=node.getFirstChild().getNodeValue();\r\n     }\r\n    }\r\n} \r\nif(firstName!=null && lastName!=null)\r\n{\r\n  println(\"Found Employee: \" + firstName + \" \" + lastName);\r\n  discountPercent =   10;\r\n  return true;\r\n} else\r\n{\r\n  println(\"Employee Not Found \" + customerId);\r\n  discountPercent =   0;\r\n  return false;\r\n}\r\nprintln(\"Found Employee: \" + firstName + \" \" + lastName);\r\nreturn true;"
+    PostScriptLang: Groovy
+    PreScript: return '''<GetEmployee><sapId>'''+customerId+'''</sapId></GetEmployee>''';
+    PreScriptLang: Groovy
+    REQUEST_VARIABLE: employeeServiceRequest
+    RESPONSE_VARIABLE: employeeServiceResponse
+    WSDL: '#{props[''mdw.services.url'']}/SOAP'
+    display: x=345,y=93,w=100,h=60
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=409,y=161,xs=402&402,ys=157&195
+    event: FINISH
+    to: S9
+    result: 'false'
+  - id: L7
+    attributes:
+      display: type=Elbow,x=456,y=105,xs=449&508,ys=123&123
+    event: FINISH
+    to: S14
+    result: 'true'
+- id: S9
+  name: Finish
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=372,y=199,w=60,h=40
+- id: S14
+  name: Set Variables
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    OsgiBundleSymbolicName: com.centurylink.myservicemix
+    Rule: "arg0=2;\r\narg1=3;"
+    SCRIPT: Groovy
+    display: x=512,y=93,w=100,h=60
+  links:
+  - id: L8
+    attributes:
+      display: type=Elbow,x=643,y=120,xs=616&670,ys=120&120
+    event: FINISH
+    to: S6
+variables:
+  arg0:
+    type: java.lang.Integer
+  arg1:
+    type: java.lang.Integer
+  customerId:
+    type: java.lang.String
+  discountPercent:
+    type: java.lang.Integer
+  employeeServiceRequest:
+    type: com.centurylink.mdw.model.StringDocument
+  employeeServiceResponse:
+    type: org.w3c.dom.Document
+  orderDoc:
+    type: org.w3c.dom.Document
+  orderNumber:
+    type: java.lang.String
+  return:
+    type: java.lang.Integer
+  validationResult:
+    type: java.lang.Boolean
+  webserviceRequestVariable:
+    type: com.centurylink.mdw.model.StringDocument

@@ -1,0 +1,89 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=44,y=42,w=104,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=70,y=110,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=160,y=130,xs=134&186,ys=130&130
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=570,y=110,w=60,h=40
+- id: S3
+  name: Populate
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: JavaObject_A3
+    Java: |
+      package com.centurylink.mdw.tests.variables;
+
+      import com.centurylink.mdw.java.JavaExecutionException;
+      import com.centurylink.mdw.java.JavaExecutor;
+
+      import java.util.ArrayList;
+      import java.util.List;
+      import java.util.Map;
+
+      public class JavaObject_A3 implements JavaExecutor {
+
+          public Object execute(Map<String,Object> variables) throws JavaExecutionException  {
+              Mountain input = (Mountain)variables.get("input");
+              if (input != null)
+                  input.setElevation(input.getElevation() - 1);
+              variables.put("mountain", new Mountain("Fuji", 12389, "Japan"));
+              List<Mountain> mountains = new ArrayList<>();
+              mountains.add(new Mountain("Denali", 20310, "United States"));
+              mountains.add(new Mountain("K2", 28251, "Pakistan"));
+              variables.put("mountains", mountains);
+              return null;
+          }
+      }
+    Output Documents: '["mountain","mountains"]'
+    display: x=190,y=100,w=100,h=60
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=335,y=130,xs=294&376,ys=130&130
+    event: FINISH
+    to: S5
+- id: S5
+  name: Update
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: '["input","mountain","mountains"]'
+    Rule: |
+      import com.centurylink.mdw.tests.variables.Mountain
+
+      mountain.elevation = mountain.elevation - 1
+      mountains.add(new Mountain("Evans", 14271, "United States"))
+      if (input != null) {
+          input.elevation = input.elevation - 1
+      }
+    SCRIPT: Groovy
+    display: x=380,y=100,w=100,h=60
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=525,y=130,xs=484&566,ys=130&130
+    event: FINISH
+    to: S2
+variables:
+  input:
+    type: java.lang.Object
+  mountain:
+    type: java.lang.Object
+  mountains:
+    type: java.lang.Object
+  testCase:
+    type: java.lang.String

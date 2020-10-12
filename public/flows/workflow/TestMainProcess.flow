@@ -1,0 +1,586 @@
+attributes:
+  ABORT_TRANSITION_ID: '192270'
+  ERROR_PROCESS_ID: '282656'
+  ERROR_TRANSITION_ID: '192269'
+  PROCESS_VISIBILITY: PUBLIC
+  SLA: '20'
+  SLA_UNIT: Minutes
+  START_TRANSITION_ID: '2325977'
+  Transition with no Label: Acts as Default
+  display: x=50,y=40,w=199,h=27
+steps:
+- id: S6
+  name: Process Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=424,y=34,w=32,h=32
+  links:
+  - id: L41
+    attributes:
+      display: type=Elbow,x=440,y=102,xs=440&440,ys=70&135
+    event: FINISH
+    to: S33
+- id: S9
+  name: N = 11
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: N = 11;
+    SCRIPT: Groovy
+    display: x=950,y=535,w=25,h=23
+  links:
+  - id: L8
+    attributes:
+      display: type=Elbow,x=966,y=600,xs=962&1041,ys=562&654
+    event: FINISH
+    to: S20
+- id: S11
+  name: Process Finish
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=488,y=880,w=32,h=32
+- id: S10
+  name: Invoke process that errs
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  attributes:
+    display: x=475,y=623,w=20,h=20
+    processname: com.centurylink.mdw.tests.workflow/TestSubProcess2.proc
+    processversion: '[0,1)'
+    synchronous: 'TRUE'
+  links:
+  - id: L21
+    attributes:
+      display: type=ElbowV,x=491,y=774,xs=491&491,ys=647&876
+    event: FINISH
+    to: S11
+- id: S25
+  name: Get orderId
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    OsgiBundleSymbolicName: com.centurylink.mdw.workflow
+    Output Documents: order
+    Rule: "org.w3c.dom.NodeList nodes = order.getFirstChild().getChildNodes();\r\norg.w3c.dom.Node node = nodes.item(0);\r\n\r\n if (\"orderId\".equals(node.getLocalName()))\r\n   orderId = node.getFirstChild().getNodeValue();\r\n\r\n"
+    SCRIPT: Groovy
+    display: x=825,y=661,w=25,h=23
+  links:
+  - id: L2
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=508,y=776,xs=837&504,ys=688&876
+    event: FINISH
+    to: S11
+- id: S7
+  name: Sum = 121
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      Sum = 121;
+    SCRIPT: Groovy
+    display: x=1092,y=533,w=25,h=23
+  links:
+  - id: L10
+    attributes:
+      display: type=Elbow,x=1045,y=599,xs=1104&1041,ys=560&654
+    event: FINISH
+    to: S20
+- id: S20
+  name: Synch both branches
+  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  attributes:
+    Synced Activities: N = 11#Sum = 121
+    display: x=1029,y=658,w=24,h=24
+  links:
+  - id: L9
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=507,y=775,xs=1041&504,ys=686&876
+    event: FINISH
+    to: S11
+- id: S17
+  name: Read order
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: order
+    OutputVariables: order
+    ReadOnlyVariables: order#xmldata#launcher
+    Rule: |-
+      // import com.centurylink.mdw.common.translator.VariableTranslator;
+      // import com.qwest.mbeng.MbengDocument;
+      // File orderFile = new File("C:\\workspaces\\mdw\\MDWDesigner\\myorder.so");
+      // order = VariableTranslator.realToObject(MbengDocument.class.getName(), orderFile.getText());
+      println("I do not need to load from file any more!");
+    SCRIPT: Groovy
+    display: x=827,y=366,w=25,h=23
+  links:
+  - id: L3
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=841,y=533,xs=838&838,ys=393&657
+    event: FINISH
+    to: S25
+- id: S8
+  name: Another Dummy
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      print("Hello");
+    SCRIPT: Groovy
+    display: x=1219,y=367,w=25,h=23
+  links:
+  - id: L14
+    attributes:
+      display: type=Elbow,x=1189,y=457,xs=1231&1187,ys=394&524
+    event: FINISH
+    to: S18
+  - id: L15
+    attributes:
+      TRANSITION_DELAY: 5s
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=Elbow,x=1235,y=452,xs=1231&1268,ys=394&526
+    event: FINISH
+    to: S19
+- id: S26
+  name: Display result
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: print("Returned value is " +Sum);
+    SCRIPT: Groovy
+    display: x=223,y=654,w=30,h=24
+  links:
+  - id: L31
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=243,y=771,xs=238&504,ys=682&876
+    event: FINISH
+    to: S11
+- id: S12
+  name: Raise ABORT event
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    RETURN_CODE: BTN
+    Rule: |
+      return "ABORT:";
+    SCRIPT: Groovy
+    display: x=343,y=479,w=24,h=24
+  links:
+  - id: L12
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=405,y=747,xs=371&371&484&484,ys=507&780&780&876
+    event: FINISH
+    to: S11
+- id: S21
+  name: Invoke remote process
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  attributes:
+    display: x=60,y=490,w=31,h=29
+    processname: com.centurylink.mdw.tests.workflow/TestSubProcess.proc
+    processversion: '[0,1)'
+    synchronous: 'TRUE'
+    variables: argument=$N;newvar=;testxml=$xmldata;result=$Sum
+  links:
+  - id: L34
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=198,y=667,xs=75&238,ys=523&650
+    event: FINISH
+    to: S26
+- id: S16
+  name: Another sync
+  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  attributes:
+    Sync Expression: A18 || A19
+    Synced Activities: N 13#Sum 169
+    display: x=1220,y=659,w=24,h=24
+  links:
+  - id: L18
+    attributes:
+      TRANSITION_DELAY: 7s
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=508,y=774,xs=1232&504,ys=687&876
+    event: FINISH
+    to: S11
+- id: S22
+  name: Invoke single process
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  attributes:
+    display: x=223,y=505,w=28,h=25
+    processname: com.centurylink.mdw.tests.workflow/TestSubProcess.proc
+    processversion: '[0,1)'
+    synchronous: 'TRUE'
+    variables: argument=$N;testxml=$xmldata;result=$Sum
+  links:
+  - id: L30
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=241,y=592,xs=237&237,ys=534&650
+    event: FINISH
+    to: S26
+- id: S4
+  name: Set remote argument
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: xmldata#maptest#intarraytest
+    Rule: |+
+      /*$xmldata.MINUTES = '2";
+       $intarraytest = "1~1~2~3~5~8";
+       $maptest = "R=red~G=green~B=blue";
+       */
+      xmldata = '<ROOT>\n'
+      xmldata = xmldata+'   <MINUTES>2</MINUTES>\n'
+      xmldata = xmldata+'</ROOT>\n'
+
+      intarraytest = new java.util.ArrayList<Integer>(6);
+      intarraytest.add( new Integer(1))
+      intarraytest.add( new Integer(1))
+      intarraytest.add( new Integer(2))
+      intarraytest.add( new Integer(3))
+      intarraytest.add( new Integer(5))
+      intarraytest.add( new Integer(8))
+
+      maptest = new HashMap<String, String>()
+      maptest.put('R', 'red')
+      maptest.put('G', 'green')
+      maptest.put('B', 'blue')
+
+    SCRIPT: Groovy
+    display: x=66,y=391,w=25,h=23
+  links:
+  - id: L37
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=79,y=460,xs=78&78,ys=418&486
+    event: FINISH
+    to: S21
+- id: S24
+  name: Dummy Resume B
+  specifier: com.centurylink.mdw.workflow.activity.ControlledActivityImpl
+  attributes:
+    Documentation: "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \r\n    </p>\r\n  </body>\r\n</html>\r\n"
+    display: x=718,y=664,w=24,h=16
+  links:
+  - id: L24
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=504,y=778,xs=730&504,ys=684&876
+    event: FINISH
+    to: S11
+- id: S19
+  name: Sum 169
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      Sum = 169;
+    SCRIPT: Groovy
+    display: x=1256,y=530,w=25,h=23
+  links:
+  - id: L17
+    attributes:
+      display: type=Elbow,x=1236,y=598,xs=1268&1232,ys=557&655
+    event: FINISH
+    to: S16
+- id: S23
+  name: Set input argument
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: xmldata
+    Rule: "xmldata = \"<ROOT>\\n\";\nxmldata = xmldata+\"   <MINUTES>2</MINUTES>\\n\";\nxmldata = xmldata+\"</ROOT>\\n\";\n\nInteger[] intarraytest = new Integer[6];\n        intarraytest[0] = new Integer(1);\n        intarraytest[1] = new Integer(1);\n        intarraytest[2] = new Integer(2);\n        intarraytest[3] = new Integer(3);\n        intarraytest[4] = new Integer(5);\n        intarraytest[5] = new Integer(8);\n\nMap<String, String> maptest = new HashMap<String, String>();\n            maptest.put(\"R\", \"red\");\n            maptest.put(\"G\", \"green\");\n            maptest.put(\"B\", \"blue\");\n    \n\n"
+    SCRIPT: Groovy
+    display: x=223,y=392,w=29,h=29
+  links:
+  - id: L35
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=243,y=467,xs=237&237,ys=425&501
+    event: FINISH
+    to: S22
+- id: S15
+  name: Create argument
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: println("Hello, world!")
+    SCRIPT: Groovy
+    display: x=478,y=435,w=24,h=24
+  links:
+  - id: L20
+    attributes:
+      display: type=ElbowV,x=486,y=533,xs=486&486,ys=463&619
+    event: FINISH
+    to: S10
+- id: S13
+  name: Scripts with syntax error
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: intarraytest#maptest#xmldata
+    Rule: |-
+      /*$xmldata.MINUTES = '2";
+       $intarraytest = "1~1~2~3~5~8";
+       $maptest = "R=red~G=green~B=blue";
+       */
+      xmldata = '<ROOT>\n'
+      xmldata = xmldata+'   <MINUTES>2</MINUTES>\n'
+      xmldata = xmldata+'</ROOT>\n'
+
+      intarraytest = new java.util.ArrayList<Integer>(6);
+      intarraytest.add( new Integer(1))
+      intarraytest.add( new Integer(1))
+      intarraytest.add( new Integer(2))
+      intarraytest.add( new Integer(3))
+      intarraytest.add( new Integer(5))
+      intarraytest.add( new Integer(8))
+
+      maptest = new HashMap<String, String>()
+      maptest.put('R', 'red')
+      maptest.put('G', 'green')
+      maptest.put('B', 'blue')
+
+
+      syntax error here
+    SCRIPT: Groovy
+    display: x=680,y=369,w=30,h=28
+  links:
+  - id: L22
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=695,y=516,xs=695&730,ys=401&660
+    event: RESUME
+    to: S24
+    result: B
+  - id: L25
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=640,y=517,xs=695&627,ys=401&661
+    event: FINISH
+    to: S14
+- id: S2
+  name: Dummy - to fork out
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: print("Hello!");
+    SCRIPT: Groovy
+    display: x=1022,y=364,w=25,h=23
+  links:
+  - id: L6
+    attributes:
+      display: type=Elbow,x=966,y=456,xs=1034&962,ys=391&531
+    event: FINISH
+    to: S9
+  - id: L7
+    attributes:
+      TRANSITION_DELAY: 5s
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=1032,y=439,xs=1032&1032&1102&1102,ys=391&463&463&529
+    event: FINISH
+    to: S7
+- id: S14
+  name: Dummy Resume A
+  specifier: com.centurylink.mdw.workflow.activity.ControlledActivityImpl
+  attributes:
+    Documentation: "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \r\n    </p>\r\n  </body>\r\n</html>\r\n"
+    display: x=615,y=665,w=24,h=16
+  links:
+  - id: L23
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '0'
+      display: type=ElbowV,x=498,y=782,xs=627&504,ys=685&876
+    event: FINISH
+    to: S11
+- id: S18
+  name: N 13
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      N = 13;
+    SCRIPT: Groovy
+    display: x=1175,y=528,w=25,h=23
+  links:
+  - id: L16
+    attributes:
+      display: type=Elbow,x=1191,y=597,xs=1187&1232,ys=555&655
+    event: FINISH
+    to: S16
+- id: S33
+  name: multiple processes ?
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: processCase
+    SCRIPT: Groovy
+    display: x=408,y=139,w=69,h=25
+  links:
+  - id: L43
+    attributes:
+      display: type=ElbowV,x=81,y=344,xs=442&78,ys=168&387
+    event: FINISH
+    to: S4
+    result: RemoteSubProcess
+  - id: L44
+    attributes:
+      display: type=ElbowV,x=633,y=311,xs=442&695,ys=168&365
+    event: FINISH
+    to: S13
+    result: DEFAULT
+  - id: L45
+    attributes:
+      display: type=ElbowV,x=756,y=330,xs=442&839,ys=168&362
+    event: FINISH
+    to: S17
+    result: ServiceOrder
+  - id: L46
+    attributes:
+      display: type=ElbowV,x=948,y=332,xs=442&1034,ys=168&360
+    event: FINISH
+    to: S2
+    result: Synchronization
+  - id: L47
+    attributes:
+      display: type=ElbowV,x=1092,y=325,xs=442&1231,ys=168&363
+    event: FINISH
+    to: S8
+    result: Sync with custom expr
+  - id: L48
+    attributes:
+      display: type=ElbowV,x=472,y=367,xs=442&490,ys=168&431
+    event: FINISH
+    to: S15
+    result: error handler delegation
+  - id: L49
+    attributes:
+      display: type=ElbowV,x=376,y=396,xs=440&440&371&371,ys=168&349&349&475
+    event: FINISH
+    to: S12
+    result: AbortEvent
+  - id: L50
+    attributes:
+      display: type=ElbowV,x=239,y=352,xs=442&237,ys=168&388
+    event: FINISH
+    to: S23
+    result: SingleSubProcess
+  - id: L51
+    attributes:
+      display: type=ElbowV,x=980,y=170,xs=481&1356&1356,ys=168&168&693
+    event: FINISH
+    to: S34
+    result: DocumentBinding
+- id: S34
+  name: Invoke service lvl9 process
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  attributes:
+    display: x=1332,y=697,w=20,h=20
+    processname: com.centurylink.mdw.tests.workflow/ServiceLevel_9.proc
+    processversion: '[0,1)'
+    synchronous: 'TRUE'
+    variables: processCase=$processCase
+  links:
+  - id: L52
+    attributes:
+      display: type=ElbowV,x=910,y=730,xs=1342&504,ys=721&876
+    event: FINISH
+    to: S11
+subflows:
+- id: F3
+  name: Cancellation Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Cancellation Handler
+    ENTRY_TRANSITION_ID: '2325978'
+    PROCESS_VISIBILITY: EMBEDDED
+    START_TRANSITION_ID: '2325900'
+    display: x=729,y=40,w=281,h=86
+  steps:
+  - id: S31
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=770,y=72,w=32,h=32
+    links:
+    - id: L40
+      attributes:
+        display: type=Elbow,x=869,y=87,xs=806&928,ys=87&87
+      event: FINISH
+      to: S32
+  - id: S32
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=932,y=71,w=32,h=32
+  variables:
+    EmbeddedSubProcessTaskAction:
+      type: java.lang.String
+- id: F2
+  name: Exception Handler
+  attributes:
+    ENTRY_TRANSITION_ID: '2325979'
+    PROCESS_VISIBILITY: EMBEDDED
+    START_TRANSITION_ID: '2325912'
+    TaskName: A Test Task
+    WORK_DISPLAY_INFO_TestFalloutProcess: x=499,y=110,w=31,h=27
+    WORK_DISPLAY_INFO_TestMainProcess: x=494,y=29,w=24,h=24
+    display: x=1053,y=39,w=310,h=84
+  steps:
+  - id: S29
+    name: Process Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=1073,y=64,w=32,h=32
+    links:
+    - id: L39
+      attributes:
+        display: type=Straight,x=1145,y=80,xs=1105&1186,ys=80&80
+      event: FINISH
+      to: S28
+  - id: S30
+    name: Process Finish
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=1301,y=65,w=32,h=32
+  - id: S28
+    name: My fallout task
+    specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+    attributes:
+      STATUS_AFTER_EVENT: Cancelled
+      TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
+      TASK_TEMPLATE: com.centurylink.mdw.tests.workflow/A Task For Testing Variables.task
+      TASK_TEMPLATE_assetVersion: '[0.2,1)'
+      Task Name: General Fallout
+      display: x=1186,y=66,w=30,h=28
+    links:
+    - id: L38
+      attributes:
+        display: type=Straight,x=1258,y=80,xs=1216&1301,ys=80&81
+      event: FINISH
+      to: S30
+  variables:
+    EmbeddedSubProcessTaskAction:
+      type: java.lang.String
+variables:
+  BTN:
+    type: java.lang.String
+  N:
+    type: java.lang.Integer
+  Sum:
+    type: java.lang.Integer
+  intarraytest:
+    type: java.util.List<Integer>
+  launcher:
+    type: org.apache.xmlbeans.XmlObject
+  maptest:
+    type: java.util.Map<String,String>
+  order:
+    type: org.w3c.dom.Document
+  orderId:
+    type: java.lang.String
+  processCase:
+    type: java.lang.String
+  xmldata:
+    type: org.w3c.dom.Document

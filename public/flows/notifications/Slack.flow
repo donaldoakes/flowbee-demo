@@ -1,0 +1,56 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=47,y=47,w=52,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=54,y=145,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=152,y=165,xs=118&186,ys=165&165
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=533,y=146,w=60,h=40
+- id: S3
+  name: Notify
+  specifier: com.centurylink.mdw.slack.SlackActivity
+  attributes:
+    display: x=189,y=135,w=100,h=60
+    message: com.centurylink.mdw.slack/message.json
+    message_assetVersion: '[0.1,1)'
+    webhookUrl: ${props['mdw.slack.webhook.url']}
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=319,y=166,xs=294&344,ys=166&166
+    event: FINISH
+    to: S4
+- id: S4
+  name: |-
+    Slack
+    Task
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    TASK_TEMPLATE: com.centurylink.mdw.tests.notifications/SlackTask.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=348,y=138,w=100,h=60
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=490,y=166,xs=452&528,ys=166&166
+    event: FINISH
+    to: S2
+textNotes:
+- id: N1
+  attributes:
+    display: x=144,y=47,w=190,h=28
+  text: For manual testing

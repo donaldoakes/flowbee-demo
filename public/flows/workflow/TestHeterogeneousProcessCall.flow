@@ -1,0 +1,288 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  Documentation: "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \r\n    </p>\r\n  </body>\r\n</html>\r\n"
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: SERVICE
+  TRANSITION_RETRY_COUNT: '-1'
+  Transition with no Label: Acts as Default
+  display: x=26,y=30,w=326,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=22,y=249,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=107,y=247,xs=86&112,ys=269&269
+    event: FINISH
+    to: S8
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=769,y=230,w=60,h=40
+- id: S3
+  name: |-
+    create
+    execution plan
+    - sequential
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: execplan
+    Rule: |+
+      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument
+      import com.centurylink.mdw.bpm.ParameterDocument.Parameter
+      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
+      import com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance
+      import com.centurylink.mdw.model.workflow.WorkStatus
+
+      execplan = ProcessExecutionPlanDocument.Factory.newInstance();
+      ProcessExecutionPlan exeplanVar = execplan.addNewProcessExecutionPlan();
+      SubprocessInstance subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess1");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "argument", "11");
+      addParameter(subprocinst, "result", "\$");
+      subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess1");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "argument", "13");
+      addParameter(subprocinst, "result", "\$");
+      subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess2");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "n", "3");
+      addParameter(subprocinst, "ncube", "\$ncube");
+      addParameter(subprocinst, "resultdoc", "\$docFromSubproc");
+
+      void addParameter(SubprocessInstance subprocinst, String name, String value) {
+       Parameter param = subprocinst.addNewParameter();
+       param.setName(name);
+       param.setStringValue(value);
+      }
+
+    SCRIPT: Groovy
+    display: x=262,y=88,w=100,h=84
+  links:
+  - id: L2
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=389,y=131,xs=366&396,ys=132&132
+    event: FINISH
+    to: S4
+- id: S4
+  name: |-
+    invoke heterogeneous
+    processes - sequential
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  attributes:
+    Execution Plan: execplan
+    Force Parallel Execution: 'FALSE'
+    STATUS_AFTER_EVENT: Hold
+    display: x=400,y=92,w=129,h=83
+    processmap: '[["SubProcess1","com.centurylink.mdw.tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","com.centurylink.mdw.tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
+    synchronous: 'TRUE'
+  links:
+  - id: L13
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=570,y=194,xs=533&611,ys=133&259
+    event: FINISH
+    to: S11
+- id: S6
+  name: |-
+    invoke heterogeneous
+    processes - parallel
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  attributes:
+    Execution Plan: execplan
+    Force Parallel Execution: 'TRUE'
+    STATUS_AFTER_EVENT: Hold
+    display: x=401,y=219,w=129,h=83
+    processmap: '[["SubProcess1","com.centurylink.mdw.tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","com.centurylink.mdw.tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
+    synchronous: 'TRUE'
+  links:
+  - id: L12
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=574,y=259,xs=534&611,ys=259&259
+    event: FINISH
+    to: S11
+- id: S7
+  name: |-
+    invoke heterogeneous
+    processes - error
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  attributes:
+    Execution Plan: execplan
+    Force Parallel Execution: 'TRUE'
+    STATUS_AFTER_EVENT: Hold
+    display: x=397,y=352,w=129,h=83
+    processmap: '[["SubProcess1","com.centurylink.mdw.tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","com.centurylink.mdw.tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
+    synchronous: 'TRUE'
+  links:
+  - id: L14
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=570,y=326,xs=530&611,ys=393&259
+    event: FINISH
+    to: S11
+- id: S8
+  name: which case?
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: testcase
+    SCRIPT: Groovy
+    display: x=116,y=240,w=87,h=58
+  links:
+  - id: L9
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=ElbowH,x=161,y=189,xs=203&231&231&258,ys=269&269&138&138
+    event: FINISH
+    to: S3
+    result: sequential
+  - id: L10
+    attributes:
+      TRANSITION_DELAY: '0'
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=ElbowH,x=185,y=363,xs=203&226&226&246,ys=269&269&389&389
+    event: FINISH
+    to: S10
+    result: error
+  - id: L11
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=199,y=285,xs=207&251,ys=269&269
+    event: FINISH
+    to: S9
+    result: parallel
+- id: S9
+  name: |-
+    create
+    execution plan
+    - parallel
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: execplan
+    Rule: |
+      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument
+      import com.centurylink.mdw.bpm.ParameterDocument.Parameter
+      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
+      import com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance
+      import com.centurylink.mdw.model.workflow.WorkStatus
+
+      execplan = ProcessExecutionPlanDocument.Factory.newInstance();
+      ProcessExecutionPlan exeplanVar = execplan.addNewProcessExecutionPlan();
+      SubprocessInstance subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess1");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "argument", "11");
+      addParameter(subprocinst, "result", "\$");
+      subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess1");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "argument", "13");
+      addParameter(subprocinst, "result", "\$");
+      subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess2");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "n", "3");
+      addParameter(subprocinst, "ncube", "\$ncube");
+      addParameter(subprocinst, "resultdoc", "\$docFromSubproc");
+
+      void addParameter(SubprocessInstance subprocinst, String name, String value) {
+       Parameter param = subprocinst.addNewParameter();
+       param.setName(name);
+       param.setStringValue(value);
+      }
+    SCRIPT: Groovy
+    display: x=255,y=213,w=105,h=86
+  links:
+  - id: L7
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=378,y=259,xs=364&397,ys=259&259
+    event: FINISH
+    to: S6
+- id: S10
+  name: |-
+    create
+    execution plan
+    - error
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: execplan
+    Rule: |
+      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument
+      import com.centurylink.mdw.bpm.ParameterDocument.Parameter
+      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
+      import com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance
+      import com.centurylink.mdw.model.workflow.WorkStatus
+
+      execplan = ProcessExecutionPlanDocument.Factory.newInstance();
+      ProcessExecutionPlan exeplanVar = execplan.addNewProcessExecutionPlan();
+      SubprocessInstance subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess1");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "argument", "11");
+      addParameter(subprocinst, "result", "\$");
+      subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcess1");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "argument", "13");
+      addParameter(subprocinst, "result", "\$");
+      subprocinst = exeplanVar.addNewSubprocessInstance();
+      subprocinst.setLogicalProcessName("SubProcessError");
+      subprocinst.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());
+      addParameter(subprocinst, "n", "3");
+      addParameter(subprocinst, "ncube", "\$ncube");
+      addParameter(subprocinst, "resultdoc", "\$docFromSubproc");
+
+      void addParameter(SubprocessInstance subprocinst, String name, String value) {
+       Parameter param = subprocinst.addNewParameter();
+       param.setName(name);
+       param.setStringValue(value);
+      }
+    SCRIPT: Groovy
+    display: x=250,y=349,w=112,h=83
+  links:
+  - id: L8
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=382,y=392,xs=366&393,ys=392&392
+    event: FINISH
+    to: S7
+- id: S11
+  name: Set result variables
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: response
+    Rule: "import groovy.xml.MarkupBuilder;\r\nimport javax.xml.parsers.DocumentBuilderFactory;\r\nimport javax.xml.parsers.DocumentBuilder;\r\nimport org.xml.sax.InputSource;\r\nimport org.w3c.dom.Document;\r\nimport groovy.xml.QName;\r\n\r\ndef varPlan  = new XmlSlurper().parseText(execplan.toString()) ;\r\nList varResult = varPlan.'**'.grep {\r\n\t it.@Name == 'result' \r\n}\r\n\r\nresult = varResult[0];  \r\n\r\ndef parseResult = new XmlParser().parseText(docFromSubproc);\r\n\r\ndef stringWriter = new StringWriter();\r\ndef docBuilder = new MarkupBuilder(stringWriter);\r\ndocBuilder.Response {\r\n\tncube(ncube)\r\n\tfor (String item : varResult) {\r\n\t\tresult(item)\r\n\t }\r\n\tnplus1(parseResult.nplus1.text())\r\n}\r\n\r\nresponse = stringWriter.toString();\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+    SCRIPT: Groovy
+    display: x=615,y=229,w=100,h=60
+  links:
+  - id: L15
+    attributes:
+      TRANSITION_RETRY_COUNT: '-1'
+      display: type=Elbow,x=742,y=250,xs=719&765,ys=250&250
+    event: FINISH
+    to: S2
+variables:
+  docFromSubproc:
+    type: com.centurylink.mdw.model.StringDocument
+  execplan:
+    type: org.apache.xmlbeans.XmlObject
+  ncube:
+    type: java.lang.String
+  request:
+    type: org.apache.xmlbeans.XmlObject
+  response:
+    type: org.apache.xmlbeans.XmlObject
+  result:
+    type: java.lang.String
+  testcase:
+    type: java.lang.String

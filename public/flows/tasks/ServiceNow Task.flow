@@ -1,0 +1,41 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=28,y=25,w=162,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=70,y=110,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=190,y=130,xs=134&246,ys=130&130
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=480,y=110,w=60,h=40
+- id: S3
+  name: |-
+    Create
+    Task
+  specifier: com.centurylink.mdw.servicenow.ServiceNowTaskActivity
+  attributes:
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/ServiceNowTask.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=250,y=90,w=120,h=80
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=425,y=130,xs=374&476,ys=130&130
+    event: FINISH
+    to: S2
+variables:
+  taskName:
+    type: java.lang.String

@@ -1,0 +1,49 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=31,y=26,w=144,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=76,y=92,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=248,y=53,xs=140&269,ys=112&112
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=510,y=92,w=60,h=40
+- id: S3
+  name: "Invoke Employee\r\nService"
+  specifier: com.centurylink.mdw.workflow.adapter.soap.MdwRpcWebServiceAdapter
+  attributes:
+    DO_LOGGING: 'True'
+    Output Documents: '["responseDoc"]'
+    PostScript: |-
+      import com.centurylink.mdw.xml.DomHelper
+
+      responseDoc = DomHelper.toXml(DomHelper.toDomDocument(responseDoc.toString()))
+    PostScriptLang: Groovy
+    PreScriptLang: Groovy
+    REQUEST_VARIABLE: requestDoc
+    RESPONSE_VARIABLE: responseDoc
+    WSDL: '#{props[''mdw.services.url'']}/SOAP/MDWWebService?WSDL'
+    display: x=273,y=80,w=111,h=67
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=454,y=112,xs=388&506,ys=112&112
+    event: FINISH
+    to: S2
+variables:
+  requestDoc:
+    type: org.w3c.dom.Document
+  responseDoc:
+    type: com.centurylink.mdw.model.StringDocument

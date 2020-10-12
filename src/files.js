@@ -9,14 +9,32 @@ const dirTree = require("directory-tree");
  */
 const app = express();
 
+express.static.mime.define({'application/json': ['spec']});
+express.static.mime.define({'application/yaml': ['flow']});
+
 app.use('/', express.static('public'));
+
+const trimPath = item => {
+    if (item.path.startsWith('public/')) {
+        item.path = item.path.substring(6);
+    }
+};
+
 app.get('/flows', async (req, res) => {
-    const flowTree = dirTree("public/flows", { extensions: /\.flow/ });
+    const flowTree = dirTree("public/flows", {
+        extensions: /\.flow/,
+        normalizePath: true
+    }, trimPath);
+    res.set('Content-Type', 'application/json');
     res.send(JSON.stringify(flowTree, null, 2));
 });
 app.get('/specs', async (req, res) => {
-    const flowTree = dirTree("public/specs", { extensions: /\.spec/ });
+    const flowTree = dirTree("public/specs", {
+        extensions: /\.spec/,
+        normalizePath: true
+    }, trimPath);
+    res.set('Content-Type', 'application/json');
     res.send(JSON.stringify(flowTree, null, 2));
 });
 
-app.listen(3000);
+app.listen(8080);

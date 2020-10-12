@@ -1,0 +1,67 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=29,y=21,w=184,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=52,y=92,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=158,y=104,xs=116&154,ys=112&112
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=499,y=90,w=60,h=40
+- id: S3
+  name: "AutoForm Task \r\nfor Service Access"
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/AutoForm Task for Service Access.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'TRUE'
+    display: x=320,y=75,w=124,h=75
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=472,y=110,xs=448&495,ys=110&110
+    event: FINISH
+    to: S2
+- id: S4
+  name: "Assign\r\nObj Var"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: objectVar
+    Rule: "objectVar = new com.centurylink.mdw.tests.tasks.MyTaskModel()\r\nobjectVar.setTaskmaster('Manoj')"
+    SCRIPT: Groovy
+    display: x=158,y=81,w=108,h=72
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=294,y=115,xs=270&316,ys=115&115
+    event: FINISH
+    to: S3
+variables:
+  dateVar:
+    type: java.util.Date
+  docVar:
+    type: org.w3c.dom.Document
+  jaxbVar:
+    type: javax.xml.bind.JAXBElement
+  jsonVar:
+    type: org.json.JSONObject
+  objectVar:
+    type: java.lang.Object
+  stringVar:
+    type: java.lang.String
+  unassignedVar:
+    type: java.lang.String

@@ -1,0 +1,63 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=48,y=43,w=164,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=69,y=171,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=158,y=191,xs=133&183,ys=191&191
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=537,y=175,w=60,h=40
+- id: S3
+  name: |-
+    Create
+    Request
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: '["serviceRequest"]'
+    Rule: |-
+      // empty request is okay
+      serviceRequest = new org.json.JSONObject()
+    SCRIPT: Groovy
+    display: x=188,y=157,w=108,h=73
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=325,y=193,xs=299&352,ys=193&193
+    event: FINISH
+    to: S4
+- id: S4
+  name: |-
+    POST
+    404
+  specifier: com.centurylink.mdw.workflow.adapter.rest.RestServiceAdapter
+  attributes:
+    EndpointUri: '#{props[''mdw.services.url'']}/api/notfound'
+    HttpMethod: POST
+    REQUEST_VARIABLE: serviceRequest
+    RESPONSE_VARIABLE: serviceResponse
+    display: x=356,y=156,w=112,h=74
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=502,y=195,xs=472&533,ys=195&195
+    event: FINISH
+    to: S2
+variables:
+  serviceRequest:
+    type: org.json.JSONObject
+  serviceResponse:
+    type: org.json.JSONObject

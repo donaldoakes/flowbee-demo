@@ -1,0 +1,83 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  ERROR_TRANSITION_ID: '84481'
+  NodeStyle: Icon
+  PROCESS_VISIBILITY: PUBLIC
+  START_TRANSITION_ID: '2328555'
+  display: x=23,y=20,w=242,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=119,y=74,w=32,h=32
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=93,y=197,xs=136&136,ys=110&217
+    event: FINISH
+    to: S2
+- id: S2
+  name: Force Error
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: bad script
+    SCRIPT: Groovy
+    display: x=124,y=221,w=24,h=24
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=136,y=304,xs=136&136,ys=249&362
+    event: FINISH
+    to: S3
+- id: S3
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=121,y=366,w=32,h=32
+subflows:
+- id: F1
+  name: Exception Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Exception Handler
+    ENTRY_TRANSITION_ID: '2328556'
+    PROCESS_VISIBILITY: EMBEDDED
+    START_TRANSITION_ID: '2328549'
+    display: x=293,y=23,w=395,h=110
+  steps:
+  - id: S5
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=333,y=63,w=32,h=32
+    links:
+    - id: L1
+      attributes:
+        display: type=Elbow,x=422,y=75,xs=369&474,ys=75&75
+      event: FINISH
+      to: S4
+  - id: S6
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=633,y=63,w=32,h=32
+  - id: S4
+    name: Subprocess From Embedded
+    specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+    attributes:
+      display: x=478,y=65,w=20,h=20
+      processname: SubprocessForEmbedded
+      processversion: '[0.4,1)'
+      synchronous: 'TRUE'
+      variables: fromParent=$passToSub;toParent=$receiveFromSub
+    links:
+    - id: L2
+      attributes:
+        display: type=Elbow,x=565,y=75,xs=502&629,ys=75&75
+      event: FINISH
+      to: S6
+variables:
+  passToSub:
+    type: java.lang.String
+  receiveFromSub:
+    type: java.lang.String

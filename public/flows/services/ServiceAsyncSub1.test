@@ -1,0 +1,13 @@
+package com.centurylink.mdw.tests.services
+
+import java.text.SimpleDateFormat
+
+today = new SimpleDateFormat("YYYY-MM-dd").format(new Date())
+start process('ServiceMain') {
+    variables = [ testCase: 'single' ]
+}
+
+wait process
+
+sleep 10 // give Error.proc a chance to flow
+verify processes('ServiceMain', 'ServiceSub', 'Error')

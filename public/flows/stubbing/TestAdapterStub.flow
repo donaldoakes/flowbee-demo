@@ -1,0 +1,43 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=26,y=26,w=151,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=49,y=112,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=169,y=91,xs=113&222,ys=132&132
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=469,y=112,w=60,h=40
+- id: S3
+  name: GetEmployee
+  specifier: com.centurylink.mdw.workflow.adapter.rest.RestServiceAdapter
+  attributes:
+    DO_LOGGING: 'True'
+    EndpointUri: http://purposely_bogus:10001/MDWHub/Services/REST
+    HttpMethod: POST
+    REQUEST_VARIABLE: request
+    RESPONSE_VARIABLE: response
+    display: x=226,y=107,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=397,y=132,xs=330&465,ys=132&132
+    event: FINISH
+    to: S2
+variables:
+  request:
+    type: com.centurylink.mdw.model.StringDocument
+  response:
+    type: com.centurylink.mdw.model.StringDocument

@@ -1,0 +1,49 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=33,y=14,w=111,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=47,y=94,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=138,y=113,xs=111&165,ys=113&113
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=458,y=94,w=60,h=40
+- id: S3
+  name: |-
+    Not
+    Interested
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    display: x=316,y=87,w=85,h=53
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=429,y=114,xs=405&454,ys=114&114
+    event: FINISH
+    to: S2
+- id: S4
+  name: |-
+    Hugely
+    Important
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    display: x=169,y=85,w=82,h=56
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=283,y=113,xs=255&312,ys=113&113
+    event: FINISH
+    to: S3

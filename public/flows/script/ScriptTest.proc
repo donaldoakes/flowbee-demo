@@ -1,0 +1,201 @@
+activities:
+- id: A1
+  name: Still Okay?
+  implementor: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: '"Sure"'
+    SCRIPT: Groovy
+    WORK_DISPLAY_INFO: x=230,y=530,w=100,h=60
+  transitions:
+  - id: T16
+    to: A17
+    event: FINISH
+    resultCode: Sure
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=352,ly=570,xs=334&406,ys=560&560
+- id: A7
+  name: Groovy
+  implementor: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
+    Rule: "import javax.xml.parsers.DocumentBuilderFactory;\r\nimport org.apache.xmlbeans.*;\r\n\r\nprintln 'Groovy Started 27';\r\n\r\n// create variables\r\ncreatedInt = 8;\r\ncreatedString = \"createdStringValue\";\r\ncreatedXmlBean = XmlObject.Factory.parse(\"<createdXmlBean>\\n  <innerElement attr='attrVal'/>\\n</createdXmlBean>\");\r\ncreatedDomDoc = buildDomDoc();\r\n\r\nmodifiedInt += 10;\r\nmodifiedString += ' has been modified';\r\ndef modCursor = modifiedXmlBean.newCursor();\r\nmodCursor.toFirstChild();\r\nmodCursor.setTextValue(\"MODIFIED\");\r\ndef newCar = modifiedDomDoc.createElement('newCar');\r\nnewCar.setAttribute('shiny', 'new');\r\nmodifiedDomDoc.firstChild.appendChild(newCar);\r\n\r\ntelephoneNumbers.each {\r\n    println 'tn: ' + it\r\n}\r\nprintln 'Groovy Done';\r\n\r\nreturn \"groovyOutcome\";\r\n\r\n\r\ndef buildDomDoc()\r\n{\r\n  def builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();\r\n  def document = builder.newDocument();\r\n  def root = document.createElement('records');\r\n  document.appendChild(root);\r\n  def car = document.createElement('car');\r\n  car.setAttribute('make', 'Infiniti');\r\n  car.setAttribute('model', 'G35x');\r\n  car.setAttribute('year', '2005');\r\n  root.appendChild(car);\r\n  def countryNode = document.createElement('country');\r\n  countryNode.appendChild(document.createTextNode('Japan'));\r\n  car.appendChild(countryNode);\r\n  def record = document.createElement('aspect');\r\n  record.setAttribute('type', 'Sedan');\r\n  record.appendChild(document.createTextNode(\"Not too big\"));\r\n  car.appendChild(record);\r\n  \r\n  return document;\r\n}"
+    SCRIPT: Groovy
+    WORK_DISPLAY_INFO: x=64,y=234,w=90,h=60
+  transitions:
+  - id: T9
+    to: A9
+    event: FINISH
+    resultCode: groovyOutcome
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=114,ly=312,xs=108&108,ys=298&340
+- id: A9
+  name: Access Library
+  implementor: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: "import com.centurylink.mdw.tests.workflow.TnValidator;\r\n\r\ntnVal = new TnValidator();\r\nfor (tn in telephoneNumbers)\r\n{\r\n  if (!tnVal.validate(tn))\r\n    return 'Invalid';\r\n}\r\n\r\n// closure access\r\ntelephoneNumbers.each(tnVal.registerTn);\r\n\r\nreturn 'Valid';\r\n\r\n"
+    SCRIPT: Groovy
+    WORK_DISPLAY_INFO: x=64,y=344,w=90,h=70
+  transitions:
+  - id: T5
+    to: A6
+    event: FINISH
+    resultCode: Valid
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=ElbowV,lx=109,ly=441,xs=107&107&226,ys=416&467&467
+- id: A4
+  name: JavaScript
+  implementor: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
+    Rule: "load(\"nashorn:mozilla_compat.js\");\r\nimportPackage(javax.xml.parsers);\r\nimportPackage(org.apache.xmlbeans);\r\n\r\n// create variables\r\ncreatedInt = 8;\r\ncreatedString = \"createdStringValue\";\r\ncreatedXmlBean = XmlObject.Factory.parse(\"<createdXmlBean>\\n  <innerElement attr='attrVal'/>\\n</createdXmlBean>\");\r\ncreatedDomDoc = buildDomDoc();\r\n\r\nmodifiedInt += 10;\r\nmodifiedString += ' has been modified';\r\nvar modCursor = modifiedXmlBean.newCursor();\r\nmodCursor.toFirstChild();\r\nmodCursor.setTextValue(\"MODIFIED\");\r\nvar newCar = modifiedDomDoc.createElement('newCar');\r\nnewCar.setAttribute('shiny', 'new');\r\nmodifiedDomDoc.firstChild.appendChild(newCar);\r\n\r\n\"javaScriptOutcome\";\r\n\r\n\r\nfunction buildDomDoc()\r\n{\r\n  var builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();\r\n  var document = builder.newDocument();\r\n  var root = document.createElement('records');\r\n  document.appendChild(root);\r\n  var car = document.createElement('car');\r\n  car.setAttribute('make', 'Infiniti');\r\n  car.setAttribute('model', 'G35x');\r\n  car.setAttribute('year', '2005');\r\n  root.appendChild(car);\r\n  var countryNode = document.createElement('country');\r\n  countryNode.appendChild(document.createTextNode('Japan'));\r\n  car.appendChild(countryNode);\r\n  var record = document.createElement('aspect');\r\n  record.setAttribute('type', 'Sedan');\r\n  record.appendChild(document.createTextNode(\"Not too big\"));\r\n  car.appendChild(record);\r\n  \r\n  return document;\r\n}"
+    SCRIPT: JavaScript
+    WORK_DISPLAY_INFO: x=230,y=240,w=100,h=70
+  transitions:
+  - id: T4
+    to: A6
+    event: FINISH
+    resultCode: javaScriptOutcome
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=280,ly=370,xs=280&280,ys=314&426
+- id: A6
+  name: Looking Good?
+  implementor: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: '''Yep'''
+    SCRIPT: Groovy
+    WORK_DISPLAY_INFO: x=230,y=430,w=100,h=70
+  transitions:
+  - id: T7
+    to: A1
+    event: FINISH
+    resultCode: Yep
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=293,ly=515,xs=280&280,ys=504&526
+- id: A8
+  name: Script Flavor?
+  implementor: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: scriptFlavor
+    SCRIPT: Groovy
+    WORK_DISPLAY_INFO: x=230,y=110,w=100,h=80
+  transitions:
+  - id: T2
+    to: A7
+    event: FINISH
+    resultCode: Groovy
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=107,ly=150,xs=226&104&104,ys=154&154&230
+  - id: T3
+    to: A4
+    event: FINISH
+    resultCode: JavaScript
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=280,ly=215,xs=280&280,ys=194&236
+  - id: T11
+    to: A10
+    event: FINISH
+    resultCode: Unknown
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=440,ly=217,xs=334&546,ys=150&285
+- id: A10
+  name: Unknown
+  implementor: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    SCRIPT: Groovy
+    WORK_DISPLAY_INFO: x=550,y=250,w=80,h=70
+  transitions:
+  - id: T15
+    to: A16
+    event: FINISH
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=590,ly=345,xs=590&590,ys=324&366
+- id: A15
+  name: Start
+  implementor: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    WORK_DISPLAY_INFO: x=250,y=30,w=60,h=40
+  transitions:
+  - id: T14
+    to: A8
+    event: FINISH
+    attributes:
+      TRANSITION_DISPLAY_INFO: type=Elbow,lx=280,ly=90,xs=280&280,ys=74&106
+- id: A16
+  name: Stop3
+  implementor: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    WORK_DISPLAY_INFO: x=560,y=370,w=60,h=40
+- id: A17
+  name: Stop
+  implementor: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    WORK_DISPLAY_INFO: x=410,y=540,w=60,h=40
+subprocesses:
+- id: P1
+  name: Exception Handler
+  activities:
+  - id: A18
+    name: Start
+    implementor: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      WORK_DISPLAY_INFO: x=560,y=90,w=60,h=40
+    transitions:
+    - id: T17
+      to: A20
+      event: FINISH
+      attributes:
+        TRANSITION_DISPLAY_INFO: type=Elbow,lx=680,ly=110,xs=624&736,ys=110&110
+  - id: A20
+    name: Stop2
+    implementor: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      WORK_DISPLAY_INFO: x=740,y=90,w=60,h=40
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Exception Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    WORK_DISPLAY_INFO: x=520,y=50,w=330,h=120
+variables:
+  bystanderDomDoc:
+    type: org.w3c.dom.Document
+    category: INPUT
+  bystanderXmlBean:
+    type: org.apache.xmlbeans.XmlObject
+    category: INPUT
+  createdDomDoc:
+    type: org.w3c.dom.Document
+    category: LOCAL
+  createdInt:
+    type: java.lang.String
+    category: LOCAL
+  createdString:
+    type: java.lang.String
+    category: LOCAL
+  createdXmlBean:
+    type: org.apache.xmlbeans.XmlObject
+    category: LOCAL
+  modifiedDomDoc:
+    type: org.w3c.dom.Document
+    category: INPUT
+  modifiedInt:
+    type: java.lang.Integer
+    category: INPUT
+  modifiedString:
+    type: java.lang.String
+    category: INPUT
+  modifiedXmlBean:
+    type: org.apache.xmlbeans.XmlObject
+    category: INPUT
+  printedString:
+    type: java.lang.String
+    category: LOCAL
+  scriptFlavor:
+    type: java.lang.String
+    category: INPUT
+  telephoneNumbers:
+    type: java.util.List<String>
+    category: INPUT
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  WORK_DISPLAY_INFO: x=50,y=34,w=97,h=26

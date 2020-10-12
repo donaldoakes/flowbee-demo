@@ -1,0 +1,65 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=50,y=50,w=0,h=0
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=42,y=118,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=132,y=138,xs=106&158,ys=138&138
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=590,y=115,w=60,h=40
+- id: S3
+  name: |-
+    Subflow
+    Milestone
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  attributes:
+    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    display: x=290,y=108,w=100,h=60
+    processname: com.centurylink.mdw.tests.milestones/SubTwoSub.proc
+    processversion: '[0.1,1)'
+    synchronous: 'true'
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=418,y=136,xs=394&442,ys=136&136
+    event: FINISH
+    to: S5
+- id: S4
+  name: Boring
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    display: x=162,y=112,w=69,h=50
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=260,y=137,xs=235&286,ys=137&137
+    event: FINISH
+    to: S3
+- id: S5
+  name: Snoozefest
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    display: x=446,y=113,w=75,h=47
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=555,y=135,xs=525&586,ys=135&135
+    event: FINISH
+    to: S2
+variables:
+  inputVar:
+    type: java.lang.String

@@ -1,0 +1,96 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: SERVICE
+  display: x=39,y=43,w=112,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=69,y=118,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=258,y=101,xs=133&212,ys=138&138
+    event: FINISH
+    to: S11
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=609,y=120,w=60,h=40
+- id: S7
+  name: "Async Invoke\r\nServiceSub"
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  attributes:
+    display: x=378,y=105,w=110,h=71
+    processname: com.centurylink.mdw.tests.services/ServiceSub
+    processversion: '[0.1,1)'
+    synchronous: 'FALSE'
+    variables: testCase=$testCase
+  links:
+  - id: L11
+    attributes:
+      display: type=Elbow,x=549,y=140,xs=492&605,ys=140&140
+    event: FINISH
+    to: S2
+- id: S8
+  name: "Async Multi\r\nServiceSub"
+  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  attributes:
+    Execution Plan: execPlan
+    Force Parallel Execution: 'TRUE'
+    STATUS_AFTER_EVENT: Hold
+    display: x=382,y=237,w=138,h=73
+    processmap: ServiceAsyncSub,com.centurylink.mdw.tests.services/ServiceSub,[0.1\,1),
+    synchronous: 'FALSE'
+  links:
+  - id: L13
+    attributes:
+      display: type=Elbow,x=563,y=272,xs=524&603,ys=272&272
+    event: FINISH
+    to: S12
+- id: S10
+  name: Create Plan
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    Java: "/**\n * Copyright (c) 2017 CenturyLink, Inc. All Rights Reserved.\n */\r\npackage com.centurylink.mdw.tests.services;\r\n\r\nimport java.util.Map;\nimport java.util.ArrayList;\nimport java.util.List;\r\nimport com.centurylink.mdw.model.Subprocess;\nimport com.centurylink.mdw.model.ExecutionPlan;\r\nimport com.centurylink.mdw.java.JavaExecutionException;\r\nimport com.centurylink.mdw.java.JavaExecutor;\r\nimport com.centurylink.mdw.java.MdwJavaException;\r\nimport com.centurylink.mdw.model.workflow.ActivityRuntimeContext;\nimport com.centurylink.mdw.model.workflow.WorkStatus;\n\npublic class CreatePlan_A10 implements JavaExecutor {\n\n    public void initialize(ActivityRuntimeContext context) throws MdwJavaException {\n    }\n\n    public Object execute(Map<String,Object> variables) throws JavaExecutionException {\n        List<Subprocess> subprocs = new ArrayList<>();\n        Subprocess subproc = new Subprocess();\n        subproc.setLogicalName(\"ServiceAsyncSub\");\n        subproc.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue());\n        subproc.getParameters().put(\"testCase\", \"$testCase\");\n        subprocs.add(subproc);\n        ExecutionPlan execPlan = new ExecutionPlan();\n        execPlan.setSubprocesses(subprocs);        \n        variables.put(\"execPlan\", execPlan);\n        return null;\n    }\n\n}\n"
+    Output Documents: execPlan
+    display: x=206,y=239,w=110,h=68
+  links:
+  - id: L12
+    attributes:
+      display: type=Elbow,x=349,y=273,xs=320&378,ys=273&273
+    event: FINISH
+    to: S8
+- id: S11
+  name: "Test\r\nCase"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: testCase
+    SCRIPT: Groovy
+    display: x=216,y=113,w=74,h=51
+  links:
+  - id: L9
+    attributes:
+      display: type=Elbow,x=261,y=185,xs=253&253,ys=168&235
+    event: FINISH
+    to: S10
+    result: multiple
+  - id: L10
+    attributes:
+      display: type=Elbow,x=307,y=117,xs=294&374,ys=138&138
+    event: FINISH
+    to: S7
+    result: single
+- id: S12
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=607,y=252,w=60,h=40
+variables:
+  execPlan:
+    type: org.yaml.snakeyaml.Yaml
+  testCase:
+    type: java.lang.String

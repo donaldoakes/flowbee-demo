@@ -1,0 +1,56 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=42,y=48,w=91,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=53,y=148,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=144,y=167,xs=117&172,ys=167&167
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=519,y=148,w=60,h=40
+- id: S3
+  name: Notify
+  specifier: com.centurylink.mdw.msteams.MsTeamsActivity
+  attributes:
+    display: x=176,y=138,w=100,h=60
+    message: com.centurylink.mdw.msteams/message.json
+    message_assetVersion: '[0.1,1)'
+    webhookUrl: ${props['mdw.msteams.webhook.url']}
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=311,y=168,xs=281&341,ys=168&168
+    event: FINISH
+    to: S4
+- id: S4
+  name: |-
+    MS Teams
+    Task
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    TASK_TEMPLATE: com.centurylink.mdw.tests.notifications/MsTeamsTask.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=345,y=138,w=100,h=60
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=482,y=167,xs=449&515,ys=167&167
+    event: FINISH
+    to: S2
+textNotes:
+- id: N1
+  attributes:
+    display: x=199,y=49,w=187,h=28
+  text: For manual testing

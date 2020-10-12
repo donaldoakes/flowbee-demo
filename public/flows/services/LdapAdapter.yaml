@@ -1,0 +1,109 @@
+process: # 1504
+  name: LdapAdapter
+  instance: 1
+  activity: # 1 "2018-03-02 09:05:02"
+    name: |
+      LDAP Adapter
+      Single Result
+    status: Completed
+  activity: # 3 "2018-03-02 09:05:13"
+    name: |
+      LDAP Adapter
+      Multiple Results
+    status: Completed
+  activity: # 4 "2018-03-02 09:05:02"
+    name: Start
+    status: Completed
+  activity: # 5 "2018-03-02 09:05:24"
+    name: Stop
+    status: Completed
+  activity: # 6 "2018-03-02 09:05:02"
+    name: Wait 10s
+    status: Completed
+  activity: # 7 "2018-03-02 09:05:02"
+    name: Sync
+    status: Completed
+  activity: # 8 "2018-03-02 09:05:13"
+    name: |
+      10 More
+      Seconds
+    status: Completed
+  activity: # 9 "2018-03-02 09:05:24"
+    name: |
+      LDAP Adapter
+      Document Binding
+    status: Completed
+  variable: # 3796
+    name: cuid
+    value: dxoakes
+  variable: # 3799
+    name: department
+    value: ${~.*}
+  variable: # 3800
+    name: emailAddress
+    value: Donald.Oakes@CenturyLink.com
+  variable: # 3801
+    name: lastName
+    value: Oakes
+  variable: # 3797
+    name: lastNameInput
+    value: Oakes
+  variable: # 3805
+    name: matchingCuids
+    value: ["dxoakes","ac25868"]
+  variable: # 3806
+    name: matchingMnetIds
+    value: [${~.*}]
+  variable: # 3802
+    name: mnetId
+    value: ${~.*}
+  variable: # 3804
+    name: sapId
+    value: ${~.*}
+  variable: # 3798
+    name: sapIdInput
+    value: ${~.*}
+  variable: # 3803
+    name: state
+    value: CO
+  variable: # 3807
+    name: userDocument
+    value: |
+      {
+        "attributes": {
+          "tier3": "${~.*}",
+          "roomNumber": "${~.*}",
+          "telephoneNumber": "${~.*}",
+          "tier2": "${~.*}",
+          "mail": "Donald.Oakes@CenturyLink.com",
+          "displayName": "Oakes, Donald H",
+          "postalCode": "${~.*}",
+          "companynumber": "${~.*}",
+          "preferredname": "Donald",
+          "joblevel": "${~.*}",
+          "nationname": "United States",
+          "title": "${~.*}",
+          "employeeNumber": "${~.*}",
+          "legacycompany": "${~.*}",
+          "mnetid": "${~.*}",
+          "street": "${~.*}",
+          "tier1": "${~.*}",
+          "costcenter": "${~.*}",
+          "st": "${~.*}",
+          "docshareaccess": "${~.*}",
+          "manager": "${~.*}",
+          "sAMAccountName": "${~.*}",
+          "initials": "H",
+          "objectClass": "top",
+          "cn": "Donald Oakes",
+          "l": "${~.*}",
+          "nationnumber": "${~.*}",
+          "employeeType": "${~.*}",
+          "saploginid": "${~.*}",
+          "companyname": "${~.*}",
+          "departmentname": "${~.*}",
+          "departmentNumber": "${~.*}"
+        },
+        "cuid": "${~.*}",
+        "name": "Donald Oakes"
+      }

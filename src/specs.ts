@@ -1,28 +1,32 @@
+import * as flowbee from 'flowbee';
+
 export class Specs {
 
-    static specs: any[] | undefined;
+    private static _specs: flowbee.Specifier[] | undefined;
 
-    static getSpecFileList(specBase: string) {
-
+    static async getSpecs(base: string): Promise<flowbee.Specifier[]> {
+        if (!Specs._specs) {
+            Specs._specs = await Specs.loadSpecs(base);
+        }
+        return Specs._specs;
     }
 
-    // static loadSpecs(specPath: string): any[] {
-    //     const specs: string[] = [];
-    //     for (const file of fs.readdirSync(specPath)) {
-    //         const filepath = path.join(specPath, file);
-    //         if (!fs.statSync(filepath).isDirectory() && file.endsWith('.spec')) {
-    //             const text = fs.readFileSync(filepath, 'utf-8');
-    //             if (text) {
-    //                 try {
-    //                     specs.push(JSON.parse(text));
-    //                 } catch (err) {
-    //                     console.log(err);
-    //                     // this.log.error(err);
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     return specs;
-    // }
+    private static async loadSpecs(base: string): Promise<flowbee.Specifier[]> {
+        const dirItem = await (await fetch(`${base}/specs`)).json();
+        Specs._specs = await Specs.collect(dirItem, []);
+        return Specs._specs;
+    }
 
+    private static async collect(item: any, specs: flowbee.Specifier[]): Promise<flowbee.Specifier[]> {
+        if (!item.name.startsWith('.')) {
+            if (item.type === 'file') {
+                specs.push(await (await fetch(item.path)).json());
+            } else if (item.type === 'directory') {
+                for (const child of item.children) {
+                    this.collect(child, specs);
+                }
+            }
+        }
+        return specs;
+    }
 }

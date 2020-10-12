@@ -1,0 +1,91 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=28,y=35,w=105,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=49,y=100,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=158,y=120,xs=113&203,ys=120&120
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=612,y=103,w=60,h=40
+- id: S3
+  name: Error
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: ServiceSub_A3
+    Java: |
+      package com.centurylink.mdw.tests.services;
+
+      import java.util.Map;
+
+      import com.centurylink.mdw.java.JavaExecutionException;
+      import com.centurylink.mdw.java.JavaExecutor;
+      import com.centurylink.mdw.java.MdwJavaException;
+      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
+
+      public class ServiceSub_A3 implements JavaExecutor {
+
+          public void initialize(ActivityRuntimeContext context) throws MdwJavaException {
+          }
+
+          public Object execute(Map<String, Object> variables) throws JavaExecutionException {
+              throw new JavaExecutionException("I've fallen and I can't get up");
+          }
+      }
+    display: x=405,y=89,w=104,h=67
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=560,y=124,xs=513&608,ys=124&124
+    event: FINISH
+    to: S2
+- id: S4
+  name: |-
+    Populate
+    Values
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: '["person"]'
+    Rule: |+
+      import com.centurylink.mdw.tests.workflow.Person
+
+      // assign some values to be accessed by Error.proc
+      x = 10
+      y = 8
+
+      id = 'torvalds'
+      person = new Person('Linus', 'Torvalds')
+      person.occupation = 'Developer'
+
+    SCRIPT: Groovy
+    display: x=207,y=88,w=105,h=67
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=358,y=121,xs=316&401,ys=121&121
+    event: FINISH
+    to: S3
+variables:
+  id:
+    type: java.lang.String
+  person:
+    type: com.centurylink.mdw.model.Jsonable
+  testCase:
+    type: java.lang.String
+  x:
+    type: java.lang.Integer
+  y:
+    type: java.lang.Integer

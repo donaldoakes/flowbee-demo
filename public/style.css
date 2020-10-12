@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+}
+.tree {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", system-ui, Ubuntu, "Droid Sans", sans-serif;
+  font-size: 14px;
+  color: #303030;
+}
+.tree ul {
+  margin: 0;
+  padding: 0 0 0 15px;
+  list-style-type: none;
+}
+.tree-caret {
+  cursor: pointer;
+  user-select: none;
+}
+.tree-caret::before {
+  content: "\25BC";
+  display: inline-block;
+  margin-right: 6px;
+}
+.tree-caret-closed::before {
+  transform: rotate(-90deg);
+}
+.tree-nested {
+  display: block;
+}
+.tree-hidden {
+  display: none;
+}
+.tree-flow-icon {
+  width: 10px;
+  margin-right: 3px;
+}
+.tree-flow-item {
+  cursor: pointer;
+}

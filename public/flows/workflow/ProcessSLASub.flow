@@ -1,0 +1,63 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=50,y=50,w=0,h=0
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=60,y=260,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=150,y=280,xs=124&177,ys=280&280
+    event: FINISH
+    to: S5
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=361,y=258,w=60,h=40
+- id: S5
+  name: |-
+    Event Wait Activity
+    with timeout
+  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  attributes:
+    SLA: '60'
+    SLA_UNITS: Minutes
+    STATUS_AFTER_TIMEOUT: Hold
+    display: x=181,y=248,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=321,y=278,xs=285&357,ys=278&278
+    event: FINISH
+    to: S2
+subflows:
+- id: F1
+  name: Delay Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Delay Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    display: x=333,y=46,w=440,h=120
+  steps:
+  - id: S6
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=373,y=86,w=60,h=40
+    links:
+    - id: L3
+      attributes:
+        display: type=Elbow,x=553,y=106,xs=437&669,ys=106&106
+      event: FINISH
+      to: S7
+  - id: S7
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      TerminationAction: Complete Process
+      display: x=673,y=86,w=60,h=40

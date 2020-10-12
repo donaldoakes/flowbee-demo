@@ -1,0 +1,75 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=42,y=33,w=197,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=70,y=140,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=175,y=160,xs=134&216,ys=160&160
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=630,y=140,w=60,h=40
+- id: S3
+  name: |-
+    Set
+    Value
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      myDouble = 100.1d
+    SCRIPT: Groovy
+    display: x=220,y=120,w=100,h=80
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=375,y=160,xs=324&426,ys=160&160
+    event: FINISH
+    to: S4
+- id: S4
+  name: |-
+    Update
+    Values
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: CustomVariableTypes_A4
+    Java: |
+      package com.centurylink.mdw.tests.code;
+
+      import com.centurylink.mdw.java.JavaExecutionException;
+      import com.centurylink.mdw.java.JavaExecutor;
+
+      import java.util.Map;
+
+      public class CustomVariableTypes_A4 implements JavaExecutor {
+          public Object execute(Map<String,Object> variables) throws JavaExecutionException  {
+              variables.put("myFloat", ((Float)variables.get("myFloat")) * 15);
+              variables.put("myString", (variables.get("myString") + ", MDW"));
+              variables.put("myDouble", ((Double)variables.get("myDouble")) * 12);
+              return null;
+          }
+      }
+    display: x=430,y=120,w=100,h=80
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=580,y=160,xs=534&626,ys=160&160
+    event: FINISH
+    to: S2
+variables:
+  myDouble:
+    type: java.lang.Double
+  myFloat:
+    type: java.lang.Float
+  myString:
+    type: java.lang.String

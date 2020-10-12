@@ -1,0 +1,143 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=31,y=22,w=108,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=50,y=90,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=140,y=110,xs=114&166,ys=110&110
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=680,y=90,w=60,h=40
+- id: S3
+  name: Exec
+  specifier: com.centurylink.mdw.python.ScriptActivity
+  attributes:
+    Output Documents: '["person"]'
+    Rule: |
+      runtimeContext.logDebug('Executing ' + runtimeContext.activity.name)
+
+      mrid = runtimeContext.getMasterRequestId()
+
+      intInput = intInput + 4
+      intLocal = 7
+
+      boolInput = not boolInput
+
+      # simple set variable
+      name = person.getName()
+      message = 'Hello'
+
+      # update json content
+      person.setFirstName('Scott')
+      person.setLastName('Fitzgerald')
+
+      return 'onward'
+    SCRIPT: Python
+    display: x=320,y=80,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=434,y=88,xs=424&496,ys=110&110
+    event: FINISH
+    to: S5
+    result: onward
+- id: S4
+  name: Which?
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: testCase
+    SCRIPT: Python
+    display: x=170,y=80,w=80,h=60
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=264,y=89,xs=254&316,ys=110&110
+    event: FINISH
+    to: S3
+    result: exec
+  - id: L5
+    attributes:
+      display: type=Elbow,x=216,y=153,xs=210&210,ys=144&176
+    event: FINISH
+    to: S6
+    result: decide
+- id: S5
+  name: Use Module
+  specifier: com.centurylink.mdw.python.ScriptActivity
+  attributes:
+    Rule: |
+      runtimeContext.logDebug('Executing ' + runtimeContext.activity.name)
+
+      from com.centurylink.mdw.tests.script.pymodule import square, greet
+
+      intInput = square(intInput)
+
+      message = greet(name, message)
+    SCRIPT: Python
+    display: x=500,y=80,w=100,h=60
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=640,y=110,xs=604&676,ys=110&110
+    event: FINISH
+    to: S2
+- id: S6
+  name: Boolean
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: testCase == 'decide'
+    SCRIPT: Python
+    display: x=170,y=180,w=80,h=60
+  links:
+  - id: L6
+    attributes:
+      display: type=Elbow,x=255,y=191,xs=254&296,ys=210&210
+    event: FINISH
+    to: S7
+    result: 'false'
+  - id: L7
+    attributes:
+      display: type=Elbow,x=218,y=249,xs=210&210,ys=244&276
+    event: FINISH
+    to: S8
+    result: 'true'
+- id: S7
+  name: No Way
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=300,y=190,w=60,h=40
+- id: S8
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=180,y=280,w=60,h=40
+variables:
+  boolInput:
+    type: java.lang.Boolean
+  intInput:
+    type: java.lang.Integer
+  intLocal:
+    type: java.lang.Integer
+  message:
+    type: java.lang.String
+  mrid:
+    type: java.lang.String
+  name:
+    type: java.lang.String
+  person:
+    type: com.centurylink.mdw.model.Jsonable
+  testCase:
+    type: java.lang.String

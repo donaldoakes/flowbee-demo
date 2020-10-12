@@ -1,0 +1,44 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=50,y=50,w=0,h=0
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=58,y=161,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=181,y=181,xs=122&240,ys=181&181
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=505,y=163,w=60,h=40
+- id: S3
+  name: Retrieve App User
+  specifier: com.centurylink.mdw.workflow.adapter.rest.RestServiceAdapter
+  attributes:
+    EndpointUri: ${props['mdw.services.url']}/api/Users/${appUser}
+    HttpMethod: GET
+    PostScriptLang: Groovy
+    PreScript: runtimeContext.logDebug("Executing " + runtimeContext.getActivity().getName())
+    PreScriptLang: Groovy
+    RESPONSE_VARIABLE: appUserResponse
+    display: x=244,y=160,w=129,h=62
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=439,y=183,xs=377&501,ys=183&183
+    event: FINISH
+    to: S2
+variables:
+  appUser:
+    type: java.lang.String
+  appUserResponse:
+    type: org.json.JSONObject

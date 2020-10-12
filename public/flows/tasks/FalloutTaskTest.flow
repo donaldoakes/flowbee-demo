@@ -1,0 +1,78 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=21,y=24,w=142,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=55,y=220,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=207,y=194,xs=119&216,ys=240&240
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=475,y=220,w=60,h=40
+- id: S3
+  name: "Throw\r\nException"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: throw new Exception("Fallout")
+    display: x=220,y=210,w=101,h=74
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=397,y=240,xs=325&471,ys=240&240
+    event: FINISH
+    to: S2
+subflows:
+- id: F6
+  name: Exception Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Exception Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    display: x=262,y=40,w=440,h=120
+  steps:
+  - id: S7
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=302,y=80,w=60,h=40
+    links:
+    - id: L3
+      attributes:
+        display: type=Elbow,x=392,y=100,xs=366&417,ys=100&100
+      event: FINISH
+      to: S4
+  - id: S4
+    name: Fallout Test Task
+    specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+    attributes:
+      STATUS_AFTER_EVENT: Cancelled
+      TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
+      TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/Fallout Test Task.task
+      TASK_TEMPLATE_assetVersion: '[0.1,1)'
+      display: x=421,y=70,w=111,h=62
+    links:
+    - id: L4
+      attributes:
+        display: type=Elbow,x=567,y=100,xs=536&598,ys=100&100
+      event: FINISH
+      to: S8
+  - id: S8
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=602,y=80,w=60,h=40
+textNotes:
+- id: N5
+  attributes:
+    display: x=29,y=64,w=197,h=22
+  text: 'TODO: Test all features.'

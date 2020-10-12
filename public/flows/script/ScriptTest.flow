@@ -1,0 +1,188 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=50,y=34,w=97,h=26
+steps:
+- id: S1
+  name: Still Okay?
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: '"Sure"'
+    SCRIPT: Groovy
+    display: x=230,y=530,w=100,h=60
+  links:
+  - id: L16
+    attributes:
+      display: type=Elbow,x=352,y=570,xs=334&406,ys=560&560
+    event: FINISH
+    to: S17
+    result: Sure
+- id: S7
+  name: Groovy
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
+    Rule: "import javax.xml.parsers.DocumentBuilderFactory;\r\nimport org.apache.xmlbeans.*;\r\n\r\nprintln 'Groovy Started 27';\r\n\r\n// create variables\r\ncreatedInt = 8;\r\ncreatedString = \"createdStringValue\";\r\ncreatedXmlBean = XmlObject.Factory.parse(\"<createdXmlBean>\\n  <innerElement attr='attrVal'/>\\n</createdXmlBean>\");\r\ncreatedDomDoc = buildDomDoc();\r\n\r\nmodifiedInt += 10;\r\nmodifiedString += ' has been modified';\r\ndef modCursor = modifiedXmlBean.newCursor();\r\nmodCursor.toFirstChild();\r\nmodCursor.setTextValue(\"MODIFIED\");\r\ndef newCar = modifiedDomDoc.createElement('newCar');\r\nnewCar.setAttribute('shiny', 'new');\r\nmodifiedDomDoc.firstChild.appendChild(newCar);\r\n\r\ntelephoneNumbers.each {\r\n    println 'tn: ' + it\r\n}\r\nprintln 'Groovy Done';\r\n\r\nreturn \"groovyOutcome\";\r\n\r\n\r\ndef buildDomDoc()\r\n{\r\n  def builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();\r\n  def document = builder.newDocument();\r\n  def root = document.createElement('records');\r\n  document.appendChild(root);\r\n  def car = document.createElement('car');\r\n  car.setAttribute('make', 'Infiniti');\r\n  car.setAttribute('model', 'G35x');\r\n  car.setAttribute('year', '2005');\r\n  root.appendChild(car);\r\n  def countryNode = document.createElement('country');\r\n  countryNode.appendChild(document.createTextNode('Japan'));\r\n  car.appendChild(countryNode);\r\n  def record = document.createElement('aspect');\r\n  record.setAttribute('type', 'Sedan');\r\n  record.appendChild(document.createTextNode(\"Not too big\"));\r\n  car.appendChild(record);\r\n  \r\n  return document;\r\n}"
+    SCRIPT: Groovy
+    display: x=64,y=234,w=90,h=60
+  links:
+  - id: L9
+    attributes:
+      display: type=Elbow,x=114,y=312,xs=108&108,ys=298&340
+    event: FINISH
+    to: S9
+    result: groovyOutcome
+- id: S9
+  name: Access Library
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: "import com.centurylink.mdw.tests.workflow.TnValidator;\r\n\r\ntnVal = new TnValidator();\r\nfor (tn in telephoneNumbers)\r\n{\r\n  if (!tnVal.validate(tn))\r\n    return 'Invalid';\r\n}\r\n\r\n// closure access\r\ntelephoneNumbers.each(tnVal.registerTn);\r\n\r\nreturn 'Valid';\r\n\r\n"
+    SCRIPT: Groovy
+    display: x=64,y=344,w=90,h=70
+  links:
+  - id: L5
+    attributes:
+      display: type=ElbowV,x=109,y=441,xs=107&107&226,ys=416&467&467
+    event: FINISH
+    to: S6
+    result: Valid
+- id: S4
+  name: JavaScript
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
+    Rule: "load(\"nashorn:mozilla_compat.js\");\r\nimportPackage(javax.xml.parsers);\r\nimportPackage(org.apache.xmlbeans);\r\n\r\n// create variables\r\ncreatedInt = 8;\r\ncreatedString = \"createdStringValue\";\r\ncreatedXmlBean = XmlObject.Factory.parse(\"<createdXmlBean>\\n  <innerElement attr='attrVal'/>\\n</createdXmlBean>\");\r\ncreatedDomDoc = buildDomDoc();\r\n\r\nmodifiedInt += 10;\r\nmodifiedString += ' has been modified';\r\nvar modCursor = modifiedXmlBean.newCursor();\r\nmodCursor.toFirstChild();\r\nmodCursor.setTextValue(\"MODIFIED\");\r\nvar newCar = modifiedDomDoc.createElement('newCar');\r\nnewCar.setAttribute('shiny', 'new');\r\nmodifiedDomDoc.firstChild.appendChild(newCar);\r\n\r\n\"javaScriptOutcome\";\r\n\r\n\r\nfunction buildDomDoc()\r\n{\r\n  var builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();\r\n  var document = builder.newDocument();\r\n  var root = document.createElement('records');\r\n  document.appendChild(root);\r\n  var car = document.createElement('car');\r\n  car.setAttribute('make', 'Infiniti');\r\n  car.setAttribute('model', 'G35x');\r\n  car.setAttribute('year', '2005');\r\n  root.appendChild(car);\r\n  var countryNode = document.createElement('country');\r\n  countryNode.appendChild(document.createTextNode('Japan'));\r\n  car.appendChild(countryNode);\r\n  var record = document.createElement('aspect');\r\n  record.setAttribute('type', 'Sedan');\r\n  record.appendChild(document.createTextNode(\"Not too big\"));\r\n  car.appendChild(record);\r\n  \r\n  return document;\r\n}"
+    SCRIPT: JavaScript
+    display: x=230,y=240,w=100,h=70
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=280,y=370,xs=280&280,ys=314&426
+    event: FINISH
+    to: S6
+    result: javaScriptOutcome
+- id: S6
+  name: Looking Good?
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: '''Yep'''
+    SCRIPT: Groovy
+    display: x=230,y=430,w=100,h=70
+  links:
+  - id: L7
+    attributes:
+      display: type=Elbow,x=293,y=515,xs=280&280,ys=504&526
+    event: FINISH
+    to: S1
+    result: Yep
+- id: S8
+  name: Script Flavor?
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: scriptFlavor
+    SCRIPT: Groovy
+    display: x=230,y=110,w=100,h=80
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=107,y=150,xs=226&104&104,ys=154&154&230
+    event: FINISH
+    to: S7
+    result: Groovy
+  - id: L3
+    attributes:
+      display: type=Elbow,x=280,y=215,xs=280&280,ys=194&236
+    event: FINISH
+    to: S4
+    result: JavaScript
+  - id: L11
+    attributes:
+      display: type=Elbow,x=440,y=217,xs=334&546,ys=150&285
+    event: FINISH
+    to: S10
+    result: Unknown
+- id: S10
+  name: Unknown
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    SCRIPT: Groovy
+    display: x=550,y=250,w=80,h=70
+  links:
+  - id: L15
+    attributes:
+      display: type=Elbow,x=590,y=345,xs=590&590,ys=324&366
+    event: FINISH
+    to: S16
+- id: S15
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=250,y=30,w=60,h=40
+  links:
+  - id: L14
+    attributes:
+      display: type=Elbow,x=280,y=90,xs=280&280,ys=74&106
+    event: FINISH
+    to: S8
+- id: S16
+  name: Stop3
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=560,y=370,w=60,h=40
+- id: S17
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=410,y=540,w=60,h=40
+subflows:
+- id: F1
+  name: Exception Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Exception Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    display: x=520,y=50,w=330,h=120
+  steps:
+  - id: S18
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=560,y=90,w=60,h=40
+    links:
+    - id: L17
+      attributes:
+        display: type=Elbow,x=680,y=110,xs=624&736,ys=110&110
+      event: FINISH
+      to: S20
+  - id: S20
+    name: Stop2
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=740,y=90,w=60,h=40
+variables:
+  bystanderDomDoc:
+    type: org.w3c.dom.Document
+  bystanderXmlBean:
+    type: org.apache.xmlbeans.XmlObject
+  createdDomDoc:
+    type: org.w3c.dom.Document
+  createdInt:
+    type: java.lang.String
+  createdString:
+    type: java.lang.String
+  createdXmlBean:
+    type: org.apache.xmlbeans.XmlObject
+  modifiedDomDoc:
+    type: org.w3c.dom.Document
+  modifiedInt:
+    type: java.lang.Integer
+  modifiedString:
+    type: java.lang.String
+  modifiedXmlBean:
+    type: org.apache.xmlbeans.XmlObject
+  printedString:
+    type: java.lang.String
+  scriptFlavor:
+    type: java.lang.String
+  telephoneNumbers:
+    type: java.util.List<String>

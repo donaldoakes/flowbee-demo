@@ -3,12 +3,13 @@
   "version": "0.0.1",
   "description": "Flow Diagramming Live Demo",
   "type": "module",
-  "main": "dist/main.js",
-  "module": "dist/main.js",
+  "main": "public/js/main.js",
+  "module": "public/js/main.js",
+  "browser": "public/js/index.js",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -watch",
-    "start": "http-server"
+    "build": "tsc && rollup -c",
+    "watch": "rollup --watch -c",
+    "start": "node src/files.js"
   },
   "repository": {
     "type": "git",
@@ -30,10 +31,13 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^15.1.0",
+    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-typescript": "^3.1.1",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "eslint": "^7.10.0",
-    "http-server": "^0.12.3",
+    "rollup": "^2.28.2",
     "typescript": "^4.0.3"
   }
 }

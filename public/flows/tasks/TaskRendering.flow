@@ -1,0 +1,99 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=36,y=92,w=136,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=155,y=19,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=302,y=84,xs=219&289,ys=39&110
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=488,y=685,w=60,h=40
+- id: S3
+  name: "Step\r\nOne"
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    display: x=250,y=114,w=78,h=48
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=289,y=209,xs=289&289,ys=166&273
+    event: FINISH
+    to: S4
+- id: S4
+  name: "Step\r\nTwo"
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    display: x=246,y=277,w=83,h=47
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=291,y=378,xs=291&291,ys=328&433
+    event: FINISH
+    to: S6
+  - id: L4
+    attributes:
+      display: type=Elbow,x=388,y=254,xs=333&444,ys=300&158
+    event: FINISH
+    to: S5
+- id: S5
+  name: "Step\r\nThree"
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    display: x=448,y=133,w=78,h=50
+  links:
+  - id: L6
+    attributes:
+      display: type=Elbow,x=496,y=342,xs=496&496,ys=187&542
+    event: FINISH
+    to: S7
+- id: S6
+  name: "Step\r\nFour"
+  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  attributes:
+    display: x=253,y=437,w=80,h=50
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=190,y=552,xs=249&134,ys=462&629
+    event: FINISH
+    to: S8
+- id: S7
+  name: New Synchronization Activity
+  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    display: x=467,y=546,w=100,h=60
+  links:
+  - id: L7
+    attributes:
+      display: type=Elbow,x=518,y=645,xs=518&518,ys=610&681
+    event: FINISH
+    to: S2
+- id: S8
+  name: "Rendered\r\nTask"
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/RenderedTask.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'true'
+    display: x=84,y=633,w=101,h=68
+  links:
+  - id: L8
+    attributes:
+      display: type=Elbow,x=326,y=620,xs=189&463,ys=667&576
+    event: FINISH
+    to: S7

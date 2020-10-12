@@ -1,0 +1,61 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: SERVICE
+  display: x=50,y=38,w=69,h=27
+  requestMethod: POST
+  requestParameters: '[["person","Body","true","Person","com.centurylink.mdw.tests.workflow/Person.java"]]'
+  requestPath: Person
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=69,y=132,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=178,y=152,xs=133&224,ys=152&152
+    event: FINISH
+    to: S3
+- id: S2
+  name: OK
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=449,y=132,w=60,h=40
+- id: S3
+  name: |-
+    Request
+    Valid?
+  specifier: com.centurylink.mdw.workflow.activity.validate.SwaggerValidatorActivity
+  attributes:
+    Strict: 'true'
+    Validate: '["Body"]'
+    display: x=228,y=117,w=111,h=74
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=383,y=156,xs=343&444,ys=152&152
+    event: FINISH
+    to: S2
+    result: 'true'
+  - id: L3
+    attributes:
+      display: type=Elbow,x=287,y=210,xs=282&282,ys=195&245
+    event: FINISH
+    to: S4
+    result: 'false'
+- id: S4
+  name: Invalid
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=251,y=249,w=60,h=40
+variables:
+  request:
+    type: com.centurylink.mdw.model.Jsonable
+  requestHeaders:
+    type: java.util.Map<String,String>
+  response:
+    type: com.centurylink.mdw.model.Jsonable
+  responseHeaders:
+    type: java.util.Map<String,String>

@@ -1,0 +1,37 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=36,y=27,w=155,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=60,y=130,w=60,h=40
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=180,y=150,xs=124&236,ys=150&150
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=450,y=130,w=60,h=40
+- id: S4
+  name: "Custom\r\nCategory Task"
+  specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.code/customCategoryTask.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=240,y=120,w=100,h=70
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=395,y=150,xs=344&446,ys=150&150
+    event: FINISH
+    to: S2

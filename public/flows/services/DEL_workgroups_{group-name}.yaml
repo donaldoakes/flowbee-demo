@@ -1,0 +1,19 @@
+test: 'DEL:workgroups/{group-name}'
+request:
+  url: '${base-url}/Workgroups/${group-name}'
+  method: DELETE
+  headers: {}
+response:
+  status:
+    code: 200
+    message: OK
+  headers:
+    content-type: application/json
+    mdw-request-id: ${~.*}
+  body: |-
+    {
+      "status": {
+        "code": 200,
+        "message": "OK"
+      }
+    }

@@ -1,0 +1,43 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=28,y=21,w=147,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=52,y=79,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=184,y=98,xs=116&193,ys=99&99
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=405,y=82,w=60,h=40
+- id: S3
+  name: "Set mrid variable\r\nfrom runtimeContext"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: mrid = runtimeContext.getMasterRequestId();
+    SCRIPT: Groovy
+    display: x=197,y=74,w=127,h=74
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=365,y=102,xs=328&401,ys=102&102
+    event: FINISH
+    to: S2
+textNotes:
+- id: N4
+  attributes:
+    display: x=137,y=191,w=309,h=38
+  text: "TODO: Test other runtimeContext access\r\nbesides masterRequestId."
+variables:
+  mrid:
+    type: java.lang.String

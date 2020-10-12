@@ -1,0 +1,78 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=44,y=39,w=84,h=26
+  requestMethod: POST
+  requestParameters: '[["mountain","Body","true","","com.centurylink.mdw.tests.variables/Mountain.java"]]'
+  requestPath: Jsonable
+  requestSummary: Because it's there
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=70,y=130,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=175,y=150,xs=134&216,ys=150&150
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=670,y=130,w=60,h=40
+- id: S4
+  name: Create/Update
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: '["input","local","request"]'
+    Rule: |+
+      import com.centurylink.mdw.tests.variables.Mountain
+
+      if (testCase == null)
+          testCase = "Process Request"
+      if (request != null) {
+          request.elevation = request.elevation - 1 // rising sea level
+      }
+      if (input != null) {
+          input.elevation = input.elevation - 1
+      }
+      local = new Mountain("Fuji", 12389, "Japan")
+
+
+    SCRIPT: Groovy
+    display: x=220,y=110,w=120,h=80
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=385,y=150,xs=344&426,ys=150&150
+    event: FINISH
+    to: S6
+- id: S6
+  name: Further Updates
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: Jsonable_A6
+    Java: "package com.centurylink.mdw.tests.variables;\n\nimport com.centurylink.mdw.java.JavaExecutionException;\nimport com.centurylink.mdw.java.JavaExecutor;\n\nimport java.util.Map;\n\npublic class Jsonable_A6 implements JavaExecutor {\n\n    public Object execute(Map<String,Object> variables) throws JavaExecutionException  {\n        Mountain request = (Mountain)variables.get(\"request\");\n        if (request != null) {\n            request.setElevation(request.getElevation() - 1);\n        }\n        Mountain input = (Mountain)variables.get(\"input\");\n        if (input != null) {\n            input.setElevation(input.getElevation() - 1);\n        }\n        Mountain local = (Mountain)variables.get(\"local\");\n        if (local != null) {\n            local.setElevation(local.getElevation() - 1);\n        }\n        \n        return null;\n    }\n}\n"
+    Output Documents: '["input","local","request"]'
+    display: x=430,y=110,w=120,h=80
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=610,y=150,xs=554&666,ys=150&150
+    event: FINISH
+    to: S2
+variables:
+  input:
+    type: com.centurylink.mdw.model.Jsonable
+  local:
+    type: com.centurylink.mdw.model.Jsonable
+  request:
+    type: com.centurylink.mdw.model.Jsonable
+  requestHeaders:
+    type: java.util.Map<String,String>
+  testCase:
+    type: java.lang.String

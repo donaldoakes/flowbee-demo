@@ -1,0 +1,73 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  SLA: '20'
+  SLA_UNIT: Minutes
+  Transition with no Label: Acts as Default
+  display: x=45,y=38,w=131,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=33,y=127,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=97,y=70,xs=97&153,ys=147&147
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=507,y=127,w=60,h=40
+- id: S4
+  name: jsonToJson
+  specifier: com.centurylink.mdw.workflow.activity.transform.CrossmapActivity
+  attributes:
+    Input: jsonInput
+    Mapper: com.centurylink.mdw.tests.workflow/jsonToJson.groovy
+    Mapper_assetVersion: '[0.1,1)'
+    Output: jsonToJsonOutput
+    display: x=157,y=118,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=299,y=167,xs=261&317,ys=148&148
+    event: FINISH
+    to: S5
+- id: S5
+  name: jsonToXml
+  specifier: com.centurylink.mdw.workflow.activity.transform.CrossmapActivity
+  attributes:
+    Input: jsonInput
+    Mapper: com.centurylink.mdw.tests.workflow/jsonToXml.groovy
+    Mapper_assetVersion: '[0.1,1)'
+    Output: jsonToXmlOutput
+    display: x=321,y=118,w=100,h=60
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=464,y=147,xs=425&503,ys=147&147
+    event: FINISH
+    to: S2
+textNotes:
+- id: N6
+  attributes:
+    display: x=215,y=30,w=341,h=22
+  text: 'TODO: Add tests for jsonToXml and xmlToXml'
+variables:
+  jsonInput:
+    type: org.json.JSONObject
+  jsonToJsonOutput:
+    type: org.json.JSONObject
+  jsonToXmlOutput:
+    type: org.w3c.dom.Document
+  xmlInput:
+    type: org.w3c.dom.Document
+  xmlToJsonOutput:
+    type: org.json.JSONObject
+  xmlToXmlOutput:
+    type: org.w3c.dom.Document

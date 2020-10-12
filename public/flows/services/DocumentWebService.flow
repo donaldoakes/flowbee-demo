@@ -1,0 +1,47 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  SLA: '20'
+  SLA_UNIT: Minutes
+  Transition with no Label: Acts as Default
+  display: x=30,y=29,w=200,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=72,y=121,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=193,y=118,xs=136&234,ys=141&141
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=487,y=120,w=60,h=40
+- id: S3
+  name: "Invoke\r\nEmployee Service"
+  specifier: com.centurylink.mdw.workflow.adapter.soap.DocumentWebServiceAdapter
+  attributes:
+    DO_LOGGING: 'True'
+    REQUEST_VARIABLE: requestDoc
+    RESPONSE_VARIABLE: responseDoc
+    WSDL: '#{props[''mdw.services.url'']}/SOAP/Employee.wsdl'
+    display: x=238,y=112,w=118,h=71
+    max_tries: '3'
+    retry_interval: '30'
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=422,y=140,xs=360&483,ys=140&140
+    event: FINISH
+    to: S2
+variables:
+  requestDoc:
+    type: org.apache.xmlbeans.XmlObject
+  responseDoc:
+    type: org.w3c.dom.Document

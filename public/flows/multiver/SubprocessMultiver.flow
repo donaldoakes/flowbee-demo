@@ -1,0 +1,63 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=44,y=38,w=187,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=90,y=140,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=215,y=160,xs=154&276,ys=160&160
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=310,y=270,w=60,h=40
+- id: S3
+  name: Set Values 3.0
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: SubprocessMultiver_A3
+    Java: |
+      package com.centurylink.mdw.tests.multiver;
+
+      import com.centurylink.mdw.java.JavaExecutor;
+      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
+
+      import java.util.Map;
+
+      public class SubprocessMultiver_A3 implements JavaExecutor {
+
+          private ActivityRuntimeContext runtimeContext;
+
+          @Override
+          public void initialize(ActivityRuntimeContext runtimeContext) {
+              this.runtimeContext = runtimeContext;
+          }
+
+          @Override
+          public Object execute(Map<String,Object> variables)  {
+              variables.put("version", runtimeContext.getProcess().getLabel());
+              variables.put("message", "Hello from version 3.0");
+              return null;
+          }
+      }
+    display: x=280,y=130,w=120,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=340,y=230,xs=340&340,ys=194&266
+    event: FINISH
+    to: S2
+variables:
+  message:
+    type: java.lang.String
+  version:
+    type: java.lang.String

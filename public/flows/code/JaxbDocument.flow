@@ -1,0 +1,59 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=20,y=21,w=136,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=39,y=89,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=142,y=109,xs=103&172,ys=109&109
+    event: FINISH
+    to: S7
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=550,y=93,w=60,h=40
+- id: S7
+  name: "Programmatic\r\nAccess/Create"
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    Java: "/**\r\n * Copyright (c) 2016 CenturyLink, Inc. All Rights Reserved.\r\n */\r\npackage com.centurylink.mdw.tests.code;\r\n\r\nimport java.util.Map;\r\n\r\nimport com.centurylink.mdw.java.JavaExecutionException;\r\nimport com.centurylink.mdw.java.JavaExecutor;\r\nimport com.centurylink.mdw.java.MdwJavaException;\r\nimport com.centurylink.mdw.model.workflow.ActivityRuntimeContext;\r\n\r\n/**\r\n * create and assign JAXBElement variable\r\n */\r\npublic class ProgrammaticAccessCreate_A7 implements JavaExecutor {\r\n\r\n    public void initialize(ActivityRuntimeContext context) throws MdwJavaException {\r\n    }\r\n\r\n    public Object execute(Map<String, Object> variables) throws JavaExecutionException {\r\n        JaxbAsset locallyCreatedJaxb = new JaxbAsset();\r\n        locallyCreatedJaxb.setRequiredElement(\"hello\");\r\n        locallyCreatedJaxb.setOptionalElement(\"jaxb\");\r\n        locallyCreatedJaxb.setRequiredAttribute(\"from\");\r\n        locallyCreatedJaxb.setOptionalAttribute(\"mdw\");\r\n        variables.put(\"locallyCreatedJaxb\", locallyCreatedJaxb);\r\n        JaxbAsset assetDefinedJaxb = (JaxbAsset) variables.get(\"assetDefinedJaxb\");\r\n        variables.put(\"requiredElemValue\", assetDefinedJaxb.getRequiredElement());\r\n        variables.put(\"requiredAttrValue\", assetDefinedJaxb.getRequiredAttribute());\r\n        return null;\r\n    }\r\n}\r\n"
+    Output Documents: locallyCreatedJaxb
+    display: x=176,y=76,w=113,h=71
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=319,y=112,xs=293&344,ys=112&112
+    event: FINISH
+    to: S8
+- id: S8
+  name: "Programmatic\r\nUpdate"
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    Java: "/**\r\n * Copyright (c) 2016 CenturyLink, Inc. All Rights Reserved.\r\n */\r\npackage com.centurylink.mdw.tests.code;\r\n\r\nimport java.util.Map;\r\n\r\nimport com.centurylink.mdw.common.service.types.ActionRequest;\r\nimport com.centurylink.mdw.common.service.types.Parameter;\r\nimport com.centurylink.mdw.java.JavaExecutionException;\r\nimport com.centurylink.mdw.java.JavaExecutor;\r\nimport com.centurylink.mdw.java.MdwJavaException;\r\nimport com.centurylink.mdw.model.workflow.ActivityRuntimeContext;\r\n\r\n/**\r\n * Programmatic update.\r\n */\r\npublic class ProgrammaticUpdate_A8 implements JavaExecutor {\r\n\r\n    public void initialize(ActivityRuntimeContext context) throws MdwJavaException {\r\n    }\r\n\r\n    public Object execute(Map<String,Object> variables) throws JavaExecutionException {\r\n        JaxbAsset assetDefinedJaxb = (JaxbAsset) variables.get(\"assetDefinedJaxb\");\r\n        assetDefinedJaxb.setOptionalElement(\"updatedOptionalElem\");\r\n        assetDefinedJaxb.setOptionalAttribute(\"updatedOptionalAttr\");\r\n\r\n        ActionRequest actionRequest = (ActionRequest)variables.get(\"actionRequest\");\r\n        actionRequest.getAction().setName(\"updatedAction\");\r\n        Parameter newParam = new Parameter();\r\n        newParam.setName(\"insertedParam\");\r\n        newParam.setValue(\"insertedValue\");\r\n        actionRequest.getAction().getParameter().add(newParam);\r\n        return null;\r\n    }\r\n}\r\n"
+    Output Documents: actionRequest#assetDefinedJaxb
+    display: x=348,y=77,w=118,h=72
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=508,y=113,xs=470&546,ys=113&113
+    event: FINISH
+    to: S2
+variables:
+  actionRequest:
+    type: javax.xml.bind.JAXBElement
+  assetDefinedJaxb:
+    type: javax.xml.bind.JAXBElement
+  locallyCreatedJaxb:
+    type: javax.xml.bind.JAXBElement
+  requiredAttrValue:
+    type: java.lang.String
+  requiredElemValue:
+    type: java.lang.String

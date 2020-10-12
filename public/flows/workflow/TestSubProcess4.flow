@@ -1,0 +1,55 @@
+attributes:
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=41,y=30,w=202,h=27
+steps:
+- id: S34
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=53,y=119,w=60,h=40
+  links:
+  - id: L27
+    attributes:
+      display: type=Elbow,x=158,y=138,xs=117&199,ys=139&139
+    event: FINISH
+    to: S31
+- id: S33
+  name: Finish
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=625,y=117,w=60,h=40
+- id: S31
+  name: Calculate cube
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: 'ncube = n * n * n;   '
+    SCRIPT: Groovy
+    display: x=203,y=111,w=100,h=60
+  links:
+  - id: L28
+    attributes:
+      display: type=Elbow,x=360,y=142,xs=307&412,ys=142&142
+    event: FINISH
+    to: S35
+- id: S35
+  name: "create output\r\ndocument"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: resultdoc
+    Rule: "import groovy.xml.MarkupBuilder;\r\n\r\ndef stringWriter = new StringWriter();\r\ndef docBuilder = new MarkupBuilder(stringWriter);\r\ndocBuilder.Result {\r\n\t\tn(n)\r\n\t\tnplus1(n+1)\r\n\t\tcube(ncube)\r\n\t\r\n}\r\nresultdoc = stringWriter.toString();"
+    SCRIPT: Groovy
+    display: x=416,y=113,w=100,h=60
+  links:
+  - id: L29
+    attributes:
+      display: type=Elbow,x=571,y=137,xs=520&621,ys=137&137
+    event: FINISH
+    to: S33
+variables:
+  n:
+    type: java.lang.Integer
+  ncube:
+    type: java.lang.Long
+  resultdoc:
+    type: com.centurylink.mdw.model.StringDocument

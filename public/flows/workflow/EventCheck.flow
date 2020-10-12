@@ -1,0 +1,118 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  SLA: '20'
+  SLA_UNIT: Minutes
+  Transition with no Label: Acts as Default
+  display: x=50,y=50,w=110,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=21,y=306,w=60,h=40
+  links:
+  - id: L23
+    attributes:
+      display: type=Elbow,x=135,y=325,xs=85&174,ys=326&326
+    event: FINISH
+    to: S23
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=353,y=320,w=60,h=40
+- id: S23
+  name: "Event Check \nActivity"
+  specifier: com.centurylink.mdw.workflow.activity.event.EventCheckActivity
+  attributes:
+    WAIT_EVENT_NAMES: C-{$MasterRequestID},Cancelled::ABORT,false,;M-{$MasterRequestID},FINISH,false,;S-{$MasterRequestID},Completed::CORRECT,false,;H-{$MasterRequestID},Hold::CORRECT,true,
+    display: x=178,y=298,w=117,h=75
+    rcvdMsgDocVar: response
+  links:
+  - id: L24
+    attributes:
+      display: type=Elbow,x=324,y=340,xs=299&349,ys=340&340
+    event: FINISH
+    to: S2
+subflows:
+- id: F6
+  name: Correction Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Correction Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    display: x=226,y=99,w=440,h=120
+  steps:
+  - id: S7
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=266,y=139,w=60,h=40
+    links:
+    - id: L27
+      attributes:
+        TRANSITION_DELAY: 5s
+        display: type=Elbow,x=446,y=159,xs=330&562,ys=159&159
+      event: FINISH
+      to: S8
+  - id: S8
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=566,y=139,w=60,h=40
+- id: F13
+  name: Cancellation Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Cancellation Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    display: x=693,y=101,w=440,h=120
+  steps:
+  - id: S14
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=733,y=141,w=60,h=40
+    links:
+    - id: L28
+      attributes:
+        TRANSITION_DELAY: 10s
+        display: type=Elbow,x=913,y=161,xs=797&1029,ys=161&161
+      event: FINISH
+      to: S15
+  - id: S15
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=1033,y=141,w=60,h=40
+- id: F24
+  name: Exception Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Exception Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    display: x=431,y=385,w=440,h=120
+  steps:
+  - id: S25
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=471,y=425,w=60,h=40
+    links:
+    - id: L29
+      attributes:
+        TRANSITION_DELAY: 10s
+        display: type=Elbow,x=651,y=445,xs=535&767,ys=445&445
+      event: FINISH
+      to: S27
+  - id: S27
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=771,y=425,w=60,h=40
+variables:
+  CustomerAccountId:
+    type: java.lang.String
+  request:
+    type: org.w3c.dom.Document
+  response:
+    type: org.w3c.dom.Document

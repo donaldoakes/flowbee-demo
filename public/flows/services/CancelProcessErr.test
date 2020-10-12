@@ -1,0 +1,21 @@
+package com.centurylink.mdw.tests.services
+
+start process('CancelMain') {
+    variables = [ testCase: 'err' ]
+}
+
+sleep 30
+
+load process // make masterProcessInstance available
+
+response = delete http("api/Processes/${masterProcessInstance.id}") {
+    headers = [ Accept: "application/json" ]
+}
+assert response.code == 202
+
+sleep 30
+
+// confirm pkg-level handler cancelled as well
+verify processes('CancelMain', 'ServiceSub', 'Error')
+
+assert masterProcessInstance.status == 'Cancelled'

@@ -1,0 +1,105 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: SERVICE
+  START_TRANSITION_ID: '2345108'
+  display: x=356,y=87,w=196,h=26
+  requestMethod: POST
+  requestParameters: '[["Order","Body","true","Order for Rules","com.centurylink.mdw.tests.rules/Order.java","[0.1,1)"]]'
+  requestPath: /order
+  requestSummary: Order for Rules testing
+steps:
+- id: S2
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    Parameters: '{"orderNumber":"${request.orderNumber}","dueDate":"${request.dueDate}","region":"${request.regionString}","quotedPrice":"${request.quotedPrice}"}'
+    display: x=183,y=47,w=60,h=40
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=200,y=78,xs=213&213,ys=91&138
+    event: FINISH
+    to: S3
+- id: S3
+  name: Setup XMLBean
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    OsgiBundleSymbolicName: com.centurylink.donsfuse
+    Output Documents: xmlBeanVar
+    Rule: "import com.centurylink.mdw.service.ApplicationSummaryDocument \r\nimport com.centurylink.mdw.service.ApplicationSummaryDocument.ApplicationSummary     \r\n\r\nxmlBeanVar = ApplicationSummaryDocument.Factory.newInstance();  \r\nApplicationSummary appSummary = xmlBeanVar.addNewApplicationSummary(); \r\nappSummary.setMdwVersion('6.1');"
+    SCRIPT: Groovy
+    display: x=163,y=142,w=100,h=60
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=217,y=232,xs=217&217,ys=206&258
+    event: FINISH
+    to: S1
+- id: S1
+  name: "Drools \r\nDecision Table"
+  specifier: com.centurylink.mdw.drools.DroolsDecisionTableActivity
+  attributes:
+    KnowledgeBase: com.centurylink.mdw.tests.rules/drools-orderRoutingDecisionTable.xlsx
+    KnowledgeBase_assetVersion: '[0.2,1)'
+    Logging: 'true'
+    Output Documents: xmlBeanVar
+    RuleVersionVar: ruleVersion
+    Rules Language: Drools
+    Stateful: 'FALSE'
+    display: x=172,y=262,w=105,h=72
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=270,y=392,xs=223&223&371&371,ys=338&385&385&435
+    event: FINISH
+    to: S7
+    result: WESTERN
+  - id: L6
+    attributes:
+      display: type=Elbow,x=329,y=277,xs=281&395,ys=298&435
+    event: FINISH
+    to: S7
+    result: EASTERN
+- id: S5
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=523,y=446,w=60,h=40
+- id: S7
+  name: Set Response
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: '["response"]'
+    Rule: |-
+      response = new org.json.JSONObject()
+      response.put('workgroup', workgroup)
+    SCRIPT: Groovy
+    display: x=345,y=439,w=100,h=60
+  links:
+  - id: L7
+    attributes:
+      display: type=Elbow,x=484,y=466,xs=449&519,ys=466&466
+    event: FINISH
+    to: S5
+variables:
+  dueDate:
+    type: java.util.Date
+  orderNumber:
+    type: java.lang.String
+  quotedPrice:
+    type: java.lang.Integer
+  region:
+    type: java.lang.String
+  request:
+    type: com.centurylink.mdw.model.Jsonable
+  requestHeaders:
+    type: java.util.Map<String,String>
+  response:
+    type: org.json.JSONObject
+  ruleVersion:
+    type: java.lang.String
+  workgroup:
+    type: java.lang.String
+  xmlBeanVar:
+    type: org.apache.xmlbeans.XmlObject

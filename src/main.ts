@@ -1,6 +1,5 @@
-import { Flow } from './flow';
+import { Flows } from './flows';
 
 window.addEventListener('load', () => {
-    // const workflow = new Flow('.', message.specs);
-    // workflow.render(message.text, message.file);
+    new Flows('').render();
 });

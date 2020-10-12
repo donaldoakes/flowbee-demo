@@ -1,0 +1,8 @@
+package com.centurylink.mdw.tests.services
+
+send message("SOAP") {
+    payload = asset("GetEmployeeSoap.xml").text
+}
+
+response.expected = asset("GetEmployeeResponseSoap.xml").text
+assert verifyXml(response).success

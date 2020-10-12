@@ -1,0 +1,108 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=46,y=41,w=48,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=41,y=231,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=135,y=252,xs=105&166,ys=252&252
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=540,y=235,w=60,h=40
+- id: S3
+  name: Fallout
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.services/Fallout.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'TRUE'
+    display: x=369,y=222,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=504,y=256,xs=473&536,ys=256&256
+    event: FINISH
+    to: S2
+- id: S4
+  name: Set Values
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: '["person","stackTrace","values"]'
+    Rule: "import com.centurylink.mdw.cache.asset.PackageCache\n\nimport java.io.ByteArrayOutputStream\nimport java.io.PrintWriter\nimport com.centurylink.mdw.services.ServiceLocator\nimport com.centurylink.mdw.services.WorkflowServices\nimport com.centurylink.mdw.model.variable.DocumentReference\nimport com.centurylink.mdw.model.Jsonable\n\ndef baos = new ByteArrayOutputStream()\ndef writer = new PrintWriter(baos)\nexception.printStackTrace(writer)\nwriter.flush()\nstackTrace = baos.toString()\n\n// populate values map from source process variables\nvalues = [:]\nvalues['message'] = exception.toString()\nif (exception.runtimeContext) {\n    def procInst = exception.runtimeContext.processInstance\n    values['processName'] = procInst.processName\n    values['packageName'] = procInst.packageName\n    values['processInstanceId'] = String.valueOf(procInst.id)\n    \n    // access variables of source process\n    procInst.variables.each { var ->\n        values[var.name] = var.value\n    }\n    \n    // access Jsonable doc var from source process\n    if (values['person'] != null) {\n        def personDocRef = new DocumentReference(values['person'])\n        def personDoc = ServiceLocator.getWorkflowServices().getDocument(personDocRef.documentId)\n        person = personDoc.getObject(Jsonable.class.name, PackageCache.getPackage(procInst.packageName));\n    }\n}\n"
+    SCRIPT: Groovy
+    display: x=170,y=223,w=100,h=60
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=319,y=253,xs=274&365,ys=253&253
+    event: FINISH
+    to: S3
+subflows:
+- id: F1
+  name: Exception Handler
+  attributes:
+    EMBEDDED_PROCESS_TYPE: Exception Handler
+    PROCESS_VISIBILITY: EMBEDDED
+    display: x=235,y=33,w=440,h=120
+  steps:
+  - id: S5
+    name: Start
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    attributes:
+      display: x=275,y=73,w=60,h=40
+    links:
+    - id: L4
+      attributes:
+        display: type=Elbow,x=370,y=93,xs=339&401,ys=93&93
+      event: FINISH
+      to: S6
+  - id: S6
+    name: Handle Fallout
+    specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+    attributes:
+      STATUS_AFTER_EVENT: Cancelled
+      TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+      display: x=405,y=63,w=100,h=60
+    links:
+    - id: L5
+      attributes:
+        display: type=Elbow,x=540,y=93,xs=509&571,ys=93&93
+      event: FINISH
+      to: S7
+  - id: S7
+    name: Stop
+    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    attributes:
+      display: x=575,y=73,w=60,h=40
+textNotes:
+- id: N1
+  attributes:
+    display: x=689,y=41,w=218,h=89
+  text: |-
+    Always have an embedded
+    Exception Handler in package-
+    level error processes to avoid
+    infinite looping due to exception
+    in error process itself.
+variables:
+  exception:
+    type: java.lang.Exception
+  person:
+    type: com.centurylink.mdw.model.Jsonable
+  stackTrace:
+    type: com.centurylink.mdw.model.StringDocument
+  values:
+    type: java.util.Map<String,String>

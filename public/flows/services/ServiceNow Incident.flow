@@ -1,0 +1,76 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=48,y=41,w=188,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=90,y=160,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=190,y=180,xs=154&226,ys=180&180
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=610,y=160,w=60,h=40
+- id: S3
+  name: |-
+    Create
+    Incident
+  specifier: com.centurylink.mdw.servicenow.ServiceNowAdapter
+  attributes:
+    AuthPassword: ${env['MDW_SERVICENOW_PASSWORD']}
+    AuthUser: ${env['MDW_SERVICENOW_USER']}
+    EndpointUri: ${props['servicenow.url']}/table/incident
+    REQUEST_VARIABLE: incident
+    RESPONSE_VARIABLE: incidentResponse
+    display: x=420,y=140,w=120,h=80
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=575,y=180,xs=544&606,ys=180&180
+    event: FINISH
+    to: S2
+- id: S4
+  name: |-
+    Build
+    Request
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Output Documents: '["incident"]'
+    Rule: |
+      import com.centurylink.mdw.servicenow.Incident
+
+      import com.centurylink.mdw.servicenow.GlideDateTime
+
+      incident = new Incident()
+      incident.shortDescription = 'Houston we have a problem'
+      incident.urgency = Incident.Level.High
+      incident.impact = Incident.Level.Medium
+      incident.correlationId = runtimeContext.processInstanceId.toString()
+      incident.correlationDisplay = 'Process Instance'
+      incident.caller = 'MDW Application'
+      incident.assignmentGroup = 'MDW Support'
+      incident.category = 'General Inquiry'
+      incident.dueDate = new GlideDateTime(System.currentTimeMillis() + 24 * 60 * 60 * 1000).localDateTime
+    SCRIPT: Groovy
+    display: x=230,y=140,w=120,h=80
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=385,y=180,xs=354&416,ys=180&180
+    event: FINISH
+    to: S3
+variables:
+  incident:
+    type: com.centurylink.mdw.model.Jsonable
+  incidentResponse:
+    type: org.json.JSONObject

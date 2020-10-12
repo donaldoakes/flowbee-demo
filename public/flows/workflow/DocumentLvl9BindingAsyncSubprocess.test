@@ -1,0 +1,11 @@
+package com.centurylink.mdw.tests.workflow
+
+start process("TestMainProcess") {
+    variables = [processCase: "DocumentBinding"]
+}
+
+wait process
+sleep 10
+verify processes("com.centurylink.mdw.tests.workflow/TestMainProcess",
+                 "com.centurylink.mdw.tests.workflow/ServiceLevel_9",
+                 "com.centurylink.mdw.tests.workflow/SmartProcessChild")

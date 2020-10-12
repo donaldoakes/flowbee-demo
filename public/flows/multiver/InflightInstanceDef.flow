@@ -1,0 +1,89 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=43,y=38,w=183,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=74,y=159,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=166,y=178,xs=138&195,ys=178&178
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=692,y=158,w=60,h=40
+- id: S3
+  name: before
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |-
+      runtimeContext.logDebug("Executing " + runtimeContext.getActivity().getName())
+      beforeVar = 'initial version'
+    SCRIPT: Groovy
+    display: x=199,y=149,w=100,h=60
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=342,y=181,xs=303&381,ys=181&181
+    event: FINISH
+    to: S5
+- id: S5
+  name: Pause
+  specifier: com.centurylink.mdw.base.PauseActivity
+  attributes:
+    display: x=384,y=162,w=60,h=40
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=482,y=182,xs=448&516,ys=182&182
+    event: FINISH
+    to: S6
+- id: S6
+  name: after
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: InflightInstanceDef_A6
+    Java: |
+      package com.centurylink.mdw.tests.multiver;
+
+      import java.util.Map;
+
+      import com.centurylink.mdw.java.JavaExecutionException;
+      import com.centurylink.mdw.java.JavaExecutor;
+      import com.centurylink.mdw.java.MdwJavaException;
+      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
+
+      public class InflightInstanceDef_A6 implements JavaExecutor {
+          public void initialize(ActivityRuntimeContext context) throws MdwJavaException {
+          }
+
+          public Object execute(Map<String,Object> variables) throws JavaExecutionException  {
+              variables.put("afterVar", "after version"); // to be updated for instance
+              return null;
+          }
+      }
+    display: x=520,y=150,w=100,h=60
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=656,y=178,xs=624&688,ys=178&178
+    event: FINISH
+    to: S2
+textNotes:
+- id: N1
+  attributes:
+    display: x=46,y=75,w=152,h=32
+  text: For manual testing
+variables:
+  afterVar:
+    type: java.lang.String
+  beforeVar:
+    type: java.lang.String

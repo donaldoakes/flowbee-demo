@@ -1,0 +1,144 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  START_TRANSITION_ID: '2360515'
+  display: x=25,y=16,w=183,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=57,y=78,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=173,y=98,xs=121&224,ys=98&98
+    event: FINISH
+    to: S5
+- id: S5
+  name: "Perform Critical\r\nBusiness Function"
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: SimpleDynamicJava_A5
+    Java: |
+      package com.centurylink.mdw.tests.code;
+
+      import java.text.SimpleDateFormat;
+      import java.util.Map;
+
+      import javax.xml.parsers.DocumentBuilder;
+      import javax.xml.parsers.DocumentBuilderFactory;
+
+      import org.apache.xmlbeans.XmlObject;
+      import org.w3c.dom.Document;
+      import org.w3c.dom.Element;
+
+      import com.centurylink.mdw.java.JavaExecutionException;
+      import com.centurylink.mdw.java.JavaExecutor;
+      import com.centurylink.mdw.java.MdwJavaException;
+      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
+      import com.centurylink.mdw.service.Action;
+      import com.centurylink.mdw.service.ActionRequestDocument;
+      import com.centurylink.mdw.service.Parameter;
+
+      public class SimpleDynamicJava_A5 implements JavaExecutor
+      {
+        ActivityRuntimeContext context;
+        private String logicalId;
+
+        public void initialize(ActivityRuntimeContext context) throws MdwJavaException
+        {
+          this.context = context;
+          logicalId = context.getAttributes().get("LOGICAL_ID");
+        }
+
+        public Object execute(Map<String, Object> variables) throws JavaExecutionException
+        {
+          context.logInfo("logical id: " + logicalId);
+
+          XmlObject xmlBean = (XmlObject) variables.get("instructions");
+          ActionRequestDocument actionRequestDoc = (ActionRequestDocument) xmlBean.changeType(ActionRequestDocument.type);
+          if (actionRequestDoc == null)
+            throw new JavaExecutionException("Missing actionRequestDoc variable: instructions");
+          variables.put("instructions", actionRequestDoc);
+          Action action = actionRequestDoc.getActionRequest().getAction();
+          if (action.getName().equals("acknowledge"))
+          {
+            // access dynamic java class
+            String ackOutcome = new Acknowledger().acknowledge();
+            variables.put("outcome", ackOutcome);
+          }
+          else if (action.getName().equals("escalate"))
+          {
+            context.logSevere("ESCALATING... ");
+            variables.put("outcome", "Escalation");
+            String message = "Escalatation required.";
+            for (Parameter parameter : action.getParameterList())
+            {
+              if (parameter.getName().equals("orderNumber"))
+                message += "\nOrder Number: " + parameter.getStringValue();
+              else if (parameter.getName().equals("customerId"))
+                message += "\nCustomer ID: " + parameter.getStringValue();
+              else if (parameter.getName().equals("contactTn"))
+                message += "\nContact TN: " + parameter.getStringValue();
+            }
+            variables.put("userMessage", message);
+          }
+
+          try
+          {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document document = builder.newDocument();
+            Element root = document.createElement("dispensation");
+            document.appendChild(root);
+            root.setAttribute("outcome", variables.get("outcome").toString());
+            variables.put("dispensation", document);
+
+            variables.put("completionDate", new SimpleDateFormat("MM/dd/yyyy").parse("12/25/2015"));
+          }
+          catch (Exception ex)
+          {
+            throw new JavaExecutionException("Bad date format.");
+          }
+          return variables.get("outcome");
+        }
+      }
+    Output Documents: dispensation
+    display: x=228,y=69,w=113,h=72
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=291,y=180,xs=285&285,ys=145&243
+    event: FINISH
+    to: S4
+    result: Escalation
+  - id: L3
+    attributes:
+      display: type=Elbow,x=391,y=103,xs=345&520,ys=101&101
+    event: FINISH
+    to: S2
+    result: Acknowledgment
+- id: S4
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=255,y=247,w=60,h=40
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=524,y=81,w=60,h=40
+variables:
+  completionDate:
+    type: java.util.Date
+  dispensation:
+    type: org.w3c.dom.Document
+  instructions:
+    type: org.apache.xmlbeans.XmlObject
+  outcome:
+    type: java.lang.String
+  responsibleParty:
+    type: java.lang.String
+  userMessage:
+    type: java.lang.String

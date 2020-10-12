@@ -1,0 +1,57 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=40,y=26,w=84,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=27,y=74,w=60,h=40
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=180,y=94,xs=91&270,ys=94&94
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=579,y=76,w=60,h=40
+- id: S4
+  name: Master Task
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/masterTaskForSubtasks.task
+    TASK_TEMPLATE_assetVersion: '[0.3,1)'
+    Wait for Task: 'TRUE'
+    display: x=274,y=72,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=491,y=96,xs=378&575,ys=96&96
+    event: FINISH
+    to: S2
+- id: S5
+  name: Subtask A
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/subtaskA.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'TRUE'
+    display: x=273,y=150,w=100,h=60
+- id: S6
+  name: Subtask B
+  specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/subtaskB.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=274,y=232,w=100,h=60

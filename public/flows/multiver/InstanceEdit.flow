@@ -1,0 +1,63 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=34,y=32,w=118,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=70,y=120,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=170,y=140,xs=134&206,ys=140&140
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=490,y=120,w=60,h=40
+- id: S3
+  name: Pause
+  specifier: com.centurylink.mdw.base.PauseActivity
+  attributes:
+    display: x=210,y=120,w=60,h=40
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=300,y=140,xs=274&326,ys=140&140
+    event: FINISH
+    to: S4
+- id: S4
+  name: |-
+    Weather
+    Update
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: InstanceEdit_A4
+    Java: |
+      package com.centurylink.mdw.tests.multiver;
+
+      import com.centurylink.mdw.java.JavaExecutor;
+
+      import java.util.Map;
+
+      public class InstanceEdit_A4 implements JavaExecutor {
+          public Object execute(Map<String,Object> variables) {
+              variables.put("weather", "cloudy");
+              return null;
+          }
+      }
+    display: x=330,y=100,w=100,h=80
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=460,y=140,xs=434&486,ys=140&140
+    event: FINISH
+    to: S2
+variables:
+  weather:
+    type: java.lang.String

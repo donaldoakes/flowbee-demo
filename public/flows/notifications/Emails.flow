@@ -1,0 +1,128 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=61,y=26,w=63,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=342,y=24,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=470,y=78,xs=372&372,ys=68&147
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=174,y=475,w=60,h=40
+- id: S3
+  name: "Send\r\nVia"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: ${sendVia}
+    SCRIPT: javax.el
+    display: x=325,y=151,w=94,h=71
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=292,y=164,xs=321&258,ys=186&266
+    event: FINISH
+    to: S5
+    result: smtp
+  - id: L3
+    attributes:
+      display: type=Elbow,x=420,y=164,xs=423&490,ys=186&267
+    event: FINISH
+    to: S4
+    result: sendgrid
+- id: S5
+  name: SMTP
+  specifier: com.centurylink.mdw.workflow.activity.notification.EmailNotificationActivity
+  attributes:
+    CCGroups: '["MDW Support"]'
+    NoticeGroups: '["Developers"]'
+    RecipientsExpression: '${recipientList != null ? recipientList : recipient}'
+    display: x=154,y=236,w=100,h=60
+    from: mdwdev@centurylink.com
+    noticeType: SMTP
+    subject: Test Email via SMTP
+    template: com.centurylink.mdw.base/emailTemplate.html
+    template_assetVersion: '[0.1,1)'
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=204,y=322,xs=204&204,ys=300&345
+    event: FINISH
+    to: S6
+- id: S4
+  name: SendGrid
+  specifier: com.centurylink.mdw.sendgrid.SendgridActivity
+  attributes:
+    CCGroups: '["MDW Support"]'
+    NoticeGroups: '["Developers"]'
+    RecipientsExpression: '${recipientList ? recipientList : recipient}'
+    display: x=494,y=237,w=100,h=60
+    from: mdw.support@centurylink.com
+    subject: Test Email via SendGrid
+    template: com.centurylink.mdw.base/emailTemplate.html
+    template_assetVersion: '[0.1,1)'
+  links:
+  - id: L6
+    attributes:
+      display: type=Elbow,x=544,y=322,xs=544&544,ys=301&344
+    event: FINISH
+    to: S7
+- id: S6
+  name: "SMTP\r\nTask"
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.notifications/SmtpTask.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'true'
+    display: x=153,y=349,w=103,h=68
+  links:
+  - id: L5
+    attributes:
+      display: type=Elbow,x=204,y=446,xs=204&204,ys=421&471
+    event: FINISH
+    to: S2
+- id: S7
+  name: "SendGrid\r\nTask"
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.notifications/SendgridTask.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'true'
+    display: x=495,y=348,w=102,h=70
+  links:
+  - id: L7
+    attributes:
+      display: type=Elbow,x=546,y=444,xs=546&546,ys=422&471
+    event: FINISH
+    to: S8
+- id: S8
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=516,y=475,w=60,h=40
+textNotes:
+- id: N9
+  attributes:
+    display: x=52,y=70,w=174,h=26
+  text: For manual testing
+variables:
+  recipient:
+    type: java.lang.String
+  recipientList:
+    type: java.util.List<String>
+  sendVia:
+    type: java.lang.String

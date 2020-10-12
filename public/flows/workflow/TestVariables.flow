@@ -1,0 +1,45 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  SLA: '20'
+  SLA_UNIT: Minutes
+  Transition with no Label: Acts as Default
+  display: x=50,y=50,w=169,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=56,y=133,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=174,y=153,xs=120&210,ys=153&153
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=476,y=133,w=60,h=40
+- id: S3
+  name: PopulateVariables
+  specifier: com.centurylink.mdw.tests.workflow.PopulateVar
+  attributes:
+    display: x=214,y=123,w=155,h=55
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=424,y=153,xs=373&472,ys=153&153
+    event: FINISH
+    to: S2
+variables:
+  intListVar:
+    type: java.util.List<Integer>
+  longListVar:
+    type: java.util.List<Long>
+  stringListVar:
+    type: java.util.List<String>
+  stringMapVar:
+    type: java.util.Map<String,String>

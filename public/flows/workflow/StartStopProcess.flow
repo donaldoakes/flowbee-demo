@@ -1,0 +1,27 @@
+attributes:
+  NodeStyle: BoxIcon
+  display: x=23,y=18,w=156,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=56,y=97,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=261,y=117,xs=120&402,ys=117&117
+    event: FINISH
+    to: S2
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=406,y=97,w=60,h=40
+variables:
+  ignoredJson:
+    type: org.json.JSONObject
+  ignoredString:
+    type: java.lang.String
+  inputVar:
+    type: java.lang.String

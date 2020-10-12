@@ -1,0 +1,126 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  display: x=25,y=27,w=159,h=27
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=41,y=86,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=169,y=86,xs=105&168,ys=106&106
+    event: FINISH
+    to: S5
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=542,y=84,w=60,h=40
+- id: S3
+  name: A Custom Task
+  specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/A Custom Task.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=389,y=172,w=123,h=64
+    taskIndexProvider: com.centurylink.mdw.services.task.CustomTaskIndexProvider
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=510,y=150,xs=516&538,ys=204&104
+    event: FINISH
+    to: S2
+- id: S4
+  name: An AutoForm Task
+  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/An AutoForm Task.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    Wait for Task: 'TRUE'
+    display: x=310,y=71,w=122,h=66
+    taskIndexProvider: com.centurylink.mdw.services.task.AutoFormTaskIndexProvider
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=487,y=104,xs=436&538,ys=104&104
+    event: FINISH
+    to: S2
+- id: S5
+  name: "Custom\r\n?"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: '#{isCustom}'
+    SCRIPT: javax.el
+    display: x=172,y=78,w=77,h=57
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=262,y=83,xs=253&306,ys=106&106
+    event: FINISH
+    to: S4
+    result: 'false'
+  - id: L5
+    attributes:
+      display: type=Elbow,x=224,y=161,xs=210&210,ys=139&194
+    event: FINISH
+    to: S6
+    result: 'true'
+- id: S6
+  name: "Provider\r\n?"
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  attributes:
+    Expression: isIndexProvider
+    SCRIPT: Groovy
+    display: x=176,y=198,w=69,h=61
+  links:
+  - id: L6
+    attributes:
+      display: type=Elbow,x=287,y=196,xs=249&385,ys=217&217
+    event: FINISH
+    to: S3
+    result: 'false'
+  - id: L7
+    attributes:
+      display: type=Elbow,x=267,y=268,xs=249&340,ys=228&302
+    event: FINISH
+    to: S7
+    result: 'true'
+- id: S7
+  name: Another Custom Task
+  specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+  attributes:
+    STATUS_AFTER_EVENT: Cancelled
+    TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
+    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/Another Custom Task.task
+    TASK_TEMPLATE_assetVersion: '[0.1,1)'
+    display: x=268,y=306,w=144,h=65
+    taskIndexProvider: com.centurylink.mdw.tests.tasks.MyTaskIndexProvider
+  links:
+  - id: L8
+    attributes:
+      display: type=Elbow,x=489,y=234,xs=416&572,ys=338&128
+    event: FINISH
+    to: S2
+variables:
+  dateVar:
+    type: java.util.Date
+  intVar:
+    type: java.lang.Integer
+  isCustom:
+    type: java.lang.Boolean
+  isIndexProvider:
+    type: java.lang.Boolean
+  jaxbVar:
+    type: javax.xml.bind.JAXBElement
+  stringListVar:
+    type: java.util.List<String>
+  stringVar:
+    type: java.lang.String

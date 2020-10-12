@@ -1,0 +1,92 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=33,y=21,w=221,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=50,y=120,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=140,y=140,xs=114&166,ys=140&140
+    event: FINISH
+    to: S4
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=700,y=120,w=60,h=40
+- id: S3
+  name: Wait
+  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  attributes:
+    SLA_DISPLAY_UNITS: Hours
+    STATUS_AFTER_TIMEOUT: Cancelled
+    WAIT_EVENT_NAMES: '[["${masterRequestId}",""]]'
+    display: x=350,y=110,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=490,y=140,xs=454&526,ys=140&140
+    event: FINISH
+    to: S5
+- id: S4
+  name: Init
+  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  attributes:
+    Rule: |
+      todaysMood = 'expectant'
+      before = runtimeContext.process.label
+    SCRIPT: Groovy
+    display: x=170,y=110,w=100,h=60
+  links:
+  - id: L3
+    attributes:
+      display: type=Elbow,x=310,y=140,xs=274&346,ys=140&140
+    event: FINISH
+    to: S3
+- id: S5
+  name: Update
+  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  attributes:
+    ClassName: MyEverChangingMoods_A5
+    Java: |
+      package com.centurylink.mdw.tests.multiver;
+
+      import com.centurylink.mdw.java.JavaExecutor;
+      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
+
+      import java.util.Map;
+
+      public class MyEverChangingMoods_A5 implements JavaExecutor {
+          private ActivityRuntimeContext context;
+
+          public void initialize(ActivityRuntimeContext context) {
+              this.context = context;
+          }
+
+          public Object execute(Map<String,Object> variables) {
+              variables.put("after", context.getProcess().getLabel());
+              variables.put("todaysMood", "jaded");
+              return null;
+          }
+      }
+    display: x=530,y=110,w=100,h=60
+  links:
+  - id: L4
+    attributes:
+      display: type=Elbow,x=665,y=140,xs=634&696,ys=140&140
+    event: FINISH
+    to: S2
+variables:
+  after:
+    type: java.lang.String
+  before:
+    type: java.lang.String
+  todaysMood:
+    type: java.lang.String

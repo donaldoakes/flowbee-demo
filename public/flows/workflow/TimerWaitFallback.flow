@@ -1,0 +1,49 @@
+attributes:
+  ArrowStyle: ArrowEnd
+  NodeStyle: BoxIcon
+  PROCESS_VISIBILITY: PUBLIC
+  PerformanceLevel: '0'
+  display: x=44,y=27,w=175,h=26
+steps:
+- id: S1
+  name: Start
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  attributes:
+    display: x=100,y=110,w=60,h=40
+  links:
+  - id: L1
+    attributes:
+      display: type=Elbow,x=210,y=130,xs=164&256,ys=130&130
+    event: FINISH
+    to: S3
+- id: S2
+  name: Stop
+  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  attributes:
+    display: x=490,y=110,w=60,h=40
+- id: S3
+  name: Wait
+  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  attributes:
+    FallbackCheckInterval: '60'
+    FallbackCheckInterval_DISPLAY_UNITS: Minutes
+    STATUS_AFTER_EVENT: Cancelled
+    TIMER_WAIT: ${waitSeconds}
+    TIMER_WAIT_DISPLAY_UNITS: Minutes
+    display: x=260,y=100,w=100,h=60
+  links:
+  - id: L2
+    attributes:
+      display: type=Elbow,x=425,y=130,xs=364&486,ys=130&130
+    event: FINISH
+    to: S2
+textNotes:
+- id: N1
+  attributes:
+    display: x=50,y=190,w=140,h=40
+  text: |-
+    No test case for this
+    currently
+variables:
+  waitSeconds:
+    type: java.lang.Integer
