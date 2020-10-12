@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=32,y=129,w=60,h=40
   links:
@@ -17,15 +17,15 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=494,y=299,w=60,h=40
 - id: S4
   name: "Create\r\nServicePlan"
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["servicePlan"]'
-    Rule: "import com.centurylink.mdw.tests.microservice.ServicePlanTest\r\n\r\nval servicePlanTest = ServicePlanTest()\r\n\r\nwhen (variables[\"testCase\"]) {\r\n  \"defaultBindings\" -> {\r\n    variables[\"servicePlan\"] = servicePlanTest.defaultBindings()\r\n  }\r\n  \"customBindings\" -> {\r\n    variables[\"servicePlan\"] = servicePlanTest.customBindings()\r\n  }\r\n}"
+    Rule: ""
     SCRIPT: Kotlin Script
     display: x=322,y=118,w=105,h=71
   links:
@@ -36,7 +36,7 @@ steps:
     to: S2
 - id: S5
   name: Which?
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: variables["language"]
     SCRIPT: Kotlin Script
@@ -58,10 +58,10 @@ steps:
   name: |-
     Java
     ServicePlan
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: ServicePlanTest_A6
-    Java: "package com.centurylink.mdw.tests.microservice;\n\nimport java.util.ArrayList;\nimport java.util.HashMap;\nimport java.util.List;\nimport java.util.Map;\n\nimport com.centurylink.mdw.java.JavaExecutionException;\nimport com.centurylink.mdw.java.JavaExecutor;\nimport com.centurylink.mdw.java.MdwJavaException;\nimport com.centurylink.mdw.microservice.ServicePlan;\nimport com.centurylink.mdw.model.workflow.ActivityRuntimeContext;\nimport com.centurylink.mdw.microservice.Microservice;\n\npublic class ServicePlanTest_A6 implements JavaExecutor {\n    private ActivityRuntimeContext context;\n\n    public void initialize(ActivityRuntimeContext context) throws MdwJavaException {\n        this.context = context;\n    }\n\n    public Object execute(Map<String,Object> variables) throws JavaExecutionException  {\n        \n        Map<String,Object> bindings = new HashMap<>();\n        bindings.put(\"greeting\", \"hello\");\n        bindings.put(\"requestMapper\", \"com.centurylink.mdw.tests.microservice/UserRequestMapper.groovy\");\n        bindings.put(\"intVar\", 123);\n        \n        Microservice microservice = new Microservice(\n                context,\n                \"admin/createUser\",\n                context.getProps().get(\"mdw.services.url\") + \"/services/Users\",\n                \"POST\",\n                \"com.centurylink.mdw.microservice/${StandardInvoke}.proc\",\n                true,\n                1,\n                true,\n                \"\",\n                bindings\n        );\n\n        List<Microservice> microservices = new ArrayList<>();\n        microservices.add(microservice);\n        ServicePlan servicePlan = new ServicePlan(microservices);\n        variables.put(\"servicePlan\", servicePlan);\n                \n        return null;\n    }\n}\n"
+    Java: ""
     Output Documents: '["servicePlan"]'
     display: x=145,y=277,w=106,h=68
   links:
@@ -79,7 +79,7 @@ variables:
   language:
     type: java.lang.String
   request:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   servicePlan:
     type: org.yaml.snakeyaml.Yaml
   testCase:

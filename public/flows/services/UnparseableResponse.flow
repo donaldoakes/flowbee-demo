@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=40,y=140,w=60,h=40
   links:
@@ -19,12 +19,12 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=510,y=140,w=60,h=40
 - id: S3
   name: Invoke
-  specifier: com.centurylink.mdw.workflow.adapter.rest.RestServiceAdapter
+  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     EndpointUri: ${url}
     HeadersVariable: serviceRequestHeaders
@@ -54,38 +54,10 @@ steps:
   name: |-
     Create
     Request
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: UnparseableResponse_A5
-    Java: |
-      package com.centurylink.mdw.tests.services;
-
-      import com.centurylink.mdw.java.JavaExecutionException;
-      import com.centurylink.mdw.java.JavaExecutor;
-      import com.centurylink.mdw.java.MdwJavaException;
-      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
-
-      import java.util.HashMap;
-      import java.util.Map;
-
-      public class UnparseableResponse_A5 implements JavaExecutor {
-          private ActivityRuntimeContext context;
-
-          public void initialize(ActivityRuntimeContext context) throws MdwJavaException {
-              this.context = context;
-          }
-
-          public Object execute(Map<String,Object> variables) throws JavaExecutionException  {
-              // bad request content causes 500 error with XML response
-              variables.put("serviceRequest", "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" +
-                  "<GetEmployee xmlns:ns2=\"http://mdw.centurylink.com/serviceTypes\">\n" +
-                  "</GetEmployee>");
-              Map<String,String> requestHeaders = new HashMap<>();
-              requestHeaders.put("Content-Type", "text/xml");
-              variables.put("serviceRequestHeaders", requestHeaders);
-              return null;
-          }
-      }
+    Java: ""
     Output Documents: '["serviceRequest","serviceRequestHeaders"]'
     display: x=180,y=120,w=100,h=80
   links:
@@ -96,7 +68,7 @@ steps:
     to: S3
 variables:
   serviceRequest:
-    type: com.centurylink.mdw.model.StringDocument
+    type: model.StringDocument
   serviceRequestHeaders:
     type: java.util.Map<String,String>
   serviceResponse:

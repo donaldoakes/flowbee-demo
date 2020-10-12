@@ -1,5 +1,5 @@
 {
   "icon": "swagger.png",
-  "id": "com.centurylink.mdw.workflow.activity.validate.SwaggerValidatorActivity",
+  "id": "flowbee-demo.validate.SwaggerValidatorActivity",
   "label": "SwaggerValidatorActivity"
 }

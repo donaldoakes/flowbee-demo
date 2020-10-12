@@ -4,7 +4,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=72,y=117,w=60,h=40
   links:
@@ -15,21 +15,21 @@ steps:
     to: S10
 - id: S6
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=595,y=119,w=60,h=40
 - id: S5
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=680,y=229,w=60,h=40
 - id: S9
   name: "POST\r\nRequest"
-  specifier: com.centurylink.mdw.workflow.adapter.rest.RestServiceAdapter
+  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     ConnectTimeout: '60000'
     DO_LOGGING: 'True'
-    EndpointUri: '#{props[''mdw.services.url'']}/Services/REST'
+    EndpointUri: '#{props[''services.url'']}/Services/REST'
     HeadersVariable: headersMap
     HttpMethod: POST
     PostScriptLang: Groovy
@@ -46,10 +46,10 @@ steps:
     to: S5
 - id: S8
   name: "GET\r\nRequest"
-  specifier: com.centurylink.mdw.workflow.adapter.rest.RestServiceAdapter
+  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     DO_LOGGING: 'True'
-    EndpointUri: '#{props[''mdw.services.url'']}/services/AppSummary'
+    EndpointUri: '#{props[''services.url'']}/services/AppSummary'
     HeadersVariable: headersMap
     HttpMethod: GET
     PostScriptLang: Groovy
@@ -64,53 +64,10 @@ steps:
     to: S6
 - id: S10
   name: Set Request
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: SetRequest_A10
-    Java: |
-      package com.centurylink.mdw.tests.services;
-
-      import java.util.Map;
-      import java.util.HashMap;
-
-      import com.centurylink.mdw.java.JavaExecutionException;
-      import com.centurylink.mdw.java.JavaExecutor;
-      import com.centurylink.mdw.java.MdwJavaException;
-      import com.centurylink.mdw.model.user.User;
-      import com.centurylink.mdw.model.user.Workgroup;
-      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
-      import com.centurylink.mdw.tests.services.GetEmployee;
-
-      public class SetRequest_A10 implements JavaExecutor {
-
-          public void initialize(ActivityRuntimeContext context) throws MdwJavaException {
-          }
-
-          public Object execute(Map<String, Object> variables) throws JavaExecutionException {
-              String httpMethod = (String) variables.get("httpMethod");
-              if (httpMethod.equals("POST")) {
-                  GetEmployee requestDoc = new GetEmployee();
-                  requestDoc.setWorkstationId("dxoakes");
-                  variables.put("requestDoc", requestDoc);
-                  Map<String,String> headers = new HashMap<String,String>();
-                  headers.put("my-header", "my-header-value");
-                  headers.put("Content-Type", "text/xml");
-                  variables.put("headersMap", headers);
-              }
-              else if (httpMethod.equals("PATCH")) {
-                  Workgroup workgroup = new Workgroup(0L, "Patchy Developers", "Dev Group for PATCH");
-                  workgroup.setUsers(new User[] { new User("dxoakes") });
-                  try {
-                      variables.put("patchRequest", workgroup.getJson());
-                  }
-                  catch (org.json.JSONException ex) {
-                      throw new JavaExecutionException(ex.getMessage(), ex);
-                  }
-              }
-              return httpMethod;
-          }
-
-      }
+    Java: ""
     Output Documents: requestDoc#patchRequest#headersMap
     display: x=206,y=104,w=120,h=74
   links:
@@ -134,11 +91,11 @@ steps:
     result: PATCH
 - id: S11
   name: "PATCH\r\nRequest"
-  specifier: com.centurylink.mdw.workflow.adapter.rest.RestServiceAdapter
+  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     ConnectTimeout: '30000'
     DO_LOGGING: 'True'
-    EndpointUri: '#{props[''mdw.services.url'']}/services/com/centurylink/mdw/tests/services/PatchHandler'
+    EndpointUri: '#{props[''services.url'']}/services/tests/services/PatchHandler'
     HttpMethod: PATCH
     PostScriptLang: Groovy
     PreScriptLang: Groovy
@@ -154,7 +111,7 @@ steps:
     to: S12
 - id: S12
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=457,y=341,w=60,h=40
 variables:
@@ -169,4 +126,4 @@ variables:
   requestDoc:
     type: javax.xml.bind.JAXBElement
   responseDoc:
-    type: com.centurylink.mdw.model.StringDocument
+    type: model.StringDocument

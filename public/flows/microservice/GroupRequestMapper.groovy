@@ -1,4 +1,0 @@
-serviceRequest {
-  name request.group
-}
-

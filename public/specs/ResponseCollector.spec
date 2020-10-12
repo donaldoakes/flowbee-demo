@@ -1,5 +1,5 @@
 {
   "icon": "collector.png",
-  "id": "com.centurylink.mdw.microservice.ResponseCollector",
+  "id": "flowbee-demo.microservice.ResponseCollector",
   "label": "ResponseCollector"
 }

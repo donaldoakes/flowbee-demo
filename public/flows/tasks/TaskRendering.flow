@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=155,y=19,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=488,y=685,w=60,h=40
 - id: S3
   name: "Step\r\nOne"
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=250,y=114,w=78,h=48
   links:
@@ -33,7 +33,7 @@ steps:
     to: S4
 - id: S4
   name: "Step\r\nTwo"
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=246,y=277,w=83,h=47
   links:
@@ -49,7 +49,7 @@ steps:
     to: S5
 - id: S5
   name: "Step\r\nThree"
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=448,y=133,w=78,h=50
   links:
@@ -60,7 +60,7 @@ steps:
     to: S7
 - id: S6
   name: "Step\r\nFour"
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=253,y=437,w=80,h=50
   links:
@@ -71,7 +71,7 @@ steps:
     to: S8
 - id: S7
   name: New Synchronization Activity
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     display: x=467,y=546,w=100,h=60
@@ -83,11 +83,11 @@ steps:
     to: S2
 - id: S8
   name: "Rendered\r\nTask"
-  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  specifier: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
-    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
-    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/RenderedTask.task
+    TASK_PAGELET: base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: tests.tasks/RenderedTask.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     Wait for Task: 'true'
     display: x=84,y=633,w=101,h=68

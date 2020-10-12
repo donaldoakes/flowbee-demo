@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=35,y=58,w=60,h=40
   links:
@@ -20,12 +20,12 @@ steps:
     to: S11
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=574,y=233,w=60,h=40
 - id: S3
   name: Stubbed Script
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: throw new Exception('Help!')
     SCRIPT: Groovy
@@ -44,7 +44,7 @@ steps:
     to: S5
 - id: S4
   name: Stubbed Timer
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '600'
@@ -58,15 +58,15 @@ steps:
     to: S6
 - id: S5
   name: Finish
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=264,y=229,w=60,h=40
 - id: S6
   name: "Stub Test\r\nSubproc"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=554,y=147,w=100,h=60
-    processname: com.centurylink.mdw.tests.stubbing/TestActivityStubSubproc
+    processname: tests.stubbing/TestActivityStubSubproc
     processversion: '[0.1,1)'
     synchronous: 'TRUE'
   links:
@@ -77,7 +77,7 @@ steps:
     to: S2
 - id: S11
   name: Path
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: flowPath
     SCRIPT: Groovy
@@ -97,7 +97,7 @@ steps:
     result: all timers
 - id: S12
   name: Timer 1
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '60'
@@ -111,7 +111,7 @@ steps:
     to: S13
 - id: S13
   name: Timer 2
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: ${number}
@@ -125,7 +125,7 @@ steps:
     to: S14
 - id: S14
   name: Timer 3
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '7200'
@@ -139,7 +139,7 @@ steps:
     to: S15
 - id: S15
   name: Done
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=529,y=305,w=60,h=40
 subflows:
@@ -152,7 +152,7 @@ subflows:
   steps:
   - id: S9
     name: Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=273,y=45,w=60,h=40
     links:
@@ -163,11 +163,11 @@ subflows:
       to: S7
   - id: S7
     name: Stubbed Task
-    specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+    specifier: flowbee-demo.task.CustomManualTaskActivity
     attributes:
       AlertIntervalUnits: Hours
       Category: COM
-      IndexProvider: com.centurylink.mdw.services.task.CustomTaskIndexProvider
+      IndexProvider: services.task.CustomTaskIndexProvider
       Notices: Open,,,,;Assigned,,,,;Completed,,,,;Cancelled,,,,;In Progress,,,,;Alert,,,,;Jeopardy,,,,;Forward,,,,;
       SLAUnits: Hours
       STATUS_AFTER_EVENT: Cancelled
@@ -183,7 +183,7 @@ subflows:
       to: S10
   - id: S10
     name: Stop
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       display: x=570,y=45,w=60,h=40
 variables:

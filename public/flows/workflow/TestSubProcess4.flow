@@ -5,7 +5,7 @@ attributes:
 steps:
 - id: S34
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=53,y=119,w=60,h=40
   links:
@@ -16,12 +16,12 @@ steps:
     to: S31
 - id: S33
   name: Finish
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=625,y=117,w=60,h=40
 - id: S31
   name: Calculate cube
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: 'ncube = n * n * n;   '
     SCRIPT: Groovy
@@ -34,10 +34,10 @@ steps:
     to: S35
 - id: S35
   name: "create output\r\ndocument"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: resultdoc
-    Rule: "import groovy.xml.MarkupBuilder;\r\n\r\ndef stringWriter = new StringWriter();\r\ndef docBuilder = new MarkupBuilder(stringWriter);\r\ndocBuilder.Result {\r\n\t\tn(n)\r\n\t\tnplus1(n+1)\r\n\t\tcube(ncube)\r\n\t\r\n}\r\nresultdoc = stringWriter.toString();"
+    Rule: ""
     SCRIPT: Groovy
     display: x=416,y=113,w=100,h=60
   links:
@@ -52,4 +52,4 @@ variables:
   ncube:
     type: java.lang.Long
   resultdoc:
-    type: com.centurylink.mdw.model.StringDocument
+    type: model.StringDocument

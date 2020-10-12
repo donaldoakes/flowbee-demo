@@ -1,5 +1,5 @@
 {
   "icon": "orchestrator.png",
-  "id": "com.centurylink.mdw.microservice.OrchestratorActivity",
+  "id": "flowbee-demo.microservice.OrchestratorActivity",
   "label": "OrchestratorActivity"
 }

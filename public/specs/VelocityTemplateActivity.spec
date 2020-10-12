@@ -1,5 +1,5 @@
 {
   "icon": "velocity.jpg",
-  "id": "com.centurylink.mdw.workflow.activity.template.VelocityTemplateActivity",
+  "id": "flowbee-demo.template.VelocityTemplateActivity",
   "label": "VelocityTemplateActivity"
 }

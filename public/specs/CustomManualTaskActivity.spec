@@ -1,5 +1,5 @@
 {
   "icon": "task.png",
-  "id": "com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity",
+  "id": "flowbee-demo.task.CustomManualTaskActivity",
   "label": "CustomManualTaskActivity"
 }

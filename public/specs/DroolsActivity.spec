@@ -1,5 +1,5 @@
 {
   "icon": "drools.jpg",
-  "id": "com.centurylink.mdw.drools.DroolsActivity",
+  "id": "flowbee-demo.drools.DroolsActivity",
   "label": "DroolsActivity"
 }

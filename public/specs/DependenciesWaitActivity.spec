@@ -1,5 +1,5 @@
 {
   "icon": "receive.gif",
-  "id": "com.centurylink.mdw.microservice.DependenciesWaitActivity",
+  "id": "flowbee-demo.microservice.DependenciesWaitActivity",
   "label": "DependenciesWaitActivity"
 }

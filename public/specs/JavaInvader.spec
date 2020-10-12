@@ -1,5 +1,5 @@
 {
   "icon": "invader.png",
-  "id": "com.centurylink.mdw.tests.code.JavaInvader",
+  "id": "flowbee-demo.tests.code.JavaInvader",
   "label": "JavaInvader"
 }

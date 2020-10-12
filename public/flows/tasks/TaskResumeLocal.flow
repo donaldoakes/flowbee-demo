@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=77,y=85,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=492,y=84,w=60,h=40
 - id: S3
   name: custom
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: custom
     SCRIPT: Groovy
@@ -42,11 +42,11 @@ steps:
     result: 'true'
 - id: S4
   name: "autoform task\r\nfor local resume"
-  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  specifier: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
-    TASK_PAGELET: com.centurylink.mdw.base/AutoFormManualTask.pagelet
-    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/autoform task for local resume.task
+    TASK_PAGELET: base/AutoFormManualTask.pagelet
+    TASK_TEMPLATE: tests.tasks/autoform task for local resume.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     Wait for Task: 'TRUE'
     display: x=317,y=78,w=108,h=73
@@ -58,11 +58,11 @@ steps:
     to: S2
 - id: S5
   name: "custom task for\r\nlocal resume"
-  specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+  specifier: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
-    TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
-    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/custom task for local resume.task
+    TASK_PAGELET: base/CustomManualTask.pagelet
+    TASK_TEMPLATE: tests.tasks/custom task for local resume.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     display: x=320,y=172,w=105,h=72
   links:

@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=85,y=128,w=60,h=40
   links:
@@ -17,15 +17,15 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
-    Monitors: '[["false","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["false","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=608,y=124,w=60,h=40
 - id: S3
   name: Branch A
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=319,y=63,w=60,h=40
   links:
   - id: L5
@@ -35,7 +35,7 @@ steps:
     to: S7
 - id: S4
   name: Dummy
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=192,y=123,w=60,h=40
   links:
@@ -56,9 +56,9 @@ steps:
     to: S6
 - id: S5
   name: Branch B
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=318,y=196,w=60,h=40
   links:
   - id: L7
@@ -68,7 +68,7 @@ steps:
     to: S7
 - id: S6
   name: Branch 0
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=320,y=124,w=60,h=40
   links:
@@ -79,9 +79,9 @@ steps:
     to: S7
 - id: S7
   name: sync
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=456,y=120,w=82,h=51
   links:
   - id: L8

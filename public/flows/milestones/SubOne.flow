@@ -1,6 +1,6 @@
 attributes:
   ArrowStyle: ArrowEnd
-  Monitors: '[["false","Due Date Monitor","com.centurylink.mdw.base/ProcessDueDateMonitor.java",""],["false","Microservice Status Monitor","com.centurylink.mdw.microservice/MicroserviceStatusProcessMonitor.java",""]]'
+  Monitors: '[["false","Due Date Monitor","base/ProcessDueDateMonitor.java",""],["false","Microservice Status Monitor","microservice/MicroserviceStatusProcessMonitor.java",""]]'
   NodeStyle: BoxIcon
   PROCESS_VISIBILITY: PUBLIC
   PerformanceLevel: '0'
@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=70,y=70,w=60,h=40
   links:
@@ -19,16 +19,16 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=907,y=392,w=60,h=40
 - id: S6
   name: |-
     Milestone
     One-One
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=80,y=203,w=96,h=69
   links:
   - id: L8
@@ -40,9 +40,9 @@ steps:
   name: |-
     Waiting
     Milestone
-  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  specifier: flowbee-demo.event.EventWaitActivity
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java","Waiting [Pause]"],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Waiting [Pause]"],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     SLA_DISPLAY_UNITS: Hours
     STATUS_AFTER_TIMEOUT: Cancelled
     WAIT_EVENT_NAMES: '[["milestoneWait-${masterRequestId}",""]]'
@@ -55,7 +55,7 @@ steps:
     to: S9
 - id: S5
   name: Unimportant
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=194,y=56,w=111,h=58
   links:
@@ -76,9 +76,9 @@ steps:
     to: S8
 - id: S3
   name: Spellbinding
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java","Custom Label"],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Custom Label"],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=416,y=65,w=106,h=60
   links:
   - id: L6
@@ -88,7 +88,7 @@ steps:
     to: S7
 - id: S7
   name: Sync
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
     display: x=373,y=363,w=78,h=54
   links:
@@ -99,7 +99,7 @@ steps:
     to: S4
 - id: S8
   name: Uninteresting
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=265,y=172,w=93,h=50
   links:
@@ -112,9 +112,9 @@ steps:
   name: |-
     Future
     Milestone
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=752,y=206,w=96,h=59
   links:
   - id: L11
@@ -124,11 +124,11 @@ steps:
     to: S11
 - id: S10
   name: SubThree
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
-    Monitors: '[["false","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["false","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=754,y=393,w=100,h=60
-    processname: com.centurylink.mdw.tests.milestones/SubThree.proc
+    processname: tests.milestones/SubThree.proc
     processversion: '[0.1,1)'
     synchronous: 'true'
   links:
@@ -139,9 +139,9 @@ steps:
     to: S2
 - id: S11
   name: F2
-  specifier: com.centurylink.mdw.workflow.activity.DefaultActivityImpl
+  specifier: flowbee-demo.DefaultActivityImpl
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java",""],["true","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=760,y=297,w=84,h=47
   links:
   - id: L13

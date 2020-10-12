@@ -1,5 +1,0 @@
-package com.centurylink.mdw.tests.workflow
-
-start process("EventCheck")
-wait process
-verify process

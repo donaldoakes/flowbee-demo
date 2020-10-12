@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=33,y=108,w=60,h=40
   links:
@@ -17,14 +17,14 @@ steps:
     to: S10
 - id: S2
   name: Right
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=387,y=404,w=60,h=40
 - id: S3
   name: Decide
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
-    Rule: "println(\"kotlin eval testing...\")\r\n\r\ncheck(variables[\"numFlavs\"] == 31) { \"Invalid value for variable numFlavs\" }\r\n\r\nvariables[\"flavor\"]"
+    Rule: ""
     SCRIPT: Kotlin Script
     display: x=126,y=391,w=100,h=60
   links:
@@ -42,15 +42,15 @@ steps:
     result: Vanilla
 - id: S4
   name: Wrong
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=146,y=519,w=60,h=40
 - id: S5
   name: Exec
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["jsonablePerson"]'
-    Rule: "import com.centurylink.mdw.tests.script.Person\r\n\r\nvar person: Person = variables[\"jsonablePerson\"] as Person\r\n\r\n// simple set variable\r\nvariables[\"jsonablePersonName\"] = person.getName()\r\nvariables[\"mrid\"] = runtimeContext.masterRequestId\r\n\r\n// update json content\r\nperson.firstName = \"Linus\"\r\nperson.lastName = \"Torvalds\"\r\n\r\n"
+    Rule: ""
     SCRIPT: Kotlin Script
     display: x=289,y=160,w=100,h=65
   links:
@@ -61,12 +61,12 @@ steps:
     to: S13
 - id: S9
   name: Finish
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=620,y=286,w=60,h=40
 - id: S10
   name: Which
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: variables["testCase"]
     SCRIPT: Kotlin Script
@@ -86,7 +86,7 @@ steps:
     result: exec
 - id: S11
   name: Boolean
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: '"decide".equals(variables["testCase"])'
     SCRIPT: Kotlin Script
@@ -106,15 +106,15 @@ steps:
     result: 'false'
 - id: S12
   name: No Way
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=285,y=296,w=60,h=40
 - id: S13
   name: Use Class
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["jsonObject"]'
-    Rule: "import com.centurylink.mdw.tests.script.Person\r\nimport com.centurylink.mdw.tests.script.PersonLookup\r\n\r\n// update document value, and reflect changes made previously\r\nval person = variables[\"jsonablePerson\"] as Person\r\nvariables[\"jsonObject\"] = PersonLookup.find(person.lastName!!).getJson()"
+    Rule: ""
     SCRIPT: Kotlin Script
     display: x=452,y=162,w=100,h=62
   links:
@@ -125,31 +125,9 @@ steps:
     to: S14
 - id: S14
   name: "Access\r\nfrom Java"
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
-    Java: |
-      package com.centurylink.mdw.tests.script;
-
-      import java.util.Map;
-
-      import com.centurylink.mdw.java.JavaExecutionException;
-      import com.centurylink.mdw.java.JavaExecutor;
-      import com.centurylink.mdw.java.MdwJavaException;
-      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
-
-      /**
-       * Access kotlin from java.
-       */
-      public class AccessfromJava_A14 implements JavaExecutor {
-
-          public void initialize(ActivityRuntimeContext context) throws MdwJavaException {
-          }
-
-          public Object execute(Map<String,Object> variables) throws JavaExecutionException {
-              variables.put("unfound", PersonLookup.find("Brin").getJson());
-              return null;
-          }
-      }
+    Java: ""
     Output Documents: '["unfound"]'
     display: x=457,y=277,w=99,h=66
   links:
@@ -164,7 +142,7 @@ variables:
   jsonObject:
     type: org.json.JSONObject
   jsonablePerson:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   jsonablePersonName:
     type: java.lang.String
   mrid:

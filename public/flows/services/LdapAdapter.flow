@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S4
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=208,y=44,w=60,h=40
   links:
@@ -23,14 +23,14 @@ steps:
     to: S6
 - id: S3
   name: "LDAP Adapter\r\nMultiple Results"
-  specifier: com.centurylink.mdw.workflow.adapter.ldap.LdapAdapter
+  specifier: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
-    AppCuid: ${props['mdw.ldap.app.user']}
-    AppPassword: ${props['mdw.ldap.app.password']}
-    BaseDn: ${props['mdw.ldap.base.dn']}
+    AppCuid: ${props['ldap.app.user']}
+    AppPassword: ${props['ldap.app.password']}
+    BaseDn: ${props['ldap.base.dn']}
     Bindings: matchingCuids=uid;matchingMnetIds=mnetid;unmatchedMultiple=unmatched;matchingHomePhones=homephone
-    LdapHost: ${props['mdw.ldap.host']}
-    LdapPort: ${props['mdw.ldap.port']}
+    LdapHost: ${props['ldap.host']}
+    LdapPort: ${props['ldap.port']}
     PostScriptLang: Groovy
     PreScriptLang: Groovy
     SearchContext: ou=People
@@ -44,19 +44,19 @@ steps:
     to: S7
 - id: S5
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=274,y=390,w=60,h=40
 - id: S1
   name: "LDAP Adapter\r\nSingle Result"
-  specifier: com.centurylink.mdw.workflow.adapter.ldap.LdapAdapter
+  specifier: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
-    AppCuid: ${props['mdw.ldap.app.user']}
-    AppPassword: ${props['mdw.ldap.app.password']}
-    BaseDn: ${props['mdw.ldap.base.dn']}
+    AppCuid: ${props['ldap.app.user']}
+    AppPassword: ${props['ldap.app.password']}
+    BaseDn: ${props['ldap.base.dn']}
     Bindings: department=departmentname;emailAddress=mail;firstName=givenname;lastName=sn;mnetId=mnetid;phoneNumber=telephonenumber;rcCode=rc;state=st;unmatchedSingle=unmatched;sapId=saploginid
-    LdapHost: ${props['mdw.ldap.host']}
-    LdapPort: ${props['mdw.ldap.port']}
+    LdapHost: ${props['ldap.host']}
+    LdapPort: ${props['ldap.port']}
     PostScriptLang: Groovy
     PreScriptLang: Groovy
     SearchContext: ou=People
@@ -70,7 +70,7 @@ steps:
     to: S7
 - id: S6
   name: Wait 10s
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'
@@ -89,7 +89,7 @@ steps:
     to: S8
 - id: S7
   name: Sync
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: "LDAP Adapter\r\nSingle Result#LDAP Adapter\r\nMultiple Results#LDAP Adapter\r\nDocument Binding"
@@ -102,7 +102,7 @@ steps:
     to: S5
 - id: S8
   name: "10 More\r\nSeconds"
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'
@@ -116,15 +116,14 @@ steps:
     to: S9
 - id: S9
   name: "LDAP Adapter\r\nDocument Binding"
-  specifier: com.centurylink.mdw.workflow.adapter.ldap.LdapAdapter
+  specifier: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
-    AppCuid: ${props['mdw.ldap.app.user']}
-    AppPassword: ${props['mdw.ldap.app.password']}
-    BaseDn: ${props['mdw.ldap.base.dn']}
+    AppCuid: ${props['ldap.app.user']}
+    AppPassword: ${props['ldap.app.password']}
+    BaseDn: ${props['ldap.base.dn']}
     Bindings: userDocument=results
-    LdapHost: ${props['mdw.ldap.host']}
-    LdapPort: ${props['mdw.ldap.port']}
-    OsgiBundleSymbolicName: com.centurylink.donsservicemix
+    LdapHost: ${props['ldap.host']}
+    LdapPort: ${props['ldap.port']}
     PostScriptLang: Groovy
     PreScriptLang: Groovy
     SearchContext: ou=People

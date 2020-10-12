@@ -1,5 +1,5 @@
 {
   "icon": "writer.jpg",
-  "id": "com.centurylink.mdw.workflow.adapter.file.FileWriterAdapter",
+  "id": "flowbee-demo.adapter.file.FileWriterAdapter",
   "label": "FileWriterAdapter"
 }

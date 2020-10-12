@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=60,y=140,w=60,h=40
   links:
@@ -17,15 +17,15 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=640,y=140,w=60,h=40
 - id: S3
   name: Invoke v2.1
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=240,y=130,w=100,h=60
-    processname: com.centurylink.mdw.tests.multiver/SubprocessMultiver.proc
+    processname: tests.multiver/SubprocessMultiver.proc
     processversion: '[2.1,3)'
     synchronous: 'true'
   links:
@@ -36,10 +36,10 @@ steps:
     to: S4
 - id: S4
   name: Invoke v3.0
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=450,y=130,w=100,h=60
-    processname: com.centurylink.mdw.tests.multiver/SubprocessMultiver.proc
+    processname: tests.multiver/SubprocessMultiver.proc
     processversion: '[3.0,4)'
     synchronous: 'true'
   links:

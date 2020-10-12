@@ -1,6 +1,0 @@
-<EmployeeLookupResponse>
-  <masterRequestId>${masterRequestId}</masterRequestId>
-  <id>${request.id}</id>
-  <firstName>Donald</firstName>
-  <lastName>Oakes</lastName>
-</EmployeeLookupResponse>

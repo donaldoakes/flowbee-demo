@@ -1,5 +1,5 @@
 {
   "icon": "sync.png",
-  "id": "com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity",
+  "id": "flowbee-demo.sync.SynchronizationActivity",
   "label": "SynchronizationActivity"
 }

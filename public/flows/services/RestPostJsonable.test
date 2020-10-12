@@ -1,6 +1,0 @@
-// cleanup first
-delete http('api/Workgroups/Another%20Workgroup')
-
-start process("RestPostJsonable.proc")
-wait process
-verify process

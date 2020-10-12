@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
@@ -17,15 +17,15 @@ steps:
     to: S6
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=824,y=261,w=60,h=40
 - id: S3
   name: "Invoke Service Subprocess \r\nSync with Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=377,y=47,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromService
+    processname: tests.workflow/SubProcessInvocationsFromService
     processversion: '[0.1,1)'
     synchronous: 'true'
     variables: '{"varDoc1":"$varDoc1"}'
@@ -37,10 +37,10 @@ steps:
     to: S2
 - id: S6
   name: Set Vars
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["varDoc1"]'
-    Rule: "if (processCase == null)\r\nreturn;\r\n\r\nvar1 = \"my nice non-document string value\";\r\nvarDoc1 = \"my nice string value\";\r\n\r\nreturn processCase;"
+    Rule: ""
     SCRIPT: Groovy
     display: x=170,y=250,w=100,h=60
   links:
@@ -99,10 +99,10 @@ steps:
     to: S15
 - id: S8
   name: "Invoke Service Subprocess \r\nAsync with Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=375,y=148,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromService
+    processname: tests.workflow/SubProcessInvocationsFromService
     processversion: '[0.1,1)'
     synchronous: 'false'
     variables: '{"varDoc1":"$varDoc1"}'
@@ -114,10 +114,10 @@ steps:
     to: S2
 - id: S9
   name: "Invoke Regular Subprocess \r\nSync with Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=379,y=431,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromRegular
+    processname: tests.workflow/SubProcessInvocationsFromRegular
     processversion: '[0.1,1)'
     synchronous: 'true'
     variables: '{"varDoc1":"$varDoc1"}'
@@ -129,10 +129,10 @@ steps:
     to: S2
 - id: S10
   name: "Invoke Service Subprocess \r\nSync no Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=386,y=258,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromService
+    processname: tests.workflow/SubProcessInvocationsFromService
     processversion: '[0.1,1)'
     synchronous: 'true'
     variables: '{"var1":"$var1"}'
@@ -144,10 +144,10 @@ steps:
     to: S2
 - id: S11
   name: "Invoke Service Subprocess \r\nAsync no Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=385,y=344,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromService
+    processname: tests.workflow/SubProcessInvocationsFromService
     processversion: '[0.1,1)'
     synchronous: 'false'
     variables: '{"var1":"$var1"}'
@@ -159,10 +159,10 @@ steps:
     to: S2
 - id: S12
   name: "Invoke Regular Subprocess \r\nAsync with Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=376,y=516,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromRegular
+    processname: tests.workflow/SubProcessInvocationsFromRegular
     processversion: '[0.1,1)'
     synchronous: 'false'
     variables: '{"varDoc1":"$varDoc1"}'
@@ -174,10 +174,10 @@ steps:
     to: S2
 - id: S13
   name: "Invoke Regular Subprocess \r\nSync no Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=375,y=603,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromRegular
+    processname: tests.workflow/SubProcessInvocationsFromRegular
     processversion: '[0.1,1)'
     synchronous: 'true'
     variables: '{"var1":"$var1"}'
@@ -189,10 +189,10 @@ steps:
     to: S2
 - id: S14
   name: "Invoke Regular Subprocess \r\nAsync no Doc Binding"
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=375,y=688,w=186,h=60
-    processname: com.centurylink.mdw.tests.workflow/SubProcessInvocationsFromRegular
+    processname: tests.workflow/SubProcessInvocationsFromRegular
     processversion: '[0.1,1)'
     synchronous: 'false'
     variables: '{"var1":"$var1"}'
@@ -204,7 +204,7 @@ steps:
     to: S2
 - id: S15
   name: Delay Sub execution
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: sleep(3000)
     SCRIPT: Groovy
@@ -225,7 +225,7 @@ subflows:
   steps:
   - id: S18
     name: Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=918,y=60,w=60,h=40
     links:
@@ -236,7 +236,7 @@ subflows:
       to: S17
   - id: S17
     name: Stop
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       TerminationAction: Complete Process
       display: x=1035,y=59,w=60,h=40
@@ -246,4 +246,4 @@ variables:
   var1:
     type: java.lang.String
   varDoc1:
-    type: com.centurylink.mdw.model.StringDocument
+    type: model.StringDocument

@@ -1,5 +1,5 @@
 {
   "icon": "process.jpg",
-  "id": "com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity",
+  "id": "flowbee-demo.process.InvokeSubProcessActivity",
   "label": "InvokeSubProcessActivity"
 }

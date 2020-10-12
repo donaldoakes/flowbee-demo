@@ -1,5 +1,5 @@
 {
   "icon": "send.gif",
-  "id": "com.centurylink.mdw.workflow.activity.event.PublishEventMessageRest",
+  "id": "flowbee-demo.event.PublishEventMessageRest",
   "label": "PublishEventMessageRest"
 }

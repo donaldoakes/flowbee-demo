@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=26,y=76,w=60,h=40
   links:
@@ -22,12 +22,12 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=493,y=269,w=60,h=40
 - id: S3
   name: Wait 20s
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '20'
@@ -41,9 +41,9 @@ steps:
     to: S6
 - id: S4
   name: "Should Finish\r\nQuickly"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
-    Rule: "def appendVal = {\r\n    sleep 100;\r\n    cumulativeResult += it\r\n}\r\n0.upto(9, appendVal)"
+    Rule: ""
     SCRIPT: Groovy
     display: x=227,y=154,w=98,h=68
   links:
@@ -54,7 +54,7 @@ steps:
     to: S5
 - id: S5
   name: Sync
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: New Execute Script
@@ -67,7 +67,7 @@ steps:
     to: S2
 - id: S6
   name: "Update\r\nResult"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: cumulativeResult += '_update'
     SCRIPT: Groovy

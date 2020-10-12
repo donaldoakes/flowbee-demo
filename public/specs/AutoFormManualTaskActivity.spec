@@ -1,5 +1,5 @@
 {
   "icon": "task.png",
-  "id": "com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity",
+  "id": "flowbee-demo.task.AutoFormManualTaskActivity",
   "label": "AutoFormManualTaskActivity"
 }

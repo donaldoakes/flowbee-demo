@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: ply.start
+  specifier: flowbee-demo.start
   attributes:
     display: x=63,y=107,w=60,h=40
   links:
@@ -18,7 +18,7 @@ steps:
     to: S3
 - id: S3
   name: Before
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: |-
       runtimeContext.logInfo("Before")
@@ -33,7 +33,7 @@ steps:
     to: S4
 - id: S4
   name: Pause
-  specifier: ply.pause
+  specifier: flowbee-demo.pause
   attributes:
     display: x=326,y=111,w=60,h=40
     implementor_assetVersion: '[0.2,1)'
@@ -45,7 +45,7 @@ steps:
     to: S5
 - id: S5
   name: After
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: |-
       runtimeContext.logInfo("After")
@@ -60,7 +60,7 @@ steps:
     to: S6
 - id: S6
   name: Stop
-  specifier: ply.stop
+  specifier: flowbee-demo.stop
   attributes:
     display: x=611,y=113,w=60,h=40
 variables:

@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     Parameters: sapId=${request.sapId};workstationId=${request.workstationId}
     display: x=43,y=102,w=60,h=40
@@ -20,7 +20,7 @@ steps:
     to: S5
 - id: S5
   name: "Real\r\nLookup?"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: sapId != 'DHO115360' && workstationId != 'dxoakes'
     SCRIPT: Groovy
@@ -40,15 +40,15 @@ steps:
     result: 'false'
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=577,y=180,w=60,h=40
 - id: S3
   name: Lookup
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: response
-    Rule: "println 'sapId: ' + sapId;\r\nprintln 'workstationId: ' + workstationId;\r\n\r\nresponse = \r\n     '''<GetEmployeeResponse xmlns=\"http://mdw.centurylink.com/serviceTypes\">\r\n          <sapId>DHO115360</sapId>\r\n          <workstationId>dxoakes</workstationId>\r\n          <firstName>Donald</firstName>\r\n          <lastName>Oakes</lastName>\r\n        </GetEmployeeResponse>''';"
+    Rule: ""
     SCRIPT: Groovy
     display: x=368,y=166,w=100,h=60
   links:
@@ -59,10 +59,10 @@ steps:
     to: S2
 - id: S6
   name: "Populate\r\nObject"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: employee#response
-    Rule: "import java.io.ByteArrayOutputStream;\r\n\r\nimport javax.xml.bind.JAXBContext\r\nimport javax.xml.bind.Marshaller\r\n\r\nimport com.centurylink.mdw.java.CompiledJavaCache\r\n\r\nemployee = CompiledJavaCache.getInstance(\"com.centurylink.mdw.tests.services.Employee\", JAXBContext.class.getClassLoader(), runtimeContext.getPackage());\r\nemployee.setSapId(sapId);\r\nemployee.setWorkstationId(workstationId)\r\nemployee.setFirstName(firstName);\r\nemployee.setLastName(lastName);\r\n\r\nByteArrayOutputStream baos = new ByteArrayOutputStream();\r\nJAXBContext jaxbContext = JAXBContext.newInstance(employee.getClass());\r\nMarshaller marshaller = jaxbContext.createMarshaller();\r\nmarshaller.marshal(employee, baos);\r\nresponse = baos.toString();\r\n"
+    Rule: ""
     SCRIPT: Groovy
     display: x=553,y=81,w=106,h=67
   links:
@@ -73,7 +73,7 @@ steps:
     to: S2
 - id: S4
   name: LDAP Lookup
-  specifier: com.centurylink.mdw.workflow.adapter.ldap.LdapAdapter
+  specifier: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: prop:LDAP/AppCUID
     AppPassword: prop:LDAP/AppPassword
@@ -104,7 +104,7 @@ variables:
   requestHeaders:
     type: java.util.Map<String,String>
   response:
-    type: com.centurylink.mdw.model.StringDocument
+    type: model.StringDocument
   sapId:
     type: java.lang.String
   workstationId:

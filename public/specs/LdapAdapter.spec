@@ -1,5 +1,5 @@
 {
   "icon": "adapter.png",
-  "id": "com.centurylink.mdw.workflow.adapter.ldap.LdapAdapter",
+  "id": "flowbee-demo.adapter.ldap.LdapAdapter",
   "label": "LdapAdapter"
 }

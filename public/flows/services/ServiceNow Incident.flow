@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=90,y=160,w=60,h=40
   links:
@@ -18,17 +18,17 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=610,y=160,w=60,h=40
 - id: S3
   name: |-
     Create
     Incident
-  specifier: com.centurylink.mdw.servicenow.ServiceNowAdapter
+  specifier: flowbee-demo.servicenow.ServiceNowAdapter
   attributes:
-    AuthPassword: ${env['MDW_SERVICENOW_PASSWORD']}
-    AuthUser: ${env['MDW_SERVICENOW_USER']}
+    AuthPassword: ${env['SERVICENOW_PASSWORD']}
+    AuthUser: ${env['SERVICENOW_USER']}
     EndpointUri: ${props['servicenow.url']}/table/incident
     REQUEST_VARIABLE: incident
     RESPONSE_VARIABLE: incidentResponse
@@ -43,13 +43,13 @@ steps:
   name: |-
     Build
     Request
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["incident"]'
     Rule: |
-      import com.centurylink.mdw.servicenow.Incident
+      import servicenow.Incident
 
-      import com.centurylink.mdw.servicenow.GlideDateTime
+      import servicenow.GlideDateTime
 
       incident = new Incident()
       incident.shortDescription = 'Houston we have a problem'
@@ -57,8 +57,8 @@ steps:
       incident.impact = Incident.Level.Medium
       incident.correlationId = runtimeContext.processInstanceId.toString()
       incident.correlationDisplay = 'Process Instance'
-      incident.caller = 'MDW Application'
-      incident.assignmentGroup = 'MDW Support'
+      incident.caller = 'Flowbee Demo Application'
+      incident.assignmentGroup = 'Flowbee Support'
       incident.category = 'General Inquiry'
       incident.dueDate = new GlideDateTime(System.currentTimeMillis() + 24 * 60 * 60 * 1000).localDateTime
     SCRIPT: Groovy
@@ -71,6 +71,6 @@ steps:
     to: S3
 variables:
   incident:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   incidentResponse:
     type: org.json.JSONObject

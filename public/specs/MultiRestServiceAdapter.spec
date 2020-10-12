@@ -1,5 +1,5 @@
 {
   "icon": "adapter.png",
-  "id": "com.centurylink.mdw.workflow.adapter.rest.MultiRestServiceAdapter",
+  "id": "flowbee-demo.adapter.rest.MultiRestServiceAdapter",
   "label": "MultiRestServiceAdapter"
 }

@@ -1,7 +1,0 @@
-package com.centurylink.mdw.tests.workflow
-
-start process("TestMainProcess") {
-    variables = [ processCase: "Synchronization" ]
-}
-wait process
-verify process

@@ -11,7 +11,7 @@ attributes:
 steps:
 - id: S6
   name: Process Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=424,y=34,w=32,h=32
   links:
@@ -22,7 +22,7 @@ steps:
     to: S33
 - id: S9
   name: N = 11
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: N = 11;
     SCRIPT: Groovy
@@ -35,15 +35,15 @@ steps:
     to: S20
 - id: S11
   name: Process Finish
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=488,y=880,w=32,h=32
 - id: S10
   name: Invoke process that errs
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=475,y=623,w=20,h=20
-    processname: com.centurylink.mdw.tests.workflow/TestSubProcess2.proc
+    processname: tests.workflow/TestSubProcess2.proc
     processversion: '[0,1)'
     synchronous: 'TRUE'
   links:
@@ -54,11 +54,11 @@ steps:
     to: S11
 - id: S25
   name: Get orderId
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
-    OsgiBundleSymbolicName: com.centurylink.mdw.workflow
+    OsgiBundleSymbolicName: workflow
     Output Documents: order
-    Rule: "org.w3c.dom.NodeList nodes = order.getFirstChild().getChildNodes();\r\norg.w3c.dom.Node node = nodes.item(0);\r\n\r\n if (\"orderId\".equals(node.getLocalName()))\r\n   orderId = node.getFirstChild().getNodeValue();\r\n\r\n"
+    Rule: ""
     SCRIPT: Groovy
     display: x=825,y=661,w=25,h=23
   links:
@@ -71,7 +71,7 @@ steps:
     to: S11
 - id: S7
   name: Sum = 121
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       Sum = 121;
@@ -85,7 +85,7 @@ steps:
     to: S20
 - id: S20
   name: Synch both branches
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
     Synced Activities: N = 11#Sum = 121
     display: x=1029,y=658,w=24,h=24
@@ -99,17 +99,12 @@ steps:
     to: S11
 - id: S17
   name: Read order
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: order
     OutputVariables: order
     ReadOnlyVariables: order#xmldata#launcher
-    Rule: |-
-      // import com.centurylink.mdw.common.translator.VariableTranslator;
-      // import com.qwest.mbeng.MbengDocument;
-      // File orderFile = new File("C:\\workspaces\\mdw\\MDWDesigner\\myorder.so");
-      // order = VariableTranslator.realToObject(MbengDocument.class.getName(), orderFile.getText());
-      println("I do not need to load from file any more!");
+    Rule: ""
     SCRIPT: Groovy
     display: x=827,y=366,w=25,h=23
   links:
@@ -122,7 +117,7 @@ steps:
     to: S25
 - id: S8
   name: Another Dummy
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       print("Hello");
@@ -143,7 +138,7 @@ steps:
     to: S19
 - id: S26
   name: Display result
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: print("Returned value is " +Sum);
     SCRIPT: Groovy
@@ -158,7 +153,7 @@ steps:
     to: S11
 - id: S12
   name: Raise ABORT event
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     RETURN_CODE: BTN
     Rule: |
@@ -175,10 +170,10 @@ steps:
     to: S11
 - id: S21
   name: Invoke remote process
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=60,y=490,w=31,h=29
-    processname: com.centurylink.mdw.tests.workflow/TestSubProcess.proc
+    processname: tests.workflow/TestSubProcess.proc
     processversion: '[0,1)'
     synchronous: 'TRUE'
     variables: argument=$N;newvar=;testxml=$xmldata;result=$Sum
@@ -192,7 +187,7 @@ steps:
     to: S26
 - id: S16
   name: Another sync
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
     Sync Expression: A18 || A19
     Synced Activities: N 13#Sum 169
@@ -207,10 +202,10 @@ steps:
     to: S11
 - id: S22
   name: Invoke single process
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=223,y=505,w=28,h=25
-    processname: com.centurylink.mdw.tests.workflow/TestSubProcess.proc
+    processname: tests.workflow/TestSubProcess.proc
     processversion: '[0,1)'
     synchronous: 'TRUE'
     variables: argument=$N;testxml=$xmldata;result=$Sum
@@ -224,7 +219,7 @@ steps:
     to: S26
 - id: S4
   name: Set remote argument
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: xmldata#maptest#intarraytest
     Rule: |+
@@ -261,7 +256,7 @@ steps:
     to: S21
 - id: S24
   name: Dummy Resume B
-  specifier: com.centurylink.mdw.workflow.activity.ControlledActivityImpl
+  specifier: flowbee-demo.ControlledActivityImpl
   attributes:
     Documentation: "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \r\n    </p>\r\n  </body>\r\n</html>\r\n"
     display: x=718,y=664,w=24,h=16
@@ -275,7 +270,7 @@ steps:
     to: S11
 - id: S19
   name: Sum 169
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       Sum = 169;
@@ -289,10 +284,10 @@ steps:
     to: S16
 - id: S23
   name: Set input argument
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: xmldata
-    Rule: "xmldata = \"<ROOT>\\n\";\nxmldata = xmldata+\"   <MINUTES>2</MINUTES>\\n\";\nxmldata = xmldata+\"</ROOT>\\n\";\n\nInteger[] intarraytest = new Integer[6];\n        intarraytest[0] = new Integer(1);\n        intarraytest[1] = new Integer(1);\n        intarraytest[2] = new Integer(2);\n        intarraytest[3] = new Integer(3);\n        intarraytest[4] = new Integer(5);\n        intarraytest[5] = new Integer(8);\n\nMap<String, String> maptest = new HashMap<String, String>();\n            maptest.put(\"R\", \"red\");\n            maptest.put(\"G\", \"green\");\n            maptest.put(\"B\", \"blue\");\n    \n\n"
+    Rule: ""
     SCRIPT: Groovy
     display: x=223,y=392,w=29,h=29
   links:
@@ -305,7 +300,7 @@ steps:
     to: S22
 - id: S15
   name: Create argument
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: println("Hello, world!")
     SCRIPT: Groovy
@@ -318,7 +313,7 @@ steps:
     to: S10
 - id: S13
   name: Scripts with syntax error
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: intarraytest#maptest#xmldata
     Rule: |-
@@ -365,7 +360,7 @@ steps:
     to: S14
 - id: S2
   name: Dummy - to fork out
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: print("Hello!");
     SCRIPT: Groovy
@@ -385,7 +380,7 @@ steps:
     to: S7
 - id: S14
   name: Dummy Resume A
-  specifier: com.centurylink.mdw.workflow.activity.ControlledActivityImpl
+  specifier: flowbee-demo.ControlledActivityImpl
   attributes:
     Documentation: "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \r\n    </p>\r\n  </body>\r\n</html>\r\n"
     display: x=615,y=665,w=24,h=16
@@ -399,7 +394,7 @@ steps:
     to: S11
 - id: S18
   name: N 13
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       N = 13;
@@ -413,7 +408,7 @@ steps:
     to: S16
 - id: S33
   name: multiple processes ?
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: processCase
     SCRIPT: Groovy
@@ -475,10 +470,10 @@ steps:
     result: DocumentBinding
 - id: S34
   name: Invoke service lvl9 process
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=1332,y=697,w=20,h=20
-    processname: com.centurylink.mdw.tests.workflow/ServiceLevel_9.proc
+    processname: tests.workflow/ServiceLevel_9.proc
     processversion: '[0,1)'
     synchronous: 'TRUE'
     variables: processCase=$processCase
@@ -500,7 +495,7 @@ subflows:
   steps:
   - id: S31
     name: Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=770,y=72,w=32,h=32
     links:
@@ -511,7 +506,7 @@ subflows:
       to: S32
   - id: S32
     name: Stop
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       display: x=932,y=71,w=32,h=32
   variables:
@@ -530,7 +525,7 @@ subflows:
   steps:
   - id: S29
     name: Process Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=1073,y=64,w=32,h=32
     links:
@@ -541,16 +536,16 @@ subflows:
       to: S28
   - id: S30
     name: Process Finish
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       display: x=1301,y=65,w=32,h=32
   - id: S28
     name: My fallout task
-    specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+    specifier: flowbee-demo.task.CustomManualTaskActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
-      TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
-      TASK_TEMPLATE: com.centurylink.mdw.tests.workflow/A Task For Testing Variables.task
+      TASK_PAGELET: base/CustomManualTask.pagelet
+      TASK_TEMPLATE: tests.workflow/A Task For Testing Variables.task
       TASK_TEMPLATE_assetVersion: '[0.2,1)'
       Task Name: General Fallout
       display: x=1186,y=66,w=30,h=28

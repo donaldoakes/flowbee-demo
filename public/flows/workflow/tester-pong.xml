@@ -1,4 +1,0 @@
-<bpm:MDWStatusMessage xmlns:bpm="http://mdw.centurylink.com/bpm">
-  <StatusCode>0</StatusCode>
-  <bpm:StatusMessage>Hello, Donald, from ${masterRequestId}</bpm:StatusMessage>
-</bpm:MDWStatusMessage>

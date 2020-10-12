@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=58,y=141,w=60,h=40
   links:
@@ -17,13 +17,13 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java","Completed"],["false","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Completed"],["false","Test Cases","testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=686,y=173,w=60,h=40
 - id: S5
   name: "Test\r\nCase?"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: '#{testCase}'
     SCRIPT: javax.el
@@ -43,16 +43,16 @@ steps:
     result: multiple
 - id: S8
   name: Create Plan
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java","Plan Created"],["false","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Plan Created"],["false","Test Cases","testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     Output Documents: executionPlan
     Rule: |
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument
-      import com.centurylink.mdw.bpm.ParameterDocument.Parameter
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
-      import com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance
-      import com.centurylink.mdw.model.workflow.WorkStatus
+      import bpm.ProcessExecutionPlanDocument
+      import bpm.ParameterDocument.Parameter
+      import bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
+      import bpm.SubprocessInstanceDocument.SubprocessInstance
+      import model.workflow.WorkStatus
 
       executionPlan = ProcessExecutionPlanDocument.Factory.newInstance();
       ProcessExecutionPlan exeplan = executionPlan.addNewProcessExecutionPlan();
@@ -88,10 +88,10 @@ steps:
     to: S10
 - id: S9
   name: Assign Output
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
-    Monitors: '[["true","Milestone","com.centurylink.mdw.milestones/ActivityMilestone.java","Output Assigned"],["false","Test Cases","com.centurylink.mdw.testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","com.centurylink.mdw.zipkin/TraceActivityMonitor.java",""]]'
-    Rule: "import com.centurylink.mdw.bpm.ParameterDocument.Parameter\r\nimport com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance\r\n\r\nSubprocessInstance subprocinst = executionPlan.getProcessExecutionPlan().getSubprocessInstanceList().get(0);\r\nmultipleSubprocName = getParameter(subprocinst, \"procName\");\r\nmultipleSubprocVer = getParameter(subprocinst, \"procVer\");\r\nsubprocinst = executionPlan.getProcessExecutionPlan().getSubprocessInstanceList().get(2);\r\nmultipleSubprocName2 = getParameter(subprocinst, \"procName\");\r\nmultipleSubprocVer2 = getParameter(subprocinst, \"procVer\");\r\n\r\nprotected String getParameter(SubprocessInstance subprocinst, String name) {\r\n if (subprocinst.getParameterList()==null) return null;\r\n for (Parameter p : subprocinst.getParameterList()) {\r\n  if (p.getName().equals(name)) return p.getStringValue();\r\n }\r\n return null;\r\n}"
+    Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Output Assigned"],["false","Test Cases","testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
+    Rule: ""
     SCRIPT: Groovy
     display: x=535,y=337,w=100,h=60
   links:
@@ -102,12 +102,12 @@ steps:
     to: S2
 - id: S10
   name: Invoke Multiple
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     DELAY_BETWEEN: '1'
     Execution Plan: executionPlan
     display: x=355,y=332,w=109,h=65
-    processmap: '[["SmartProcessChild","com.centurylink.mdw.tests.workflow/SmartProcessChild.proc","[2.4,3)"],["SmartProcessChild2","com.centurylink.mdw.tests.workflow/SmartProcessChild2.proc","[0.4,1)"]]'
+    processmap: '[["SmartProcessChild","tests.workflow/SmartProcessChild.proc","[2.4,3)"],["SmartProcessChild2","tests.workflow/SmartProcessChild2.proc","[0.4,1)"]]'
     synchronous: 'true'
   links:
   - id: L11
@@ -117,10 +117,10 @@ steps:
     to: S9
 - id: S11
   name: Invoke Single
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=382,y=61,w=100,h=60
-    processname: com.centurylink.mdw.tests.workflow/SmartProcessChild.proc
+    processname: tests.workflow/SmartProcessChild.proc
     processversion: '[2.4,3)'
     synchronous: 'true'
     variables: '{"procVer":"${singleSubprocVer}","inputVar":"${testCaseJson.name}","procName":"${singleSubprocName}"}'
@@ -154,4 +154,4 @@ variables:
   testCase:
     type: java.lang.String
   testCaseJson:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable

@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=119,y=74,w=32,h=32
   links:
@@ -19,7 +19,7 @@ steps:
     to: S2
 - id: S2
   name: Force Error
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: bad script
     SCRIPT: Groovy
@@ -32,7 +32,7 @@ steps:
     to: S3
 - id: S3
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=121,y=366,w=32,h=32
 subflows:
@@ -47,7 +47,7 @@ subflows:
   steps:
   - id: S5
     name: Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=333,y=63,w=32,h=32
     links:
@@ -58,12 +58,12 @@ subflows:
       to: S4
   - id: S6
     name: Stop
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       display: x=633,y=63,w=32,h=32
   - id: S4
     name: Subprocess From Embedded
-    specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+    specifier: flowbee-demo.process.InvokeSubProcessActivity
     attributes:
       display: x=478,y=65,w=20,h=20
       processname: SubprocessForEmbedded

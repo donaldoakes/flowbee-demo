@@ -1,5 +1,5 @@
 {
   "icon": "timer.png",
-  "id": "com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity",
+  "id": "flowbee-demo.timer.TimerWaitActivity",
   "label": "TimerWaitActivity"
 }

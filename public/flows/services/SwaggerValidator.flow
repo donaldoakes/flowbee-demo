@@ -4,12 +4,12 @@ attributes:
   PROCESS_VISIBILITY: SERVICE
   display: x=50,y=38,w=69,h=27
   requestMethod: POST
-  requestParameters: '[["person","Body","true","Person","com.centurylink.mdw.tests.workflow/Person.java"]]'
+  requestParameters: '[["person","Body","true","Person","tests.workflow/Person.java"]]'
   requestPath: Person
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=69,y=132,w=60,h=40
   links:
@@ -20,14 +20,14 @@ steps:
     to: S3
 - id: S2
   name: OK
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=449,y=132,w=60,h=40
 - id: S3
   name: |-
     Request
     Valid?
-  specifier: com.centurylink.mdw.workflow.activity.validate.SwaggerValidatorActivity
+  specifier: flowbee-demo.validate.SwaggerValidatorActivity
   attributes:
     Strict: 'true'
     Validate: '["Body"]'
@@ -47,15 +47,15 @@ steps:
     result: 'false'
 - id: S4
   name: Invalid
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=251,y=249,w=60,h=40
 variables:
   request:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   requestHeaders:
     type: java.util.Map<String,String>
   response:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   responseHeaders:
     type: java.util.Map<String,String>

@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=74,y=159,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=692,y=158,w=60,h=40
 - id: S3
   name: before
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       runtimeContext.logDebug("Executing " + runtimeContext.getActivity().getName())
@@ -37,7 +37,7 @@ steps:
     to: S5
 - id: S5
   name: Pause
-  specifier: com.centurylink.mdw.base.PauseActivity
+  specifier: flowbee-demo.pause
   attributes:
     display: x=384,y=162,w=60,h=40
   links:
@@ -48,28 +48,10 @@ steps:
     to: S6
 - id: S6
   name: after
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: InflightInstanceDef_A6
-    Java: |
-      package com.centurylink.mdw.tests.multiver;
-
-      import java.util.Map;
-
-      import com.centurylink.mdw.java.JavaExecutionException;
-      import com.centurylink.mdw.java.JavaExecutor;
-      import com.centurylink.mdw.java.MdwJavaException;
-      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
-
-      public class InflightInstanceDef_A6 implements JavaExecutor {
-          public void initialize(ActivityRuntimeContext context) throws MdwJavaException {
-          }
-
-          public Object execute(Map<String,Object> variables) throws JavaExecutionException  {
-              variables.put("afterVar", "after version"); // to be updated for instance
-              return null;
-          }
-      }
+    Java: ""
     display: x=520,y=150,w=100,h=60
   links:
   - id: L5

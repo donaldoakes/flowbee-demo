@@ -1,5 +1,5 @@
 {
   "icon": "crossmap.png",
-  "id": "com.centurylink.mdw.workflow.activity.transform.CrossmapActivity",
+  "id": "flowbee-demo.transform.CrossmapActivity",
   "label": "CrossmapActivity"
 }

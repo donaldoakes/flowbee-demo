@@ -1,13 +1,13 @@
 attributes:
   ArrowStyle: ArrowEnd
-  Documentation: "Scenario:\n\n1. In mdw.yaml, the following appears under `application`:\n    ```yaml\n    application:\n      name: my-mdw\n      configs:\n        - one.properties\n        - two.properties\n        - three.yaml\n    ``` \n\n2. The following files exist in the location pointed to by -Dmdw.config.location.  \n    **one.properties**\n    ```\n    one.prop=oneValue\n    ```\n    **two.properties**\n    ```\n    two.prop=twoValue\n    ```\n    **three.yaml**\n    ```yaml\n    flat.config: threeFlatValue\n    structured:\n      config: threeStructuredValue\n    ```\n\n3. The `Log Props` activity produces this output:\n    ```\n    one: oneValue\n    two: twoValue\n    three.flat: threeFlatValue\n    three.structured: threeStructuredValue\n    ``` "
+  Documentation: "Scenario:\n\n1. In yaml, the following appears under `application`:\n    ```yaml\n    application:\n      name: my-app\n      configs:\n        - one.properties\n        - two.properties\n        - three.yaml\n    ``` \n\n2. The following files exist in the location pointed to by -Dconfig.location.  \n    **one.properties**\n    ```\n    one.prop=oneValue\n    ```\n    **two.properties**\n    ```\n    two.prop=twoValue\n    ```\n    **three.yaml**\n    ```yaml\n    flat.config: threeFlatValue\n    structured:\n      config: threeStructuredValue\n    ```\n\n3. The `Log Props` activity produces this output:\n    ```\n    one: oneValue\n    two: twoValue\n    three.flat: threeFlatValue\n    three.structured: threeStructuredValue\n    ``` "
   NodeStyle: BoxIcon
   PROCESS_VISIBILITY: PUBLIC
   display: x=46,y=56,w=96,h=27
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
@@ -18,15 +18,15 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=480,y=260,w=60,h=40
 - id: S3
   name: Log Props
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
-      import com.centurylink.mdw.config.PropertyManager
+      import config.PropertyManager
 
       println 'one: ' + PropertyManager.getProperty("one.prop")
       println 'two: ' + runtimeContext.getProperty("two.prop")

@@ -1,5 +1,5 @@
 {
   "icon": "adapter.png",
-  "id": "com.centurylink.mdw.workflow.adapter.soap.MdwRpcWebServiceAdapter",
-  "label": "MdwRpcWebServiceAdapter"
+  "id": "flowbee-demo.adapter.soap.RpcWebServiceAdapter",
+  "label": "RpcWebServiceAdapter"
 }

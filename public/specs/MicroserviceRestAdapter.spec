@@ -1,5 +1,5 @@
 {
   "icon": "adapter.png",
-  "id": "com.centurylink.mdw.microservice.MicroserviceRestAdapter",
+  "id": "flowbee-demo.microservice.MicroserviceRestAdapter",
   "label": "MicroserviceRestAdapter"
 }

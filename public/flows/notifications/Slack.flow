@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=54,y=145,w=60,h=40
   links:
@@ -17,17 +17,17 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=533,y=146,w=60,h=40
 - id: S3
   name: Notify
-  specifier: com.centurylink.mdw.slack.SlackActivity
+  specifier: flowbee-demo.slack.SlackActivity
   attributes:
     display: x=189,y=135,w=100,h=60
-    message: com.centurylink.mdw.slack/message.json
+    message: slack/message.json
     message_assetVersion: '[0.1,1)'
-    webhookUrl: ${props['mdw.slack.webhook.url']}
+    webhookUrl: ${props['slack.webhook.url']}
   links:
   - id: L2
     attributes:
@@ -38,9 +38,9 @@ steps:
   name: |-
     Slack
     Task
-  specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+  specifier: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
-    TASK_TEMPLATE: com.centurylink.mdw.tests.notifications/SlackTask.task
+    TASK_TEMPLATE: tests.notifications/SlackTask.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     display: x=348,y=138,w=100,h=60
   links:

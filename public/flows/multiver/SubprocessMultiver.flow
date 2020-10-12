@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=90,y=140,w=60,h=40
   links:
@@ -17,19 +17,19 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=310,y=270,w=60,h=40
 - id: S3
   name: Set Values 3.0
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: SubprocessMultiver_A3
     Java: |
-      package com.centurylink.mdw.tests.multiver;
+      package tests.multiver;
 
-      import com.centurylink.mdw.java.JavaExecutor;
-      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
+      import java.JavaExecutor;
+      import model.workflow.ActivityRuntimeContext;
 
       import java.util.Map;
 

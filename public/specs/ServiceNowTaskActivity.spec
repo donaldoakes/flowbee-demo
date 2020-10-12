@@ -1,5 +1,5 @@
 {
   "icon": "servicenow.png",
-  "id": "com.centurylink.mdw.servicenow.ServiceNowTaskActivity",
+  "id": "flowbee-demo.servicenow.ServiceNowTaskActivity",
   "label": "ServiceNowTaskActivity"
 }

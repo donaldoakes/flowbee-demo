@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=70,y=110,w=60,h=40
   links:
@@ -18,16 +18,16 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=480,y=110,w=60,h=40
 - id: S3
   name: |-
     Create
     Task
-  specifier: com.centurylink.mdw.servicenow.ServiceNowTaskActivity
+  specifier: flowbee-demo.servicenow.ServiceNowTaskActivity
   attributes:
-    TASK_TEMPLATE: com.centurylink.mdw.tests.tasks/ServiceNowTask.task
+    TASK_TEMPLATE: tests.tasks/ServiceNowTask.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     display: x=250,y=90,w=120,h=80
   links:

@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=80,y=160,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=490,y=160,w=60,h=40
 - id: S3
   name: Pause
-  specifier: com.centurylink.mdw.base.PauseActivity
+  specifier: flowbee-demo.pause
   attributes:
     display: x=200,y=160,w=60,h=40
   links:
@@ -33,14 +33,14 @@ steps:
     to: S4
 - id: S4
   name: JavaStuff
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: InflightDynamicJava_A4
     Java: |
-      package com.centurylink.mdw.tests.cloud;
+      package tests.cloud;
 
-      import com.centurylink.mdw.java.JavaExecutionException;
-      import com.centurylink.mdw.java.JavaExecutor;
+      import java.JavaExecutionException;
+      import java.JavaExecutor;
 
       import java.util.Map;
 

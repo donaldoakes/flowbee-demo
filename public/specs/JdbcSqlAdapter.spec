@@ -1,5 +1,5 @@
 {
   "icon": "adapter.png",
-  "id": "com.centurylink.mdw.workflow.adapter.db.JdbcSqlAdapter",
+  "id": "flowbee-demo.adapter.db.JdbcSqlAdapter",
   "label": "JdbcSqlAdapter"
 }

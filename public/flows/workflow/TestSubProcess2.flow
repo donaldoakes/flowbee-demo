@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S30
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=21,y=179,w=60,h=40
   links:
@@ -21,7 +21,7 @@ steps:
     to: S26
 - id: S27
   name: Not executed
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     display: x=448,y=287,w=100,h=60
   links:
@@ -32,40 +32,14 @@ steps:
     to: S28
 - id: S28
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=705,y=156,w=60,h=40
 - id: S26
   name: Throw an Exception
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
-    Java: |
-      /**
-       * Copyright (c) 2016 CenturyLink, Inc. All Rights Reserved.
-       */
-
-      package com.centurylink.mdw.tests.workflow;
-
-      import java.util.Map;
-
-      import com.centurylink.mdw.java.JavaExecutionException;
-      import com.centurylink.mdw.java.JavaExecutor;
-      import com.centurylink.mdw.java.MdwJavaException;
-      import com.centurylink.mdw.model.workflow.ActivityRuntimeContext;
-
-      /**
-       * Dynamic Java to force an error.
-       */
-      public class ThrowanException_A26 implements JavaExecutor {
-
-          public void initialize(ActivityRuntimeContext context) throws MdwJavaException {
-          }
-
-          public Object execute(Map<String, Object> variables) throws JavaExecutionException {
-              throw new RuntimeException("Help me, I'm an error");
-          }
-
-      }
+    Java: ""
     display: x=166,y=176,w=132,h=69
   links:
   - id: L20
@@ -90,9 +64,9 @@ steps:
     result: 'yes'
 - id: S29
   name: Alternate path
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
-    OsgiBundleSymbolicName: com.centurylink.mdw.workflow
+    OsgiBundleSymbolicName: workflow
     Rule: runtimeContext.logInfo("In alternate path");
     SCRIPT: Groovy
     display: x=448,y=24,w=100,h=60

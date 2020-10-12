@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=25,y=104,w=60,h=40
   links:
@@ -17,19 +17,19 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=590,y=103,w=60,h=40
 - id: S3
   name: Invoke Subs
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     DELAY_BETWEEN: '6'
     Execution Plan: plan
     Force Parallel Execution: 'true'
     STATUS_AFTER_EVENT: Hold
     display: x=431,y=91,w=99,h=60
-    processmap: '[["sub1","com.centurylink.mdw.tests.workflow/EventInstanceDeadlock-Sub1","[0.1,1)",""],["sub2","com.centurylink.mdw.tests.workflow/EventInstanceDeadlock-Sub2","[0.1,1)",""],["notify","com.centurylink.mdw.tests.workflow/EventInstanceDeadlock-Notify","[0.1,1)",""]]'
+    processmap: '[["sub1","tests.workflow/EventInstanceDeadlock-Sub1","[0.1,1)",""],["sub2","tests.workflow/EventInstanceDeadlock-Sub2","[0.1,1)",""],["notify","tests.workflow/EventInstanceDeadlock-Notify","[0.1,1)",""]]'
     synchronous: 'false'
   links:
   - id: L4
@@ -39,10 +39,10 @@ steps:
     to: S2
 - id: S4
   name: Build Plan
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: plan
-    Rule: "import com.centurylink.mdw.model.ExecutionPlan\r\nimport com.centurylink.mdw.model.Subprocess\r\nimport com.centurylink.mdw.model.workflow.WorkStatus\r\n\r\n// request is of type com.centurylink.tom.model.Order\r\nruntimeContext.logDebug 'serviceSummary:\\n' + serviceSummary.json.toString(2)\r\n\r\n// build the servicePlan\r\n// three of each subproc to force contention\r\nplan = new ExecutionPlan()\r\nList<Subprocess> subprocs = new ArrayList<>()\r\nSubprocess subproc\r\nfor (int i = 0; i < subCount; i++) {\r\n    subproc = new Subprocess()\r\n    subproc.setLogicalName(\"sub1\")\r\n    subproc.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue())\r\n    subproc.getParameters().put('serviceSummary', '$serviceSummary')\r\n    subprocs.add(subproc)\r\n    subproc = new Subprocess()\r\n    subproc.setLogicalName(\"sub2\")\r\n    subproc.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue())\r\n    subproc.getParameters().put('serviceSummary', '$serviceSummary')\r\n    subprocs.add(subproc)\r\n}\r\nif (!publishFirst) {\r\n    subproc = new Subprocess()\r\n    subproc.setLogicalName(\"notify\")\r\n    subproc.setStatusCode(WorkStatus.STATUS_PENDING_PROCESS.intValue())\r\n    subprocs.add(subproc)\r\n    plan.setSubprocesses(subprocs)\r\n}\r\n\r\n\r\n\r\n"
+    Rule: ""
     SCRIPT: Groovy
     display: x=284,y=91,w=103,h=61
   links:
@@ -53,7 +53,7 @@ steps:
     to: S3
 - id: S5
   name: "Publish\r\nFirst?"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: publishFirst
     SCRIPT: Groovy
@@ -73,7 +73,7 @@ steps:
     result: 'true'
 - id: S8
   name: Broadcast Update Message
-  specifier: com.centurylink.mdw.workflow.activity.event.PublishEventMessage
+  specifier: flowbee-demo.event.PublishEventMessage
   attributes:
     Event Name: servicesummary-update-${masterRequestId}
     display: x=153,y=219,w=161,h=61
@@ -89,6 +89,6 @@ variables:
   publishFirst:
     type: java.lang.Boolean
   serviceSummary:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   subCount:
     type: java.lang.Integer

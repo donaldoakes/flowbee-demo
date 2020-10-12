@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S13
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=27,y=328,w=60,h=40
   links:
@@ -21,7 +21,7 @@ steps:
     to: S5
 - id: S10
   name: update case value
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: $case = "good";
     display: x=554,y=320,w=100,h=60
@@ -33,7 +33,7 @@ steps:
     to: S7
 - id: S3
   name: Set Variable in Main
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       SetInMain = "Hello";
@@ -49,12 +49,12 @@ steps:
     to: S7
 - id: S7
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=851,y=462,w=60,h=40
 - id: S15
   name: Wait for 3 min
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     $+Id: '26997'
     STATUS_AFTER_EVENT: Hold
@@ -70,11 +70,11 @@ steps:
     to: S10
 - id: S1
   name: Manual task with event wait
-  specifier: com.centurylink.mdw.workflow.activity.task.CustomManualTaskActivity
+  specifier: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
-    TASK_PAGELET: com.centurylink.mdw.base/CustomManualTask.pagelet
-    TASK_TEMPLATE: com.centurylink.mdw.tests.workflow/TestEmbedded.task
+    TASK_PAGELET: base/CustomManualTask.pagelet
+    TASK_TEMPLATE: tests.workflow/TestEmbedded.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},CORRECT,true
     display: x=354,y=676,w=100,h=60
@@ -88,7 +88,7 @@ steps:
     to: S7
 - id: S12
   name: Sync arm1
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: print("Hello");
     display: x=352,y=476,w=100,h=60
@@ -100,10 +100,10 @@ steps:
     to: S2
 - id: S4
   name: set up arg table
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: launcher
-    Rule: "table launcher \n    with argument, result, retcode\n    option key=argument;\nvariable index;\ndo $index = 0;\ndo new (1, \"\", \"START\") in $launcher;\ndo new (2, \"\", \"START\") in $launcher;\ndo new (3, \"\", \"START\") in $launcher;\n"
+    Rule: ""
     SCRIPT: Groovy
     display: x=286,y=870,w=100,h=60
   links:
@@ -114,7 +114,7 @@ steps:
     to: S11
 - id: S14
   name: timer wait - keep waiting
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Waiting
     TIMER_WAIT: '2'
@@ -129,7 +129,7 @@ steps:
     to: S7
 - id: S8
   name: sum up
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       table launcher;
@@ -148,7 +148,7 @@ steps:
     to: S7
 - id: S11
   name: 3 subproceses
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     DELAY_BETWEEN: '5'
     KeyColumn: argument
@@ -168,7 +168,7 @@ steps:
     to: S8
 - id: S9
   name: Wait for some event
-  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  specifier: flowbee-demo.event.EventWaitActivity
   attributes:
     STATUS_AFTER_TIMEOUT: Cancelled
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},Hold::CORRECT,true;Signal-{$MasterRequestID},,false
@@ -181,7 +181,7 @@ steps:
     to: S10
 - id: S2
   name: Synch with Wait
-  specifier: com.centurylink.mdw.workflow.activity.sync.SynchronizationActivity
+  specifier: flowbee-demo.sync.SynchronizationActivity
   attributes:
     $+Id: '27875'
     STATUS_AFTER_EVENT: Hold
@@ -201,7 +201,7 @@ steps:
     to: S7
 - id: S5
   name: which case?
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -268,7 +268,7 @@ steps:
     result: sync-wait
 - id: S22
   name: "sync arm2\r\n(delay 2 min)"
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: SetInMain = "Ah hah!";
     SCRIPT: Groovy
@@ -291,7 +291,7 @@ subflows:
   steps:
   - id: S17
     name: Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=709,y=78,w=60,h=40
     links:
@@ -302,7 +302,7 @@ subflows:
       to: S18
   - id: S18
     name: Set Variable in Embedded
-    specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+    specifier: flowbee-demo.script.ScriptExecutorActivity
     attributes:
       Rule: SetInEmbedded = SetInMain + ", World!";
       SCRIPT: Groovy
@@ -315,7 +315,7 @@ subflows:
       to: S16
   - id: S16
     name: Stop
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       display: x=982,y=81,w=60,h=40
   variables:
@@ -332,7 +332,7 @@ subflows:
   steps:
   - id: S20
     name: Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=295,y=80,w=60,h=40
     links:
@@ -343,12 +343,12 @@ subflows:
       to: S19
   - id: S21
     name: Stop
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       display: x=617,y=80,w=60,h=40
   - id: S19
     name: wait 1 min
-    specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+    specifier: flowbee-demo.timer.TimerWaitActivity
     attributes:
       TIMER_WAIT: '1'
       Unit: Minutes

@@ -1,5 +1,5 @@
 {
   "icon": "email.png",
-  "id": "com.centurylink.mdw.workflow.activity.notification.EmailNotificationActivity",
+  "id": "flowbee-demo.notification.EmailNotificationActivity",
   "label": "EmailNotificationActivity"
 }

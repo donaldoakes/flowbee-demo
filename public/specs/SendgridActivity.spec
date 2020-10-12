@@ -1,5 +1,5 @@
 {
   "icon": "sendgrid.png",
-  "id": "com.centurylink.mdw.sendgrid.SendgridActivity",
+  "id": "flowbee-demo.sendgrid.SendgridActivity",
   "label": "SendgridActivity"
 }

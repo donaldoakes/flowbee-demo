@@ -1,5 +1,5 @@
 {
   "icon": "java.png",
-  "id": "com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity",
+  "id": "flowbee-demo.java.DynamicJavaActivity",
   "label": "DynamicJavaActivity"
 }

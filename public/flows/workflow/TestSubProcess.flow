@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S34
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=55,y=100,w=60,h=40
   links:
@@ -20,7 +20,7 @@ steps:
     to: S31
 - id: S32
   name: Wait for a while
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '1'
@@ -34,12 +34,12 @@ steps:
     to: S33
 - id: S33
   name: Finish
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=558,y=102,w=60,h=40
 - id: S31
   name: Calculate sqaure
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: 'result = argument * argument;   '
     SCRIPT: Groovy

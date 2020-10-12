@@ -1,9 +1,0 @@
-package com.centurylink.mdw.tests.workflow
-
-start process("TimerWaitActivityOrder") {
-    variables = [cumulativeResult: "_"]
-}
-wait process
-verify process {
-    resultsById = true
-}

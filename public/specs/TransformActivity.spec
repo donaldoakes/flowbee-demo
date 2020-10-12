@@ -1,5 +1,5 @@
 {
   "icon": "xml.jpg",
-  "id": "com.centurylink.mdw.workflow.activity.transform.TransformActivity",
+  "id": "flowbee-demo.transform.TransformActivity",
   "label": "TransformActivity"
 }

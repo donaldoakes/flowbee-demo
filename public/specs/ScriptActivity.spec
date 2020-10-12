@@ -1,5 +1,5 @@
 {
   "icon": "kotlin.png",
-  "id": "com.centurylink.mdw.kotlin.ScriptActivity",
+  "id": "flowbee-demo.kotlin.ScriptActivity",
   "label": "ScriptActivity"
 }

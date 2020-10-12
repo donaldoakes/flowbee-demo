@@ -1,5 +1,5 @@
 {
   "icon": "servicenow.png",
-  "id": "com.centurylink.mdw.servicenow.ServiceNowAdapter",
+  "id": "flowbee-demo.servicenow.ServiceNowAdapter",
   "label": "ServiceNowAdapter"
 }

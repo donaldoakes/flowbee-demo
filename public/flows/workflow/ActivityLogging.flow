@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=38,y=107,w=60,h=40
   links:
@@ -17,14 +17,14 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=766,y=111,w=60,h=40
 - id: S3
   name: |-
     Custom
     Activity
-  specifier: com.centurylink.mdw.tests.workflow.LoggingActivity
+  specifier: flowbee-demo.tests.workflow.LoggingActivity
   attributes:
     display: x=145,y=96,w=104,h=68
   links:
@@ -35,10 +35,10 @@ steps:
     to: S4
 - id: S4
   name: Dynamic Java
-  specifier: com.centurylink.mdw.workflow.activity.java.DynamicJavaActivity
+  specifier: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: ActivityLogging_A4
-    Java: "package com.centurylink.mdw.tests.workflow;\n\nimport java.util.Map;\n\nimport com.centurylink.mdw.java.JavaExecutionException;\nimport com.centurylink.mdw.java.JavaExecutor;\nimport com.centurylink.mdw.java.MdwJavaException;\nimport com.centurylink.mdw.model.workflow.ActivityRuntimeContext;\n\npublic class ActivityLogging_A4 implements JavaExecutor {\n    private ActivityRuntimeContext context;\n\n    public void initialize(ActivityRuntimeContext context) throws MdwJavaException {\n        this.context = context;\n    }\n\n    public Object execute(Map<String,Object> variables) throws JavaExecutionException  {\n        // context\n        context.logInfo(\"context.logInfo()\");\n        context.logDebug(\"context.logDebug()\");\n        context.logError(\"context.logError()\", new Exception(\"context.logError()\"));\n        \n        return null;\n    }\n}\n"
+    Java: ""
     display: x=305,y=97,w=103,h=66
   links:
   - id: L3
@@ -48,7 +48,7 @@ steps:
     to: S5
 - id: S5
   name: Groovy
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       runtimeContext.logInfo("context.logInfo()");
@@ -64,7 +64,7 @@ steps:
     to: S6
 - id: S6
   name: Kotlin
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: |
       runtimeContext.logInfo("context.logInfo()");

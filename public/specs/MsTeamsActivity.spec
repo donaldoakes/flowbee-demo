@@ -1,5 +1,5 @@
 {
   "icon": "msteams.png",
-  "id": "com.centurylink.mdw.msteams.MsTeamsActivity",
+  "id": "flowbee-demo.msteams.MsTeamsActivity",
   "label": "MsTeamsActivity"
 }

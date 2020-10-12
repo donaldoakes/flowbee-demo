@@ -1,5 +1,5 @@
 {
   "icon": "camel.gif",
-  "id": "com.centurylink.mdw.camel.CamelRouteAdapter",
+  "id": "flowbee-demo.camel.CamelRouteAdapter",
   "label": "CamelRouteAdapter"
 }

@@ -12,7 +12,7 @@ attributes:
 steps:
 - id: S2
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=36,y=208,w=60,h=40
   links:
@@ -23,12 +23,12 @@ steps:
     to: S3
 - id: S4
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=490,y=212,w=60,h=40
 - id: S1
   name: Check
-  specifier: com.centurylink.mdw.workflow.activity.timer.TimerWaitActivity
+  specifier: flowbee-demo.timer.TimerWaitActivity
   attributes:
     TIMER_WAIT: '2'
     Unit: Minutes
@@ -43,7 +43,7 @@ steps:
     to: S3
 - id: S3
   name: Event Wait
-  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  specifier: flowbee-demo.event.EventWaitActivity
   attributes:
     $+Id: '472083'
     STATUS_AFTER_EVENT: Hold
@@ -74,7 +74,7 @@ subflows:
   steps:
   - id: S5
     name: Start
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+    specifier: flowbee-demo.start
     attributes:
       display: x=398,y=71,w=60,h=40
     links:
@@ -85,15 +85,15 @@ subflows:
       to: S7
   - id: S6
     name: Stop
-    specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+    specifier: flowbee-demo.stop
     attributes:
       display: x=698,y=71,w=60,h=40
   - id: S7
     name: Event Wait Fallout
-    specifier: com.centurylink.mdw.workflow.activity.task.AutoFormManualTaskActivity
+    specifier: flowbee-demo.task.AutoFormManualTaskActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
-      TASK_TEMPLATE: com.centurylink.mdw.tests.workflow/Event Wait Fallout.task
+      TASK_TEMPLATE: tests.workflow/Event Wait Fallout.task
       TASK_TEMPLATE_assetVersion: '[0.2,1)'
       Wait for Task: 'TRUE'
       display: x=523,y=61,w=105,h=61

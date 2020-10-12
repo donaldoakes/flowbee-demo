@@ -1,5 +1,5 @@
 {
   "icon": "excel.gif",
-  "id": "com.centurylink.mdw.drools.DroolsDecisionTableActivity",
+  "id": "flowbee-demo.drools.DroolsDecisionTableActivity",
   "label": "DroolsDecisionTableActivity"
 }

@@ -1,7 +1,0 @@
-package com.centurylink.mdw.tests.workflow
-
-start process("SubprocessFromEmbedded") {
-    variables = [passToSub: "incoming"]
-}
-wait process
-verify processes("SubprocessFromEmbedded", "SubprocessForEmbedded")

@@ -4,13 +4,13 @@ attributes:
   PROCESS_VISIBILITY: SERVICE
   display: x=379,y=59,w=250,h=26
   requestMethod: POST
-  requestParameters: '[["User","Body","true","User with optional groups","com.centurylink.mdw.tests.microservice/User.java","[0.2,1)"]]'
+  requestParameters: '[["User","Body","true","User with optional groups","microservice/User.java","[0.2,1)"]]'
   requestPath: /user
   requestSummary: Create a user and add to workgroups
 steps:
 - id: S1
   name: Receive
-  specifier: ply.start
+  specifier: flowbee-demo.start
   attributes:
     display: x=45,y=52,w=60,h=40
   links:
@@ -21,12 +21,12 @@ steps:
     to: S6
 - id: S2
   name: Response
-  specifier: ply.stop
+  specifier: flowbee-demo.stop
   attributes:
     display: x=626,y=532,w=60,h=40
 - id: S3
   name: "Invoke\r\nServices"
-  specifier: com.centurylink.mdw.microservice.OrchestratorActivity
+  specifier: flowbee-demo.microservice.OrchestratorActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     display: x=428,y=284,w=121,h=77
@@ -40,37 +40,10 @@ steps:
     to: S10
 - id: S4
   name: "Create\r\nPlan"
-  specifier: com.centurylink.mdw.kotlin.ScriptActivity
+  specifier: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["servicePlan"]'
-    Rule: |-
-      import com.centurylink.mdw.microservice.servicePlan
-      import com.centurylink.mdw.model.Jsonable
-
-      variables["servicePlan"] = servicePlan(runtimeContext) {
-          services {
-              microservice {
-                  name = "admin/createUser"
-                  method = "POST"
-                  url = "${runtimeContext.props["mdw.services.url"]}/services/Users"
-                  dependencies = "[[\"true\", \"admin/createGroup\", \"\"]]"
-                  bindings {
-                    "requestMapper" to "com.centurylink.mdw.tests.microservice/UserRequestMapper.groovy"
-                    "responseMapper" to "com.centurylink.mdw.microservice/StatusResponseMapper.groovy"
-                  }
-              }
-              microservice {
-                  name = "admin/createGroup"
-                  method = "POST"
-                  url = "${runtimeContext.props["mdw.services.url"]}/services/Workgroups"
-                  enabled = (variables["request"] as Jsonable).getJson().has("group")
-                  bindings {
-                    "requestMapper" to "com.centurylink.mdw.tests.microservice/GroupRequestMapper.groovy"
-                    "responseMapper" to "com.centurylink.mdw.microservice/StatusResponseMapper.groovy"
-                  }
-              }
-          }
-      }
+    Rule: ""
     SCRIPT: Kotlin Script
     display: x=237,y=282,w=118,h=75
   links:
@@ -81,9 +54,9 @@ steps:
     to: S3
 - id: S5
   name: "Consolidate\r\nResponses"
-  specifier: com.centurylink.mdw.microservice.ResponseCollector
+  specifier: flowbee-demo.microservice.ResponseCollector
   attributes:
-    consolidator: com.centurylink.mdw.microservice.CombiningConsolidator
+    consolidator: microservice.CombiningConsolidator
     display: x=430,y=520,w=120,h=73
   links:
   - id: L4
@@ -93,7 +66,7 @@ steps:
     to: S2
 - id: S6
   name: "Validate\r\nRequest"
-  specifier: com.centurylink.mdw.workflow.activity.validate.SwaggerValidatorActivity
+  specifier: flowbee-demo.validate.SwaggerValidatorActivity
   attributes:
     Validate: '["Query","Body"]'
     display: x=238,y=142,w=118,h=75
@@ -112,33 +85,22 @@ steps:
     result: 'true'
 - id: S7
   name: Reject
-  specifier: ply.stop
+  specifier: flowbee-demo.stop
   attributes:
     display: x=45,y=157,w=60,h=40
 - id: S9
   name: Accepted
-  specifier: ply.stop
+  specifier: flowbee-demo.stop
   attributes:
     display: x=629,y=421,w=60,h=40
 - id: S10
   name: |-
     Synchronous
     Response?
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["response"]'
-    Rule: |
-      import com.centurylink.mdw.model.StatusResponse
-      import static com.centurylink.mdw.model.Status.ACCEPTED
-
-      if (synchronous) {
-          return true
-      }
-      else {
-          // populate the 202 response
-          response = new StatusResponse(ACCEPTED).getJson()
-          return false
-      }
+    Rule: ""
     SCRIPT: Groovy
     display: x=430,y=406,w=122,h=73
   links:
@@ -158,7 +120,7 @@ variables:
   parallel:
     type: java.lang.Boolean
   request:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   requestHeaders:
     type: java.util.Map<String,String>
   response:
@@ -168,6 +130,6 @@ variables:
   servicePlan:
     type: org.yaml.snakeyaml.Yaml
   serviceSummary:
-    type: com.centurylink.mdw.model.Jsonable
+    type: io.limberest.json.Jsonable
   synchronous:
     type: java.lang.Boolean

@@ -1,7 +1,0 @@
-package com.centurylink.mdw.tests.services
-
-start process("RestfulServiceAdapter") {
-    variables = [httpMethod: "GET"]
-}
-wait process
-verify process

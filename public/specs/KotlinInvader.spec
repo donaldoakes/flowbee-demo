@@ -1,5 +1,5 @@
 {
   "icon": "invader.png",
-  "id": "com.centurylink.mdw.tests.code.KotlinInvader",
+  "id": "flowbee-demo.tests.code.KotlinInvader",
   "label": "KotlinInvader"
 }

@@ -1,5 +1,5 @@
 {
   "icon": "error.png",
-  "id": "com.centurylink.mdw.microservice.ErrorHandlerActivity",
+  "id": "flowbee-demo.microservice.ErrorHandlerActivity",
   "label": "ErrorHandlerActivity"
 }

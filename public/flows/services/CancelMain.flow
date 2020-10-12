@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=84,y=137,w=60,h=40
   links:
@@ -20,7 +20,7 @@ steps:
   name: |-
     Which
     Case?
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -40,10 +40,10 @@ steps:
     result: sub
 - id: S4
   name: Error Sub
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=213,y=263,w=100,h=60
-    processname: com.centurylink.mdw.tests.services/ServiceSub.proc
+    processname: tests.services/ServiceSub.proc
     processversion: '[0.4,1)'
     synchronous: 'false'
     variables: '{"testCase":"$testCase"}'
@@ -55,10 +55,10 @@ steps:
     to: S6
 - id: S5
   name: Cancel Sub
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeSubProcessActivity
+  specifier: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=410,y=59,w=100,h=60
-    processname: com.centurylink.mdw.tests.services/CancelSub.proc
+    processname: tests.services/CancelSub.proc
     processversion: '[0.1,1)'
     synchronous: 'false'
     variables: '{"testCase":"$testCase"}'
@@ -72,7 +72,7 @@ steps:
   name: |-
     Wait
     Forever
-  specifier: com.centurylink.mdw.workflow.activity.event.EventWaitActivity
+  specifier: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA_DISPLAY_UNITS: Hours
     STATUS_AFTER_TIMEOUT: Cancelled
@@ -86,7 +86,7 @@ steps:
     to: S7
 - id: S7
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=609,y=174,w=60,h=40
 textNotes:

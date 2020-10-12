@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessStartActivity
+  specifier: flowbee-demo.start
   attributes:
     display: x=22,y=249,w=60,h=40
   links:
@@ -20,7 +20,7 @@ steps:
     to: S8
 - id: S2
   name: Stop
-  specifier: com.centurylink.mdw.workflow.activity.process.ProcessFinishActivity
+  specifier: flowbee-demo.stop
   attributes:
     display: x=769,y=230,w=60,h=40
 - id: S3
@@ -28,15 +28,15 @@ steps:
     create
     execution plan
     - sequential
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |+
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument
-      import com.centurylink.mdw.bpm.ParameterDocument.Parameter
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
-      import com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance
-      import com.centurylink.mdw.model.workflow.WorkStatus
+      import bpm.ProcessExecutionPlanDocument
+      import bpm.ParameterDocument.Parameter
+      import bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
+      import bpm.SubprocessInstanceDocument.SubprocessInstance
+      import model.workflow.WorkStatus
 
       execplan = ProcessExecutionPlanDocument.Factory.newInstance();
       ProcessExecutionPlan exeplanVar = execplan.addNewProcessExecutionPlan();
@@ -76,13 +76,13 @@ steps:
   name: |-
     invoke heterogeneous
     processes - sequential
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'FALSE'
     STATUS_AFTER_EVENT: Hold
     display: x=400,y=92,w=129,h=83
-    processmap: '[["SubProcess1","com.centurylink.mdw.tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","com.centurylink.mdw.tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
+    processmap: '[["SubProcess1","tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
     synchronous: 'TRUE'
   links:
   - id: L13
@@ -95,13 +95,13 @@ steps:
   name: |-
     invoke heterogeneous
     processes - parallel
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'TRUE'
     STATUS_AFTER_EVENT: Hold
     display: x=401,y=219,w=129,h=83
-    processmap: '[["SubProcess1","com.centurylink.mdw.tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","com.centurylink.mdw.tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
+    processmap: '[["SubProcess1","tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
     synchronous: 'TRUE'
   links:
   - id: L12
@@ -114,13 +114,13 @@ steps:
   name: |-
     invoke heterogeneous
     processes - error
-  specifier: com.centurylink.mdw.workflow.activity.process.InvokeHeterogeneousProcessActivity
+  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'TRUE'
     STATUS_AFTER_EVENT: Hold
     display: x=397,y=352,w=129,h=83
-    processmap: '[["SubProcess1","com.centurylink.mdw.tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","com.centurylink.mdw.tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
+    processmap: '[["SubProcess1","tests.workflow/TestSubProcess3.proc","[0,1)",""],["SubProcess2","tests.workflow/TestSubProcess4.proc","[0,1)",""]]'
     synchronous: 'TRUE'
   links:
   - id: L14
@@ -131,7 +131,7 @@ steps:
     to: S11
 - id: S8
   name: which case?
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptEvaluator
+  specifier: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testcase
     SCRIPT: Groovy
@@ -165,15 +165,15 @@ steps:
     create
     execution plan
     - parallel
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument
-      import com.centurylink.mdw.bpm.ParameterDocument.Parameter
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
-      import com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance
-      import com.centurylink.mdw.model.workflow.WorkStatus
+      import bpm.ProcessExecutionPlanDocument
+      import bpm.ParameterDocument.Parameter
+      import bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
+      import bpm.SubprocessInstanceDocument.SubprocessInstance
+      import model.workflow.WorkStatus
 
       execplan = ProcessExecutionPlanDocument.Factory.newInstance();
       ProcessExecutionPlan exeplanVar = execplan.addNewProcessExecutionPlan();
@@ -213,15 +213,15 @@ steps:
     create
     execution plan
     - error
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument
-      import com.centurylink.mdw.bpm.ParameterDocument.Parameter
-      import com.centurylink.mdw.bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
-      import com.centurylink.mdw.bpm.SubprocessInstanceDocument.SubprocessInstance
-      import com.centurylink.mdw.model.workflow.WorkStatus
+      import bpm.ProcessExecutionPlanDocument
+      import bpm.ParameterDocument.Parameter
+      import bpm.ProcessExecutionPlanDocument.ProcessExecutionPlan
+      import bpm.SubprocessInstanceDocument.SubprocessInstance
+      import model.workflow.WorkStatus
 
       execplan = ProcessExecutionPlanDocument.Factory.newInstance();
       ProcessExecutionPlan exeplanVar = execplan.addNewProcessExecutionPlan();
@@ -258,10 +258,10 @@ steps:
     to: S7
 - id: S11
   name: Set result variables
-  specifier: com.centurylink.mdw.workflow.activity.script.ScriptExecutorActivity
+  specifier: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: response
-    Rule: "import groovy.xml.MarkupBuilder;\r\nimport javax.xml.parsers.DocumentBuilderFactory;\r\nimport javax.xml.parsers.DocumentBuilder;\r\nimport org.xml.sax.InputSource;\r\nimport org.w3c.dom.Document;\r\nimport groovy.xml.QName;\r\n\r\ndef varPlan  = new XmlSlurper().parseText(execplan.toString()) ;\r\nList varResult = varPlan.'**'.grep {\r\n\t it.@Name == 'result' \r\n}\r\n\r\nresult = varResult[0];  \r\n\r\ndef parseResult = new XmlParser().parseText(docFromSubproc);\r\n\r\ndef stringWriter = new StringWriter();\r\ndef docBuilder = new MarkupBuilder(stringWriter);\r\ndocBuilder.Response {\r\n\tncube(ncube)\r\n\tfor (String item : varResult) {\r\n\t\tresult(item)\r\n\t }\r\n\tnplus1(parseResult.nplus1.text())\r\n}\r\n\r\nresponse = stringWriter.toString();\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n"
+    Rule: ""
     SCRIPT: Groovy
     display: x=615,y=229,w=100,h=60
   links:
@@ -273,7 +273,7 @@ steps:
     to: S2
 variables:
   docFromSubproc:
-    type: com.centurylink.mdw.model.StringDocument
+    type: model.StringDocument
   execplan:
     type: org.apache.xmlbeans.XmlObject
   ncube:
