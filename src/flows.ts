@@ -7,6 +7,7 @@ export class Flows {
 
     renderItem(item: any, ul: HTMLUListElement, dark: boolean) {
         // TODO tab index
+        // TODO honor dark
         if (!item.name.startsWith('.')) {
             if (item.type === 'file') {
                 const li = document.createElement('li') as HTMLLIElement;
@@ -46,7 +47,7 @@ export class Flows {
         }
     }
 
-    async render(dark = false) {
+    async render(dark: boolean) {
         const dirItem = await (await fetch(`${this.base}/flows`)).json();
         const div = document.getElementById('flow-tree') as HTMLDivElement;
         const ul = document.createElement('ul') as HTMLUListElement;

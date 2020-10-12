@@ -6,7 +6,7 @@ export class Flow {
     constructor(private readonly base: string) {
     }
 
-    async render(text: string, file: string, dark = false, readonly = false) {
+    async render(text: string, file: string, dark: boolean, readonly = false) {
         // TODO: switch between light/dark
         const options = dark ? flowbee.DefaultOptions.diagram.dark : flowbee.DefaultOptions.diagram.light;
         options.iconBase = `${this.base}/icons`;

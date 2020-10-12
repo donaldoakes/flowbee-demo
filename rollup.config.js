@@ -11,7 +11,8 @@ export default [
         output: {
             name: 'flowbee-demo',
             file: 'public/js/index.js',
-            format: 'umd'
+            format: 'umd',
+            sourcemap: true
         },
         plugins: [
             resolve(),

@@ -1,3 +1,6 @@
+html, body {
+  height: 100%;
+}
 .container {
   display: flex;
 }
@@ -5,6 +8,8 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", system-ui, Ubuntu, "Droid Sans", sans-serif;
   font-size: 14px;
   color: #303030;
+  height: auto;
+  overflow-y: visible;
 }
 .tree ul {
   margin: 0;
@@ -35,4 +40,48 @@
 }
 .tree-flow-item {
   cursor: pointer;
+}
+
+.toolbox {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", system-ui, Ubuntu, "Droid Sans", sans-serif;
+  font-size: 13px;
+}
+.toolbox > ul {
+  padding: 0;
+  list-style-type: none;
+}
+.toolbox > ul > li {
+  height: 22px;
+  display: flex;
+  cursor: pointer;
+  white-space: nowrap;
+  padding-left: 5px;
+  line-height: 22px;
+}
+.toolbox > ul > li:active {
+  cursor: copy;
+}
+.toolbox > ul > li:focus {
+  outline-width: 0;
+  background-color: #1fccfd;
+}
+.toolbox-icon {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+.toolbox-icon img {
+  width: 16px;
+  min-width: 16px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+.toolbox-label {
+  color: #404040;
+  padding-left: 10px;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }

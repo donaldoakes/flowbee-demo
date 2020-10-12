@@ -23,7 +23,7 @@ export class Specs {
                 specs.push(await (await fetch(item.path)).json());
             } else if (item.type === 'directory') {
                 for (const child of item.children) {
-                    this.collect(child, specs);
+                    await this.collect(child, specs);
                 }
             }
         }

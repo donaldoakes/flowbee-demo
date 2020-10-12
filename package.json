@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Flow Diagramming Live Demo",
   "type": "module",
-  "main": "public/js/main.js",
-  "module": "public/js/main.js",
+  "main": "public/js/src/index.js",
+  "module": "public/js/src/main.js",
   "browser": "public/js/index.js",
   "scripts": {
     "build": "tsc && rollup -c",

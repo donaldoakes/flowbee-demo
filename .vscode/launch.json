@@ -5,9 +5,9 @@
             "name": "Chrome localhost",
             "type": "pwa-chrome",
             "request": "launch",
+            "sourceMaps": true,
             "url": "http://localhost:8080",
-            "webRoot": "${workspaceFolder}/public/js",
-            "outputCapture": "std"
+            "webRoot": "${workspaceFolder}/public"
         }
     ]
 }
