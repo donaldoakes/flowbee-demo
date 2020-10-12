@@ -7,7 +7,8 @@
   "module": "dist/main.js",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -watch"
+    "watch": "tsc -watch",
+    "start": "http-server"
   },
   "repository": {
     "type": "git",
@@ -24,11 +25,15 @@
     "url": "https://github.com/donaldoakes/flowbee-demo/issues"
   },
   "homepage": "https://github.com/donaldoakes/flowbee-demo#readme",
-  "dependencies": {},
+  "dependencies": {
+    "directory-tree": "^2.2.5",
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "eslint": "^7.10.0",
+    "http-server": "^0.12.3",
     "typescript": "^4.0.3"
   }
 }
