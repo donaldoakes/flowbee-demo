@@ -20,7 +20,7 @@ steps:
     to: S42
 - id: S42
   name: which case?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: testCase
     SCRIPT: Groovy

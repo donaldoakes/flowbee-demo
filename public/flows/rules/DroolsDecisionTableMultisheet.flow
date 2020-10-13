@@ -85,7 +85,7 @@ steps:
     result: EASTERN
 - id: S139
   name: Geography
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: geography
     SCRIPT: Groovy

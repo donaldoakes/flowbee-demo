@@ -55,7 +55,7 @@ steps:
     to: S3
 - id: S5
   name: Which Test Case?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: processCase
     SCRIPT: Groovy

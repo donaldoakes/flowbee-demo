@@ -19,7 +19,7 @@ steps:
     to: S13
 - id: S1
   name: Count > 100?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: 'count > 99 ?  ''TRUE'' : ''FALSE'''
     SCRIPT: Groovy
@@ -183,7 +183,7 @@ steps:
     to: S3
 - id: S13
   name: case?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: processCase
     SCRIPT: Groovy

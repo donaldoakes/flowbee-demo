@@ -40,7 +40,7 @@ steps:
     to: S12
 - id: S4
   name: Synchronous?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: mode
     SCRIPT: Groovy
@@ -60,7 +60,7 @@ steps:
     result: Asynchronous
 - id: S6
   name: Platform?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: platform
     SCRIPT: Groovy
@@ -117,7 +117,7 @@ steps:
     to: S2
 - id: S9
   name: Platform?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: platform
     SCRIPT: Groovy

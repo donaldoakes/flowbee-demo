@@ -55,7 +55,7 @@ steps:
     to: S2
 - id: S5
   name: "Custom\r\n?"
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: '#{isCustom}'
     SCRIPT: javax.el
@@ -75,7 +75,7 @@ steps:
     result: 'true'
 - id: S6
   name: "Provider\r\n?"
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: isIndexProvider
     SCRIPT: Groovy

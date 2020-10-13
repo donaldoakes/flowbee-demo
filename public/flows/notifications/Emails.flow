@@ -22,7 +22,7 @@ steps:
     display: x=174,y=475,w=60,h=40
 - id: S3
   name: "Send\r\nVia"
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: ${sendVia}
     SCRIPT: javax.el

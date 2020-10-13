@@ -20,7 +20,7 @@ steps:
   name: |-
     Which
     Case?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: testCase
     SCRIPT: Groovy

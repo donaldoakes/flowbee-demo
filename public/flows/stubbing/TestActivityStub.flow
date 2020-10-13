@@ -77,7 +77,7 @@ steps:
     to: S2
 - id: S11
   name: Path
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: flowPath
     SCRIPT: Groovy

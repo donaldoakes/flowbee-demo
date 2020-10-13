@@ -56,7 +56,7 @@ steps:
     result: onward
 - id: S4
   name: Which?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: testCase
     SCRIPT: Python
@@ -96,7 +96,7 @@ steps:
     to: S2
 - id: S6
   name: Boolean
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: testCase == 'decide'
     SCRIPT: Python

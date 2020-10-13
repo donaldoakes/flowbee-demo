@@ -131,7 +131,7 @@ steps:
     to: S11
 - id: S8
   name: which case?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: testcase
     SCRIPT: Groovy

@@ -51,7 +51,7 @@ steps:
     to: S3
 - id: S5
   name: stop?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: n > loops
     SCRIPT: Groovy

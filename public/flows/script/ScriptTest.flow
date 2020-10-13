@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Still Okay?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: '"Sure"'
     SCRIPT: Groovy
@@ -64,7 +64,7 @@ steps:
     result: javaScriptOutcome
 - id: S6
   name: Looking Good?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: '''Yep'''
     SCRIPT: Groovy
@@ -78,7 +78,7 @@ steps:
     result: Yep
 - id: S8
   name: Script Flavor?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: scriptFlavor
     SCRIPT: Groovy

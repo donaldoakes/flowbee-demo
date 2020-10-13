@@ -408,7 +408,7 @@ steps:
     to: S16
 - id: S33
   name: multiple processes ?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: processCase
     SCRIPT: Groovy

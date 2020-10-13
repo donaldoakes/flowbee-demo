@@ -20,7 +20,7 @@ steps:
     to: S5
 - id: S5
   name: "Real\r\nLookup?"
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: sapId != 'DHO115360' && workstationId != 'dxoakes'
     SCRIPT: Groovy

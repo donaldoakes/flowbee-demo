@@ -90,7 +90,7 @@ steps:
     to: S12
 - id: S16
   name: Which Task?
-  descriptor: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.decision
   attributes:
     Expression: path
     SCRIPT: Groovy
