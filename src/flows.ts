@@ -51,6 +51,7 @@ export class Flows {
         const dirItem = await (await fetch(`${this.base}/flows`)).json();
         const div = document.getElementById('flow-tree') as HTMLDivElement;
         const ul = document.createElement('ul') as HTMLUListElement;
+        ul.style.paddingLeft = '0px';
         this.renderItem(dirItem, ul, dark);
         div.appendChild(ul);
     }

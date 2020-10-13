@@ -23,7 +23,7 @@ export class Toolbox {
             li.appendChild(iconDiv);
             const labelDiv = document.createElement("div") as HTMLDivElement;
             labelDiv.className = 'toolbox-label';
-            labelDiv.style.color = dark ? '#cccccc' : '#616161';
+            labelDiv.style.color = dark ? '#cccccc' : '#303030';
             labelDiv.appendChild(document.createTextNode(spec.label));
             li.appendChild(labelDiv);
             ul.appendChild(li);
