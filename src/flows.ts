@@ -3,16 +3,18 @@ import { Specs } from './specs';
 
 export class Flows {
 
+    private tabIndex = 100;
+
     constructor(private readonly base: string) {}
 
     renderItem(item: any, ul: HTMLUListElement, dark: boolean) {
-        // TODO tab index
         // TODO honor dark
         if (!item.name.startsWith('.')) {
             if (item.type === 'file') {
                 const li = document.createElement('li') as HTMLLIElement;
                 li.setAttribute('id', item.path);
                 li.className = 'tree-flow-item';
+                li.tabIndex = this.tabIndex++;
                 const img = document.createElement('img') as HTMLImageElement;
                 img.src = '/img/flow.svg';
                 img.alt = 'flow';
