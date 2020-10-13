@@ -1,4 +1,4 @@
-import { Specs } from './specs';
+import { Descriptors } from './descriptors';
 
 export class Toolbox {
 
@@ -9,22 +9,22 @@ export class Toolbox {
     async render(dark: boolean) {
         const div = document.getElementById('flow-toolbox') as HTMLElement;
         const ul = document.createElement('ul') as HTMLUListElement;
-        const specs = await Specs.getSpecs(this.base);
+        const descriptors = await Descriptors.getDescriptors(this.base);
         let tabIndex = 1000;
-        for (const spec of specs) {
+        for (const descriptor of descriptors) {
             const li = document.createElement('li') as HTMLLIElement;
-            li.setAttribute('id', spec.id);
+            li.setAttribute('id', descriptor.name);
             li.tabIndex = tabIndex++;
             const iconDiv = document.createElement('div') as HTMLDivElement;
             iconDiv.className = 'toolbox-icon';
             const iconImg = document.createElement('img') as HTMLImageElement;
-            iconImg.src = `${this.base}/icons/${spec.icon}`;
+            iconImg.src = `${this.base}/icons/${descriptor.icon}`;
             iconDiv.appendChild(iconImg);
             li.appendChild(iconDiv);
             const labelDiv = document.createElement('div') as HTMLDivElement;
             labelDiv.className = 'toolbox-label';
             labelDiv.style.color = dark ? '#cccccc' : '#303030';
-            labelDiv.appendChild(document.createTextNode(spec.label));
+            labelDiv.appendChild(document.createTextNode(descriptor.label));
             li.appendChild(labelDiv);
             ul.appendChild(li);
         }

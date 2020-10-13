@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=49,y=100,w=60,h=40
   links:
@@ -18,12 +18,12 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=612,y=103,w=60,h=40
 - id: S3
   name: Error
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: ServiceSub_A3
     Java: ""
@@ -38,7 +38,7 @@ steps:
   name: |-
     Populate
     Values
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["person"]'
     Rule: |+

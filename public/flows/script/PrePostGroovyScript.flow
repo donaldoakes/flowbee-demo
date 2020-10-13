@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S3
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=33,y=102,w=67,h=38
   links:
@@ -17,12 +17,12 @@ steps:
     to: S4
 - id: S6
   name: Finish
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=674,y=100,w=60,h=40
 - id: S4
   name: Perform Validation
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -42,12 +42,12 @@ steps:
     result: 'false'
 - id: S7
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=203,y=201,w=60,h=40
 - id: S8
   name: Check Employee
-  specifier: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
+  descriptor: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     OsgiBundleSymbolicName: workflow
@@ -74,12 +74,12 @@ steps:
     result: 'true'
 - id: S9
   name: Finish
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=372,y=199,w=60,h=40
 - id: S14
   name: Set Variables
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy

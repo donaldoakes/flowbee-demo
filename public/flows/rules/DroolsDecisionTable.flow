@@ -11,7 +11,7 @@ attributes:
 steps:
 - id: S2
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     Parameters: '{"orderNumber":"${request.orderNumber}","dueDate":"${request.dueDate}","region":"${request.regionString}","quotedPrice":"${request.quotedPrice}"}'
     display: x=183,y=47,w=60,h=40
@@ -23,7 +23,7 @@ steps:
     to: S3
 - id: S3
   name: Setup XMLBean
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: xmlBeanVar
     Rule: ""
@@ -37,7 +37,7 @@ steps:
     to: S1
 - id: S1
   name: "Drools \r\nDecision Table"
-  specifier: flowbee-demo.drools.DroolsDecisionTableActivity
+  descriptor: flowbee-demo.drools.DroolsDecisionTableActivity
   attributes:
     KnowledgeBase: tests.rules/drools-orderRoutingDecisionTable.xlsx
     KnowledgeBase_assetVersion: '[0.2,1)'
@@ -62,12 +62,12 @@ steps:
     result: EASTERN
 - id: S5
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=523,y=446,w=60,h=40
 - id: S7
   name: Set Response
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["response"]'
     Rule: |-

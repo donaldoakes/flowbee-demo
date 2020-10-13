@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=82,y=121,w=60,h=40
   links:
@@ -18,14 +18,14 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=504,y=120,w=60,h=40
 - id: S3
   name: |-
     Invoke
     Retryable
-  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
+  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     EndpointUri: ${serviceUrl}
     HttpMethod: POST
@@ -44,7 +44,7 @@ steps:
   name: |-
     Create
     Request
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["serviceRequest"]'
     Rule: |-

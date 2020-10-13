@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     Parameters: sapId=${request.sapId};workstationId=${request.workstationId}
     display: x=43,y=102,w=60,h=40
@@ -20,7 +20,7 @@ steps:
     to: S5
 - id: S5
   name: "Real\r\nLookup?"
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: sapId != 'DHO115360' && workstationId != 'dxoakes'
     SCRIPT: Groovy
@@ -40,12 +40,12 @@ steps:
     result: 'false'
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=577,y=180,w=60,h=40
 - id: S3
   name: Lookup
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: response
     Rule: ""
@@ -59,7 +59,7 @@ steps:
     to: S2
 - id: S6
   name: "Populate\r\nObject"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: employee#response
     Rule: ""
@@ -73,7 +73,7 @@ steps:
     to: S2
 - id: S4
   name: LDAP Lookup
-  specifier: flowbee-demo.adapter.ldap.LdapAdapter
+  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: prop:LDAP/AppCUID
     AppPassword: prop:LDAP/AppPassword

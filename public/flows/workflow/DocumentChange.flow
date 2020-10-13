@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=16,y=156,w=60,h=40
   links:
@@ -21,7 +21,7 @@ steps:
     to: S6
 - id: S6
   name: "Create\r\nJava Objects"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: changedJavaObject#unchangedJavaObject
     Rule: ""
@@ -35,7 +35,7 @@ steps:
     to: S4
 - id: S5
   name: "Change\r\nNon-Output Docs"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -48,12 +48,12 @@ steps:
     to: S2
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=695,y=149,w=60,h=40
 - id: S4
   name: Outcome
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: outcome
     SCRIPT: Groovy
@@ -73,7 +73,7 @@ steps:
     result: nochange
 - id: S3
   name: "Change\r\nOutput Docs"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: changedDomDoc#changedJavaObject#changedJson#changedStringDoc#changedXmlBean#changedXmlBeanWrapper
     Rule: ""

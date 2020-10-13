@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=33,y=108,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S10
 - id: S2
   name: Right
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=387,y=404,w=60,h=40
 - id: S3
   name: Decide
-  specifier: flowbee-demo.kotlin.ScriptActivity
+  descriptor: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: ""
     SCRIPT: Kotlin Script
@@ -42,12 +42,12 @@ steps:
     result: Vanilla
 - id: S4
   name: Wrong
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=146,y=519,w=60,h=40
 - id: S5
   name: Exec
-  specifier: flowbee-demo.kotlin.ScriptActivity
+  descriptor: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["jsonablePerson"]'
     Rule: ""
@@ -61,12 +61,12 @@ steps:
     to: S13
 - id: S9
   name: Finish
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=620,y=286,w=60,h=40
 - id: S10
   name: Which
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: variables["testCase"]
     SCRIPT: Kotlin Script
@@ -86,7 +86,7 @@ steps:
     result: exec
 - id: S11
   name: Boolean
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: '"decide".equals(variables["testCase"])'
     SCRIPT: Kotlin Script
@@ -106,12 +106,12 @@ steps:
     result: 'false'
 - id: S12
   name: No Way
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=285,y=296,w=60,h=40
 - id: S13
   name: Use Class
-  specifier: flowbee-demo.kotlin.ScriptActivity
+  descriptor: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["jsonObject"]'
     Rule: ""
@@ -125,7 +125,7 @@ steps:
     to: S14
 - id: S14
   name: "Access\r\nfrom Java"
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     Output Documents: '["unfound"]'

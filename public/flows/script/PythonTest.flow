@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=50,y=90,w=60,h=40
   links:
@@ -18,12 +18,12 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=680,y=90,w=60,h=40
 - id: S3
   name: Exec
-  specifier: flowbee-demo.python.ScriptActivity
+  descriptor: flowbee-demo.python.ScriptActivity
   attributes:
     Output Documents: '["person"]'
     Rule: |
@@ -56,7 +56,7 @@ steps:
     result: onward
 - id: S4
   name: Which?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testCase
     SCRIPT: Python
@@ -76,7 +76,7 @@ steps:
     result: decide
 - id: S5
   name: Use Module
-  specifier: flowbee-demo.python.ScriptActivity
+  descriptor: flowbee-demo.python.ScriptActivity
   attributes:
     Rule: |
       runtimeContext.logDebug('Executing ' + runtimeContext.activity.name)
@@ -96,7 +96,7 @@ steps:
     to: S2
 - id: S6
   name: Boolean
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testCase == 'decide'
     SCRIPT: Python
@@ -116,12 +116,12 @@ steps:
     result: 'true'
 - id: S7
   name: No Way
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=300,y=190,w=60,h=40
 - id: S8
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=180,y=280,w=60,h=40
 variables:

@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S39
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=61,y=206,w=60,h=40
   links:
@@ -20,12 +20,12 @@ steps:
     to: S40
 - id: S38
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=515,y=210,w=60,h=40
 - id: S41
   name: Check
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '30'
@@ -41,7 +41,7 @@ steps:
     to: S40
 - id: S40
   name: Task that also waits for event
-  specifier: flowbee-demo.task.CustomManualTaskActivity
+  descriptor: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     STATUS_AFTER_TIMEOUT: Hold
@@ -75,7 +75,7 @@ subflows:
   steps:
   - id: S44
     name: Start
-    specifier: flowbee-demo.start
+    descriptor: flowbee-demo.start
     attributes:
       display: x=330,y=72,w=60,h=40
     links:
@@ -86,12 +86,12 @@ subflows:
       to: S43
   - id: S42
     name: Stop
-    specifier: flowbee-demo.stop
+    descriptor: flowbee-demo.stop
     attributes:
       display: x=630,y=72,w=60,h=40
   - id: S43
     name: "Task And Event\r\nFallout"
-    specifier: flowbee-demo.task.AutoFormManualTaskActivity
+    descriptor: flowbee-demo.task.AutoFormManualTaskActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TASK_PAGELET: base/AutoFormManualTask.pagelet

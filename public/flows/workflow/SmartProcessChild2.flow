@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=45,y=107,w=60,h=40
   links:
@@ -18,12 +18,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=428,y=106,w=60,h=40
 - id: S3
   name: Set Ver Info
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Child 2 Set Info"],["false","Test Cases","testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     Rule: ""

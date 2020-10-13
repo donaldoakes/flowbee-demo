@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=41,y=86,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=542,y=84,w=60,h=40
 - id: S3
   name: A Custom Task
-  specifier: flowbee-demo.task.CustomManualTaskActivity
+  descriptor: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/CustomManualTask.pagelet
@@ -38,7 +38,7 @@ steps:
     to: S2
 - id: S4
   name: An AutoForm Task
-  specifier: flowbee-demo.task.AutoFormManualTaskActivity
+  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -55,7 +55,7 @@ steps:
     to: S2
 - id: S5
   name: "Custom\r\n?"
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: '#{isCustom}'
     SCRIPT: javax.el
@@ -75,7 +75,7 @@ steps:
     result: 'true'
 - id: S6
   name: "Provider\r\n?"
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: isIndexProvider
     SCRIPT: Groovy
@@ -95,7 +95,7 @@ steps:
     result: 'true'
 - id: S7
   name: Another Custom Task
-  specifier: flowbee-demo.task.CustomManualTaskActivity
+  descriptor: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/CustomManualTask.pagelet

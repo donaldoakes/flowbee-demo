@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Still Okay?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: '"Sure"'
     SCRIPT: Groovy
@@ -20,7 +20,7 @@ steps:
     result: Sure
 - id: S7
   name: Groovy
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
     Rule: ""
@@ -35,7 +35,7 @@ steps:
     result: groovyOutcome
 - id: S9
   name: Access Library
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -49,7 +49,7 @@ steps:
     result: Valid
 - id: S4
   name: JavaScript
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
     Rule: ""
@@ -64,7 +64,7 @@ steps:
     result: javaScriptOutcome
 - id: S6
   name: Looking Good?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: '''Yep'''
     SCRIPT: Groovy
@@ -78,7 +78,7 @@ steps:
     result: Yep
 - id: S8
   name: Script Flavor?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: scriptFlavor
     SCRIPT: Groovy
@@ -104,7 +104,7 @@ steps:
     result: Unknown
 - id: S10
   name: Unknown
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     SCRIPT: Groovy
     display: x=550,y=250,w=80,h=70
@@ -116,7 +116,7 @@ steps:
     to: S16
 - id: S15
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=250,y=30,w=60,h=40
   links:
@@ -127,12 +127,12 @@ steps:
     to: S8
 - id: S16
   name: Stop3
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=560,y=370,w=60,h=40
 - id: S17
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=410,y=540,w=60,h=40
 subflows:
@@ -145,7 +145,7 @@ subflows:
   steps:
   - id: S18
     name: Start
-    specifier: flowbee-demo.start
+    descriptor: flowbee-demo.start
     attributes:
       display: x=560,y=90,w=60,h=40
     links:
@@ -156,7 +156,7 @@ subflows:
       to: S20
   - id: S20
     name: Stop2
-    specifier: flowbee-demo.stop
+    descriptor: flowbee-demo.stop
     attributes:
       display: x=740,y=90,w=60,h=40
 variables:

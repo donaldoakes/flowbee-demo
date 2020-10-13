@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S97
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=295,y=71,w=60,h=40
   links:
@@ -31,7 +31,7 @@ steps:
     to: S101
 - id: S99
   name: Sync
-  specifier: flowbee-demo.sync.SynchronizationActivity
+  descriptor: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: "Explicit Return Val#No Return Val#No Return Val\r\n(with SubProc)"
@@ -44,7 +44,7 @@ steps:
     to: S98
 - id: S100
   name: No Return Val
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: x = "myString";
     SCRIPT: Groovy
@@ -57,7 +57,7 @@ steps:
     to: S99
 - id: S95
   name: Explicit Return Val
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: return "x";
     SCRIPT: Groovy
@@ -71,12 +71,12 @@ steps:
     result: x
 - id: S98
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=336,y=479,w=60,h=40
 - id: S101
   name: "No Return Val\r\n(with SubProc)"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy

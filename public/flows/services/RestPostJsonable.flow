@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=49,y=122,w=60,h=40
   links:
@@ -18,14 +18,14 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=552,y=123,w=60,h=40
 - id: S3
   name: |-
     Invoke
     Post
-  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
+  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     EndpointUri: ${props['services.url']}/api/Workgroups
     HttpMethod: POST
@@ -43,7 +43,7 @@ steps:
   name: |-
     Build
     Request
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["workgroup"]'
     Rule: |-

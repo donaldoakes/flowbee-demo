@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=38,y=107,w=60,h=40
   links:
@@ -17,14 +17,14 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=766,y=111,w=60,h=40
 - id: S3
   name: |-
     Custom
     Activity
-  specifier: flowbee-demo.tests.workflow.LoggingActivity
+  descriptor: flowbee-demo.tests.workflow.LoggingActivity
   attributes:
     display: x=145,y=96,w=104,h=68
   links:
@@ -35,7 +35,7 @@ steps:
     to: S4
 - id: S4
   name: Dynamic Java
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: ActivityLogging_A4
     Java: ""
@@ -48,7 +48,7 @@ steps:
     to: S5
 - id: S5
   name: Groovy
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       runtimeContext.logInfo("context.logInfo()");
@@ -64,7 +64,7 @@ steps:
     to: S6
 - id: S6
   name: Kotlin
-  specifier: flowbee-demo.kotlin.ScriptActivity
+  descriptor: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: |
       runtimeContext.logInfo("context.logInfo()");

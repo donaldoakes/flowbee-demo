@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=22,y=249,w=60,h=40
   links:
@@ -20,7 +20,7 @@ steps:
     to: S8
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=769,y=230,w=60,h=40
 - id: S3
@@ -28,7 +28,7 @@ steps:
     create
     execution plan
     - sequential
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |+
@@ -76,7 +76,7 @@ steps:
   name: |-
     invoke heterogeneous
     processes - sequential
-  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'FALSE'
@@ -95,7 +95,7 @@ steps:
   name: |-
     invoke heterogeneous
     processes - parallel
-  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'TRUE'
@@ -114,7 +114,7 @@ steps:
   name: |-
     invoke heterogeneous
     processes - error
-  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'TRUE'
@@ -131,7 +131,7 @@ steps:
     to: S11
 - id: S8
   name: which case?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testcase
     SCRIPT: Groovy
@@ -165,7 +165,7 @@ steps:
     create
     execution plan
     - parallel
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |
@@ -213,7 +213,7 @@ steps:
     create
     execution plan
     - error
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |
@@ -258,7 +258,7 @@ steps:
     to: S7
 - id: S11
   name: Set result variables
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: response
     Rule: ""

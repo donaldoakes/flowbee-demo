@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=69,y=132,w=60,h=40
   links:
@@ -20,14 +20,14 @@ steps:
     to: S3
 - id: S2
   name: OK
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=449,y=132,w=60,h=40
 - id: S3
   name: |-
     Request
     Valid?
-  specifier: flowbee-demo.validate.SwaggerValidatorActivity
+  descriptor: flowbee-demo.validate.SwaggerValidatorActivity
   attributes:
     Strict: 'true'
     Validate: '["Body"]'
@@ -47,7 +47,7 @@ steps:
     result: 'false'
 - id: S4
   name: Invalid
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=251,y=249,w=60,h=40
 variables:

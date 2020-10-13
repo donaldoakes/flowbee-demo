@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S4
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=208,y=44,w=60,h=40
   links:
@@ -23,7 +23,7 @@ steps:
     to: S6
 - id: S3
   name: "LDAP Adapter\r\nMultiple Results"
-  specifier: flowbee-demo.adapter.ldap.LdapAdapter
+  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: ${props['ldap.app.user']}
     AppPassword: ${props['ldap.app.password']}
@@ -44,12 +44,12 @@ steps:
     to: S7
 - id: S5
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=274,y=390,w=60,h=40
 - id: S1
   name: "LDAP Adapter\r\nSingle Result"
-  specifier: flowbee-demo.adapter.ldap.LdapAdapter
+  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: ${props['ldap.app.user']}
     AppPassword: ${props['ldap.app.password']}
@@ -70,7 +70,7 @@ steps:
     to: S7
 - id: S6
   name: Wait 10s
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'
@@ -89,7 +89,7 @@ steps:
     to: S8
 - id: S7
   name: Sync
-  specifier: flowbee-demo.sync.SynchronizationActivity
+  descriptor: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: "LDAP Adapter\r\nSingle Result#LDAP Adapter\r\nMultiple Results#LDAP Adapter\r\nDocument Binding"
@@ -102,7 +102,7 @@ steps:
     to: S5
 - id: S8
   name: "10 More\r\nSeconds"
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'
@@ -116,7 +116,7 @@ steps:
     to: S9
 - id: S9
   name: "LDAP Adapter\r\nDocument Binding"
-  specifier: flowbee-demo.adapter.ldap.LdapAdapter
+  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: ${props['ldap.app.user']}
     AppPassword: ${props['ldap.app.password']}

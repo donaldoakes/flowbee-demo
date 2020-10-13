@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=90,y=121,w=60,h=40
   links:
@@ -18,14 +18,14 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=637,y=122,w=60,h=40
 - id: S3
   name: |-
     Wait for
     Task
-  specifier: flowbee-demo.task.AutoFormManualTaskActivity
+  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     INSTANCE_ID_VAR: taskInstanceId
     TASK_TEMPLATE: tests.tasks/New Autoform Manual Task.task
@@ -38,7 +38,7 @@ steps:
     to: S2
 - id: S4
   name: Create Task
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: PreCreatedTask_A4
     Java: ""

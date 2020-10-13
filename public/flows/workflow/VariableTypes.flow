@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=57,y=140,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=477,y=140,w=60,h=40
 - id: S3
   name: Update Vars
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: inputJsonable#inputYaml#localJsonable#localYaml
     Rule: ""

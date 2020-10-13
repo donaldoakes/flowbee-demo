@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
@@ -19,12 +19,12 @@ steps:
     to: S7
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=685,y=269,w=60,h=40
 - id: S4
   name: Invoke Subprocess
-  specifier: flowbee-demo.process.InvokeSubProcessActivity
+  descriptor: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=330,y=339,w=110,h=58
     processname: tests.workflow/ProcessSLASub.proc
@@ -38,7 +38,7 @@ steps:
     to: S6
 - id: S5
   name: Event Wait Activity
-  specifier: flowbee-demo.event.EventWaitActivity
+  descriptor: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA_UNITS: Minutes
     STATUS_AFTER_TIMEOUT: Cancelled
@@ -52,7 +52,7 @@ steps:
     to: S6
 - id: S6
   name: Synchronization Activity
-  specifier: flowbee-demo.sync.SynchronizationActivity
+  descriptor: flowbee-demo.sync.SynchronizationActivity
   attributes:
     display: x=490,y=261,w=133,h=57
   links:
@@ -63,7 +63,7 @@ steps:
     to: S2
 - id: S7
   name: Branch
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: return null
     SCRIPT: Groovy

@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=250,y=11,w=60,h=40
   links:
@@ -27,12 +27,12 @@ steps:
     to: S9
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=261,y=400,w=60,h=40
 - id: S3
   name: "Query Using\r\nJDBC URL"
-  specifier: flowbee-demo.adapter.db.JdbcSqlAdapter
+  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     Output Documents: userDocument
     PostScript: "import java.sql.ResultSet\r\nimport model.user.User\r\n\r\nResultSet rs = (ResultSet) response;\r\nif (rs.next()) {\r\n    User user = new User();\r\n    user.setCuid(rs.getString(\"cuid\"))\r\n    user.setName(rs.getString(\"name\"))\r\n    userDocument = user.getJson();\r\n}\r\nelse {\r\n    throw new RuntimeException(\"User query returns no results: \" + runtimeContext.getAttributes().get(\"sqlQuery\"));\r\n}"
@@ -51,7 +51,7 @@ steps:
     to: S5
 - id: S4
   name: "Query Multiple Params,\r\nMultiple Results"
-  specifier: flowbee-demo.adapter.db.JdbcSqlAdapter
+  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     Output Documents: supportUsers
     PostScript: "import java.sql.ResultSet\r\n\r\nResultSet rs = (ResultSet) response;\r\nsupportUsers = new ArrayList<String>();\r\nwhile (rs.next()) {\r\n  supportUsers.add(rs.getString(\"name\"));\r\n}\r\n"
@@ -70,7 +70,7 @@ steps:
     to: S5
 - id: S5
   name: Sync
-  specifier: flowbee-demo.sync.SynchronizationActivity
+  descriptor: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: "Query Using\r\nJDBC URL#Query Multiple Params,\r\nMultiple Results#Reset\r\nUser Name"
@@ -83,7 +83,7 @@ steps:
     to: S2
 - id: S6
   name: "Update\r\nUser Name"
-  specifier: flowbee-demo.adapter.db.JdbcSqlAdapter
+  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     DESCRIPTION: Where clause is hard-coded to avoid any mishaps due to bad input data.
     display: x=472,y=13,w=100,h=66
@@ -98,7 +98,7 @@ steps:
     to: S7
 - id: S7
   name: "Select User\r\nAnd Bind Name"
-  specifier: flowbee-demo.adapter.db.JdbcSqlAdapter
+  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     PostScript: "import java.sql.ResultSet\r\n\r\nResultSet rs = (ResultSet) response;\r\nif (rs.next()) {\r\n  return rs.getString(\"name\");\r\n}"
     PostScriptLang: Groovy
@@ -116,7 +116,7 @@ steps:
     result: Don Oakes
 - id: S8
   name: "Reset\r\nUser Name"
-  specifier: flowbee-demo.adapter.db.JdbcSqlAdapter
+  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     DESCRIPTION: Where clause is hard-coded to avoid any mishaps due to bad input data.
     PostScriptLang: Groovy
@@ -133,7 +133,7 @@ steps:
     to: S5
 - id: S9
   name: Wait 60s
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '60'
@@ -147,7 +147,7 @@ steps:
     to: S6
 - id: S10
   name: Wait 10s
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'

@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S43
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
@@ -20,7 +20,7 @@ steps:
     to: S42
 - id: S42
   name: which case?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -57,14 +57,14 @@ steps:
     result: methodExpression
 - id: S46
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=741,y=263,w=60,h=40
 - id: S49
   name: |-
     Timer and Event
     Wait - wait
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Waiting
     TIMER_WAIT: '2'
@@ -85,7 +85,7 @@ steps:
     result: other
 - id: S47
   name: wait for 1 min
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     $+Id: '69569'
     TIMER_WAIT: '1'
@@ -101,14 +101,14 @@ steps:
     to: S45
 - id: S44
   name: wait for 1min
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     TIMER_WAIT: '1'
     Unit: Minutes
     display: x=417,y=146,w=100,h=60
 - id: S50
   name: wait for 60s
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     TIMER_WAIT: '60'
     Unit: Seconds
@@ -123,7 +123,7 @@ steps:
   name: |-
     Timer and Event
     Wait - hold
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     TIMER_WAIT: '2'
@@ -148,7 +148,7 @@ steps:
   name: |-
     Timer and Event
     Wait - cancel
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '2'
@@ -169,7 +169,7 @@ steps:
     result: other
 - id: S51
   name: "Create\r\nTimerBean"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: timerBean
     Rule: ""
@@ -184,7 +184,7 @@ steps:
     to: S52
 - id: S52
   name: "Wait via\r\nMethod Expr"
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '#{timerBean.timerDelaySeconds}'
@@ -207,12 +207,12 @@ steps:
     result: Not
 - id: S53
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=168,y=610,w=60,h=40
 - id: S55
   name: Done
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=306,y=506,w=60,h=40
 variables:

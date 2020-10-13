@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=28,y=129,w=60,h=40
   links:
@@ -18,12 +18,12 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=638,y=119,w=60,h=40
 - id: S3
   name: Never
-  specifier: flowbee-demo.event.EventWaitActivity
+  descriptor: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA: ${timeout}
     SLA_DISPLAY_UNITS: Minutes
@@ -43,7 +43,7 @@ steps:
     to: S4
 - id: S4
   name: After
-  specifier: flowbee-demo.kotlin.ScriptActivity
+  descriptor: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: variables["after"] = System.currentTimeMillis()
     SCRIPT: Kotlin Script
@@ -56,7 +56,7 @@ steps:
     to: S2
 - id: S5
   name: Before
-  specifier: flowbee-demo.kotlin.ScriptActivity
+  descriptor: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: variables["before"] = System.currentTimeMillis()
     SCRIPT: Kotlin Script

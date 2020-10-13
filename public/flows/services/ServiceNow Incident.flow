@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=90,y=160,w=60,h=40
   links:
@@ -18,14 +18,14 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=610,y=160,w=60,h=40
 - id: S3
   name: |-
     Create
     Incident
-  specifier: flowbee-demo.servicenow.ServiceNowAdapter
+  descriptor: flowbee-demo.servicenow.ServiceNowAdapter
   attributes:
     AuthPassword: ${env['SERVICENOW_PASSWORD']}
     AuthUser: ${env['SERVICENOW_USER']}
@@ -43,7 +43,7 @@ steps:
   name: |-
     Build
     Request
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["incident"]'
     Rule: |

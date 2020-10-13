@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S1
   name: Receive
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=45,y=52,w=60,h=40
   links:
@@ -21,12 +21,12 @@ steps:
     to: S6
 - id: S2
   name: Response
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=626,y=532,w=60,h=40
 - id: S3
   name: "Invoke\r\nServices"
-  specifier: flowbee-demo.microservice.OrchestratorActivity
+  descriptor: flowbee-demo.microservice.OrchestratorActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     display: x=428,y=284,w=121,h=77
@@ -40,7 +40,7 @@ steps:
     to: S10
 - id: S4
   name: "Create\r\nPlan"
-  specifier: flowbee-demo.kotlin.ScriptActivity
+  descriptor: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["servicePlan"]'
     Rule: ""
@@ -54,7 +54,7 @@ steps:
     to: S3
 - id: S5
   name: "Consolidate\r\nResponses"
-  specifier: flowbee-demo.microservice.ResponseCollector
+  descriptor: flowbee-demo.microservice.ResponseCollector
   attributes:
     consolidator: microservice.CombiningConsolidator
     display: x=430,y=520,w=120,h=73
@@ -66,7 +66,7 @@ steps:
     to: S2
 - id: S6
   name: "Validate\r\nRequest"
-  specifier: flowbee-demo.validate.SwaggerValidatorActivity
+  descriptor: flowbee-demo.validate.SwaggerValidatorActivity
   attributes:
     Validate: '["Query","Body"]'
     display: x=238,y=142,w=118,h=75
@@ -85,19 +85,19 @@ steps:
     result: 'true'
 - id: S7
   name: Reject
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=45,y=157,w=60,h=40
 - id: S9
   name: Accepted
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=629,y=421,w=60,h=40
 - id: S10
   name: |-
     Synchronous
     Response?
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["response"]'
     Rule: ""

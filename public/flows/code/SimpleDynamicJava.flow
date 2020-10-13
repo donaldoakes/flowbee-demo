@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=57,y=78,w=60,h=40
   links:
@@ -18,7 +18,7 @@ steps:
     to: S5
 - id: S5
   name: "Perform Critical\r\nBusiness Function"
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: SimpleDynamicJava_A5
     Java: ""
@@ -39,12 +39,12 @@ steps:
     result: Acknowledgment
 - id: S4
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=255,y=247,w=60,h=40
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=524,y=81,w=60,h=40
 variables:

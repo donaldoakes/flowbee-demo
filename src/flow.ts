@@ -1,5 +1,5 @@
 import * as flowbee from 'flowbee';
-import { Specs } from './specs';
+import { Descriptors } from './descriptors';
 
 export class Flow {
 
@@ -12,8 +12,8 @@ export class Flow {
         options.iconBase = `${this.base}/icons`;
         const canvas = document.getElementById('diagram-canvas') as HTMLCanvasElement;
         console.debug(`rendering ${file} to canvas: ${canvas}`);
-        const specs = await Specs.getSpecs(this.base);
-        const flow = new flowbee.FlowDiagram(canvas, options, specs, readonly);
+        const descriptors = await Descriptors.getDescriptors(this.base);
+        const flow = new flowbee.FlowDiagram(canvas, options, descriptors, readonly);
 
         const instance = undefined;
         const step: string | undefined = undefined;

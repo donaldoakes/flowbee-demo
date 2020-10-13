@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S142
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=304,y=38,w=60,h=40
   links:
@@ -21,7 +21,7 @@ steps:
     to: S139
 - id: S140
   name: NorthSouth Decision Table
-  specifier: flowbee-demo.drools.DroolsDecisionTableActivity
+  descriptor: flowbee-demo.drools.DroolsDecisionTableActivity
   attributes:
     DecisionTableSheet: NorthSouth
     KnowledgeBase: tests.rules/drools-multiSheetDecisionTable.xlsx
@@ -43,27 +43,27 @@ steps:
     result: SOUTHERN
 - id: S138
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=389,y=367,w=60,h=40
 - id: S141
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=513,y=367,w=60,h=40
 - id: S143
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=95,y=370,w=60,h=40
 - id: S144
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=229,y=370,w=60,h=40
 - id: S137
   name: EastWest DecisionTable
-  specifier: flowbee-demo.drools.DroolsDecisionTableActivity
+  descriptor: flowbee-demo.drools.DroolsDecisionTableActivity
   attributes:
     DecisionTableSheet: EastWest
     KnowledgeBase: tests.rules/drools-multiSheetDecisionTable.xlsx
@@ -85,7 +85,7 @@ steps:
     result: EASTERN
 - id: S139
   name: Geography
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: geography
     SCRIPT: Groovy

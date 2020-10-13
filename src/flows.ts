@@ -1,5 +1,5 @@
 import { Flow } from './flow';
-import { Specs } from './specs';
+import { Descriptors } from './descriptors';
 
 export class Flows {
 

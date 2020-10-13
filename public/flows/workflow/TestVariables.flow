@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=56,y=133,w=60,h=40
   links:
@@ -20,12 +20,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=476,y=133,w=60,h=40
 - id: S3
   name: PopulateVariables
-  specifier: flowbee-demo.tests.workflow.PopulateVar
+  descriptor: flowbee-demo.tests.workflow.PopulateVar
   attributes:
     display: x=214,y=123,w=155,h=55
   links:

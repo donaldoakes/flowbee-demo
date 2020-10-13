@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=69,y=118,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S11
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=609,y=120,w=60,h=40
 - id: S7
   name: "Async Invoke\r\nServiceSub"
-  specifier: flowbee-demo.process.InvokeSubProcessActivity
+  descriptor: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=378,y=105,w=110,h=71
     processname: tests.services/ServiceSub
@@ -37,7 +37,7 @@ steps:
     to: S2
 - id: S8
   name: "Async Multi\r\nServiceSub"
-  specifier: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execPlan
     Force Parallel Execution: 'TRUE'
@@ -53,7 +53,7 @@ steps:
     to: S12
 - id: S10
   name: Create Plan
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     Output Documents: execPlan
@@ -66,7 +66,7 @@ steps:
     to: S8
 - id: S11
   name: "Test\r\nCase"
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -86,7 +86,7 @@ steps:
     result: single
 - id: S12
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=607,y=252,w=60,h=40
 variables:

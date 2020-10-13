@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=70,y=140,w=60,h=40
   links:
@@ -17,14 +17,14 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=630,y=140,w=60,h=40
 - id: S3
   name: |-
     Set
     Value
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       myDouble = 100.1d
@@ -40,7 +40,7 @@ steps:
   name: |-
     Update
     Values
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: CustomVariableTypes_A4
     Java: ""

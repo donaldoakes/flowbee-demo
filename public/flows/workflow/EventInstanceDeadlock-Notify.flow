@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=42,y=120,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=504,y=123,w=60,h=40
 - id: S4
   name: "Sleep a Few\r\nSeconds"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: Thread.sleep(20000)
     SCRIPT: Groovy
@@ -35,7 +35,7 @@ steps:
     to: S6
 - id: S6
   name: Broadcast Event
-  specifier: flowbee-demo.event.PublishEventMessage
+  descriptor: flowbee-demo.event.PublishEventMessage
   attributes:
     Event Name: servicesummary-update-${masterRequestId}
     display: x=324,y=119,w=100,h=60

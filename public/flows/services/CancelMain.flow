@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=84,y=137,w=60,h=40
   links:
@@ -20,7 +20,7 @@ steps:
   name: |-
     Which
     Case?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -40,7 +40,7 @@ steps:
     result: sub
 - id: S4
   name: Error Sub
-  specifier: flowbee-demo.process.InvokeSubProcessActivity
+  descriptor: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=213,y=263,w=100,h=60
     processname: tests.services/ServiceSub.proc
@@ -55,7 +55,7 @@ steps:
     to: S6
 - id: S5
   name: Cancel Sub
-  specifier: flowbee-demo.process.InvokeSubProcessActivity
+  descriptor: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=410,y=59,w=100,h=60
     processname: tests.services/CancelSub.proc
@@ -72,7 +72,7 @@ steps:
   name: |-
     Wait
     Forever
-  specifier: flowbee-demo.event.EventWaitActivity
+  descriptor: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA_DISPLAY_UNITS: Hours
     STATUS_AFTER_TIMEOUT: Cancelled
@@ -86,7 +86,7 @@ steps:
     to: S7
 - id: S7
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=609,y=174,w=60,h=40
 textNotes:

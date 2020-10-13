@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=33,y=127,w=60,h=40
   links:
@@ -20,12 +20,12 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=507,y=127,w=60,h=40
 - id: S4
   name: jsonToJson
-  specifier: flowbee-demo.transform.CrossmapActivity
+  descriptor: flowbee-demo.transform.CrossmapActivity
   attributes:
     Input: jsonInput
     Mapper: tests.workflow/jsonToJson.groovy
@@ -40,7 +40,7 @@ steps:
     to: S5
 - id: S5
   name: jsonToXml
-  specifier: flowbee-demo.transform.CrossmapActivity
+  descriptor: flowbee-demo.transform.CrossmapActivity
   attributes:
     Input: jsonInput
     Mapper: tests.workflow/jsonToXml.groovy

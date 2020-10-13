@@ -1,4 +1,4 @@
-import { Specs } from './specs';
+import { Descriptors } from './descriptors';
 import { Flows } from './flows';
 import { Toolbox } from './toolbox';
 import { isPropertyAccessOrQualifiedName } from 'typescript';
@@ -6,8 +6,8 @@ import { isPropertyAccessOrQualifiedName } from 'typescript';
 window.addEventListener('load', async () => {
     const base = '';
     const dark = false;
-    // prime the specs
-    await Specs.getSpecs(base);
+    // prime the descriptors
+    await Descriptors.getDescriptors(base);
     await new Flows(base).render(dark);
     await new Toolbox(base).render(dark);
 

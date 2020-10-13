@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=70,y=110,w=60,h=40
   links:
@@ -18,14 +18,14 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=480,y=110,w=60,h=40
 - id: S3
   name: |-
     Create
     Task
-  specifier: flowbee-demo.servicenow.ServiceNowTaskActivity
+  descriptor: flowbee-demo.servicenow.ServiceNowTaskActivity
   attributes:
     TASK_TEMPLATE: tests.tasks/ServiceNowTask.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'

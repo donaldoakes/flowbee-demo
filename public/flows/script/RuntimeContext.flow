@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=52,y=79,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=405,y=82,w=60,h=40
 - id: S3
   name: "Set mrid variable\r\nfrom runtimeContext"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: mrid = runtimeContext.getMasterRequestId();
     SCRIPT: Groovy

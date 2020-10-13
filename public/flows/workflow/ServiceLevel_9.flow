@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=56,y=261,w=60,h=40
   links:
@@ -21,12 +21,12 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=561,y=125,w=60,h=40
 - id: S3
   name: Invoke regular Async Subprocess
-  specifier: flowbee-demo.process.InvokeSubProcessActivity
+  descriptor: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=323,y=115,w=183,h=59
     processname: tests.workflow/SmartProcessChild
@@ -41,7 +41,7 @@ steps:
     to: S2
 - id: S4
   name: Set document
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: myvar
     Rule: myvar="Some special variable value in here!";
@@ -55,7 +55,7 @@ steps:
     to: S3
 - id: S5
   name: Which Test Case?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: processCase
     SCRIPT: Groovy

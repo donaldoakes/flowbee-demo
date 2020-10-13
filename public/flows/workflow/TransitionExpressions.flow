@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=63,y=138,w=60,h=40
   links:
@@ -18,12 +18,12 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=533,y=248,w=60,h=40
 - id: S3
   name: increment n
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       if (n == null)
@@ -40,7 +40,7 @@ steps:
     to: S5
 - id: S4
   name: dummy
-  specifier: flowbee-demo.DefaultActivityImpl
+  descriptor: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=188,y=140,w=60,h=40
   links:
@@ -51,7 +51,7 @@ steps:
     to: S3
 - id: S5
   name: stop?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: n > loops
     SCRIPT: Groovy

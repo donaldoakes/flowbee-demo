@@ -9,7 +9,7 @@ const dirTree = require("directory-tree");
  */
 const app = express();
 
-express.static.mime.define({'application/json': ['spec']});
+express.static.mime.define({'application/json': ['desc']});
 express.static.mime.define({'application/yaml': ['flow']});
 
 app.use('/', express.static('public'));
@@ -28,9 +28,9 @@ app.get('/flows', async (req, res) => {
     res.set('Content-Type', 'application/json');
     res.send(JSON.stringify(flowTree, null, 2));
 });
-app.get('/specs', async (req, res) => {
-    const flowTree = dirTree("public/specs", {
-        extensions: /\.spec/,
+app.get('/descriptors', async (req, res) => {
+    const flowTree = dirTree("public/spedescriptorscs", {
+        extensions: /\.desc/,
         normalizePath: true
     }, trimPath);
     res.set('Content-Type', 'application/json');

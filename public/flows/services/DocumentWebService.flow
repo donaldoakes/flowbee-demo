@@ -9,7 +9,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=72,y=121,w=60,h=40
   links:
@@ -20,12 +20,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=487,y=120,w=60,h=40
 - id: S3
   name: "Invoke\r\nEmployee Service"
-  specifier: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
+  descriptor: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     REQUEST_VARIABLE: requestDoc

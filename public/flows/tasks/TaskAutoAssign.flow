@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=41,y=103,w=60,h=40
   links:
@@ -27,12 +27,12 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=461,y=103,w=60,h=40
 - id: S3
   name: "AutoAssigned\r\nTask"
-  specifier: flowbee-demo.task.AutoFormManualTaskActivity
+  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -48,7 +48,7 @@ steps:
     to: S2
 - id: S4
   name: "AutoAssigned\r\nFrom JAB Elem"
-  specifier: flowbee-demo.task.CustomManualTaskActivity
+  descriptor: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/CustomManualTask.pagelet
@@ -63,7 +63,7 @@ steps:
     to: S2
 - id: S5
   name: "AutoAssigned\r\nFrom JAXB Attr"
-  specifier: flowbee-demo.task.AutoFormManualTaskActivity
+  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet

@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=29,y=209,w=60,h=40
   links:
@@ -19,12 +19,12 @@ steps:
     to: S16
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=588,y=186,w=60,h=40
 - id: S3
   name: "AutoForm Manual Task \r\nw Non Recurring Event"
-  specifier: flowbee-demo.task.AutoFormManualTaskActivity
+  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -41,7 +41,7 @@ steps:
     to: S2
 - id: S12
   name: "Custom Manual Task \r\nw Recurring Event"
-  specifier: flowbee-demo.task.CustomManualTaskActivity
+  descriptor: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     STATUS_AFTER_TIMEOUT: Hold
@@ -73,7 +73,7 @@ steps:
     result: AnotherWay
 - id: S14
   name: Check
-  specifier: flowbee-demo.timer.TimerWaitActivity
+  descriptor: flowbee-demo.timer.TimerWaitActivity
   attributes:
     Category: COM
     STATUS_AFTER_EVENT: Cancelled
@@ -90,7 +90,7 @@ steps:
     to: S12
 - id: S16
   name: Which Task?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: path
     SCRIPT: Groovy
@@ -120,7 +120,7 @@ subflows:
   steps:
   - id: S6
     name: Start
-    specifier: flowbee-demo.start
+    descriptor: flowbee-demo.start
     attributes:
       display: x=239,y=48,w=60,h=40
     links:
@@ -131,12 +131,12 @@ subflows:
       to: S11
   - id: S7
     name: Stop
-    specifier: flowbee-demo.stop
+    descriptor: flowbee-demo.stop
     attributes:
       display: x=539,y=48,w=60,h=40
   - id: S11
     name: New Timer Wait
-    specifier: flowbee-demo.timer.TimerWaitActivity
+    descriptor: flowbee-demo.timer.TimerWaitActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TIMER_WAIT: '2'
@@ -157,7 +157,7 @@ subflows:
   steps:
   - id: S9
     name: Start
-    specifier: flowbee-demo.start
+    descriptor: flowbee-demo.start
     attributes:
       display: x=697,y=52,w=60,h=40
     links:
@@ -168,7 +168,7 @@ subflows:
       to: S10
   - id: S10
     name: Stop
-    specifier: flowbee-demo.stop
+    descriptor: flowbee-demo.stop
     attributes:
       display: x=997,y=52,w=60,h=40
 variables:

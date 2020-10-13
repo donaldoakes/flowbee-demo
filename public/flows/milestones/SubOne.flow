@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=70,y=70,w=60,h=40
   links:
@@ -19,14 +19,14 @@ steps:
     to: S5
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=907,y=392,w=60,h=40
 - id: S6
   name: |-
     Milestone
     One-One
-  specifier: flowbee-demo.DefaultActivityImpl
+  descriptor: flowbee-demo.DefaultActivityImpl
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=80,y=203,w=96,h=69
@@ -40,7 +40,7 @@ steps:
   name: |-
     Waiting
     Milestone
-  specifier: flowbee-demo.event.EventWaitActivity
+  descriptor: flowbee-demo.event.EventWaitActivity
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Waiting [Pause]"],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     SLA_DISPLAY_UNITS: Hours
@@ -55,7 +55,7 @@ steps:
     to: S9
 - id: S5
   name: Unimportant
-  specifier: flowbee-demo.DefaultActivityImpl
+  descriptor: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=194,y=56,w=111,h=58
   links:
@@ -76,7 +76,7 @@ steps:
     to: S8
 - id: S3
   name: Spellbinding
-  specifier: flowbee-demo.DefaultActivityImpl
+  descriptor: flowbee-demo.DefaultActivityImpl
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Custom Label"],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=416,y=65,w=106,h=60
@@ -88,7 +88,7 @@ steps:
     to: S7
 - id: S7
   name: Sync
-  specifier: flowbee-demo.sync.SynchronizationActivity
+  descriptor: flowbee-demo.sync.SynchronizationActivity
   attributes:
     display: x=373,y=363,w=78,h=54
   links:
@@ -99,7 +99,7 @@ steps:
     to: S4
 - id: S8
   name: Uninteresting
-  specifier: flowbee-demo.DefaultActivityImpl
+  descriptor: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=265,y=172,w=93,h=50
   links:
@@ -112,7 +112,7 @@ steps:
   name: |-
     Future
     Milestone
-  specifier: flowbee-demo.DefaultActivityImpl
+  descriptor: flowbee-demo.DefaultActivityImpl
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=752,y=206,w=96,h=59
@@ -124,7 +124,7 @@ steps:
     to: S11
 - id: S10
   name: SubThree
-  specifier: flowbee-demo.process.InvokeSubProcessActivity
+  descriptor: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     Monitors: '[["false","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=754,y=393,w=100,h=60
@@ -139,7 +139,7 @@ steps:
     to: S2
 - id: S11
   name: F2
-  specifier: flowbee-demo.DefaultActivityImpl
+  descriptor: flowbee-demo.DefaultActivityImpl
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=760,y=297,w=84,h=47

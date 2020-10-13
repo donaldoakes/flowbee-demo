@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=53,y=148,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S3
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=519,y=148,w=60,h=40
 - id: S3
   name: Notify
-  specifier: flowbee-demo.msteams.MsTeamsActivity
+  descriptor: flowbee-demo.msteams.MsTeamsActivity
   attributes:
     display: x=176,y=138,w=100,h=60
     message: msteams/message.json
@@ -38,7 +38,7 @@ steps:
   name: |-
     MS Teams
     Task
-  specifier: flowbee-demo.task.AutoFormManualTaskActivity
+  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     TASK_TEMPLATE: tests.notifications/MsTeamsTask.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'

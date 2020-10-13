@@ -4,7 +4,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=72,y=117,w=60,h=40
   links:
@@ -15,17 +15,17 @@ steps:
     to: S10
 - id: S6
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=595,y=119,w=60,h=40
 - id: S5
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=680,y=229,w=60,h=40
 - id: S9
   name: "POST\r\nRequest"
-  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
+  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     ConnectTimeout: '60000'
     DO_LOGGING: 'True'
@@ -46,7 +46,7 @@ steps:
     to: S5
 - id: S8
   name: "GET\r\nRequest"
-  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
+  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     EndpointUri: '#{props[''services.url'']}/services/AppSummary'
@@ -64,7 +64,7 @@ steps:
     to: S6
 - id: S10
   name: Set Request
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: SetRequest_A10
     Java: ""
@@ -91,7 +91,7 @@ steps:
     result: PATCH
 - id: S11
   name: "PATCH\r\nRequest"
-  specifier: flowbee-demo.adapter.rest.RestServiceAdapter
+  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     ConnectTimeout: '30000'
     DO_LOGGING: 'True'
@@ -111,7 +111,7 @@ steps:
     to: S12
 - id: S12
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=457,y=341,w=60,h=40
 variables:

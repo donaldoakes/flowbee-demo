@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=80,y=110,w=60,h=40
   links:
@@ -17,12 +17,12 @@ steps:
     to: S4
 - id: S2
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=520,y=110,w=60,h=40
 - id: S4
   name: Await Event
-  specifier: flowbee-demo.event.EventWaitActivity
+  descriptor: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA_DISPLAY_UNITS: Hours
     STATUS_AFTER_TIMEOUT: Cancelled

@@ -10,7 +10,7 @@ attributes:
 steps:
 - id: S30
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=21,y=179,w=60,h=40
   links:
@@ -21,7 +21,7 @@ steps:
     to: S26
 - id: S27
   name: Not executed
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     display: x=448,y=287,w=100,h=60
   links:
@@ -32,12 +32,12 @@ steps:
     to: S28
 - id: S28
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=705,y=156,w=60,h=40
 - id: S26
   name: Throw an Exception
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     display: x=166,y=176,w=132,h=69
@@ -64,7 +64,7 @@ steps:
     result: 'yes'
 - id: S29
   name: Alternate path
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     OsgiBundleSymbolicName: workflow
     Rule: runtimeContext.logInfo("In alternate path");

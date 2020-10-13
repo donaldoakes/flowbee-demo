@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S7
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=26,y=280,w=60,h=40
   links:
@@ -19,7 +19,7 @@ steps:
     to: S13
 - id: S1
   name: Count > 100?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: 'count > 99 ?  ''TRUE'' : ''FALSE'''
     SCRIPT: Groovy
@@ -43,7 +43,7 @@ steps:
     result: 'FALSE'
 - id: S2
   name: Display Response
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: println response
     SCRIPT: Groovy
@@ -56,7 +56,7 @@ steps:
     to: S3
 - id: S12
   name: Call a web service
-  specifier: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
+  descriptor: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     PostScriptLang: Groovy
@@ -74,7 +74,7 @@ steps:
     to: S2
 - id: S10
   name: count = 0
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       /*document response;
@@ -109,7 +109,7 @@ steps:
     to: S1
 - id: S8
   name: Set up request
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: req
     Rule: ""
@@ -123,7 +123,7 @@ steps:
     to: S12
 - id: S9
   name: count = count + 1
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       count = count + 1;
@@ -139,12 +139,12 @@ steps:
     to: S1
 - id: S3
   name: Stop
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=900,y=140,w=60,h=40
 - id: S6
   name: Get OrderId
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: response
     Rule: |-
@@ -165,7 +165,7 @@ steps:
     to: S3
 - id: S4
   name: XSLT transformation
-  specifier: flowbee-demo.transform.TransformActivity
+  descriptor: flowbee-demo.transform.TransformActivity
   attributes:
     Input Documents: inputxml
     Output Documents: response
@@ -183,7 +183,7 @@ steps:
     to: S3
 - id: S13
   name: case?
-  specifier: flowbee-demo.script.ScriptEvaluator
+  descriptor: flowbee-demo.script.ScriptEvaluator
   attributes:
     Expression: processCase
     SCRIPT: Groovy
@@ -221,7 +221,7 @@ steps:
     result: SyntaxError
 - id: S14
   name: Syntax Error
-  specifier: flowbee-demo.java.DynamicJavaActivity
+  descriptor: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     display: x=548,y=136,w=100,h=60

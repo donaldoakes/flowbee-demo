@@ -5,7 +5,7 @@ attributes:
 steps:
 - id: S34
   name: Start
-  specifier: flowbee-demo.start
+  descriptor: flowbee-demo.start
   attributes:
     display: x=53,y=119,w=60,h=40
   links:
@@ -16,12 +16,12 @@ steps:
     to: S31
 - id: S33
   name: Finish
-  specifier: flowbee-demo.stop
+  descriptor: flowbee-demo.stop
   attributes:
     display: x=625,y=117,w=60,h=40
 - id: S31
   name: Calculate cube
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: 'ncube = n * n * n;   '
     SCRIPT: Groovy
@@ -34,7 +34,7 @@ steps:
     to: S35
 - id: S35
   name: "create output\r\ndocument"
-  specifier: flowbee-demo.script.ScriptExecutorActivity
+  descriptor: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: resultdoc
     Rule: ""
