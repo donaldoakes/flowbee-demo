@@ -1,61 +1,69 @@
+import * as flowbee from 'flowbee';
 import { Descriptors } from './descriptors';
 import { Flows } from './flows';
-import { Toolbox } from './toolbox';
-import { isPropertyAccessOrQualifiedName } from 'typescript';
 
 window.addEventListener('load', async () => {
     const base = '';
     const dark = false;
-    // prime the descriptors
-    await Descriptors.getDescriptors(base);
-    await new Flows(base).render(dark);
-    await new Toolbox(base).render(dark);
 
-    const container = document.getElementById('flow-container') as HTMLDivElement;
-    const flowTree = document.getElementById('flow-tree') as HTMLDivElement;
-    const toolbox = document.getElementById('flow-toolbox') as HTMLDivElement;
+    const descriptors = await Descriptors.getDescriptors(base);
+
+    const flowTreeElement = document.getElementById('flow-tree') as HTMLDivElement;
+
+    await new Flows(base).render(dark);
+
+    const toolboxElement = document.getElementById('flow-toolbox') as HTMLDivElement;
+    const toolboxOptions = dark ? flowbee.DefaultOptions.toolbox.dark : flowbee.DefaultOptions.toolbox.light;
+    toolboxOptions.iconBase = `${base}/icons`;
+    await new flowbee.Toolbox(
+        toolboxElement,
+        toolboxOptions,
+        descriptors
+    ).render();
 
     // avoid resize when collapse
-    flowTree.style.width = flowTree.style.minWidth = flowTree.style.maxWidth = (flowTree.offsetWidth - 2) + 'px';
+    flowTreeElement.style.width = flowTreeElement.style.minWidth = flowTreeElement.style.maxWidth = (flowTreeElement.offsetWidth - 2) + 'px';
+
+    const containerElement = document.getElementById('flow-container') as HTMLDivElement;
 
     let isLeftSplitterDrag = false;
     let isRightSplitterDrag = false;
 
     const isLeftSplitterHover = (e: MouseEvent): boolean => {
-        const flowTreeWidth = flowTree.offsetWidth - 2;
-        const x = e.clientX - container.getBoundingClientRect().left;
+        const flowTreeWidth = flowTreeElement.offsetWidth - 2;
+        const x = e.clientX - containerElement.getBoundingClientRect().left;
         return (Math.abs(x - flowTreeWidth) <= 2);
     };
     const isRightSplitterHover = (e: MouseEvent): boolean => {
-        const toolboxWidth = toolbox.offsetWidth - 2;
-        const x = e.clientX - container.getBoundingClientRect().left;
-        return (Math.abs(x - (container.offsetWidth - toolboxWidth)) <= 3);
+        const toolboxWidth = toolboxElement.offsetWidth - 2;
+        const x = e.clientX - containerElement.getBoundingClientRect().left;
+        return (Math.abs(x - (containerElement.offsetWidth - toolboxWidth)) <= 3);
     };
 
-    container.onmousedown = (e: MouseEvent) => {
+    containerElement.onmousedown = (e: MouseEvent) => {
         isLeftSplitterDrag = isLeftSplitterHover(e);
         isRightSplitterDrag = isRightSplitterHover(e);
     };
-    container.onmouseup = (e: MouseEvent) => {
+    containerElement.onmouseup = (e: MouseEvent) => {
         isLeftSplitterDrag = isRightSplitterDrag = false;
         document.body.style.cursor = 'default';
     };
-    container.onmouseout = (e: MouseEvent) => {
+    containerElement.onmouseout = (e: MouseEvent) => {
         if (!isLeftSplitterDrag && !isRightSplitterDrag) {
             document.body.style.cursor = 'default';
         }
     };
-    container.onmousemove = (e: MouseEvent) => {
+    containerElement.onmousemove = (e: MouseEvent) => {
         if (isLeftSplitterDrag) {
             e.preventDefault();
             document.body.style.cursor = 'ew-resize';
-            const x = e.clientX - container.getBoundingClientRect().left - 8;
-            flowTree.style.width = flowTree.style.minWidth = flowTree.style.maxWidth = x + 'px';
+            const x = e.clientX - containerElement.getBoundingClientRect().left - 8;
+            flowTreeElement.style.width = flowTreeElement.style.minWidth = flowTreeElement.style.maxWidth = x + 'px';
         } else if (isRightSplitterDrag) {
             e.preventDefault();
             document.body.style.cursor = 'ew-resize';
-            const x = e.clientX - container.getBoundingClientRect().left + 8;
-            toolbox.style.width = toolbox.style.minWidth = toolbox.style.maxWidth = (container.offsetWidth - x) + 'px';
+            const x = e.clientX - containerElement.getBoundingClientRect().left + 8;
+            toolboxElement.style.width = toolboxElement.style.minWidth = toolboxElement.style.maxWidth = (containerElement.offsetWidth - x) + 'px';
         } else {
             if (isLeftSplitterHover(e) || isRightSplitterHover(e)) {
                 document.body.style.cursor = 'ew-resize';
