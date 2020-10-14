@@ -7,7 +7,7 @@
   "module": "public/js/src/main.js",
   "browser": "public/js/index.js",
   "scripts": {
-    "build": "tsc && rollup -c",
+    "build": "rollup -c",
     "watch": "rollup --watch -c",
     "start": "node src/files.js"
   },

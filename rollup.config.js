@@ -5,7 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 
 export default [
-    // browser UMD build (tsc builds module output & types)
+    // browser UMD build
     {
         input: 'src/main.ts',
         output: {
