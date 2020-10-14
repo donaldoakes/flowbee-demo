@@ -44,7 +44,7 @@ window.addEventListener('load', async () => {
     const isLeftSplitterHover = (e: MouseEvent): boolean => {
         const flowTreeWidth = flowTreeElement.offsetWidth - 2;
         const x = e.clientX - containerElement.getBoundingClientRect().left;
-        return (Math.abs(x - flowTreeWidth) <= 2);
+        return (Math.abs(x - flowTreeWidth) <= 3);
     };
     const isRightSplitterHover = (e: MouseEvent): boolean => {
         const toolboxWidth = toolboxElement.offsetWidth - 2;
@@ -69,12 +69,12 @@ window.addEventListener('load', async () => {
         if (isLeftSplitterDrag) {
             e.preventDefault();
             document.body.style.cursor = 'ew-resize';
-            const x = e.clientX - containerElement.getBoundingClientRect().left - 8;
+            const x = e.clientX - containerElement.getBoundingClientRect().left;
             flowTreeElement.style.width = flowTreeElement.style.minWidth = flowTreeElement.style.maxWidth = x + 'px';
         } else if (isRightSplitterDrag) {
             e.preventDefault();
             document.body.style.cursor = 'ew-resize';
-            const x = e.clientX - containerElement.getBoundingClientRect().left + 8;
+            const x = e.clientX - containerElement.getBoundingClientRect().left;
             toolboxElement.style.width = toolboxElement.style.minWidth = toolboxElement.style.maxWidth = (containerElement.offsetWidth - x) + 'px';
         } else {
             if (isLeftSplitterHover(e) || isRightSplitterHover(e)) {
