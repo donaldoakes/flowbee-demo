@@ -3,20 +3,27 @@ import { Descriptors } from './descriptors';
 
 window.addEventListener('load', async () => {
     const base = '';
-    const dark = false;
     const readonly = false;
+
+    function get(name){
+        // eslint-disable-next-line no-cond-assign
+        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search)) {
+           return decodeURIComponent(name[1]);
+        }
+    }
+    const theme = get('theme');
 
     const descriptors = await Descriptors.getDescriptors(base);
 
     const flowTreeElement = document.getElementById('flow-tree') as HTMLDivElement;
     const root = await (await fetch(`${base}/flows`)).json();
-    const flowTreeOptions = dark ? flowbee.DefaultOptions.flowTree.dark : flowbee.DefaultOptions.flowTree.light;
+    const flowTreeOptions = { fileIcon: `/img/flow-${theme}.svg` };
     const flowTree = new flowbee.FlowTree(flowTreeElement, flowTreeOptions);
-    flowTree.render(root);
+    flowTree.render(theme, root);
     flowTree.onFlowSelect(async selectEvent => {
         const canvasElement = document.getElementById('diagram-canvas') as HTMLCanvasElement;
         const text = await (await fetch(selectEvent.path)).text();
-        const diagramOptions = dark ? flowbee.DefaultOptions.diagram.dark : flowbee.DefaultOptions.diagram.light;
+        const diagramOptions = theme === 'dark' ? flowbee.DefaultOptions.diagram.dark : flowbee.DefaultOptions.diagram.light;
         diagramOptions.iconBase = `${base}/icons`;
         console.debug(`rendering ${selectEvent.path} to canvas`);
         const flow = new flowbee.FlowDiagram(canvasElement, diagramOptions, descriptors, readonly);
@@ -28,10 +35,10 @@ window.addEventListener('load', async () => {
         flow.render(text, selectEvent.name, instance, step, animate, instanceEdit, data);
     });
 
+
     const toolboxElement = document.getElementById('flow-toolbox') as HTMLDivElement;
-    const toolboxOptions = dark ? flowbee.DefaultOptions.toolbox.dark : flowbee.DefaultOptions.toolbox.light;
-    toolboxOptions.iconBase = `${base}/icons`;
-    await new flowbee.Toolbox(toolboxElement, toolboxOptions).render(descriptors);
+    const toolboxOptions = { iconBase: `${base}/icons` };
+    await new flowbee.Toolbox(toolboxElement, toolboxOptions).render(theme, descriptors);
 
     // avoid resize when collapse
     flowTreeElement.style.width = flowTreeElement.style.minWidth = flowTreeElement.style.maxWidth = (flowTreeElement.offsetWidth - 2) + 'px';
