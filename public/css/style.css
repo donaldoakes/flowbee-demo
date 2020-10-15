@@ -28,4 +28,7 @@ body {
   border-left: 3px ridge #e7e7e7;
   padding: 3px 0;
 }
+.flowbee-diagram-light .title {
+  visibility: visible; /* temp until header */
+}
 

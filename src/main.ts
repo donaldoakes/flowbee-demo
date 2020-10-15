@@ -20,12 +20,11 @@ window.addEventListener('load', async () => {
     const flowTreeOptions = { fileIcon: `/img/flow-${theme}.svg` };
     const flowTree = new flowbee.FlowTree(flowTreeElement, flowTreeOptions);
     flowTree.render(theme, root);
-    flowTree.onFlowSelect(async selectEvent => {
+    flowTree.onFlowSelect(async (selectEvent: flowbee.FlowTreeSelectEvent) => {
         const canvasElement = document.getElementById('diagram-canvas') as HTMLCanvasElement;
         canvasElement.parentElement.className = `flowbee-diagram-${theme} diagram`;
         const text = await (await fetch(selectEvent.path)).text();
-        const diagramOptions = theme === 'dark' ? flowbee.DefaultOptions.diagram.dark : flowbee.DefaultOptions.diagram.light;
-        diagramOptions.iconBase = `${base}/icons`;
+        const diagramOptions = { iconBase: `${base}/icons` };
         console.debug(`rendering ${selectEvent.path} to canvas`);
         const flow = new flowbee.FlowDiagram(canvasElement, diagramOptions, descriptors);
         flow.readonly = readonly;
@@ -36,7 +35,6 @@ window.addEventListener('load', async () => {
         const data = undefined;
         flow.render(theme, text, selectEvent.name, instance, step, animate, instanceEdit, data);
     });
-
 
     const toolboxElement = document.getElementById('flow-toolbox') as HTMLDivElement;
     const toolboxOptions = { iconBase: `${base}/icons` };
@@ -88,8 +86,6 @@ window.addEventListener('load', async () => {
         } else {
             if (e.buttons === 0 && (isLeftSplitterHover(e) || isRightSplitterHover(e))) {
                 document.body.style.cursor = 'ew-resize';
-            } else {
-                document.body.style.cursor = 'default';
             }
         }
     };
