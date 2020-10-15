@@ -7,13 +7,26 @@
   <title>Flowbee Live Demo</title>
 </head>
 <body>
+  <div class="header">
+    <h1>Flowbee Live Demo</h1>
+    <div id="actions" class="actions">
+      <select id="theme-select" title="Theme">
+        <option value="light">Flowbee Light</option>
+        <option value="dark">Flowbee Dark</option>
+      </select>
+    </div>
+    <div>
+      <a href="https://github.com/donaldoakes/flowbee#readme">Docs</a>
+      <a href="https://github.com/donaldoakes/flowbee">GitHub</a>
+    </div>
+  </div>
   <div id="flow-container" class="container">
     <div id="flow-tree"></div>
-    <div class="diagram">
+    <div id="flow-diagram" class="diagram">
       <canvas id="diagram-canvas"></canvas>
     </div>
     <div id="flow-toolbox"></div>
-</div>
+  </div>
   <script src="js/index.js"></script>
 </body>
 </html>

@@ -1,23 +1,25 @@
 import * as flowbee from 'flowbee';
 import { Descriptors } from './descriptors';
+import { Actions, ThemeChangeEvent } from './actions';
 
 window.addEventListener('load', async () => {
     const base = '';
     const readonly = false;
+    let theme = 'light';
+    let flowDiagram: flowbee.FlowDiagram;
 
-    function get(name){
-        // eslint-disable-next-line no-cond-assign
-        if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search)) {
-           return decodeURIComponent(name[1]);
-        }
-    }
-    const theme = get('theme');
+    const instance = undefined;
+    const step: string | undefined = undefined;
+    const animate = false;
+    const instanceEdit = false;
 
     const descriptors = await Descriptors.getDescriptors(base);
 
     const flowTreeElement = document.getElementById('flow-tree') as HTMLDivElement;
     const root = await (await fetch(`${base}/flows`)).json();
-    const flowTreeOptions = { fileIcon: `/img/flow-${theme}.svg` };
+    const flowTreeOptions = {
+        fileIcon: { light: 'img/flow-light.svg', dark: 'img/flow-dark.svg' }
+    };
     const flowTree = new flowbee.FlowTree(flowTreeElement, flowTreeOptions);
     flowTree.render(theme, root);
     flowTree.onFlowSelect(async (selectEvent: flowbee.FlowTreeSelectEvent) => {
@@ -26,19 +28,28 @@ window.addEventListener('load', async () => {
         const text = await (await fetch(selectEvent.path)).text();
         const diagramOptions = { iconBase: `${base}/icons` };
         console.debug(`rendering ${selectEvent.path} to canvas`);
-        const flow = new flowbee.FlowDiagram(canvasElement, diagramOptions, descriptors);
-        flow.readonly = readonly;
-        const instance = undefined;
-        const step: string | undefined = undefined;
-        const animate = false;
-        const instanceEdit = false;
-        const data = undefined;
-        flow.render(theme, text, selectEvent.name, instance, step, animate, instanceEdit, data);
+        flowDiagram = new flowbee.FlowDiagram(canvasElement, diagramOptions, descriptors);
+        flowDiagram.readonly = readonly;
+        flowDiagram.render(theme, text, selectEvent.name, instance, step, animate, instanceEdit);
     });
 
+    const flowDiagramElement = document.getElementById('flow-diagram');
+    flowDiagramElement.style.backgroundColor = theme === 'dark' ? '#1e1e1e' : '#ffffff';
     const toolboxElement = document.getElementById('flow-toolbox') as HTMLDivElement;
     const toolboxOptions = { iconBase: `${base}/icons` };
-    await new flowbee.Toolbox(toolboxElement, toolboxOptions).render(theme, descriptors);
+    const toolbox = await new flowbee.Toolbox(toolboxElement, toolboxOptions);
+    toolbox.render(theme, descriptors);
+
+    const actions = new Actions(document.getElementById('actions'));
+    actions.onThemeChange((e: ThemeChangeEvent) => {
+        theme = e.theme;
+        flowTree.render(theme, root);
+        toolbox.render(theme, descriptors);
+        flowDiagramElement.style.backgroundColor = theme === 'dark' ? '#1e1e1e' : '#ffffff';
+        if (flowDiagram) {
+            flowDiagram.render(theme, flowDiagram.flow, flowDiagram.name, instance, step, animate, instanceEdit);
+        }
+    });
 
     // avoid resize when collapse
     flowTreeElement.style.width = flowTreeElement.style.minWidth = flowTreeElement.style.maxWidth = (flowTreeElement.offsetWidth - 2) + 'px';
