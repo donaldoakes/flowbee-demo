@@ -20,11 +20,11 @@ body {
 }
 
 /* customized flowbee styles */
-.tree {
+.flowbee-tree {
   border-right: 2px ridge #e7e7e7;
   padding: 3px 0 3px 7px;
 }
-.toolbox {
+.flowbee-toolbox {
   border-left: 3px ridge #e7e7e7;
   padding: 3px 0;
 }
