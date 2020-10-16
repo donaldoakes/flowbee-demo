@@ -87,7 +87,7 @@ subflows:
     descriptor: flowbee-demo.stop
     attributes:
       display: x=575,y=73,w=60,h=40
-textNotes:
+notes:
 - id: N1
   attributes:
     display: x=689,y=41,w=218,h=89

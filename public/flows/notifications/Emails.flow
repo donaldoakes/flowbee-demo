@@ -114,7 +114,7 @@ steps:
   descriptor: flowbee-demo.stop
   attributes:
     display: x=516,y=475,w=60,h=40
-textNotes:
+notes:
 - id: N9
   attributes:
     display: x=52,y=70,w=174,h=26

@@ -70,7 +70,7 @@ steps:
       display: type=Elbow,x=372,y=319,xs=255&490,ys=319&319
     event: FINISH
     to: S2
-textNotes:
+notes:
 - id: N3
   attributes:
     display: x=232,y=45,w=149,h=22
