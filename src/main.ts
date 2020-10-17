@@ -45,8 +45,8 @@ window.addEventListener('load', async () => {
 
     new Splitters(flowTreeElement, toolboxElement);
 
-    const actions = new Actions(document.getElementById('actions'));
-    actions.onThemeChange((e: ThemeChangeEvent) => {
+    const diagramOptions = new Actions(document.getElementById('diagram-options'));
+    diagramOptions.onThemeChange((e: ThemeChangeEvent) => {
         theme = e.theme;
         flowTree.render(theme, root);
         toolbox.render(theme, descriptors);

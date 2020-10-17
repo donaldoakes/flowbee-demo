@@ -11,7 +11,7 @@ h1 {
   font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-size: 30px;
   font-weight: 400;
-  margin: 5px;
+  margin: -3px 5px 5px 5px;
 }
 .header {
   display: flex;
@@ -32,9 +32,53 @@ h1 {
 .actions select {
   font-size: 12px;
   background-color: #d3d3d3;
+  border: 1px solid black;
+  position: relative;
+  top: -6px;
+}
+.actions select:focus {
+  outline: none;
+}
+.actions input[type=image] {
+  width: 20px;
+  margin-left: 9px;
+}
+.actions input[type=image]:focus {
+  outline: none;
+}
+.actions input[type=range] {
+  width: 80px;
+  height: 1px;
+  position: relative;
+  top: -9px;
+  background-color: black;
+  -webkit-appearance: none;
+}
+.actions input[type=range]:focus {
+  outline: none;
+}
+.actions input[type=range]::-webkit-slider-runnable-track {
+  height: 1px;
+  background: black;
+}
+.actions input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #202020;
+  margin-top: -4px;
+}
+.actions input[type=range]::-moz-range-thumb {
+  border: none;
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background: #202020;
 }
 .header a {
-  color: #546e7a;
+  color: #236cf2;
   margin: 0 10px;
   font-size: 18px;
   font-weight: 500;
@@ -44,8 +88,13 @@ h1 {
   text-decoration: underline;
 }
 .header a:visited {
-  color: #546e7a;
+  color: #236cf2;
 }
+
+.unselected {
+  opacity: .5;
+}
+
 .container {
   display: flex;
   height: calc(100vh - 68px); /* TODO: why +8? */
@@ -57,7 +106,6 @@ h1 {
   overflow: auto;
   padding: 3px;
 }
-
 .diagram > canvas {
   height: 100%;
   width: 100%;
