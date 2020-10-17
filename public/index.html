@@ -9,22 +9,22 @@
 <body>
   <div class="header">
     <h1>Flowbee Live Demo</h1>
-    <div id="diagram-options" class="actions">
+    <div id="drawing-actions" class="actions">
       <select id="theme-select" title="Theme">
         <option value="light">Flowbee Light</option>
         <option value="dark">Flowbee Dark</option>
       </select>
-      <input type="image" src="img/grid.svg" title="Grid" />
-      <input type="image" class="unselected" src="img/snap.svg" title="Snap to grid" />
-      <input type="image" class="zoom" src="img/zoom-out.svg" title="Zoom out" />
-      <input type="range" min="20" max="200" value="100">
-      <input type="image" class="zoom" src="img/zoom-in.svg" title="Zoom in" style="margin-left:0"/>
+      <input id="grid" type="image" src="img/grid.svg" title="Grid" />
+      <input id="snap" type="image" src="img/snap.svg" title="Snap to grid" />
+      <input id="zoom-out" type="image" class="zoom" src="img/zoom-out.svg" title="Zoom out" />
+      <input id="zoom-range" type="range" min="20" max="200" value="100">
+      <input id="zoom-in" type="image" class="zoom" src="img/zoom-in.svg" title="Zoom in" style="margin-left:0"/>
     </div>
     <div id="flow-actions" class="actions">
-      <input type="image" src="img/save.svg" title="Save" />
-      <input type="image" src="img/download.svg" title="Download" />
-      <input type="image" src="img/new.svg" title="New" />
-      <input type="image" src="img/run.svg" title="Run" style="width:19px" />
+      <input id="save" type="image" src="img/save.svg" title="Save" />
+      <input id="download" type="image" src="img/download.svg" title="Download" />
+      <input id="new" type="image" src="img/new.svg" title="New" />
+      <input id="run" type="image" src="img/run.svg" title="Run" style="width:19px" />
     </div>
     <div>
       <a href="https://github.com/donaldoakes/flowbee#readme">Docs</a>

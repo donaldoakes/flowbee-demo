@@ -1,6 +1,6 @@
 import * as flowbee from 'flowbee';
 import { Descriptors } from './descriptors';
-import { Actions, ThemeChangeEvent } from './actions';
+import { DrawingActions, ThemeChangeEvent, OptionToggleEvent } from './actions';
 import { Splitters } from './splitters';
 
 window.addEventListener('load', async () => {
@@ -8,6 +8,11 @@ window.addEventListener('load', async () => {
     const readonly = false;
     let theme = 'light';
     let flowDiagram: flowbee.FlowDiagram;
+    const drawingOptions = {
+        grid: true,
+        snap: true,
+        zoom: 100
+    };
 
     const instance = undefined;
     const step: string | undefined = undefined;
@@ -45,14 +50,26 @@ window.addEventListener('load', async () => {
 
     new Splitters(flowTreeElement, toolboxElement);
 
-    const diagramOptions = new Actions(document.getElementById('diagram-options'));
-    diagramOptions.onThemeChange((e: ThemeChangeEvent) => {
+    const drawingActions = new DrawingActions(document.getElementById('drawing-actions'));
+    drawingActions.onThemeChange((e: ThemeChangeEvent) => {
         theme = e.theme;
         flowTree.render(theme, root);
         toolbox.render(theme, descriptors);
         flowDiagramElement.style.backgroundColor = theme === 'dark' ? '#1e1e1e' : '#ffffff';
         if (flowDiagram) {
-            flowDiagram.render(theme, flowDiagram.flow, flowDiagram.flow.name, { grid: { visibility: 'visible' } }, animate);
+            flowDiagram.render(theme, flowDiagram.flow, flowDiagram.flow.name);
+        }
+    });
+    drawingActions.onOptionToggle((e: OptionToggleEvent) => {
+        const drawingOption = e.option;
+        document.getElementById(`${drawingOption}`).classList.toggle('unselected');
+        drawingOptions[drawingOption] = !drawingOptions[drawingOption];
+        if (flowDiagram) {
+            const flowbeeOptions: flowbee.DiagramOptions & flowbee.DrawingOptions = {};
+            if (drawingOption === 'grid') {
+                flowbeeOptions.grid = { visibility: drawingOptions.grid ? 'visible' : 'hidden' };
+            }
+            flowDiagram.render(theme, flowDiagram.flow, flowDiagram.flow.name, flowbeeOptions, animate);
         }
     });
 
