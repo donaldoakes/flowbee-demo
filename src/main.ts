@@ -8,10 +8,16 @@ window.addEventListener('load', async () => {
     const readonly = false;
     let theme = 'light';
     let flowDiagram: flowbee.FlowDiagram;
+
     const drawingOptions = {
         grid: true,
         snap: true,
         zoom: 100
+    };
+    const getFlowbeeOptions = (): flowbee.DiagramOptions & flowbee.DrawingOptions => {
+        return {
+            grid: { visibility: drawingOptions.grid ? 'visible' : 'hidden' }
+        };
     };
 
     const instance = undefined;
@@ -38,7 +44,7 @@ window.addEventListener('load', async () => {
         flowDiagram.instance = instance;
         flowDiagram.step = step;
         flowDiagram.editInstanceId = editInstanceId;
-        flowDiagram.render(theme, text, selectEvent.name, { grid: { visibility: 'visible' } }, animate);
+        flowDiagram.render(theme, text, selectEvent.name, getFlowbeeOptions(), animate);
     });
 
     const flowDiagramElement = document.getElementById('flow-diagram') as HTMLDivElement;
@@ -65,11 +71,7 @@ window.addEventListener('load', async () => {
         document.getElementById(`${drawingOption}`).classList.toggle('unselected');
         drawingOptions[drawingOption] = !drawingOptions[drawingOption];
         if (flowDiagram) {
-            const flowbeeOptions: flowbee.DiagramOptions & flowbee.DrawingOptions = {};
-            if (drawingOption === 'grid') {
-                flowbeeOptions.grid = { visibility: drawingOptions.grid ? 'visible' : 'hidden' };
-            }
-            flowDiagram.render(theme, flowDiagram.flow, flowDiagram.flow.name, flowbeeOptions, animate);
+            flowDiagram.render(theme, flowDiagram.flow, flowDiagram.flow.name, getFlowbeeOptions(), animate);
         }
     });
 
