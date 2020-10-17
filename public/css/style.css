@@ -58,6 +58,11 @@ h1 {
   padding: 3px;
 }
 
+.diagram > canvas {
+  height: 100%;
+  width: 100%;
+}
+
 /* customized flowbee styles */
 .flowbee-tree {
   border-right: 2px ridge #e7e7e7;
