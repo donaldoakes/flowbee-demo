@@ -6,6 +6,9 @@ export interface ThemeChangeEvent {
 export interface OptionToggleEvent {
     option: string;
 }
+export interface FlowActionEvent {
+    action: string;
+}
 
 export class DrawingActions {
 
@@ -27,6 +30,21 @@ export class DrawingActions {
         const gridToggle = container.querySelector('#grid') as HTMLInputElement;
         gridToggle.onclick = e => {
             this._onOptionToggle.emit({ option: (e.target as HTMLElement).id });
+        };
+    }
+}
+
+export class FlowActions {
+
+    private _onFlowAction = new flowbee.TypedEvent<FlowActionEvent>();
+    onFlowAction(listener: flowbee.Listener<FlowActionEvent>) {
+        this._onFlowAction.on(listener);
+    }
+
+    constructor(container: HTMLElement) {
+        const saveAction = container.querySelector('#save') as HTMLInputElement;
+        saveAction.onclick = e => {
+            this._onFlowAction.emit({ action: (e.target as HTMLElement).id });
         };
     }
 }
