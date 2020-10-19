@@ -9,12 +9,15 @@ export class Options {
     yaml = true;
     indent = 2;
 
+    get iconBase() { return `${this.base}/icons`; }
+    storagePath = '/flows/localStorage';
+
     constructor(readonly base: string) {}
 
     get diagramOptions(): flowbee.DiagramOptions & flowbee.DrawingOptions {
         return {
             theme: this.theme,
-            iconBase: `${this.base}/icons`,
+            iconBase: `${this.iconBase}`,
             grid: { visibility: this.grid ? 'visible' : 'hidden' }
         };
     }
@@ -29,7 +32,7 @@ export class Options {
     get toolboxOptions(): flowbee.ToolboxOptions {
         return {
             theme: this.theme,
-            iconBase: `${this.base}/icons`
+            iconBase: `${this.iconBase}`
         };
     }
 }

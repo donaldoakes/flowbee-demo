@@ -3,6 +3,7 @@ import { Descriptors } from './descriptors';
 import { DrawingActions, ThemeChangeEvent, OptionToggleEvent, FlowActions, FlowActionEvent } from './actions';
 import { Splitters } from './splitters';
 import { Options } from './options';
+import { Storage } from './storage';
 
 window.addEventListener('load', async () => {
     const base = '';
@@ -10,6 +11,7 @@ window.addEventListener('load', async () => {
     const readonly = false;
     let flowPath: string;
     let flowDiagram: flowbee.FlowDiagram;
+    const storage = new Storage(options.storagePath);
 
     const instance = undefined;
     const step: string | undefined = undefined;
@@ -19,12 +21,28 @@ window.addEventListener('load', async () => {
     const descriptors = await Descriptors.getDescriptors(base);
 
     const flowTreeElement = document.getElementById('flow-tree') as HTMLDivElement;
-    const root = await (await fetch(`${base}/flows`)).json();
+    const root = await (await fetch(`${base}/flows`)).json() as flowbee.FileTree;
+    const localFlows = storage.loadFlows();
+    if (localFlows.length > 0) {
+        root.children.unshift({
+            path: 'localStorage',
+            name: 'localStorage',
+            children: localFlows,
+            type: 'directory'
+        });
+    }
+
     const flowTree = new flowbee.FlowTree(root, flowTreeElement);
     flowTree.render(options.flowTreeOptions);
     flowTree.onFlowSelect(async (selectEvent: flowbee.FlowTreeSelectEvent) => {
         const canvasElement = document.getElementById('diagram-canvas') as HTMLCanvasElement;
-        const text = await (await fetch(selectEvent.path)).text();
+        let text: string;
+        if (storage.isLocal(selectEvent.path)) {
+            text = storage.loadFlow(selectEvent.path);
+
+        } else {
+            text = await (await fetch(selectEvent.path)).text();
+        }
         flowPath = selectEvent.path;
         console.debug(`rendering ${flowPath} to canvas`);
         flowDiagram = new flowbee.FlowDiagram(text, canvasElement, flowPath, descriptors);
@@ -68,13 +86,11 @@ window.addEventListener('load', async () => {
         if (flowDiagram) {
             if (flowAction === 'save') {
                 let name = flowDiagram.flow.name;
-                if (!flowPath.startsWith('/flows/_localStorage/')) {
-                    name = prompt('Save in _localStorage as:');
+                if (!storage.isLocal(flowPath)) {
+                    name = prompt('Save in localStorage as:');
                 }
-                const path = `/flows/_localStorage/${name}`;
-                console.debug(`save: ${path}`);
                 const contents = options.yaml ? flowDiagram.toYaml(options.indent) : flowDiagram.toJson(options.indent);
-                localStorage.setItem(path, contents);
+                storage.saveFlow(name, contents);
             }
         }
     });
