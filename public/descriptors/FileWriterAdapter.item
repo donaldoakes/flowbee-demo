@@ -1,5 +1,5 @@
 {
   "icon": "writer.jpg",
-  "name": "flowbee-demo.adapter.file.FileWriterAdapter",
-  "label": "FileWriterAdapter"
+  "path": "flowbee-demo.adapter.file.FileWriterAdapter",
+  "name": "FileWriterAdapter"
 }

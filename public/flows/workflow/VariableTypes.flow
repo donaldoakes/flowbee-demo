@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=57,y=140,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=233,y=184,xs=121&232,ys=160&160
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=477,y=140,w=60,h=40
 - id: S3
   name: Update Vars
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: inputJsonable#inputYaml#localJsonable#localYaml
     Rule: ""
@@ -32,7 +31,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=411,y=160,xs=340&473,ys=160&160
-    event: FINISH
     to: S2
 variables:
   inputJsonable:

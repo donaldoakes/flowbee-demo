@@ -7,25 +7,24 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=49,y=122,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=140,y=141,xs=114&167,ys=141&141
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=552,y=123,w=60,h=40
 - id: S3
   name: |-
     Invoke
     Post
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     EndpointUri: ${props['services.url']}/api/Workgroups
     HttpMethod: POST
@@ -37,13 +36,12 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=501,y=143,xs=454&549,ys=143&143
-    event: FINISH
     to: S2
 - id: S4
   name: |-
     Build
     Request
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["workgroup"]'
     Rule: |-
@@ -57,7 +55,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=308,y=142,xs=281&336,ys=142&142
-    event: FINISH
     to: S3
 variables:
   serviceResponse:

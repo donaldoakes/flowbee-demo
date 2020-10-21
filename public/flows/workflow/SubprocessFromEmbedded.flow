@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=177,y=280,xs=124&230,ys=280&280
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=480,y=260,w=60,h=40
 - id: S3
   name: Force Error
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       runtimeContext.logDebug("Executing " + runtimeContext.getActivity().getName())
@@ -33,7 +32,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=407,y=280,xs=338&476,ys=280&280
-    event: FINISH
     to: S2
 subflows:
 - id: F1
@@ -45,23 +43,22 @@ subflows:
   steps:
   - id: S4
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=439,y=98,w=60,h=40
     links:
     - id: L3
       attributes:
         display: type=Elbow,x=533,y=118,xs=503&563,ys=118&118
-      event: FINISH
       to: S7
   - id: S6
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=739,y=98,w=60,h=40
   - id: S7
     name: "Subprocess \nfrom Embedded"
-    descriptor: flowbee-demo.process.InvokeSubProcessActivity
+    path: flowbee-demo.process.InvokeSubProcessActivity
     attributes:
       display: x=568,y=87,w=105,h=66
       processname: tests.workflow/SubprocessForEmbedded.proc
@@ -72,7 +69,6 @@ subflows:
     - id: L4
       attributes:
         display: type=Elbow,x=705,y=118,xs=676&735,ys=118&118
-      event: FINISH
       to: S6
 variables:
   passToSub:

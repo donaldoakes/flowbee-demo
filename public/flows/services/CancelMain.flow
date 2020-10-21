@@ -7,20 +7,19 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=84,y=137,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=182,y=156,xs=148&216,ys=156&156
-    event: FINISH
     to: S3
 - id: S3
   name: |-
     Which
     Case?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -29,18 +28,16 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=262,y=226,xs=262&262,ys=194&259
-    event: FINISH
     to: S4
     result: err
   - id: L4
     attributes:
       display: type=Elbow,x=320,y=132,xs=309&406,ys=157&89
-    event: FINISH
     to: S5
     result: sub
 - id: S4
   name: Error Sub
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=213,y=263,w=100,h=60
     processname: tests.services/ServiceSub.proc
@@ -51,11 +48,10 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=356,y=293,xs=317&395,ys=293&293
-    event: FINISH
     to: S6
 - id: S5
   name: Cancel Sub
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=410,y=59,w=100,h=60
     processname: tests.services/CancelSub.proc
@@ -66,13 +62,12 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=457,y=188,xs=457&457,ys=123&254
-    event: FINISH
     to: S6
 - id: S6
   name: |-
     Wait
     Forever
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA_DISPLAY_UNITS: Hours
     STATUS_AFTER_TIMEOUT: Cancelled
@@ -82,11 +77,10 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=557,y=243,xs=509&605,ys=292&194
-    event: FINISH
     to: S7
 - id: S7
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=609,y=174,w=60,h=40
 notes:

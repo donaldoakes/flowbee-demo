@@ -1,5 +1,5 @@
 {
-  "name": "flowbee-demo.decision",
-  "label": "Decision",
+  "path": "flowbee-demo.decision",
+  "name": "Decision",
   "icon": "shape:decision"
 }

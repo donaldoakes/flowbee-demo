@@ -6,34 +6,32 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=80,y=160,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=170,y=180,xs=144&196,ys=180&180
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=490,y=160,w=60,h=40
 - id: S3
   name: Pause
-  descriptor: flowbee-demo.pause
+  path: flowbee-demo.pause
   attributes:
     display: x=200,y=160,w=60,h=40
   links:
   - id: L2
     attributes:
       display: type=Elbow,x=290,y=180,xs=264&316,ys=180&180
-    event: FINISH
     to: S4
 - id: S4
   name: JavaStuff
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: InflightDynamicJava_A4
     Java: |
@@ -56,7 +54,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=455,y=180,xs=424&486,ys=180&180
-    event: FINISH
     to: S2
 notes:
 - id: N1

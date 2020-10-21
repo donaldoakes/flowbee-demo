@@ -9,18 +9,17 @@ attributes:
 steps:
 - id: S43
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
   - id: L38
     attributes:
       display: type=Elbow,x=146,y=280,xs=124&167,ys=280&280
-    event: FINISH
     to: S42
 - id: S42
   name: which case?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -31,13 +30,11 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=268,y=115,xs=231&290&290&416,ys=280&280&49&49
-    event: FINISH
     to: S48
     result: cancel
   - id: L36
     attributes:
       display: type=Elbow,x=327,y=280,xs=235&412,ys=280&280
-    event: FINISH
     to: S49
     result: wait
   - id: L40
@@ -45,26 +42,24 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=260,y=369,xs=231&292&292&413,ys=280&280&422&422
-    event: FINISH
     to: S45
     result: hold
   - id: L46
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=130,y=328,xs=201&201,ys=304&361
-    event: FINISH
     to: S51
     result: methodExpression
 - id: S46
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=741,y=263,w=60,h=40
 - id: S49
   name: |-
     Timer and Event
     Wait - wait
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Waiting
     TIMER_WAIT: '2'
@@ -75,17 +70,15 @@ steps:
   - id: L37
     attributes:
       display: type=Elbow,x=632,y=283,xs=520&737,ys=283&283
-    event: FINISH
     to: S46
   - id: L43
     attributes:
       display: type=Elbow,x=486,y=220,xs=466&466,ys=243&210
-    event: FINISH
     to: S44
     result: other
 - id: S47
   name: wait for 1 min
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     $+Id: '69569'
     TIMER_WAIT: '1'
@@ -97,18 +90,17 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=502,y=375,xs=519&565&565&521,ys=530&530&433&433
-    event: FINISH
     to: S45
 - id: S44
   name: wait for 1min
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     TIMER_WAIT: '1'
     Unit: Minutes
     display: x=417,y=146,w=100,h=60
 - id: S50
   name: wait for 60s
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     TIMER_WAIT: '60'
     Unit: Seconds
@@ -117,13 +109,12 @@ steps:
   - id: L45
     attributes:
       display: type=Elbow,x=771,y=174,xs=771&771,ys=90&259
-    event: FINISH
     to: S46
 - id: S45
   name: |-
     Timer and Event
     Wait - hold
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     TIMER_WAIT: '2'
@@ -134,21 +125,19 @@ steps:
   - id: L39
     attributes:
       display: type=Elbow,x=633,y=353,xs=521&737,ys=417&283
-    event: FINISH
     to: S46
   - id: L41
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=467,y=476,xs=466&466,ys=451&498
-    event: FINISH
     to: S47
     result: other
 - id: S48
   name: |-
     Timer and Event
     Wait - cancel
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '2'
@@ -159,17 +148,15 @@ steps:
   - id: L35
     attributes:
       display: type=Elbow,x=623,y=163,xs=524&737,ys=54&283
-    event: FINISH
     to: S46
   - id: L44
     attributes:
       display: type=Elbow,x=655,y=28,xs=524&729,ys=55&55
-    event: FINISH
     to: S50
     result: other
 - id: S51
   name: "Create\r\nTimerBean"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: timerBean
     Rule: ""
@@ -180,11 +167,10 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=196,y=461,xs=196&196,ys=447&487
-    event: FINISH
     to: S52
 - id: S52
   name: "Wait via\r\nMethod Expr"
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '#{timerBean.timerDelaySeconds}'
@@ -196,23 +182,21 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=198,y=584,xs=198&198,ys=563&606
-    event: FINISH
     to: S53
   - id: L50
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=272,y=505,xs=262&302,ys=526&526
-    event: FINISH
     to: S55
     result: Not
 - id: S53
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=168,y=610,w=60,h=40
 - id: S55
   name: Done
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=306,y=506,w=60,h=40
 variables:

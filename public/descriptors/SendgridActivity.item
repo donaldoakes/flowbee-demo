@@ -1,5 +1,5 @@
 {
   "icon": "sendgrid.png",
-  "name": "flowbee-demo.sendgrid.SendgridActivity",
-  "label": "SendgridActivity"
+  "path": "flowbee-demo.sendgrid.SendgridActivity",
+  "name": "SendgridActivity"
 }

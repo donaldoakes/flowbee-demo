@@ -1,5 +1,5 @@
 {
   "icon": "timer.png",
-  "name": "flowbee-demo.timer.TimerWaitActivity",
-  "label": "TimerWaitActivity"
+  "path": "flowbee-demo.timer.TimerWaitActivity",
+  "name": "TimerWaitActivity"
 }

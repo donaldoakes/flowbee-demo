@@ -6,24 +6,23 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=58,y=141,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=149,y=161,xs=122&177,ys=161&161
-    event: FINISH
     to: S5
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Completed"],["false","Test Cases","testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=686,y=173,w=60,h=40
 - id: S5
   name: "Test\r\nCase?"
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: '#{testCase}'
     SCRIPT: javax.el
@@ -32,18 +31,16 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=285,y=103,xs=274&378,ys=161&90
-    event: FINISH
     to: S11
     result: single
   - id: L4
     attributes:
       display: type=Elbow,x=300,y=196,xs=270&297&297&354,ys=173&173&244&244
-    event: FINISH
     to: S8
     result: multiple
 - id: S8
   name: Create Plan
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Plan Created"],["false","Test Cases","testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     Output Documents: executionPlan
@@ -84,11 +81,10 @@ steps:
   - id: L10
     attributes:
       display: type=Elbow,x=408,y=301,xs=408&408,ys=274&328
-    event: FINISH
     to: S10
 - id: S9
   name: Assign Output
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Output Assigned"],["false","Test Cases","testing/TestCaseActivityMonitor.java",""],["false","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     Rule: ""
@@ -98,11 +94,10 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=674,y=285,xs=639&716,ys=367&217
-    event: FINISH
     to: S2
 - id: S10
   name: Invoke Multiple
-  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  path: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     DELAY_BETWEEN: '1'
     Execution Plan: executionPlan
@@ -113,11 +108,10 @@ steps:
   - id: L11
     attributes:
       display: type=Elbow,x=499,y=367,xs=468&531,ys=367&367
-    event: FINISH
     to: S9
 - id: S11
   name: Invoke Single
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=382,y=61,w=100,h=60
     processname: tests.workflow/SmartProcessChild.proc
@@ -128,7 +122,6 @@ steps:
   - id: L12
     attributes:
       display: type=Elbow,x=584,y=141,xs=486&682,ys=90&193
-    event: FINISH
     to: S2
 variables:
   executionPlan:

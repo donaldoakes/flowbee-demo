@@ -1,5 +1,5 @@
 {
-  "name": "flowbee-demo.pause",
-  "label": "Pause",
+  "path": "flowbee-demo.pause",
+  "name": "Pause",
   "icon": "shape:pause"
 }

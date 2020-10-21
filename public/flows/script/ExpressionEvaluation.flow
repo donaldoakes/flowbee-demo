@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     Parameters: firstName=${request.firstName};lastName=${request.lastName}
     display: x=108,y=219,w=60,h=40
@@ -14,11 +14,10 @@ steps:
   - id: L1
     attributes:
       display: type=Elbow,x=319,y=240,xs=172&480,ys=238&238
-    event: FINISH
     to: S2
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=484,y=218,w=60,h=40
 variables:

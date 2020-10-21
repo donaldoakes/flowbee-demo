@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=25,y=300,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=126,y=309,xs=89&143,ys=320&320
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=968,y=221,w=60,h=40
 - id: S3
   name: "Synchronous Cloud\r\nJMS Request"
-  descriptor: flowbee-demo.adapter.jms.JmsAdapter
+  path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
     DO_LOGGING: 'True'
     PostScriptLang: Groovy
@@ -36,11 +35,10 @@ steps:
   - id: L16
     attributes:
       display: type=Elbow,x=648,y=69,xs=532&765,ys=69&69
-    event: FINISH
     to: S12
 - id: S4
   name: Synchronous?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: mode
     SCRIPT: Groovy
@@ -49,18 +47,16 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=365,y=205,xs=194&424,ys=286&155
-    event: FINISH
     to: S6
     result: Synchronous
   - id: L13
     attributes:
       display: type=Elbow,x=314,y=421,xs=194&429,ys=357&537
-    event: FINISH
     to: S9
     result: Asynchronous
 - id: S6
   name: Platform?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: platform
     SCRIPT: Groovy
@@ -69,18 +65,16 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=475,y=100,xs=475&475,ys=114&86
-    event: FINISH
     to: S3
     result: Cloud
   - id: L8
     attributes:
       display: type=Elbow,x=475,y=193,xs=475&475,ys=196&217
-    event: FINISH
     to: S7
     result: OSGi
 - id: S7
   name: "Synchronous OSGi\r\nJMS Request"
-  descriptor: flowbee-demo.adapter.jms.JmsAdapter
+  path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
     DO_LOGGING: 'True'
     JNDI Server URL: flowbee-demo-activemq
@@ -95,11 +89,10 @@ steps:
   - id: L17
     attributes:
       display: type=Elbow,x=654,y=175,xs=544&765,ys=256&93
-    event: FINISH
     to: S12
 - id: S8
   name: "Asynchronous Cloud\r\nJMS Request"
-  descriptor: flowbee-demo.adapter.jms.JmsAdapter
+  path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
     DO_LOGGING: 'True'
     PostScriptLang: Groovy
@@ -113,11 +106,10 @@ steps:
   - id: L14
     attributes:
       display: type=Elbow,x=769,y=349,xs=542&964,ys=421&241
-    event: FINISH
     to: S2
 - id: S9
   name: Platform?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: platform
     SCRIPT: Groovy
@@ -126,18 +118,16 @@ steps:
   - id: L11
     attributes:
       display: type=Elbow,x=480,y=469,xs=480&480,ys=496&461
-    event: FINISH
     to: S8
     result: Cloud
   - id: L12
     attributes:
       display: type=Elbow,x=486,y=591,xs=480&480,ys=578&598
-    event: FINISH
     to: S10
     result: OSGi
 - id: S10
   name: "Asynchronous OSGi\r\nJMS Request"
-  descriptor: flowbee-demo.adapter.jms.JmsAdapter
+  path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
     DO_LOGGING: 'True'
     JNDI Server URL: flowbee-demo-activemq
@@ -152,11 +142,10 @@ steps:
   - id: L15
     attributes:
       display: type=Elbow,x=775,y=454,xs=544&964,ys=637&241
-    event: FINISH
     to: S2
 - id: S12
   name: "Set Response\r\nJMS Message Id"
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     DESCRIPTION: For synchronous calls, grabs the jmsmessage Id from the <RequestId> field in the StatusMessage reponse, to help match with expected results
     Java: ""
@@ -165,7 +154,6 @@ steps:
   - id: L18
     attributes:
       display: type=Elbow,x=935,y=154,xs=873&998,ys=93&217
-    event: FINISH
     to: S2
 variables:
   asyncResponse:

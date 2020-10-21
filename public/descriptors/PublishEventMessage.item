@@ -1,5 +1,5 @@
 {
   "icon": "send.gif",
-  "name": "flowbee-demo.event.PublishEventMessage",
-  "label": "PublishEventMessage"
+  "path": "flowbee-demo.event.PublishEventMessage",
+  "name": "PublishEventMessage"
 }

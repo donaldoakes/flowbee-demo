@@ -6,28 +6,26 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=26,y=76,w=60,h=40
   links:
   - id: L7
     attributes:
       display: type=Elbow,x=155,y=96,xs=90&220,ys=96&96
-    event: FINISH
     to: S3
   - id: L8
     attributes:
       display: type=Elbow,x=157,y=141,xs=90&223,ys=96&188
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=493,y=269,w=60,h=40
 - id: S3
   name: Wait 20s
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '20'
@@ -37,11 +35,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=348,y=101,xs=328&365,ys=98&98
-    event: FINISH
     to: S6
 - id: S4
   name: "Should Finish\r\nQuickly"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -50,11 +47,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=404,y=168,xs=329&468,ys=192&192
-    event: FINISH
     to: S5
 - id: S5
   name: Sync
-  descriptor: flowbee-demo.sync.SynchronizationActivity
+  path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: New Execute Script
@@ -63,11 +59,10 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=523,y=245,xs=523&523,ys=226&265
-    event: FINISH
     to: S2
 - id: S6
   name: "Update\r\nResult"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: cumulativeResult += '_update'
     SCRIPT: Groovy
@@ -76,7 +71,6 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=444,y=74,xs=479&522&522,ys=90&90&162
-    event: FINISH
     to: S5
 variables:
   cumulativeResult:

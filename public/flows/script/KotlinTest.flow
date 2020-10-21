@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=33,y=108,w=60,h=40
   links:
   - id: L7
     attributes:
       display: type=Elbow,x=111,y=150,xs=97&134,ys=128&187
-    event: FINISH
     to: S10
 - id: S2
   name: Right
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=387,y=404,w=60,h=40
 - id: S3
   name: Decide
-  descriptor: flowbee-demo.kotlin.ScriptActivity
+  path: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: ""
     SCRIPT: Kotlin Script
@@ -31,23 +30,21 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=281,y=406,xs=230&383,ys=424&424
-    event: FINISH
     to: S2
     result: Chocolate
   - id: L3
     attributes:
       display: type=Elbow,x=183,y=480,xs=176&176,ys=455&515
-    event: FINISH
     to: S4
     result: Vanilla
 - id: S4
   name: Wrong
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=146,y=519,w=60,h=40
 - id: S5
   name: Exec
-  descriptor: flowbee-demo.kotlin.ScriptActivity
+  path: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["jsonablePerson"]'
     Rule: ""
@@ -57,16 +54,15 @@ steps:
   - id: L10
     attributes:
       display: type=Elbow,x=425,y=193,xs=393&448,ys=193&193
-    event: FINISH
     to: S13
 - id: S9
   name: Finish
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=620,y=286,w=60,h=40
 - id: S10
   name: Which
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: variables["testCase"]
     SCRIPT: Kotlin Script
@@ -75,18 +71,16 @@ steps:
   - id: L1
     attributes:
       display: type=Elbow,x=188,y=242,xs=177&177,ys=223&279
-    event: FINISH
     to: S11
     result: decide
   - id: L4
     attributes:
       display: type=Elbow,x=249,y=173,xs=221&285,ys=189&189
-    event: FINISH
     to: S5
     result: exec
 - id: S11
   name: Boolean
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: '"decide".equals(variables["testCase"])'
     SCRIPT: Kotlin Script
@@ -95,23 +89,21 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=182,y=351,xs=176&176,ys=347&387
-    event: FINISH
     to: S3
     result: 'true'
   - id: L9
     attributes:
       display: type=Elbow,x=234,y=298,xs=222&281,ys=316&316
-    event: FINISH
     to: S12
     result: 'false'
 - id: S12
   name: No Way
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=285,y=296,w=60,h=40
 - id: S13
   name: Use Class
-  descriptor: flowbee-demo.kotlin.ScriptActivity
+  path: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["jsonObject"]'
     Rule: ""
@@ -121,11 +113,10 @@ steps:
   - id: L11
     attributes:
       display: type=Elbow,x=552,y=253,xs=504&504,ys=228&273
-    event: FINISH
     to: S14
 - id: S14
   name: "Access\r\nfrom Java"
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     Output Documents: '["unfound"]'
@@ -134,7 +125,6 @@ steps:
   - id: L12
     attributes:
       display: type=Elbow,x=589,y=306,xs=560&616,ys=306&306
-    event: FINISH
     to: S9
 variables:
   flavor:

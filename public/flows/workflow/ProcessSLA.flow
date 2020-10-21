@@ -8,23 +8,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
   - id: L7
     attributes:
       display: type=Elbow,x=158,y=280,xs=124&193,ys=280&280
-    event: FINISH
     to: S7
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=685,y=269,w=60,h=40
 - id: S4
   name: Invoke Subprocess
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=330,y=339,w=110,h=58
     processname: tests.workflow/ProcessSLASub.proc
@@ -34,11 +33,10 @@ steps:
   - id: L10
     attributes:
       display: type=Elbow,x=370,y=364,xs=440&556&556,ys=368&368&318
-    event: FINISH
     to: S6
 - id: S5
   name: Event Wait Activity
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA_UNITS: Minutes
     STATUS_AFTER_TIMEOUT: Cancelled
@@ -48,22 +46,20 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=371,y=205,xs=439&553&553,ys=209&209&257
-    event: FINISH
     to: S6
 - id: S6
   name: Synchronization Activity
-  descriptor: flowbee-demo.sync.SynchronizationActivity
+  path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     display: x=490,y=261,w=133,h=57
   links:
   - id: L6
     attributes:
       display: type=Elbow,x=653,y=288,xs=627&680,ys=288&288
-    event: FINISH
     to: S2
 - id: S7
   name: Branch
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: return null
     SCRIPT: Groovy
@@ -72,10 +68,8 @@ steps:
   - id: L8
     attributes:
       display: type=ElbowV,x=237,y=233,xs=235&235&334,ys=257&209&209
-    event: FINISH
     to: S5
   - id: L9
     attributes:
       display: type=ElbowV,x=237,y=339,xs=235&235&330,ys=310&368&368
-    event: FINISH
     to: S4

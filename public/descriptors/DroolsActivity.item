@@ -1,5 +1,5 @@
 {
   "icon": "drools.jpg",
-  "name": "flowbee-demo.drools.DroolsActivity",
-  "label": "DroolsActivity"
+  "path": "flowbee-demo.drools.DroolsActivity",
+  "name": "DroolsActivity"
 }

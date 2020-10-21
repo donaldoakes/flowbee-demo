@@ -6,36 +6,34 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=38,y=107,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=122,y=127,xs=103&142,ys=127&127
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=766,y=111,w=60,h=40
 - id: S3
   name: |-
     Custom
     Activity
-  descriptor: flowbee-demo.tests.workflow.LoggingActivity
+  path: flowbee-demo.tests.workflow.LoggingActivity
   attributes:
     display: x=145,y=96,w=104,h=68
   links:
   - id: L2
     attributes:
       display: type=Elbow,x=278,y=130,xs=254&302,ys=130&130
-    event: FINISH
     to: S4
 - id: S4
   name: Dynamic Java
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: ActivityLogging_A4
     Java: ""
@@ -44,11 +42,10 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=433,y=129,xs=412&454,ys=129&129
-    event: FINISH
     to: S5
 - id: S5
   name: Groovy
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       runtimeContext.logInfo("context.logInfo()");
@@ -60,11 +57,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=586,y=130,xs=566&606,ys=130&130
-    event: FINISH
     to: S6
 - id: S6
   name: Kotlin
-  descriptor: flowbee-demo.kotlin.ScriptActivity
+  path: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Rule: |
       runtimeContext.logInfo("context.logInfo()");
@@ -76,5 +72,4 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=738,y=131,xs=714&762,ys=131&131
-    event: FINISH
     to: S2

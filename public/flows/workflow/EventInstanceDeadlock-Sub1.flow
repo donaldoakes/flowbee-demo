@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=71,y=132,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=204,y=137,xs=135&226,ys=152&152
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=496,y=133,w=60,h=40
 - id: S3
   name: "Microservice\r\nDependencies Wait"
-  descriptor: flowbee-demo.microservice.DependenciesWaitActivity
+  path: flowbee-demo.microservice.DependenciesWaitActivity
   attributes:
     MICROSERVICE_NAMES: true,mic1,${serviceSummary != null},
     STATUS_AFTER_TIMEOUT: Cancelled
@@ -32,7 +31,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=439,y=153,xs=384&492,ys=153&153
-    event: FINISH
     to: S2
 variables:
   serviceSummary:

@@ -6,28 +6,25 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=243,y=29,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=45,y=44,xs=239&114,ys=49&188
-    event: FINISH
     to: S3
   - id: L3
     attributes:
       display: type=Elbow,x=273,y=89,xs=273&273,ys=73&106
-    event: FINISH
     to: S4
   - id: L5
     attributes:
       display: type=Elbow,x=392,y=117,xs=307&458,ys=49&184
-    event: FINISH
     to: S6
 - id: S3
   name: Timer 1
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: ${delay1}
@@ -37,11 +34,10 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=146,y=264,xs=118&118,ys=256&297
-    event: FINISH
     to: S9
 - id: S4
   name: Timer 2
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: ${delay2}
@@ -51,16 +47,15 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=274,y=182,xs=282&282,ys=174&200
-    event: FINISH
     to: S10
 - id: S5
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=260,y=397,w=60,h=40
 - id: S6
   name: Timer 3
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: ${delay3}
@@ -70,11 +65,10 @@ steps:
   - id: L10
     attributes:
       display: type=Elbow,x=459,y=273,xs=459&459,ys=252&295
-    event: FINISH
     to: S11
 - id: S8
   name: Sync
-  descriptor: flowbee-demo.sync.SynchronizationActivity
+  path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: Timer 1#Timer 2
@@ -83,40 +77,36 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=290,y=370,xs=290&290,ys=352&393
-    event: FINISH
     to: S5
 - id: S9
   name: Dummy 1
-  descriptor: flowbee-demo.DefaultActivityImpl
+  path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=88,y=301,w=60,h=40
   links:
   - id: L12
     attributes:
       display: type=Elbow,x=196,y=321,xs=152&239,ys=321&321
-    event: FINISH
     to: S8
 - id: S10
   name: Dummy 2
-  descriptor: flowbee-demo.DefaultActivityImpl
+  path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=252,y=204,w=60,h=40
   links:
   - id: L9
     attributes:
       display: type=Elbow,x=282,y=266,xs=282&282,ys=248&284
-    event: FINISH
     to: S8
 - id: S11
   name: Dummy 3
-  descriptor: flowbee-demo.DefaultActivityImpl
+  path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=429,y=299,w=60,h=40
   links:
   - id: L11
     attributes:
       display: type=Elbow,x=387,y=319,xs=425&347,ys=319&319
-    event: FINISH
     to: S8
 variables:
   delay1:

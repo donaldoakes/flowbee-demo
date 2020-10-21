@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=39,y=89,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=142,y=109,xs=103&172,ys=109&109
-    event: FINISH
     to: S7
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=550,y=93,w=60,h=40
 - id: S7
   name: "Programmatic\r\nAccess/Create"
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     Output Documents: locallyCreatedJaxb
@@ -31,11 +30,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=319,y=112,xs=293&344,ys=112&112
-    event: FINISH
     to: S8
 - id: S8
   name: "Programmatic\r\nUpdate"
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     Output Documents: actionRequest#assetDefinedJaxb
@@ -44,7 +42,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=508,y=113,xs=470&546,ys=113&113
-    event: FINISH
     to: S2
 variables:
   actionRequest:

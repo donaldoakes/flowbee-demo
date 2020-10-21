@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=41,y=231,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=135,y=252,xs=105&166,ys=252&252
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=540,y=235,w=60,h=40
 - id: S3
   name: Fallout
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -34,11 +33,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=504,y=256,xs=473&536,ys=256&256
-    event: FINISH
     to: S2
 - id: S4
   name: Set Values
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["person","stackTrace","values"]'
     Rule: ""
@@ -48,7 +46,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=319,y=253,xs=274&365,ys=253&253
-    event: FINISH
     to: S3
 subflows:
 - id: F1
@@ -60,18 +57,17 @@ subflows:
   steps:
   - id: S5
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=275,y=73,w=60,h=40
     links:
     - id: L4
       attributes:
         display: type=Elbow,x=370,y=93,xs=339&401,ys=93&93
-      event: FINISH
       to: S6
   - id: S6
     name: Handle Fallout
-    descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+    path: flowbee-demo.task.AutoFormManualTaskActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -80,11 +76,10 @@ subflows:
     - id: L5
       attributes:
         display: type=Elbow,x=540,y=93,xs=509&571,ys=93&93
-      event: FINISH
       to: S7
   - id: S7
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=575,y=73,w=60,h=40
 notes:

@@ -7,23 +7,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=50,y=120,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=140,y=140,xs=114&166,ys=140&140
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=700,y=120,w=60,h=40
 - id: S3
   name: Wait
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA_DISPLAY_UNITS: Hours
     STATUS_AFTER_TIMEOUT: Cancelled
@@ -33,11 +32,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=490,y=140,xs=454&526,ys=140&140
-    event: FINISH
     to: S5
 - id: S4
   name: Init
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       todaysMood = 'expectant'
@@ -48,11 +46,10 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=310,y=140,xs=274&346,ys=140&140
-    event: FINISH
     to: S3
 - id: S5
   name: Update
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: MyEverChangingMoods_A5
     Java: |
@@ -81,7 +78,6 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=665,y=140,xs=634&696,ys=140&140
-    event: FINISH
     to: S2
 variables:
   after:

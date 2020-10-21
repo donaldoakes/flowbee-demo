@@ -1,5 +1,5 @@
 {
   "icon": "adapter.png",
-  "name": "flowbee-demo.microservice.MicroserviceRestAdapter",
-  "label": "MicroserviceRestAdapter"
+  "path": "flowbee-demo.microservice.MicroserviceRestAdapter",
+  "name": "MicroserviceRestAdapter"
 }

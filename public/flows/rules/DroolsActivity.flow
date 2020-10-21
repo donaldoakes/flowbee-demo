@@ -7,18 +7,17 @@ attributes:
 steps:
 - id: S3
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=221,y=36,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=227,y=95,xs=251&251,ys=80&119
-    event: FINISH
     to: S1
 - id: S1
   name: "Apply Order \r\nRouting"
-  descriptor: flowbee-demo.drools.DroolsActivity
+  path: flowbee-demo.drools.DroolsActivity
   attributes:
     Facts: dueDate#region
     KnowledgeBase: tests.rules/drools-orderRoutingDrool.drl
@@ -32,23 +31,21 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=93,y=232,xs=198&82,ys=157&292
-    event: FINISH
     to: S4
     result: WESTERN
   - id: L3
     attributes:
       display: type=Elbow,x=369,y=234,xs=306&435,ys=157&291
-    event: FINISH
     to: S2
     result: EASTERN
 - id: S4
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=52,y=296,w=60,h=40
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=405,y=295,w=60,h=40
 notes:

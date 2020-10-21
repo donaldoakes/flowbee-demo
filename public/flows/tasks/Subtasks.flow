@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=27,y=74,w=60,h=40
   links:
   - id: L3
     attributes:
       display: type=Elbow,x=180,y=94,xs=91&270,ys=94&94
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=579,y=76,w=60,h=40
 - id: S4
   name: Master Task
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -34,11 +33,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=491,y=96,xs=378&575,ys=96&96
-    event: FINISH
     to: S2
 - id: S5
   name: Subtask A
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -48,7 +46,7 @@ steps:
     display: x=273,y=150,w=100,h=60
 - id: S6
   name: Subtask B
-  descriptor: flowbee-demo.task.CustomManualTaskActivity
+  path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/CustomManualTask.pagelet

@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=32,y=129,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=123,y=149,xs=95&152,ys=149&149
-    event: FINISH
     to: S5
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=494,y=299,w=60,h=40
 - id: S4
   name: "Create\r\nServicePlan"
-  descriptor: flowbee-demo.kotlin.ScriptActivity
+  path: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["servicePlan"]'
     Rule: ""
@@ -32,11 +31,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=478,y=224,xs=431&525,ys=153&295
-    event: FINISH
     to: S2
 - id: S5
   name: Which?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: variables["language"]
     SCRIPT: Kotlin Script
@@ -45,20 +43,18 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=264,y=156,xs=245&318,ys=148&148
-    event: FINISH
     to: S4
     result: Kotlin
   - id: L4
     attributes:
       display: type=Elbow,x=207,y=230,xs=198&198,ys=181&273
-    event: FINISH
     to: S6
     result: Java
 - id: S6
   name: |-
     Java
     ServicePlan
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: ServicePlanTest_A6
     Java: ""
@@ -68,7 +64,6 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=372,y=319,xs=255&490,ys=319&319
-    event: FINISH
     to: S2
 notes:
 - id: N3

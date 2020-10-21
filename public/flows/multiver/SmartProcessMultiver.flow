@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=60,y=140,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=180,y=160,xs=124&236,ys=160&160
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=640,y=140,w=60,h=40
 - id: S3
   name: Invoke v2.1
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=240,y=130,w=100,h=60
     processname: tests.multiver/SubprocessMultiver.proc
@@ -32,11 +31,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=395,y=160,xs=344&446,ys=160&160
-    event: FINISH
     to: S4
 - id: S4
   name: Invoke v3.0
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=450,y=130,w=100,h=60
     processname: tests.multiver/SubprocessMultiver.proc
@@ -46,5 +44,4 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=595,y=160,xs=554&636,ys=160&160
-    event: FINISH
     to: S2

@@ -7,23 +7,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=49,y=100,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=158,y=120,xs=113&203,ys=120&120
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=612,y=103,w=60,h=40
 - id: S3
   name: Error
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: ServiceSub_A3
     Java: ""
@@ -32,13 +31,12 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=560,y=124,xs=513&608,ys=124&124
-    event: FINISH
     to: S2
 - id: S4
   name: |-
     Populate
     Values
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["person"]'
     Rule: |+
@@ -58,7 +56,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=358,y=121,xs=316&401,ys=121&121
-    event: FINISH
     to: S3
 variables:
   id:

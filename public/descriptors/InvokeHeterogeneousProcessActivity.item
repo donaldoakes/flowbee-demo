@@ -1,5 +1,5 @@
 {
   "icon": "multisub.png",
-  "name": "flowbee-demo.process.InvokeHeterogeneousProcessActivity",
-  "label": "InvokeHeterogeneousProcessActivity"
+  "path": "flowbee-demo.process.InvokeHeterogeneousProcessActivity",
+  "name": "InvokeHeterogeneousProcessActivity"
 }

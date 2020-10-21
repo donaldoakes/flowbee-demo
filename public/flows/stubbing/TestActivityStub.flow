@@ -9,23 +9,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=35,y=58,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=200,y=29,xs=99&151,ys=78&148
-    event: FINISH
     to: S11
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=574,y=233,w=60,h=40
 - id: S3
   name: Stubbed Script
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: throw new Exception('Help!')
     SCRIPT: Groovy
@@ -34,17 +33,15 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=354,y=153,xs=346&410,ys=177&177
-    event: FINISH
     to: S4
     result: toTimer
   - id: L4
     attributes:
       display: type=Elbow,x=293,y=214,xs=294&294,ys=207&225
-    event: FINISH
     to: S5
 - id: S4
   name: Stubbed Timer
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '600'
@@ -54,16 +51,15 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=541,y=169,xs=518&550,ys=179&179
-    event: FINISH
     to: S6
 - id: S5
   name: Finish
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=264,y=229,w=60,h=40
 - id: S6
   name: "Stub Test\r\nSubproc"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=554,y=147,w=100,h=60
     processname: tests.stubbing/TestActivityStubSubproc
@@ -73,11 +69,10 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=604,y=220,xs=604&604,ys=211&229
-    event: FINISH
     to: S2
 - id: S11
   name: Path
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: flowPath
     SCRIPT: Groovy
@@ -86,18 +81,16 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=186,y=150,xs=185&238,ys=172&172
-    event: FINISH
     to: S3
     result: various
   - id: L9
     attributes:
       display: type=Elbow,x=163,y=213,xs=151&151,ys=196&290
-    event: FINISH
     to: S12
     result: all timers
 - id: S12
   name: Timer 1
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '60'
@@ -107,11 +100,10 @@ steps:
   - id: L10
     attributes:
       display: type=Elbow,x=224,y=324,xs=208&241,ys=324&324
-    event: FINISH
     to: S13
 - id: S13
   name: Timer 2
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: ${number}
@@ -121,11 +113,10 @@ steps:
   - id: L11
     attributes:
       display: type=Elbow,x=361,y=323,xs=349&373,ys=323&323
-    event: FINISH
     to: S14
 - id: S14
   name: Timer 3
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '7200'
@@ -135,11 +126,10 @@ steps:
   - id: L12
     attributes:
       display: type=Elbow,x=503,y=325,xs=481&525,ys=325&325
-    event: FINISH
     to: S15
 - id: S15
   name: Done
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=529,y=305,w=60,h=40
 subflows:
@@ -152,18 +142,17 @@ subflows:
   steps:
   - id: S9
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=273,y=45,w=60,h=40
     links:
     - id: L6
       attributes:
         display: type=Elbow,x=369,y=65,xs=337&401,ys=65&65
-      event: FINISH
       to: S7
   - id: S7
     name: Stubbed Task
-    descriptor: flowbee-demo.task.CustomManualTaskActivity
+    path: flowbee-demo.task.CustomManualTaskActivity
     attributes:
       AlertIntervalUnits: Hours
       Category: COM
@@ -179,11 +168,10 @@ subflows:
     - id: L7
       attributes:
         display: type=Elbow,x=539,y=65,xs=509&566,ys=65&65
-      event: FINISH
       to: S10
   - id: S10
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=570,y=45,w=60,h=40
 variables:

@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=342,y=24,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=470,y=78,xs=372&372,ys=68&147
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=174,y=475,w=60,h=40
 - id: S3
   name: "Send\r\nVia"
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: ${sendVia}
     SCRIPT: javax.el
@@ -31,18 +30,16 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=292,y=164,xs=321&258,ys=186&266
-    event: FINISH
     to: S5
     result: smtp
   - id: L3
     attributes:
       display: type=Elbow,x=420,y=164,xs=423&490,ys=186&267
-    event: FINISH
     to: S4
     result: sendgrid
 - id: S5
   name: SMTP
-  descriptor: flowbee-demo.notification.EmailNotificationActivity
+  path: flowbee-demo.notification.EmailNotificationActivity
   attributes:
     CCGroups: '["Flowbee Support"]'
     NoticeGroups: '["Developers"]'
@@ -57,11 +54,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=204,y=322,xs=204&204,ys=300&345
-    event: FINISH
     to: S6
 - id: S4
   name: SendGrid
-  descriptor: flowbee-demo.sendgrid.SendgridActivity
+  path: flowbee-demo.sendgrid.SendgridActivity
   attributes:
     CCGroups: '["Flowbee Support"]'
     NoticeGroups: '["Developers"]'
@@ -75,11 +71,10 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=544,y=322,xs=544&544,ys=301&344
-    event: FINISH
     to: S7
 - id: S6
   name: "SMTP\r\nTask"
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -91,11 +86,10 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=204,y=446,xs=204&204,ys=421&471
-    event: FINISH
     to: S2
 - id: S7
   name: "SendGrid\r\nTask"
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -107,11 +101,10 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=546,y=444,xs=546&546,ys=422&471
-    event: FINISH
     to: S8
 - id: S8
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=516,y=475,w=60,h=40
 notes:

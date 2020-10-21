@@ -4,18 +4,17 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=56,y=97,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=261,y=117,xs=120&402,ys=117&117
-    event: FINISH
     to: S2
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=406,y=97,w=60,h=40
 variables:

@@ -6,36 +6,34 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=70,y=120,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=170,y=140,xs=134&206,ys=140&140
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=490,y=120,w=60,h=40
 - id: S3
   name: Pause
-  descriptor: flowbee-demo.pause
+  path: flowbee-demo.pause
   attributes:
     display: x=210,y=120,w=60,h=40
   links:
   - id: L2
     attributes:
       display: type=Elbow,x=300,y=140,xs=274&326,ys=140&140
-    event: FINISH
     to: S4
 - id: S4
   name: |-
     Weather
     Update
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: InstanceEdit_A4
     Java: |
@@ -56,7 +54,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=460,y=140,xs=434&486,ys=140&140
-    event: FINISH
     to: S2
 variables:
   weather:

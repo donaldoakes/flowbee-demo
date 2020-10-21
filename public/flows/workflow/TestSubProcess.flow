@@ -9,18 +9,17 @@ attributes:
 steps:
 - id: S34
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=55,y=100,w=60,h=40
   links:
   - id: L27
     attributes:
       display: type=Elbow,x=157,y=119,xs=119&191,ys=120&120
-    event: FINISH
     to: S31
 - id: S32
   name: Wait for a while
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '1'
@@ -30,16 +29,15 @@ steps:
   - id: L26
     attributes:
       display: type=Elbow,x=523,y=121,xs=488&554,ys=122&122
-    event: FINISH
     to: S33
 - id: S33
   name: Finish
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=558,y=102,w=60,h=40
 - id: S31
   name: Calculate sqaure
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: 'result = argument * argument;   '
     SCRIPT: Groovy
@@ -48,7 +46,6 @@ steps:
   - id: L28
     attributes:
       display: type=Elbow,x=340,y=123,xs=299&380,ys=123&123
-    event: FINISH
     to: S32
 variables:
   argument:

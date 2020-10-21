@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=41,y=86,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=169,y=86,xs=105&168,ys=106&106
-    event: FINISH
     to: S5
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=542,y=84,w=60,h=40
 - id: S3
   name: A Custom Task
-  descriptor: flowbee-demo.task.CustomManualTaskActivity
+  path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/CustomManualTask.pagelet
@@ -34,11 +33,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=510,y=150,xs=516&538,ys=204&104
-    event: FINISH
     to: S2
 - id: S4
   name: An AutoForm Task
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -51,11 +49,10 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=487,y=104,xs=436&538,ys=104&104
-    event: FINISH
     to: S2
 - id: S5
   name: "Custom\r\n?"
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: '#{isCustom}'
     SCRIPT: javax.el
@@ -64,18 +61,16 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=262,y=83,xs=253&306,ys=106&106
-    event: FINISH
     to: S4
     result: 'false'
   - id: L5
     attributes:
       display: type=Elbow,x=224,y=161,xs=210&210,ys=139&194
-    event: FINISH
     to: S6
     result: 'true'
 - id: S6
   name: "Provider\r\n?"
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: isIndexProvider
     SCRIPT: Groovy
@@ -84,18 +79,16 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=287,y=196,xs=249&385,ys=217&217
-    event: FINISH
     to: S3
     result: 'false'
   - id: L7
     attributes:
       display: type=Elbow,x=267,y=268,xs=249&340,ys=228&302
-    event: FINISH
     to: S7
     result: 'true'
 - id: S7
   name: Another Custom Task
-  descriptor: flowbee-demo.task.CustomManualTaskActivity
+  path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/CustomManualTask.pagelet
@@ -107,7 +100,6 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=489,y=234,xs=416&572,ys=338&128
-    event: FINISH
     to: S2
 variables:
   dateVar:

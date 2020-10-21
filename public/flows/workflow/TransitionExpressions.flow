@@ -7,23 +7,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=63,y=138,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=156,y=159,xs=128&184,ys=159&159
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=533,y=248,w=60,h=40
 - id: S3
   name: increment n
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       if (n == null)
@@ -36,22 +35,20 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=381,y=217,xs=381&381,ys=197&237
-    event: FINISH
     to: S5
 - id: S4
   name: dummy
-  descriptor: flowbee-demo.DefaultActivityImpl
+  path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=188,y=140,w=60,h=40
   links:
   - id: L3
     attributes:
       display: type=Elbow,x=288,y=160,xs=252&324,ys=160&160
-    event: FINISH
     to: S3
 - id: S5
   name: stop?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: n > loops
     SCRIPT: Groovy
@@ -60,7 +57,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=459,y=249,xs=428&529,ys=268&268
-    event: FINISH
     to: S2
     result: 'true'
   - id: L5
@@ -68,7 +64,6 @@ steps:
       TRANSITION_DELAY: ${delay}s
       TRANSITION_RETRY_COUNT: ${max}
       display: type=Elbow,x=269,y=249,xs=340&218&218,ys=269&269&180
-    event: FINISH
     to: S4
     result: 'false'
 variables:

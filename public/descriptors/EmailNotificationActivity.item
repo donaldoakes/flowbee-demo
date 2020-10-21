@@ -1,5 +1,5 @@
 {
   "icon": "email.png",
-  "name": "flowbee-demo.notification.EmailNotificationActivity",
-  "label": "EmailNotificationActivity"
+  "path": "flowbee-demo.notification.EmailNotificationActivity",
+  "name": "EmailNotificationActivity"
 }

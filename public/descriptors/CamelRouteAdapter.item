@@ -1,5 +1,5 @@
 {
   "icon": "camel.gif",
-  "name": "flowbee-demo.camel.CamelRouteAdapter",
-  "label": "CamelRouteAdapter"
+  "path": "flowbee-demo.camel.CamelRouteAdapter",
+  "name": "CamelRouteAdapter"
 }

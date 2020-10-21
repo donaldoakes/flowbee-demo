@@ -1,5 +1,5 @@
 {
   "icon": "invader.png",
-  "name": "flowbee-demo.tests.code.KotlinInvader",
-  "label": "KotlinInvader"
+  "path": "flowbee-demo.tests.code.KotlinInvader",
+  "name": "KotlinInvader"
 }

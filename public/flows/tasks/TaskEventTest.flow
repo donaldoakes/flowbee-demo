@@ -7,7 +7,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=29,y=209,w=60,h=40
   links:
@@ -15,16 +15,15 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=126,y=229,xs=93&132,ys=229&229
-    event: FINISH
     to: S16
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=588,y=186,w=60,h=40
 - id: S3
   name: "AutoForm Manual Task \r\nw Non Recurring Event"
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -37,11 +36,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=549,y=191,xs=479&584,ys=197&197
-    event: FINISH
     to: S2
 - id: S12
   name: "Custom Manual Task \r\nw Recurring Event"
-  descriptor: flowbee-demo.task.CustomManualTaskActivity
+  path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     STATUS_AFTER_TIMEOUT: Hold
@@ -55,25 +53,22 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=302,y=305,xs=405&405,ys=290&339
-    event: FINISH
     to: S14
     result: NonTaskAction
   - id: L9
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=566,y=223,xs=479&584,ys=223&223
-    event: FINISH
     to: S2
   - id: L13
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=512,y=262,xs=475&616&616,ys=265&265&230
-    event: FINISH
     to: S2
     result: AnotherWay
 - id: S14
   name: Check
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     Category: COM
     STATUS_AFTER_EVENT: Cancelled
@@ -86,11 +81,10 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=405,y=323,xs=405&405,ys=339&290
-    event: FINISH
     to: S12
 - id: S16
   name: Which Task?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: path
     SCRIPT: Groovy
@@ -100,14 +94,12 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=268,y=168,xs=252&339,ys=192&192
-    event: FINISH
     to: S3
     result: AutoForm
   - id: L12
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=266,y=217,xs=252&334,ys=240&240
-    event: FINISH
     to: S12
     result: Custom
 subflows:
@@ -120,23 +112,22 @@ subflows:
   steps:
   - id: S6
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=239,y=48,w=60,h=40
     links:
     - id: L4
       attributes:
         display: type=Elbow,x=336,y=76,xs=303&362,ys=68&68
-      event: FINISH
       to: S11
   - id: S7
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=539,y=48,w=60,h=40
   - id: S11
     name: New Timer Wait
-    descriptor: flowbee-demo.timer.TimerWaitActivity
+    path: flowbee-demo.timer.TimerWaitActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TIMER_WAIT: '2'
@@ -146,7 +137,6 @@ subflows:
     - id: L6
       attributes:
         display: type=Elbow,x=502,y=68,xs=470&535,ys=68&68
-      event: FINISH
       to: S7
 - id: F8
   name: Cancellation Handler
@@ -157,18 +147,17 @@ subflows:
   steps:
   - id: S9
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=697,y=52,w=60,h=40
     links:
     - id: L5
       attributes:
         display: type=Elbow,x=877,y=72,xs=761&993,ys=72&72
-      event: FINISH
       to: S10
   - id: S10
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=997,y=52,w=60,h=40
 variables:

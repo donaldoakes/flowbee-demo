@@ -1,5 +1,5 @@
 {
-  "name": "flowbee-demo.stop",
-  "label": "Stop",
+  "path": "flowbee-demo.stop",
+  "name": "Stop",
   "icon": "shape:stop"
 }

@@ -10,34 +10,32 @@ attributes:
 steps:
 - id: S30
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=21,y=179,w=60,h=40
   links:
   - id: L24
     attributes:
       display: type=Elbow,x=124,y=256,xs=85&162,ys=199&199
-    event: FINISH
     to: S26
 - id: S27
   name: Not executed
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     display: x=448,y=287,w=100,h=60
   links:
   - id: L23
     attributes:
       display: type=Elbow,x=633,y=242,xs=552&701,ys=317&176
-    event: FINISH
     to: S28
 - id: S28
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=705,y=156,w=60,h=40
 - id: S26
   name: Throw an Exception
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     Java: ""
     display: x=166,y=176,w=132,h=69
@@ -47,24 +45,22 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=373,y=126,xs=302&444,ys=210&54
-    event: RESUME
+    event: Resume
     to: S29
     result: AltAction
   - id: L22
     attributes:
       display: type=Elbow,x=380,y=265,xs=302&444,ys=210&317
-    event: FINISH
     to: S27
     result: 'no'
   - id: L25
     attributes:
       display: type=ElbowV,x=508,y=186,xs=302&701,ys=186&186
-    event: FINISH
     to: S28
     result: 'yes'
 - id: S29
   name: Alternate path
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     OsgiBundleSymbolicName: workflow
     Rule: runtimeContext.logInfo("In alternate path");
@@ -76,5 +72,4 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=605,y=126,xs=552&701,ys=54&176
-    event: FINISH
     to: S28

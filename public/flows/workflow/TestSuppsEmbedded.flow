@@ -12,18 +12,17 @@ attributes:
 steps:
 - id: S13
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=24,y=438,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=245,y=365,xs=88&139,ys=458&458
-    event: FINISH
     to: S5
 - id: S10
   name: update case value
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: $case = "good";
     display: x=653,y=162,w=100,h=60
@@ -31,16 +30,15 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=747,y=355,xs=703&809,ys=226&374
-    event: FINISH
     to: S7
 - id: S7
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=779,y=378,w=60,h=40
 - id: S1
   name: Manual task with event wait
-  descriptor: flowbee-demo.task.CustomManualTaskActivity
+  path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     TASK_PAGELET: base/CustomManualTask.pagelet
@@ -54,11 +52,10 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=704,y=389,xs=518&656&656&775,ys=494&494&394&394
-    event: FINISH
     to: S7
 - id: S9
   name: Wait for some event
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     STATUS_AFTER_TIMEOUT: Cancelled
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},Hold::CORRECT,true,;Signal-{$MasterRequestID},,false,
@@ -67,11 +64,10 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=609,y=209,xs=524&649,ys=195&195
-    event: FINISH
     to: S10
 - id: S5
   name: which case?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: testCase
     SCRIPT: Groovy
@@ -80,7 +76,6 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=280,y=213,xs=195&416,ys=458&199
-    event: FINISH
     to: S9
     result: correct-resume-on-wait
   - id: L14
@@ -88,37 +83,32 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=334,y=452,xs=195&410,ys=460&460
-    event: FINISH
     to: S1
     result: task-wait
   - id: L26
     attributes:
       display: type=Elbow,x=265,y=205,xs=195&416,ys=458&199
-    event: FINISH
     to: S9
     result: finish-resume-on-wait
   - id: L27
     attributes:
       display: type=Elbow,x=237,y=298,xs=195&420,ys=458&303
-    event: FINISH
     to: S22
     result: custom-finish-event-on-event-wait
   - id: L29
     attributes:
       display: type=Elbow,x=302,y=378,xs=191&300&300&410,ys=458&458&382&382
-    event: FINISH
     to: S24
     result: correct-waiting-on-wait
   - id: L32
     attributes:
       TRANSITION_DELAY: 0s
       display: type=Elbow,x=246,y=542,xs=195&426,ys=458&586
-    event: FINISH
     to: S25
     result: cancel-on-event
 - id: S22
   name: Wait for some event
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     STATUS_AFTER_TIMEOUT: Cancelled
     WAIT_EVENT_NAMES: Signal-{$MasterRequestID},custom-finish,false,
@@ -127,12 +117,11 @@ steps:
   - id: L30
     attributes:
       display: type=Elbow,x=588,y=276,xs=528&775,ys=303&398
-    event: FINISH
     to: S7
     result: custom-finish
 - id: S24
   name: Wait for some event
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     STATUS_AFTER_TIMEOUT: Cancelled
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},Waiting::CORRECT,true,;Signal-{$MasterRequestID},,false,
@@ -141,11 +130,10 @@ steps:
   - id: L31
     attributes:
       display: type=Elbow,x=659,y=411,xs=514&775,ys=395&395
-    event: FINISH
     to: S7
 - id: S25
   name: Wait for 3 min
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     $+Id: '26997'
     STATUS_AFTER_EVENT: Cancelled
@@ -157,7 +145,6 @@ steps:
   - id: L33
     attributes:
       display: type=Elbow,x=595,y=489,xs=534&775,ys=586&398
-    event: FINISH
     to: S7
 subflows:
 - id: F2
@@ -171,18 +158,17 @@ subflows:
   steps:
   - id: S17
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=837,y=73,w=60,h=40
     links:
     - id: L22
       attributes:
         display: type=Elbow,x=915,y=93,xs=901&950,ys=93&93
-      event: FINISH
       to: S18
   - id: S18
     name: Set Variable in Embedded
-    descriptor: flowbee-demo.script.ScriptExecutorActivity
+    path: flowbee-demo.script.ScriptExecutorActivity
     attributes:
       Rule: SetInEmbedded = SetInMain + ", World!";
       SCRIPT: Groovy
@@ -191,11 +177,10 @@ subflows:
     - id: L23
       attributes:
         display: type=Elbow,x=1096,y=96,xs=1058&1106,ys=96&96
-      event: FINISH
       to: S16
   - id: S16
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=1110,y=76,w=60,h=40
   variables:
@@ -212,23 +197,22 @@ subflows:
   steps:
   - id: S20
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=859,y=386,w=60,h=40
     links:
     - id: L24
       attributes:
         display: type=Elbow,x=991,y=398,xs=923&970,ys=406&406
-      event: FINISH
       to: S19
   - id: S21
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=1133,y=386,w=60,h=40
   - id: S19
     name: wait 1 min
-    descriptor: flowbee-demo.timer.TimerWaitActivity
+    path: flowbee-demo.timer.TimerWaitActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TIMER_WAIT: '1'
@@ -238,7 +222,6 @@ subflows:
     - id: L25
       attributes:
         display: type=Elbow,x=1104,y=406,xs=1078&1129,ys=406&406
-      event: FINISH
       to: S21
   variables:
     EmbeddedSubProcessTaskAction:
@@ -252,23 +235,22 @@ subflows:
   steps:
   - id: S27
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=862,y=222,w=60,h=40
     links:
     - id: L34
       attributes:
         display: type=Elbow,x=954,y=242,xs=926&959,ys=242&242
-      event: FINISH
       to: S30
   - id: S28
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=1101,y=222,w=60,h=40
   - id: S30
     name: wait 1 min
-    descriptor: flowbee-demo.timer.TimerWaitActivity
+    path: flowbee-demo.timer.TimerWaitActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TIMER_WAIT: '1'
@@ -278,7 +260,6 @@ subflows:
     - id: L35
       attributes:
         display: type=Elbow,x=1082,y=242,xs=1067&1097,ys=242&242
-      event: FINISH
       to: S28
 variables:
   SetInEmbedded:

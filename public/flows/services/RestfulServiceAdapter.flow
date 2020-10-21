@@ -4,28 +4,27 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=72,y=117,w=60,h=40
   links:
   - id: L13
     attributes:
       display: type=Elbow,x=179,y=137,xs=136&202,ys=137&137
-    event: FINISH
     to: S10
 - id: S6
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=595,y=119,w=60,h=40
 - id: S5
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=680,y=229,w=60,h=40
 - id: S9
   name: "POST\r\nRequest"
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     ConnectTimeout: '60000'
     DO_LOGGING: 'True'
@@ -42,11 +41,10 @@ steps:
   - id: L12
     attributes:
       display: type=Elbow,x=633,y=247,xs=567&676,ys=249&249
-    event: FINISH
     to: S5
 - id: S8
   name: "GET\r\nRequest"
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     EndpointUri: '#{props[''services.url'']}/services/AppSummary'
@@ -60,11 +58,10 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=566,y=143,xs=532&591,ys=139&139
-    event: FINISH
     to: S6
 - id: S10
   name: Set Request
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: SetRequest_A10
     Java: ""
@@ -74,24 +71,21 @@ steps:
   - id: L14
     attributes:
       display: type=Elbow,x=358,y=149,xs=330&408,ys=141&141
-    event: FINISH
     to: S8
     result: GET
   - id: L15
     attributes:
       display: type=ElbowV,x=337,y=226,xs=310&310&438,ys=182&250&250
-    event: FINISH
     to: S9
     result: POST
   - id: L16
     attributes:
       display: type=Elbow,x=272,y=271,xs=266&266,ys=182&317
-    event: FINISH
     to: S11
     result: PATCH
 - id: S11
   name: "PATCH\r\nRequest"
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     ConnectTimeout: '30000'
     DO_LOGGING: 'True'
@@ -107,11 +101,10 @@ steps:
   - id: L17
     attributes:
       display: type=Elbow,x=394,y=361,xs=335&453,ys=361&361
-    event: FINISH
     to: S12
 - id: S12
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=457,y=341,w=60,h=40
 variables:

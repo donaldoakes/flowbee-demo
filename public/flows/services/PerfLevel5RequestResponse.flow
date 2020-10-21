@@ -9,23 +9,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=50,y=130,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=140,y=150,xs=114&166,ys=150&150
-    event: FINISH
     to: S5
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=670,y=130,w=60,h=40
 - id: S3
   name: Respond
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["response"]'
     Rule: response = new model.StatusResponse(200, "OK").getJson()
@@ -35,11 +34,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=640,y=150,xs=614&666,ys=150&150
-    event: FINISH
     to: S2
 - id: S4
   name: Invoke
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     EndpointUri: '#{props[''services.url'']}/api/Workgroups'
     HttpMethod: POST
@@ -50,13 +48,12 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=475,y=150,xs=444&506,ys=150&150
-    event: FINISH
     to: S3
 - id: S5
   name: |-
     Create
     Request
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["serviceRequest"]'
     Rule: |
@@ -72,7 +69,6 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=305,y=150,xs=274&336,ys=150&150
-    event: FINISH
     to: S4
 variables:
   request:

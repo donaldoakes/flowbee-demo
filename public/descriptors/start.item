@@ -1,5 +1,5 @@
 {
-  "name": "flowbee-demo.start",
-  "label": "Start",
+  "path": "flowbee-demo.start",
+  "name": "Start",
   "icon": "shape:start"
 }

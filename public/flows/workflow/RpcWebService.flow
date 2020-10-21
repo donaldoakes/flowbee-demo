@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=76,y=92,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=248,y=53,xs=140&269,ys=112&112
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=510,y=92,w=60,h=40
 - id: S3
   name: "Invoke Employee\r\nService"
-  descriptor: flowbee-demo.adapter.soap.RpcWebServiceAdapter
+  path: flowbee-demo.adapter.soap.RpcWebServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     Output Documents: '["responseDoc"]'
@@ -40,7 +39,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=454,y=112,xs=388&506,ys=112&112
-    event: FINISH
     to: S2
 variables:
   requestDoc:

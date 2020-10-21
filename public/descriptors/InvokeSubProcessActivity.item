@@ -1,5 +1,5 @@
 {
   "icon": "process.jpg",
-  "name": "flowbee-demo.process.InvokeSubProcessActivity",
-  "label": "InvokeSubProcessActivity"
+  "path": "flowbee-demo.process.InvokeSubProcessActivity",
+  "name": "InvokeSubProcessActivity"
 }

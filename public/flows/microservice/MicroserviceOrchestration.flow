@@ -10,23 +10,22 @@ attributes:
 steps:
 - id: S1
   name: Receive
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=45,y=52,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=100,y=68,xs=105&294&294,ys=72&72&138
-    event: FINISH
     to: S6
 - id: S2
   name: Response
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=626,y=532,w=60,h=40
 - id: S3
   name: "Invoke\r\nServices"
-  descriptor: flowbee-demo.microservice.OrchestratorActivity
+  path: flowbee-demo.microservice.OrchestratorActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     display: x=428,y=284,w=121,h=77
@@ -36,11 +35,10 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=489,y=378,xs=489&489,ys=365&402
-    event: FINISH
     to: S10
 - id: S4
   name: "Create\r\nPlan"
-  descriptor: flowbee-demo.kotlin.ScriptActivity
+  path: flowbee-demo.kotlin.ScriptActivity
   attributes:
     Output Documents: '["servicePlan"]'
     Rule: ""
@@ -50,11 +48,10 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=391,y=320,xs=359&424,ys=320&320
-    event: FINISH
     to: S3
 - id: S5
   name: "Consolidate\r\nResponses"
-  descriptor: flowbee-demo.microservice.ResponseCollector
+  path: flowbee-demo.microservice.ResponseCollector
   attributes:
     consolidator: microservice.CombiningConsolidator
     display: x=430,y=520,w=120,h=73
@@ -62,11 +59,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=590,y=551,xs=554&622,ys=552&552
-    event: FINISH
     to: S2
 - id: S6
   name: "Validate\r\nRequest"
-  descriptor: flowbee-demo.validate.SwaggerValidatorActivity
+  path: flowbee-demo.validate.SwaggerValidatorActivity
   attributes:
     Validate: '["Query","Body"]'
     display: x=238,y=142,w=118,h=75
@@ -74,30 +70,28 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=140,y=178,xs=234&109,ys=177&177
-    event: FINISH
     to: S7
     result: 'false'
   - id: L6
     attributes:
       display: type=Elbow,x=302,y=242,xs=296&296,ys=221&277
-    event: FINISH
     to: S4
     result: 'true'
 - id: S7
   name: Reject
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=45,y=157,w=60,h=40
 - id: S9
   name: Accepted
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=629,y=421,w=60,h=40
 - id: S10
   name: |-
     Synchronous
     Response?
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["response"]'
     Rule: ""
@@ -107,13 +101,11 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=497,y=491,xs=490&490,ys=483&516
-    event: FINISH
     to: S5
     result: 'true'
   - id: L9
     attributes:
       display: type=Elbow,x=575,y=423,xs=556&625,ys=441&441
-    event: FINISH
     to: S9
     result: 'false'
 variables:

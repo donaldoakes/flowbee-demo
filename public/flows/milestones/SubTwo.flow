@@ -7,25 +7,24 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=42,y=118,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=132,y=138,xs=106&158,ys=138&138
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=590,y=115,w=60,h=40
 - id: S3
   name: |-
     Subflow
     Milestone
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=290,y=108,w=100,h=60
@@ -36,29 +35,26 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=418,y=136,xs=394&442,ys=136&136
-    event: FINISH
     to: S5
 - id: S4
   name: Boring
-  descriptor: flowbee-demo.DefaultActivityImpl
+  path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=162,y=112,w=69,h=50
   links:
   - id: L2
     attributes:
       display: type=Elbow,x=260,y=137,xs=235&286,ys=137&137
-    event: FINISH
     to: S3
 - id: S5
   name: Snoozefest
-  descriptor: flowbee-demo.DefaultActivityImpl
+  path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=446,y=113,w=75,h=47
   links:
   - id: L4
     attributes:
       display: type=Elbow,x=555,y=135,xs=525&586,ys=135&135
-    event: FINISH
     to: S2
 variables:
   inputVar:

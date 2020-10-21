@@ -8,7 +8,7 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     Parameters: sapId=${request.sapId};workstationId=${request.workstationId}
     display: x=43,y=102,w=60,h=40
@@ -16,11 +16,10 @@ steps:
   - id: L1
     attributes:
       display: type=Elbow,x=165,y=129,xs=107&152,ys=122&122
-    event: FINISH
     to: S5
 - id: S5
   name: "Real\r\nLookup?"
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: sapId != 'DHO115360' && workstationId != 'dxoakes'
     SCRIPT: Groovy
@@ -29,23 +28,21 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=300,y=112,xs=238&361,ys=112&112
-    event: FINISH
     to: S4
     result: 'true'
   - id: L5
     attributes:
       display: type=Elbow,x=292,y=189,xs=230&265&265&364,ys=143&143&185&185
-    event: FINISH
     to: S3
     result: 'false'
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=577,y=180,w=60,h=40
 - id: S3
   name: Lookup
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: response
     Rule: ""
@@ -55,11 +52,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=527,y=201,xs=472&573,ys=200&200
-    event: FINISH
     to: S2
 - id: S6
   name: "Populate\r\nObject"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: employee#response
     Rule: ""
@@ -69,11 +65,10 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=607,y=154,xs=607&607,ys=152&176
-    event: FINISH
     to: S2
 - id: S4
   name: LDAP Lookup
-  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
+  path: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: prop:LDAP/AppCUID
     AppPassword: prop:LDAP/AppPassword
@@ -90,7 +85,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=539,y=132,xs=469&549,ys=110&110
-    event: FINISH
     to: S6
 variables:
   employee:

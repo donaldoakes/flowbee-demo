@@ -85,7 +85,15 @@ window.addEventListener('load', async () => {
         const flowAction = e.action;
         if (flowDiagram) {
             if (flowAction === 'save') {
-                let name = flowDiagram.flow.name;
+                let name = flowDiagram.flow.path;
+                const lastSlash = name.lastIndexOf('/');
+                if (lastSlash > 0 && lastSlash < name.length - 1) {
+                  name = name.substring(lastSlash + 1);
+                }
+                const lastDot = name.lastIndexOf('.');
+                if (lastDot > 1) {
+                  name = name.substring(0, lastDot);
+                }
                 if (!storage.isLocal(flowPath)) {
                     name = prompt('Save in localStorage as:');
                 }

@@ -9,18 +9,17 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=22,y=249,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=107,y=247,xs=86&112,ys=269&269
-    event: FINISH
     to: S8
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=769,y=230,w=60,h=40
 - id: S3
@@ -28,7 +27,7 @@ steps:
     create
     execution plan
     - sequential
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |+
@@ -70,13 +69,12 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=389,y=131,xs=366&396,ys=132&132
-    event: FINISH
     to: S4
 - id: S4
   name: |-
     invoke heterogeneous
     processes - sequential
-  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  path: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'FALSE'
@@ -89,13 +87,12 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=570,y=194,xs=533&611,ys=133&259
-    event: FINISH
     to: S11
 - id: S6
   name: |-
     invoke heterogeneous
     processes - parallel
-  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  path: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'TRUE'
@@ -108,13 +105,12 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=574,y=259,xs=534&611,ys=259&259
-    event: FINISH
     to: S11
 - id: S7
   name: |-
     invoke heterogeneous
     processes - error
-  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  path: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     Execution Plan: execplan
     Force Parallel Execution: 'TRUE'
@@ -127,11 +123,10 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=570,y=326,xs=530&611,ys=393&259
-    event: FINISH
     to: S11
 - id: S8
   name: which case?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: testcase
     SCRIPT: Groovy
@@ -142,7 +137,6 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '-1'
       display: type=ElbowH,x=161,y=189,xs=203&231&231&258,ys=269&269&138&138
-    event: FINISH
     to: S3
     result: sequential
   - id: L10
@@ -150,14 +144,12 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '-1'
       display: type=ElbowH,x=185,y=363,xs=203&226&226&246,ys=269&269&389&389
-    event: FINISH
     to: S10
     result: error
   - id: L11
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=199,y=285,xs=207&251,ys=269&269
-    event: FINISH
     to: S9
     result: parallel
 - id: S9
@@ -165,7 +157,7 @@ steps:
     create
     execution plan
     - parallel
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |
@@ -206,14 +198,13 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=378,y=259,xs=364&397,ys=259&259
-    event: FINISH
     to: S6
 - id: S10
   name: |-
     create
     execution plan
     - error
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: execplan
     Rule: |
@@ -254,11 +245,10 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=382,y=392,xs=366&393,ys=392&392
-    event: FINISH
     to: S7
 - id: S11
   name: Set result variables
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: response
     Rule: ""
@@ -269,7 +259,6 @@ steps:
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=742,y=250,xs=719&765,ys=250&250
-    event: FINISH
     to: S2
 variables:
   docFromSubproc:

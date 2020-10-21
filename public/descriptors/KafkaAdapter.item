@@ -1,5 +1,5 @@
 {
   "icon": "kafka.png",
-  "name": "flowbee-demo.kafka.KafkaAdapter",
-  "label": "KafkaAdapter"
+  "path": "flowbee-demo.kafka.KafkaAdapter",
+  "name": "KafkaAdapter"
 }

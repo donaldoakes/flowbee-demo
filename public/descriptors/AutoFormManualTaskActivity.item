@@ -1,5 +1,5 @@
 {
   "icon": "task.png",
-  "name": "flowbee-demo.task.AutoFormManualTaskActivity",
-  "label": "AutoFormManualTaskActivity"
+  "path": "flowbee-demo.task.AutoFormManualTaskActivity",
+  "name": "AutoFormManualTaskActivity"
 }

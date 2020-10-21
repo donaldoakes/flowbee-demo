@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=49,y=112,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=169,y=91,xs=113&222,ys=132&132
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=469,y=112,w=60,h=40
 - id: S3
   name: GetEmployee
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     EndpointUri: http://purposely_bogus:10001/hub/Services/REST
@@ -34,7 +33,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=397,y=132,xs=330&465,ys=132&132
-    event: FINISH
     to: S2
 variables:
   request:

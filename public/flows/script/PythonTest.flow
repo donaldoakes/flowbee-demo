@@ -7,23 +7,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=50,y=90,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=140,y=110,xs=114&166,ys=110&110
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=680,y=90,w=60,h=40
 - id: S3
   name: Exec
-  descriptor: flowbee-demo.python.ScriptActivity
+  path: flowbee-demo.python.ScriptActivity
   attributes:
     Output Documents: '["person"]'
     Rule: |
@@ -51,12 +50,11 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=434,y=88,xs=424&496,ys=110&110
-    event: FINISH
     to: S5
     result: onward
 - id: S4
   name: Which?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: testCase
     SCRIPT: Python
@@ -65,18 +63,16 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=264,y=89,xs=254&316,ys=110&110
-    event: FINISH
     to: S3
     result: exec
   - id: L5
     attributes:
       display: type=Elbow,x=216,y=153,xs=210&210,ys=144&176
-    event: FINISH
     to: S6
     result: decide
 - id: S5
   name: Use Module
-  descriptor: flowbee-demo.python.ScriptActivity
+  path: flowbee-demo.python.ScriptActivity
   attributes:
     Rule: |
       runtimeContext.logDebug('Executing ' + runtimeContext.activity.name)
@@ -92,11 +88,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=640,y=110,xs=604&676,ys=110&110
-    event: FINISH
     to: S2
 - id: S6
   name: Boolean
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: testCase == 'decide'
     SCRIPT: Python
@@ -105,23 +100,21 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=255,y=191,xs=254&296,ys=210&210
-    event: FINISH
     to: S7
     result: 'false'
   - id: L7
     attributes:
       display: type=Elbow,x=218,y=249,xs=210&210,ys=244&276
-    event: FINISH
     to: S8
     result: 'true'
 - id: S7
   name: No Way
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=300,y=190,w=60,h=40
 - id: S8
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=180,y=280,w=60,h=40
 variables:

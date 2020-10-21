@@ -10,28 +10,27 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=157,y=90,w=60,h=40
   links:
   - id: L3
     attributes:
       display: type=Elbow,x=160,y=149,xs=187&187,ys=134&209
-    event: FINISH
     to: S3
 - id: S4
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=158,y=336,w=60,h=40
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=396,y=218,w=60,h=40
 - id: S3
   name: JavaScript Activity
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: JavaScript
@@ -40,12 +39,10 @@ steps:
   - id: L1
     attributes:
       display: type=Elbow,x=188,y=302,xs=188&188,ys=277&332
-    event: FINISH
     to: S4
   - id: L2
     attributes:
       display: type=Elbow,x=317,y=238,xs=241&392,ys=238&238
-    event: FINISH
     to: S2
     result: OutcomeY
 variables:

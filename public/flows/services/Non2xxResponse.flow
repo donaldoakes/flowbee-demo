@@ -7,25 +7,24 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=69,y=171,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=158,y=191,xs=133&183,ys=191&191
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=537,y=175,w=60,h=40
 - id: S3
   name: |-
     Create
     Request
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["serviceRequest"]'
     Rule: |-
@@ -37,13 +36,12 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=325,y=193,xs=299&352,ys=193&193
-    event: FINISH
     to: S4
 - id: S4
   name: |-
     POST
     404
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     EndpointUri: '#{props[''services.url'']}/api/notfound'
     HttpMethod: POST
@@ -54,7 +52,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=502,y=195,xs=472&533,ys=195&195
-    event: FINISH
     to: S2
 variables:
   serviceRequest:

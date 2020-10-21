@@ -1,5 +1,5 @@
 {
   "icon": "slack.png",
-  "name": "flowbee-demo.slack.SlackActivity",
-  "label": "SlackActivity"
+  "path": "flowbee-demo.slack.SlackActivity",
+  "name": "SlackActivity"
 }

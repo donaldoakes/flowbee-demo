@@ -29,12 +29,12 @@ app.get('/flows', async (req, res) => {
     res.send(JSON.stringify(flowTree, null, 2));
 });
 app.get('/descriptors', async (req, res) => {
-    const flowTree = dirTree("public/descriptors", {
+    const descriptors = dirTree("public/descriptors", {
         extensions: /\.item/,
         normalizePath: true
     }, trimPath);
     res.set('Content-Type', 'application/json');
-    res.send(JSON.stringify(flowTree, null, 2));
+    res.send(JSON.stringify(descriptors, null, 2));
 });
 
 app.listen(8000);

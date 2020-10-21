@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=52,y=92,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=158,y=104,xs=116&154,ys=112&112
-    event: FINISH
     to: S4
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=499,y=90,w=60,h=40
 - id: S3
   name: "AutoForm Task \r\nfor Service Access"
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -34,11 +33,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=472,y=110,xs=448&495,ys=110&110
-    event: FINISH
     to: S2
 - id: S4
   name: "Assign\r\nObj Var"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: objectVar
     Rule: ""
@@ -48,7 +46,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=294,y=115,xs=270&316,ys=115&115
-    event: FINISH
     to: S3
 variables:
   dateVar:

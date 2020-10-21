@@ -1,5 +1,5 @@
 {
   "icon": "script.gif",
-  "name": "flowbee-demo.script.ScriptExecutorActivity",
-  "label": "ScriptExecutorActivity"
+  "path": "flowbee-demo.script.ScriptExecutorActivity",
+  "name": "ScriptExecutorActivity"
 }

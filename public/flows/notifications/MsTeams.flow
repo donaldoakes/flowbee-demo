@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=53,y=148,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=144,y=167,xs=117&172,ys=167&167
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=519,y=148,w=60,h=40
 - id: S3
   name: Notify
-  descriptor: flowbee-demo.msteams.MsTeamsActivity
+  path: flowbee-demo.msteams.MsTeamsActivity
   attributes:
     display: x=176,y=138,w=100,h=60
     message: msteams/message.json
@@ -32,13 +31,12 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=311,y=168,xs=281&341,ys=168&168
-    event: FINISH
     to: S4
 - id: S4
   name: |-
     MS Teams
     Task
-  descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+  path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
     TASK_TEMPLATE: tests.notifications/MsTeamsTask.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
@@ -47,7 +45,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=482,y=167,xs=449&515,ys=167&167
-    event: FINISH
     to: S2
 notes:
 - id: N1

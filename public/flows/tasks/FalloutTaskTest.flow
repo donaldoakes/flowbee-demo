@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=55,y=220,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=207,y=194,xs=119&216,ys=240&240
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=475,y=220,w=60,h=40
 - id: S3
   name: "Throw\r\nException"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: throw new Exception("Fallout")
     display: x=220,y=210,w=101,h=74
@@ -30,7 +29,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=397,y=240,xs=325&471,ys=240&240
-    event: FINISH
     to: S2
 subflows:
 - id: F6
@@ -42,18 +40,17 @@ subflows:
   steps:
   - id: S7
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=302,y=80,w=60,h=40
     links:
     - id: L3
       attributes:
         display: type=Elbow,x=392,y=100,xs=366&417,ys=100&100
-      event: FINISH
       to: S4
   - id: S4
     name: Fallout Test Task
-    descriptor: flowbee-demo.task.CustomManualTaskActivity
+    path: flowbee-demo.task.CustomManualTaskActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TASK_PAGELET: base/CustomManualTask.pagelet
@@ -64,11 +61,10 @@ subflows:
     - id: L4
       attributes:
         display: type=Elbow,x=567,y=100,xs=536&598,ys=100&100
-      event: FINISH
       to: S8
   - id: S8
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=602,y=80,w=60,h=40
 notes:

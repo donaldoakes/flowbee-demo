@@ -6,74 +6,67 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=284,y=28,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=314,y=100,xs=314&314,ys=71&129
-    event: FINISH
     to: S3
 - id: S3
   name: Which?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     display: x=284,y=133,w=60,h=40
   links:
   - id: L2
     attributes:
       display: type=Elbow,x=155,y=182,xs=280&101,ys=153&224
-    event: FINISH
     to: S4
     result: java
   - id: L3
     attributes:
       display: type=Elbow,x=228,y=226,xs=314&230,ys=177&314
-    event: FINISH
     to: S6
     result: java pagelet
   - id: L4
     attributes:
       display: type=Elbow,x=461,y=182,xs=348&567,ys=153&212
-    event: FINISH
     to: S5
     result: kotlin
   - id: L5
     attributes:
       display: type=Elbow,x=339,y=330,xs=329&329&416&416,ys=164&350&350&379
-    event: FINISH
     to: S7
     result: kotlin pagelet
 - id: S4
   name: |-
     Java
     Activity
-  descriptor: flowbee-demo.tests.code.JavaActivity
+  path: flowbee-demo.tests.code.JavaActivity
   attributes:
     display: x=36,y=204,w=60,h=40
   links:
   - id: L7
     attributes:
       display: type=Elbow,x=67,y=283,xs=67&67,ys=248&319
-    event: FINISH
     to: S8
 - id: S5
   name: |-
     Kotlin
     Activity
-  descriptor: flowbee-demo.tests.code.KotlinActivity
+  path: flowbee-demo.tests.code.KotlinActivity
   attributes:
     display: x=572,y=192,w=60,h=40
   links:
   - id: L9
     attributes:
       display: type=Elbow,x=600,y=271,xs=600&600,ys=236&306
-    event: FINISH
     to: S9
 - id: S6
   name: Java Invader
-  descriptor: flowbee-demo.tests.code.JavaInvader
+  path: flowbee-demo.tests.code.JavaInvader
   attributes:
     Invader: Dr. Soran
     Planet: Neptune
@@ -82,12 +75,11 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=112,y=324,xs=176&102,ys=343&343
-    event: FINISH
     to: S8
     result: Neptune
 - id: S7
   name: Kotlin Invader
-  descriptor: flowbee-demo.tests.code.KotlinInvader
+  path: flowbee-demo.tests.code.KotlinInvader
   attributes:
     Invader: Gul Dukat
     Planet: Jupiter
@@ -96,17 +88,16 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=524,y=362,xs=479&564,ys=414&330
-    event: FINISH
     to: S9
     result: Jupiter
 - id: S8
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=38,y=323,w=60,h=40
 - id: S9
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=569,y=310,w=60,h=40
 variables:

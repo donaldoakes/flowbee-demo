@@ -7,23 +7,22 @@ attributes:
 steps:
 - id: S88
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=57,y=87,w=60,h=40
   links:
   - id: L68
     attributes:
       display: type=Elbow,x=209,y=67,xs=121&241,ys=107&107
-    event: FINISH
     to: S90
 - id: S89
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=477,y=87,w=60,h=40
 - id: S90
   name: Assign Var Vals
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |
       print 'value of fromParent: ' + fromParent
@@ -34,7 +33,6 @@ steps:
   - id: L69
     attributes:
       display: type=Elbow,x=410,y=107,xs=349&473,ys=107&107
-    event: FINISH
     to: S89
 variables:
   fromParent:

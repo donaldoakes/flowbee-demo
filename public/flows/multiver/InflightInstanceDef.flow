@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=74,y=159,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=166,y=178,xs=138&195,ys=178&178
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=692,y=158,w=60,h=40
 - id: S3
   name: before
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       runtimeContext.logDebug("Executing " + runtimeContext.getActivity().getName())
@@ -33,22 +32,20 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=342,y=181,xs=303&381,ys=181&181
-    event: FINISH
     to: S5
 - id: S5
   name: Pause
-  descriptor: flowbee-demo.pause
+  path: flowbee-demo.pause
   attributes:
     display: x=384,y=162,w=60,h=40
   links:
   - id: L4
     attributes:
       display: type=Elbow,x=482,y=182,xs=448&516,ys=182&182
-    event: FINISH
     to: S6
 - id: S6
   name: after
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: InflightInstanceDef_A6
     Java: ""
@@ -57,7 +54,6 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=656,y=178,xs=624&688,ys=178&178
-    event: FINISH
     to: S2
 notes:
 - id: N1

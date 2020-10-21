@@ -1,5 +1,5 @@
 {
   "icon": "xml.jpg",
-  "name": "flowbee-demo.transform.TransformActivity",
-  "label": "TransformActivity"
+  "path": "flowbee-demo.transform.TransformActivity",
+  "name": "TransformActivity"
 }

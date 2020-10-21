@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=25,y=104,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=28,y=-41,xs=89&144,ys=124&124
-    event: FINISH
     to: S5
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=590,y=103,w=60,h=40
 - id: S3
   name: Invoke Subs
-  descriptor: flowbee-demo.process.InvokeHeterogeneousProcessActivity
+  path: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
     DELAY_BETWEEN: '6'
     Execution Plan: plan
@@ -35,11 +34,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=561,y=123,xs=534&586,ys=123&123
-    event: FINISH
     to: S2
 - id: S4
   name: Build Plan
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: plan
     Rule: ""
@@ -49,11 +47,10 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=415,y=121,xs=391&427,ys=121&121
-    event: FINISH
     to: S3
 - id: S5
   name: "Publish\r\nFirst?"
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: publishFirst
     SCRIPT: Groovy
@@ -62,18 +59,16 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=235,y=127,xs=232&280,ys=124&124
-    event: FINISH
     to: S4
     result: 'false'
   - id: L6
     attributes:
       display: type=Elbow,x=191,y=179,xs=190&190,ys=158&215
-    event: FINISH
     to: S8
     result: 'true'
 - id: S8
   name: Broadcast Update Message
-  descriptor: flowbee-demo.event.PublishEventMessage
+  path: flowbee-demo.event.PublishEventMessage
   attributes:
     Event Name: servicesummary-update-${masterRequestId}
     display: x=153,y=219,w=161,h=61
@@ -81,7 +76,6 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=318,y=175,xs=299&299,ys=215&156
-    event: FINISH
     to: S4
 variables:
   plan:

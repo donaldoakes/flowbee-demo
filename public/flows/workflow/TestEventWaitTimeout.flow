@@ -12,23 +12,22 @@ attributes:
 steps:
 - id: S2
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=36,y=208,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=188,y=195,xs=100&230,ys=228&228
-    event: FINISH
     to: S3
 - id: S4
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=490,y=212,w=60,h=40
 - id: S1
   name: Check
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     TIMER_WAIT: '2'
     Unit: Minutes
@@ -39,11 +38,10 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=325,y=316,xs=263&263&320&320,ys=359&307&307&262
-    event: FINISH
     to: S3
 - id: S3
   name: Event Wait
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     $+Id: '472083'
     STATUS_AFTER_EVENT: Hold
@@ -54,14 +52,13 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=390,y=233,xs=338&486,ys=232&232
-    event: FINISH
     to: S4
   - id: L3
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=200,y=293,xs=246&246,ys=264&359
-    event: DELAY
+    event: Delay
     to: S1
 subflows:
 - id: F2
@@ -74,23 +71,22 @@ subflows:
   steps:
   - id: S5
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=398,y=71,w=60,h=40
     links:
     - id: L6
       attributes:
         display: type=Elbow,x=491,y=91,xs=462&519,ys=91&91
-      event: FINISH
       to: S7
   - id: S6
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=698,y=71,w=60,h=40
   - id: S7
     name: Event Wait Fallout
-    descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+    path: flowbee-demo.task.AutoFormManualTaskActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TASK_TEMPLATE: tests.workflow/Event Wait Fallout.task
@@ -101,7 +97,6 @@ subflows:
     - id: L5
       attributes:
         display: type=Elbow,x=663,y=91,xs=632&694,ys=91&91
-      event: FINISH
       to: S6
   variables:
     EmbeddedSubProcessTaskAction:

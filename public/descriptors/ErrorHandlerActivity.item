@@ -1,5 +1,5 @@
 {
   "icon": "error.png",
-  "name": "flowbee-demo.microservice.ErrorHandlerActivity",
-  "label": "ErrorHandlerActivity"
+  "path": "flowbee-demo.microservice.ErrorHandlerActivity",
+  "name": "ErrorHandlerActivity"
 }

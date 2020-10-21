@@ -7,25 +7,24 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=70,y=110,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=190,y=130,xs=134&246,ys=130&130
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=480,y=110,w=60,h=40
 - id: S3
   name: |-
     Create
     Task
-  descriptor: flowbee-demo.servicenow.ServiceNowTaskActivity
+  path: flowbee-demo.servicenow.ServiceNowTaskActivity
   attributes:
     TASK_TEMPLATE: tests.tasks/ServiceNowTask.task
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
@@ -34,7 +33,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=425,y=130,xs=374&476,ys=130&130
-    event: FINISH
     to: S2
 variables:
   taskName:

@@ -10,18 +10,17 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=16,y=156,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=42,y=113,xs=80&131,ys=176&176
-    event: FINISH
     to: S6
 - id: S6
   name: "Create\r\nJava Objects"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: changedJavaObject#unchangedJavaObject
     Rule: ""
@@ -31,11 +30,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=275,y=171,xs=249&300,ys=171&171
-    event: FINISH
     to: S4
 - id: S5
   name: "Change\r\nNon-Output Docs"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -44,16 +42,15 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=640,y=230,xs=567&691,ys=292&169
-    event: FINISH
     to: S2
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=695,y=149,w=60,h=40
 - id: S4
   name: Outcome
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: outcome
     SCRIPT: Groovy
@@ -62,18 +59,16 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=419,y=147,xs=368&507&507,ys=168&168&98
-    event: FINISH
     to: S3
     result: change
   - id: L2
     attributes:
       display: type=ElbowH,x=416,y=179,xs=368&506&506,ys=175&175&252
-    event: FINISH
     to: S5
     result: nochange
 - id: S3
   name: "Change\r\nOutput Docs"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: changedDomDoc#changedJavaObject#changedJson#changedStringDoc#changedXmlBean#changedXmlBeanWrapper
     Rule: ""
@@ -83,7 +78,6 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=632,y=114,xs=568&691,ys=57&169
-    event: FINISH
     to: S2
 variables:
   changedDomDoc:

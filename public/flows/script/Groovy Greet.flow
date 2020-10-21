@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=70,y=90,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=185,y=110,xs=134&236,ys=110&110
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=490,y=90,w=60,h=40
 - id: S3
   name: Greetings
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: |-
       runtimeContext.logDebug("Executing " + runtimeContext.getActivity().getName())
@@ -36,7 +35,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=415,y=110,xs=344&486,ys=110&110
-    event: FINISH
     to: S2
 variables:
   name:

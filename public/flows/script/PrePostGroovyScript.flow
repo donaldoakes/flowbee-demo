@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S3
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=33,y=102,w=67,h=38
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=146,y=121,xs=104&175,ys=121&121
-    event: FINISH
     to: S4
 - id: S6
   name: Finish
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=674,y=100,w=60,h=40
 - id: S4
   name: Perform Validation
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -31,23 +30,21 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=298,y=103,xs=283&341,ys=123&123
-    event: FINISH
     to: S8
     result: 'true'
   - id: L3
     attributes:
       display: type=Elbow,x=237,y=163,xs=233&233,ys=157&197
-    event: FINISH
     to: S7
     result: 'false'
 - id: S7
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=203,y=201,w=60,h=40
 - id: S8
   name: Check Employee
-  descriptor: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
+  path: flowbee-demo.adapter.soap.DocumentWebServiceAdapter
   attributes:
     DO_LOGGING: 'True'
     OsgiBundleSymbolicName: workflow
@@ -63,23 +60,21 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=409,y=161,xs=402&402,ys=157&195
-    event: FINISH
     to: S9
     result: 'false'
   - id: L7
     attributes:
       display: type=Elbow,x=456,y=105,xs=449&508,ys=123&123
-    event: FINISH
     to: S14
     result: 'true'
 - id: S9
   name: Finish
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=372,y=199,w=60,h=40
 - id: S14
   name: Set Variables
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -88,7 +83,6 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=643,y=120,xs=616&670,ys=120&120
-    event: FINISH
     to: S6
 variables:
   arg0:

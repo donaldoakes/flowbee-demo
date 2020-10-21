@@ -7,23 +7,21 @@ attributes:
 steps:
 - id: S4
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=208,y=44,w=60,h=40
   links:
   - id: L2
     attributes:
       display: type=Elbow,x=86,y=40,xs=204&91,ys=64&186
-    event: FINISH
     to: S1
   - id: L3
     attributes:
       display: type=Elbow,x=303,y=81,xs=272&350,ys=64&64
-    event: FINISH
     to: S6
 - id: S3
   name: "LDAP Adapter\r\nMultiple Results"
-  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
+  path: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: ${props['ldap.app.user']}
     AppPassword: ${props['ldap.app.password']}
@@ -40,16 +38,15 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=301,y=277,xs=301&301,ys=270&296
-    event: FINISH
     to: S7
 - id: S5
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=274,y=390,w=60,h=40
 - id: S1
   name: "LDAP Adapter\r\nSingle Result"
-  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
+  path: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: ${props['ldap.app.user']}
     AppPassword: ${props['ldap.app.password']}
@@ -66,11 +63,10 @@ steps:
   - id: L6
     attributes:
       display: type=Elbow,x=199,y=278,xs=150&250,ys=224&330
-    event: FINISH
     to: S7
 - id: S6
   name: Wait 10s
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'
@@ -80,16 +76,14 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=348,y=144,xs=404&291,ys=105&195
-    event: FINISH
     to: S3
   - id: L8
     attributes:
       display: type=Elbow,x=488,y=72,xs=458&517,ys=72&72
-    event: FINISH
     to: S8
 - id: S7
   name: Sync
-  descriptor: flowbee-demo.sync.SynchronizationActivity
+  path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: "LDAP Adapter\r\nSingle Result#LDAP Adapter\r\nMultiple Results#LDAP Adapter\r\nDocument Binding"
@@ -98,11 +92,10 @@ steps:
   - id: L1
     attributes:
       display: type=Elbow,x=304,y=359,xs=304&304,ys=364&386
-    event: FINISH
     to: S5
 - id: S8
   name: "10 More\r\nSeconds"
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'
@@ -112,11 +105,10 @@ steps:
   - id: L9
     attributes:
       display: type=Elbow,x=575,y=138,xs=575&575,ys=115&162
-    event: FINISH
     to: S9
 - id: S9
   name: "LDAP Adapter\r\nDocument Binding"
-  descriptor: flowbee-demo.adapter.ldap.LdapAdapter
+  path: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
     AppCuid: ${props['ldap.app.user']}
     AppPassword: ${props['ldap.app.password']}
@@ -133,7 +125,6 @@ steps:
   - id: L10
     attributes:
       display: type=Elbow,x=426,y=249,xs=519&358,ys=200&330
-    event: FINISH
     to: S7
 variables:
   cuid:

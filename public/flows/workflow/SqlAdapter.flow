@@ -6,33 +6,30 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=250,y=11,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=253,y=9,xs=246&207,ys=31&161
-    event: FINISH
     to: S3
   - id: L3
     attributes:
       display: type=Elbow,x=283,y=63,xs=289&289,ys=55&84
-    event: FINISH
     to: S10
   - id: L6
     attributes:
       display: type=Elbow,x=322,y=28,xs=314&338,ys=32&32
-    event: FINISH
     to: S9
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=261,y=400,w=60,h=40
 - id: S3
   name: "Query Using\r\nJDBC URL"
-  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
+  path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     Output Documents: userDocument
     PostScript: "import java.sql.ResultSet\r\nimport model.user.User\r\n\r\nResultSet rs = (ResultSet) response;\r\nif (rs.next()) {\r\n    User user = new User();\r\n    user.setCuid(rs.getString(\"cuid\"))\r\n    user.setName(rs.getString(\"name\"))\r\n    userDocument = user.getJson();\r\n}\r\nelse {\r\n    throw new RuntimeException(\"User query returns no results: \" + runtimeContext.getAttributes().get(\"sqlQuery\"));\r\n}"
@@ -47,11 +44,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=181,y=246,xs=152&278,ys=203&289
-    event: FINISH
     to: S5
 - id: S4
   name: "Query Multiple Params,\r\nMultiple Results"
-  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
+  path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     Output Documents: supportUsers
     PostScript: "import java.sql.ResultSet\r\n\r\nResultSet rs = (ResultSet) response;\r\nsupportUsers = new ArrayList<String>();\r\nwhile (rs.next()) {\r\n  supportUsers.add(rs.getString(\"name\"));\r\n}\r\n"
@@ -66,11 +62,10 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=316,y=276,xs=316&316,ys=267&289
-    event: FINISH
     to: S5
 - id: S5
   name: Sync
-  descriptor: flowbee-demo.sync.SynchronizationActivity
+  path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     Synced Activities: "Query Using\r\nJDBC URL#Query Multiple Params,\r\nMultiple Results#Reset\r\nUser Name"
@@ -79,11 +74,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=291,y=344,xs=291&291,ys=357&396
-    event: FINISH
     to: S2
 - id: S6
   name: "Update\r\nUser Name"
-  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
+  path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     DESCRIPTION: Where clause is hard-coded to avoid any mishaps due to bad input data.
     display: x=472,y=13,w=100,h=66
@@ -94,11 +88,10 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=525,y=111,xs=525&525,ys=83&149
-    event: FINISH
     to: S7
 - id: S7
   name: "Select User\r\nAnd Bind Name"
-  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
+  path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     PostScript: "import java.sql.ResultSet\r\n\r\nResultSet rs = (ResultSet) response;\r\nif (rs.next()) {\r\n  return rs.getString(\"name\");\r\n}"
     PostScriptLang: Groovy
@@ -111,12 +104,11 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=535,y=248,xs=527&527,ys=229&287
-    event: FINISH
     to: S8
     result: Don Oakes
 - id: S8
   name: "Reset\r\nUser Name"
-  descriptor: flowbee-demo.adapter.db.JdbcSqlAdapter
+  path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
     DESCRIPTION: Where clause is hard-coded to avoid any mishaps due to bad input data.
     PostScriptLang: Groovy
@@ -129,11 +121,10 @@ steps:
   - id: L9
     attributes:
       display: type=Elbow,x=401,y=323,xs=470&332,ys=323&323
-    event: FINISH
     to: S5
 - id: S9
   name: Wait 60s
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '60'
@@ -143,11 +134,10 @@ steps:
   - id: L10
     attributes:
       display: type=Elbow,x=457,y=43,xs=446&468,ys=43&43
-    event: FINISH
     to: S6
 - id: S10
   name: Wait 10s
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '10'
@@ -157,7 +147,6 @@ steps:
   - id: L11
     attributes:
       display: type=Elbow,x=336,y=166,xs=336&336,ys=152&181
-    event: FINISH
     to: S4
 variables:
   supportUsers:

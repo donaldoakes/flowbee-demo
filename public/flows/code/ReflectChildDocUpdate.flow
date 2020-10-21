@@ -6,23 +6,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=35,y=86,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=139,y=88,xs=99&161,ys=106&106
-    event: FINISH
     to: S3
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=463,y=90,w=60,h=40
 - id: S3
   name: "Invoke\r\nJaxbDocument"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=165,y=74,w=101,h=70
     processname: JaxbDocument
@@ -33,11 +32,10 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=299,y=86,xs=270&320,ys=109&109
-    event: FINISH
     to: S4
 - id: S4
   name: "Pull\r\nValues"
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -46,7 +44,6 @@ steps:
   - id: L3
     attributes:
       display: type=Elbow,x=443,y=110,xs=434&459,ys=110&110
-    event: FINISH
     to: S2
 variables:
   actionName:

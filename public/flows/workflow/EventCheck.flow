@@ -9,23 +9,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=21,y=306,w=60,h=40
   links:
   - id: L23
     attributes:
       display: type=Elbow,x=135,y=325,xs=85&174,ys=326&326
-    event: FINISH
     to: S23
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=353,y=320,w=60,h=40
 - id: S23
   name: "Event Check \nActivity"
-  descriptor: flowbee-demo.event.EventCheckActivity
+  path: flowbee-demo.event.EventCheckActivity
   attributes:
     WAIT_EVENT_NAMES: C-{$MasterRequestID},Cancelled::ABORT,false,;M-{$MasterRequestID},FINISH,false,;S-{$MasterRequestID},Completed::CORRECT,false,;H-{$MasterRequestID},Hold::CORRECT,true,
     display: x=178,y=298,w=117,h=75
@@ -34,7 +33,6 @@ steps:
   - id: L24
     attributes:
       display: type=Elbow,x=324,y=340,xs=299&349,ys=340&340
-    event: FINISH
     to: S2
 subflows:
 - id: F6
@@ -46,7 +44,7 @@ subflows:
   steps:
   - id: S7
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=266,y=139,w=60,h=40
     links:
@@ -54,11 +52,10 @@ subflows:
       attributes:
         TRANSITION_DELAY: 5s
         display: type=Elbow,x=446,y=159,xs=330&562,ys=159&159
-      event: FINISH
       to: S8
   - id: S8
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=566,y=139,w=60,h=40
 - id: F13
@@ -70,7 +67,7 @@ subflows:
   steps:
   - id: S14
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=733,y=141,w=60,h=40
     links:
@@ -78,11 +75,10 @@ subflows:
       attributes:
         TRANSITION_DELAY: 10s
         display: type=Elbow,x=913,y=161,xs=797&1029,ys=161&161
-      event: FINISH
       to: S15
   - id: S15
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=1033,y=141,w=60,h=40
 - id: F24
@@ -94,7 +90,7 @@ subflows:
   steps:
   - id: S25
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=471,y=425,w=60,h=40
     links:
@@ -102,11 +98,10 @@ subflows:
       attributes:
         TRANSITION_DELAY: 10s
         display: type=Elbow,x=651,y=445,xs=535&767,ys=445&445
-      event: FINISH
       to: S27
   - id: S27
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=771,y=425,w=60,h=40
 variables:

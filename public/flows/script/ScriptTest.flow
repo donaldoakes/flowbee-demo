@@ -6,7 +6,7 @@ attributes:
 steps:
 - id: S1
   name: Still Okay?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: '"Sure"'
     SCRIPT: Groovy
@@ -15,12 +15,11 @@ steps:
   - id: L16
     attributes:
       display: type=Elbow,x=352,y=570,xs=334&406,ys=560&560
-    event: FINISH
     to: S17
     result: Sure
 - id: S7
   name: Groovy
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
     Rule: ""
@@ -30,12 +29,11 @@ steps:
   - id: L9
     attributes:
       display: type=Elbow,x=114,y=312,xs=108&108,ys=298&340
-    event: FINISH
     to: S9
     result: groovyOutcome
 - id: S9
   name: Access Library
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: ""
     SCRIPT: Groovy
@@ -44,12 +42,11 @@ steps:
   - id: L5
     attributes:
       display: type=ElbowV,x=109,y=441,xs=107&107&226,ys=416&467&467
-    event: FINISH
     to: S6
     result: Valid
 - id: S4
   name: JavaScript
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: createdDomDoc#createdXmlBean#modifiedDomDoc#modifiedXmlBean
     Rule: ""
@@ -59,12 +56,11 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=280,y=370,xs=280&280,ys=314&426
-    event: FINISH
     to: S6
     result: javaScriptOutcome
 - id: S6
   name: Looking Good?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: '''Yep'''
     SCRIPT: Groovy
@@ -73,12 +69,11 @@ steps:
   - id: L7
     attributes:
       display: type=Elbow,x=293,y=515,xs=280&280,ys=504&526
-    event: FINISH
     to: S1
     result: Yep
 - id: S8
   name: Script Flavor?
-  descriptor: flowbee-demo.decision
+  path: flowbee-demo.decision
   attributes:
     Expression: scriptFlavor
     SCRIPT: Groovy
@@ -87,24 +82,21 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=107,y=150,xs=226&104&104,ys=154&154&230
-    event: FINISH
     to: S7
     result: Groovy
   - id: L3
     attributes:
       display: type=Elbow,x=280,y=215,xs=280&280,ys=194&236
-    event: FINISH
     to: S4
     result: JavaScript
   - id: L11
     attributes:
       display: type=Elbow,x=440,y=217,xs=334&546,ys=150&285
-    event: FINISH
     to: S10
     result: Unknown
 - id: S10
   name: Unknown
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     SCRIPT: Groovy
     display: x=550,y=250,w=80,h=70
@@ -112,27 +104,25 @@ steps:
   - id: L15
     attributes:
       display: type=Elbow,x=590,y=345,xs=590&590,ys=324&366
-    event: FINISH
     to: S16
 - id: S15
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=250,y=30,w=60,h=40
   links:
   - id: L14
     attributes:
       display: type=Elbow,x=280,y=90,xs=280&280,ys=74&106
-    event: FINISH
     to: S8
 - id: S16
   name: Stop3
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=560,y=370,w=60,h=40
 - id: S17
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=410,y=540,w=60,h=40
 subflows:
@@ -145,18 +135,17 @@ subflows:
   steps:
   - id: S18
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=560,y=90,w=60,h=40
     links:
     - id: L17
       attributes:
         display: type=Elbow,x=680,y=110,xs=624&736,ys=110&110
-      event: FINISH
       to: S20
   - id: S20
     name: Stop2
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=740,y=90,w=60,h=40
 variables:

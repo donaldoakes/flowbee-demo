@@ -1,5 +1,5 @@
 {
   "icon": "task.png",
-  "name": "flowbee-demo.task.CustomManualTaskActivity",
-  "label": "CustomManualTaskActivity"
+  "path": "flowbee-demo.task.CustomManualTaskActivity",
+  "name": "CustomManualTaskActivity"
 }

@@ -8,23 +8,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=40,y=140,w=60,h=40
   links:
   - id: L4
     attributes:
       display: type=Elbow,x=140,y=160,xs=104&176,ys=160&160
-    event: FINISH
     to: S5
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=510,y=140,w=60,h=40
 - id: S3
   name: Invoke
-  descriptor: flowbee-demo.adapter.rest.RestServiceAdapter
+  path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
     EndpointUri: ${url}
     HeadersVariable: serviceRequestHeaders
@@ -48,13 +47,12 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=480,y=160,xs=454&506,ys=160&160
-    event: FINISH
     to: S2
 - id: S5
   name: |-
     Create
     Request
-  descriptor: flowbee-demo.java.DynamicJavaActivity
+  path: flowbee-demo.java.DynamicJavaActivity
   attributes:
     ClassName: UnparseableResponse_A5
     Java: ""
@@ -64,7 +62,6 @@ steps:
   - id: L5
     attributes:
       display: type=Elbow,x=315,y=160,xs=284&346,ys=160&160
-    event: FINISH
     to: S3
 variables:
   serviceRequest:

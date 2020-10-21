@@ -1,5 +1,5 @@
 {
   "icon": "crossmap.png",
-  "name": "flowbee-demo.transform.CrossmapActivity",
-  "label": "CrossmapActivity"
+  "path": "flowbee-demo.transform.CrossmapActivity",
+  "name": "CrossmapActivity"
 }

@@ -6,25 +6,24 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=150,y=280,xs=124&177,ys=280&280
-    event: FINISH
     to: S5
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=361,y=258,w=60,h=40
 - id: S5
   name: |-
     Event Wait Activity
     with timeout
-  descriptor: flowbee-demo.event.EventWaitActivity
+  path: flowbee-demo.event.EventWaitActivity
   attributes:
     SLA: '60'
     SLA_UNITS: Minutes
@@ -34,7 +33,6 @@ steps:
   - id: L2
     attributes:
       display: type=Elbow,x=321,y=278,xs=285&357,ys=278&278
-    event: FINISH
     to: S2
 subflows:
 - id: F1
@@ -46,18 +44,17 @@ subflows:
   steps:
   - id: S6
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=373,y=86,w=60,h=40
     links:
     - id: L3
       attributes:
         display: type=Elbow,x=553,y=106,xs=437&669,ys=106&106
-      event: FINISH
       to: S7
   - id: S7
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       TerminationAction: Complete Process
       display: x=673,y=86,w=60,h=40

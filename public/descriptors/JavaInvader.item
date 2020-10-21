@@ -1,5 +1,5 @@
 {
   "icon": "invader.png",
-  "name": "flowbee-demo.tests.code.JavaInvader",
-  "label": "JavaInvader"
+  "path": "flowbee-demo.tests.code.JavaInvader",
+  "name": "JavaInvader"
 }

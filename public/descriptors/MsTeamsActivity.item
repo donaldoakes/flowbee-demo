@@ -1,5 +1,5 @@
 {
   "icon": "msteams.png",
-  "name": "flowbee-demo.msteams.MsTeamsActivity",
-  "label": "MsTeamsActivity"
+  "path": "flowbee-demo.msteams.MsTeamsActivity",
+  "name": "MsTeamsActivity"
 }

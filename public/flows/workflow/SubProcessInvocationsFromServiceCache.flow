@@ -7,23 +7,22 @@ attributes:
 steps:
 - id: S1
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
   - id: L1
     attributes:
       display: type=Elbow,x=486,y=-240,xs=124&166,ys=280&280
-    event: FINISH
     to: S6
 - id: S2
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=824,y=261,w=60,h=40
 - id: S3
   name: "Invoke Service Subprocess \r\nSync with Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=377,y=47,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromService
@@ -34,11 +33,10 @@ steps:
   - id: L4
     attributes:
       display: type=Elbow,x=641,y=106,xs=567&854&854,ys=74&74&261
-    event: FINISH
     to: S2
 - id: S6
   name: Set Vars
-  descriptor: flowbee-demo.script.ScriptExecutorActivity
+  path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Output Documents: '["varDoc1"]'
     Rule: ""
@@ -48,54 +46,46 @@ steps:
   - id: L9
     attributes:
       display: type=Elbow,x=198,y=97,xs=270&323&323&377,ys=280&280&77&77
-    event: FINISH
     to: S3
     result: ServiceWithDocsSync
   - id: L10
     attributes:
       display: type=Elbow,x=273,y=296,xs=274&382,ys=284&284
-    event: FINISH
     to: S10
     result: ServiceNoDocsSync
   - id: L11
     attributes:
       display: type=Elbow,x=202,y=362,xs=274&381,ys=280&374
-    event: FINISH
     to: S11
     result: ServiceNoDocsAsync
   - id: L12
     attributes:
       display: type=Elbow,x=194,y=445,xs=270&324&324&379,ys=280&280&461&461
-    event: FINISH
     to: S9
     result: RegularWithDocsSync
   - id: L13
     attributes:
       display: type=Elbow,x=232,y=522,xs=220&220&376,ys=310&546&546
-    event: FINISH
     to: S12
     result: RegularWithDocsAsync
   - id: L14
     attributes:
       display: type=Elbow,x=232,y=609,xs=220&220&375,ys=310&633&633
-    event: FINISH
     to: S13
     result: RegularNoDocsSync
   - id: L20
     attributes:
       display: type=Elbow,x=226,y=694,xs=220&220&375,ys=310&718&718
-    event: FINISH
     to: S14
     result: RegularNoDocsAsync
   - id: L22
     attributes:
       display: type=Elbow,x=191,y=172,xs=274&371,ys=280&178
-    event: FINISH
     to: S8
     result: ServiceWithDocsAsync
 - id: S8
   name: "Invoke Service Subprocess \r\nAsync with Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=375,y=148,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromService
@@ -106,11 +96,10 @@ steps:
   - id: L8
     attributes:
       display: type=Elbow,x=563,y=163,xs=565&854&854,ys=167&167&261
-    event: FINISH
     to: S2
 - id: S9
   name: "Invoke Regular Subprocess \r\nSync with Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=379,y=431,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromRegular
@@ -121,11 +110,10 @@ steps:
   - id: L17
     attributes:
       display: type=Elbow,x=694,y=371,xs=569&820,ys=461&281
-    event: FINISH
     to: S2
 - id: S10
   name: "Invoke Service Subprocess \r\nSync no Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=386,y=258,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromService
@@ -136,11 +124,10 @@ steps:
   - id: L15
     attributes:
       display: type=Elbow,x=698,y=281,xs=576&820,ys=281&281
-    event: FINISH
     to: S2
 - id: S11
   name: "Invoke Service Subprocess \r\nAsync no Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=385,y=344,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromService
@@ -151,11 +138,10 @@ steps:
   - id: L16
     attributes:
       display: type=Elbow,x=697,y=327,xs=575&820,ys=374&281
-    event: FINISH
     to: S2
 - id: S12
   name: "Invoke Regular Subprocess \r\nAsync with Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=376,y=516,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromRegular
@@ -166,11 +152,10 @@ steps:
   - id: L18
     attributes:
       display: type=Elbow,x=693,y=413,xs=566&820,ys=546&281
-    event: FINISH
     to: S2
 - id: S13
   name: "Invoke Regular Subprocess \r\nSync no Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=375,y=603,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromRegular
@@ -181,11 +166,10 @@ steps:
   - id: L19
     attributes:
       display: type=Elbow,x=692,y=457,xs=565&820,ys=633&281
-    event: FINISH
     to: S2
 - id: S14
   name: "Invoke Regular Subprocess \r\nAsync no Doc Binding"
-  descriptor: flowbee-demo.process.InvokeSubProcessActivity
+  path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
     display: x=375,y=688,w=186,h=60
     processname: tests.workflow/SubProcessInvocationsFromRegular
@@ -196,7 +180,6 @@ steps:
   - id: L21
     attributes:
       display: type=Elbow,x=709,y=511,xs=565&854,ys=718&305
-    event: FINISH
     to: S2
 subflows:
 - id: F18
@@ -208,18 +191,17 @@ subflows:
   steps:
   - id: S17
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=906,y=57,w=60,h=40
     links:
     - id: L23
       attributes:
         display: type=Elbow,x=992,y=77,xs=970&1016,ys=77&77
-      event: FINISH
       to: S16
   - id: S16
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       TerminationAction: Complete Process
       display: x=1020,y=58,w=60,h=40

@@ -9,23 +9,22 @@ attributes:
 steps:
 - id: S39
   name: Start
-  descriptor: flowbee-demo.start
+  path: flowbee-demo.start
   attributes:
     display: x=61,y=206,w=60,h=40
   links:
   - id: L33
     attributes:
       display: type=Elbow,x=210,y=193,xs=125&252,ys=226&226
-    event: FINISH
     to: S40
 - id: S38
   name: Stop
-  descriptor: flowbee-demo.stop
+  path: flowbee-demo.stop
   attributes:
     display: x=515,y=210,w=60,h=40
 - id: S41
   name: Check
-  descriptor: flowbee-demo.timer.TimerWaitActivity
+  path: flowbee-demo.timer.TimerWaitActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     TIMER_WAIT: '30'
@@ -37,11 +36,10 @@ steps:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=349,y=317,xs=288&288&345&345,ys=357&305&305&264
-    event: FINISH
     to: S40
 - id: S40
   name: Task that also waits for event
-  descriptor: flowbee-demo.task.CustomManualTaskActivity
+  path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
     STATUS_AFTER_EVENT: Hold
     STATUS_AFTER_TIMEOUT: Hold
@@ -54,14 +52,12 @@ steps:
   - id: L34
     attributes:
       display: type=Elbow,x=412,y=231,xs=360&511,ys=230&230
-    event: FINISH
     to: S38
   - id: L35
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=163,y=291,xs=270&270,ys=264&357
-    event: FINISH
     to: S41
     result: NonTaskAction
 subflows:
@@ -75,23 +71,22 @@ subflows:
   steps:
   - id: S44
     name: Start
-    descriptor: flowbee-demo.start
+    path: flowbee-demo.start
     attributes:
       display: x=330,y=72,w=60,h=40
     links:
     - id: L32
       attributes:
         display: type=Elbow,x=425,y=92,xs=394&456,ys=92&92
-      event: FINISH
       to: S43
   - id: S42
     name: Stop
-    descriptor: flowbee-demo.stop
+    path: flowbee-demo.stop
     attributes:
       display: x=630,y=72,w=60,h=40
   - id: S43
     name: "Task And Event\r\nFallout"
-    descriptor: flowbee-demo.task.AutoFormManualTaskActivity
+    path: flowbee-demo.task.AutoFormManualTaskActivity
     attributes:
       STATUS_AFTER_EVENT: Cancelled
       TASK_PAGELET: base/AutoFormManualTask.pagelet
@@ -103,7 +98,6 @@ subflows:
     - id: L31
       attributes:
         display: type=Elbow,x=595,y=92,xs=564&626,ys=92&92
-      event: FINISH
       to: S42
   variables:
     EmbeddedSubProcessTaskAction:
