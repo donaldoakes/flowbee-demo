@@ -5,21 +5,21 @@ attributes:
   START_TRANSITION_ID: '2358799'
   display: x=20,y=13,w=116,h=27
 steps:
-- id: S4
+- id: s4
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=208,y=44,w=60,h=40
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=86,y=40,xs=204&91,ys=64&186
-    to: S1
-  - id: L3
+    to: s1
+  - id: l3
     attributes:
       display: type=Elbow,x=303,y=81,xs=272&350,ys=64&64
-    to: S6
-- id: S3
+    to: s6
+- id: s3
   name: "LDAP Adapter\r\nMultiple Results"
   path: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
@@ -35,16 +35,16 @@ steps:
     SearchFilter: (sn=${lastNameInput})
     display: x=233,y=199,w=116,h=67
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=301,y=277,xs=301&301,ys=270&296
-    to: S7
-- id: S5
+    to: s7
+- id: s5
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=274,y=390,w=60,h=40
-- id: S1
+- id: s1
   name: "LDAP Adapter\r\nSingle Result"
   path: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
@@ -60,11 +60,11 @@ steps:
     SearchFilter: (uid=${cuid})
     display: x=36,y=190,w=110,h=69
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=199,y=278,xs=150&250,ys=224&330
-    to: S7
-- id: S6
+    to: s7
+- id: s6
   name: Wait 10s
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -73,15 +73,15 @@ steps:
     Unit: Seconds
     display: x=354,y=41,w=100,h=60
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=348,y=144,xs=404&291,ys=105&195
-    to: S3
-  - id: L8
+    to: s3
+  - id: l8
     attributes:
       display: type=Elbow,x=488,y=72,xs=458&517,ys=72&72
-    to: S8
-- id: S7
+    to: s8
+- id: s7
   name: Sync
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
@@ -89,11 +89,11 @@ steps:
     Synced Activities: "LDAP Adapter\r\nSingle Result#LDAP Adapter\r\nMultiple Results#LDAP Adapter\r\nDocument Binding"
     display: x=254,y=300,w=100,h=60
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=304,y=359,xs=304&304,ys=364&386
-    to: S5
-- id: S8
+    to: s5
+- id: s8
   name: "10 More\r\nSeconds"
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -102,11 +102,11 @@ steps:
     Unit: Seconds
     display: x=521,y=44,w=106,h=67
   links:
-  - id: L9
+  - id: l9
     attributes:
       display: type=Elbow,x=575,y=138,xs=575&575,ys=115&162
-    to: S9
-- id: S9
+    to: s9
+- id: s9
   name: "LDAP Adapter\r\nDocument Binding"
   path: flowbee-demo.adapter.ldap.LdapAdapter
   attributes:
@@ -122,10 +122,10 @@ steps:
     SearchFilter: (saploginid=${sapIdInput})
     display: x=523,y=166,w=113,h=69
   links:
-  - id: L10
+  - id: l10
     attributes:
       display: type=Elbow,x=426,y=249,xs=519&358,ys=200&330
-    to: S7
+    to: s7
 variables:
   cuid:
     type: java.lang.String

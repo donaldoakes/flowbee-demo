@@ -4,77 +4,77 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=36,y=92,w=136,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=155,y=19,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=302,y=84,xs=219&289,ys=39&110
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=488,y=685,w=60,h=40
-- id: S3
+- id: s3
   name: "Step\r\nOne"
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=250,y=114,w=78,h=48
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=289,y=209,xs=289&289,ys=166&273
-    to: S4
-- id: S4
+    to: s4
+- id: s4
   name: "Step\r\nTwo"
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=246,y=277,w=83,h=47
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=291,y=378,xs=291&291,ys=328&433
-    to: S6
-  - id: L4
+    to: s6
+  - id: l4
     attributes:
       display: type=Elbow,x=388,y=254,xs=333&444,ys=300&158
-    to: S5
-- id: S5
+    to: s5
+- id: s5
   name: "Step\r\nThree"
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=448,y=133,w=78,h=50
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=496,y=342,xs=496&496,ys=187&542
-    to: S7
-- id: S6
+    to: s7
+- id: s6
   name: "Step\r\nFour"
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=253,y=437,w=80,h=50
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=190,y=552,xs=249&134,ys=462&629
-    to: S8
-- id: S7
+    to: s8
+- id: s7
   name: New Synchronization Activity
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     STATUS_AFTER_EVENT: Cancelled
     display: x=467,y=546,w=100,h=60
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=518,y=645,xs=518&518,ys=610&681
-    to: S2
-- id: S8
+    to: s2
+- id: s8
   name: "Rendered\r\nTask"
   path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
@@ -85,7 +85,7 @@ steps:
     Wait for Task: 'true'
     display: x=84,y=633,w=101,h=68
   links:
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=326,y=620,xs=189&463,ys=667&576
-    to: S7
+    to: s7

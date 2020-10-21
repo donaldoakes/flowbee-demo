@@ -3,17 +3,17 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=34,y=24,w=202,h=27
 steps:
-- id: S34
+- id: s34
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=76,y=80,w=60,h=40
   links:
-  - id: L27
+  - id: l27
     attributes:
       display: type=Elbow,x=206,y=101,xs=140&272,ys=101&101
-    to: S31
-- id: S31
+    to: s31
+- id: s31
   name: Calculate sqaure
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -21,11 +21,11 @@ steps:
     SCRIPT: Groovy
     display: x=276,y=69,w=100,h=60
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=459,y=94,xs=380&538,ys=94&94
-    to: S33
-- id: S33
+    to: s33
+- id: s33
   name: Finish
   path: flowbee-demo.stop
   attributes:

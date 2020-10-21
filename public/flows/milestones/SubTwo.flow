@@ -5,22 +5,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=50,y=50,w=0,h=0
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=42,y=118,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=132,y=138,xs=106&158,ys=138&138
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=590,y=115,w=60,h=40
-- id: S3
+- id: s3
   name: |-
     Subflow
     Milestone
@@ -32,30 +32,30 @@ steps:
     processversion: '[0.1,1)'
     synchronous: 'true'
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=418,y=136,xs=394&442,ys=136&136
-    to: S5
-- id: S4
+    to: s5
+- id: s4
   name: Boring
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=162,y=112,w=69,h=50
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=260,y=137,xs=235&286,ys=137&137
-    to: S3
-- id: S5
+    to: s3
+- id: s5
   name: Snoozefest
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=446,y=113,w=75,h=47
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=555,y=135,xs=525&586,ys=135&135
-    to: S2
+    to: s2
 variables:
   inputVar:
     type: java.lang.String

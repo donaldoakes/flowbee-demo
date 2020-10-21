@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=29,y=27,w=130,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=57,y=140,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=233,y=184,xs=121&232,ys=160&160
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=477,y=140,w=60,h=40
-- id: S3
+- id: s3
   name: Update Vars
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -28,10 +28,10 @@ steps:
     SCRIPT: Groovy
     display: x=236,y=134,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=411,y=160,xs=340&473,ys=160&160
-    to: S2
+    to: s2
 variables:
   inputJsonable:
     type: common.service.Jsonable

@@ -4,43 +4,43 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=39,y=79,w=202,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=284,y=28,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=314,y=100,xs=314&314,ys=71&129
-    to: S3
-- id: S3
+    to: s3
+- id: s3
   name: Which?
   path: flowbee-demo.decision
   attributes:
     display: x=284,y=133,w=60,h=40
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=155,y=182,xs=280&101,ys=153&224
-    to: S4
+    to: s4
     result: java
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=228,y=226,xs=314&230,ys=177&314
-    to: S6
+    to: s6
     result: java pagelet
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=461,y=182,xs=348&567,ys=153&212
-    to: S5
+    to: s5
     result: kotlin
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=339,y=330,xs=329&329&416&416,ys=164&350&350&379
-    to: S7
+    to: s7
     result: kotlin pagelet
-- id: S4
+- id: s4
   name: |-
     Java
     Activity
@@ -48,11 +48,11 @@ steps:
   attributes:
     display: x=36,y=204,w=60,h=40
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=67,y=283,xs=67&67,ys=248&319
-    to: S8
-- id: S5
+    to: s8
+- id: s5
   name: |-
     Kotlin
     Activity
@@ -60,11 +60,11 @@ steps:
   attributes:
     display: x=572,y=192,w=60,h=40
   links:
-  - id: L9
+  - id: l9
     attributes:
       display: type=Elbow,x=600,y=271,xs=600&600,ys=236&306
-    to: S9
-- id: S6
+    to: s9
+- id: s6
   name: Java Invader
   path: flowbee-demo.tests.code.JavaInvader
   attributes:
@@ -72,12 +72,12 @@ steps:
     Planet: Neptune
     display: x=181,y=318,w=100,h=60
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=112,y=324,xs=176&102,ys=343&343
-    to: S8
+    to: s8
     result: Neptune
-- id: S7
+- id: s7
   name: Kotlin Invader
   path: flowbee-demo.tests.code.KotlinInvader
   attributes:
@@ -85,17 +85,17 @@ steps:
     Planet: Jupiter
     display: x=375,y=384,w=100,h=60
   links:
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=524,y=362,xs=479&564,ys=414&330
-    to: S9
+    to: s9
     result: Jupiter
-- id: S8
+- id: s8
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=38,y=323,w=60,h=40
-- id: S9
+- id: s9
   name: Stop
   path: flowbee-demo.stop
   attributes:

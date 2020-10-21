@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=33,y=29,w=222,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=65,y=114,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=231,y=114,xs=129&245,ys=134&134
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=485,y=114,w=60,h=40
-- id: S3
+- id: s3
   name: "Stubbed Event\r\nWait"
   path: flowbee-demo.event.EventWaitActivity
   attributes:
@@ -28,10 +28,10 @@ steps:
     display: x=249,y=112,w=99,h=72
     rcvdMsgDocVar: notifyPayload
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=417,y=134,xs=352&481,ys=134&134
-    to: S2
+    to: s2
 variables:
   notifyPayload:
     type: org.apache.xmlbeans.XmlObject

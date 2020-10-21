@@ -8,17 +8,17 @@ attributes:
   Transition with no Label: Acts as Default
   display: x=14,y=15,w=169,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=16,y=156,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=42,y=113,xs=80&131,ys=176&176
-    to: S6
-- id: S6
+    to: s6
+- id: s6
   name: "Create\r\nJava Objects"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -27,11 +27,11 @@ steps:
     SCRIPT: Groovy
     display: x=135,y=143,w=110,h=70
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=275,y=171,xs=249&300,ys=171&171
-    to: S4
-- id: S5
+    to: s4
+- id: s5
   name: "Change\r\nNon-Output Docs"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -39,16 +39,16 @@ steps:
     SCRIPT: Groovy
     display: x=451,y=256,w=112,h=72
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=640,y=230,xs=567&691,ys=292&169
-    to: S2
-- id: S2
+    to: s2
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=695,y=149,w=60,h=40
-- id: S4
+- id: s4
   name: Outcome
   path: flowbee-demo.decision
   attributes:
@@ -56,17 +56,17 @@ steps:
     SCRIPT: Groovy
     display: x=304,y=151,w=60,h=40
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=419,y=147,xs=368&507&507,ys=168&168&98
-    to: S3
+    to: s3
     result: change
-  - id: L2
+  - id: l2
     attributes:
       display: type=ElbowH,x=416,y=179,xs=368&506&506,ys=175&175&252
-    to: S5
+    to: s5
     result: nochange
-- id: S3
+- id: s3
   name: "Change\r\nOutput Docs"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -75,10 +75,10 @@ steps:
     SCRIPT: Groovy
     display: x=451,y=21,w=113,h=73
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=632,y=114,xs=568&691,ys=57&169
-    to: S2
+    to: s2
 variables:
   changedDomDoc:
     type: org.w3c.dom.Document

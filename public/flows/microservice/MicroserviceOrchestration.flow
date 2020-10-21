@@ -8,22 +8,22 @@ attributes:
   requestPath: /user
   requestSummary: Create a user and add to workgroups
 steps:
-- id: S1
+- id: s1
   name: Receive
   path: flowbee-demo.start
   attributes:
     display: x=45,y=52,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=100,y=68,xs=105&294&294,ys=72&72&138
-    to: S6
-- id: S2
+    to: s6
+- id: s2
   name: Response
   path: flowbee-demo.stop
   attributes:
     display: x=626,y=532,w=60,h=40
-- id: S3
+- id: s3
   name: "Invoke\r\nServices"
   path: flowbee-demo.microservice.OrchestratorActivity
   attributes:
@@ -32,11 +32,11 @@ steps:
     parallel: ${parallel}
     synchronous: ${synchronous}
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=489,y=378,xs=489&489,ys=365&402
-    to: S10
-- id: S4
+    to: s10
+- id: s4
   name: "Create\r\nPlan"
   path: flowbee-demo.kotlin.ScriptActivity
   attributes:
@@ -45,49 +45,49 @@ steps:
     SCRIPT: Kotlin Script
     display: x=237,y=282,w=118,h=75
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=391,y=320,xs=359&424,ys=320&320
-    to: S3
-- id: S5
+    to: s3
+- id: s5
   name: "Consolidate\r\nResponses"
   path: flowbee-demo.microservice.ResponseCollector
   attributes:
     consolidator: microservice.CombiningConsolidator
     display: x=430,y=520,w=120,h=73
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=590,y=551,xs=554&622,ys=552&552
-    to: S2
-- id: S6
+    to: s2
+- id: s6
   name: "Validate\r\nRequest"
   path: flowbee-demo.validate.SwaggerValidatorActivity
   attributes:
     Validate: '["Query","Body"]'
     display: x=238,y=142,w=118,h=75
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=140,y=178,xs=234&109,ys=177&177
-    to: S7
+    to: s7
     result: 'false'
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=302,y=242,xs=296&296,ys=221&277
-    to: S4
+    to: s4
     result: 'true'
-- id: S7
+- id: s7
   name: Reject
   path: flowbee-demo.stop
   attributes:
     display: x=45,y=157,w=60,h=40
-- id: S9
+- id: s9
   name: Accepted
   path: flowbee-demo.stop
   attributes:
     display: x=629,y=421,w=60,h=40
-- id: S10
+- id: s10
   name: |-
     Synchronous
     Response?
@@ -98,15 +98,15 @@ steps:
     SCRIPT: Groovy
     display: x=430,y=406,w=122,h=73
   links:
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=497,y=491,xs=490&490,ys=483&516
-    to: S5
+    to: s5
     result: 'true'
-  - id: L9
+  - id: l9
     attributes:
       display: type=Elbow,x=575,y=423,xs=556&625,ys=441&441
-    to: S9
+    to: s9
     result: 'false'
 variables:
   parallel:

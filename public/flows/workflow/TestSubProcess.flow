@@ -7,17 +7,17 @@ attributes:
   Transition with no Label: Acts as Default
   display: x=31,y=23,w=192,h=27
 steps:
-- id: S34
+- id: s34
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=55,y=100,w=60,h=40
   links:
-  - id: L27
+  - id: l27
     attributes:
       display: type=Elbow,x=157,y=119,xs=119&191,ys=120&120
-    to: S31
-- id: S32
+    to: s31
+- id: s32
   name: Wait for a while
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -26,16 +26,16 @@ steps:
     Unit: Minutes
     display: x=384,y=94,w=100,h=60
   links:
-  - id: L26
+  - id: l26
     attributes:
       display: type=Elbow,x=523,y=121,xs=488&554,ys=122&122
-    to: S33
-- id: S33
+    to: s33
+- id: s33
   name: Finish
   path: flowbee-demo.stop
   attributes:
     display: x=558,y=102,w=60,h=40
-- id: S31
+- id: s31
   name: Calculate sqaure
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -43,10 +43,10 @@ steps:
     SCRIPT: Groovy
     display: x=195,y=93,w=100,h=60
   links:
-  - id: L28
+  - id: l28
     attributes:
       display: type=Elbow,x=340,y=123,xs=299&380,ys=123&123
-    to: S32
+    to: s32
 variables:
   argument:
     type: java.lang.Integer

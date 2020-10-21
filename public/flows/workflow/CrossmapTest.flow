@@ -7,22 +7,22 @@ attributes:
   Transition with no Label: Acts as Default
   display: x=45,y=38,w=131,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=33,y=127,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=97,y=70,xs=97&153,ys=147&147
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=507,y=127,w=60,h=40
-- id: S4
+- id: s4
   name: jsonToJson
   path: flowbee-demo.transform.CrossmapActivity
   attributes:
@@ -32,11 +32,11 @@ steps:
     Output: jsonToJsonOutput
     display: x=157,y=118,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=299,y=167,xs=261&317,ys=148&148
-    to: S5
-- id: S5
+    to: s5
+- id: s5
   name: jsonToXml
   path: flowbee-demo.transform.CrossmapActivity
   attributes:
@@ -46,12 +46,12 @@ steps:
     Output: jsonToXmlOutput
     display: x=321,y=118,w=100,h=60
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=464,y=147,xs=425&503,ys=147&147
-    to: S2
+    to: s2
 notes:
-- id: N6
+- id: n6
   attributes:
     display: x=215,y=30,w=341,h=22
   text: 'TODO: Add tests for jsonToXml and xmlToXml'

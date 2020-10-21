@@ -5,17 +5,17 @@ attributes:
   PerformanceLevel: '0'
   display: x=40,y=36,w=112,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=84,y=137,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=182,y=156,xs=148&216,ys=156&156
-    to: S3
-- id: S3
+    to: s3
+- id: s3
   name: |-
     Which
     Case?
@@ -25,17 +25,17 @@ steps:
     SCRIPT: Groovy
     display: x=220,y=125,w=85,h=65
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=262,y=226,xs=262&262,ys=194&259
-    to: S4
+    to: s4
     result: err
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=320,y=132,xs=309&406,ys=157&89
-    to: S5
+    to: s5
     result: sub
-- id: S4
+- id: s4
   name: Error Sub
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -45,11 +45,11 @@ steps:
     synchronous: 'false'
     variables: '{"testCase":"$testCase"}'
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=356,y=293,xs=317&395,ys=293&293
-    to: S6
-- id: S5
+    to: s6
+- id: s5
   name: Cancel Sub
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -59,11 +59,11 @@ steps:
     synchronous: 'false'
     variables: '{"testCase":"$testCase"}'
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=457,y=188,xs=457&457,ys=123&254
-    to: S6
-- id: S6
+    to: s6
+- id: s6
   name: |-
     Wait
     Forever
@@ -74,17 +74,17 @@ steps:
     WAIT_EVENT_NAMES: '[["eternity",""]]'
     display: x=398,y=258,w=106,h=68
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=557,y=243,xs=509&605,ys=292&194
-    to: S7
-- id: S7
+    to: s7
+- id: s7
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=609,y=174,w=60,h=40
 notes:
-- id: N1
+- id: n1
   attributes:
     display: x=388,y=339,w=133,h=40
   text: "Must not complete, \nor Cancel will fail."

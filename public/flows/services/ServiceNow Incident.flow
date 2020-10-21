@@ -5,22 +5,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=48,y=41,w=188,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=90,y=160,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=190,y=180,xs=154&226,ys=180&180
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=610,y=160,w=60,h=40
-- id: S3
+- id: s3
   name: |-
     Create
     Incident
@@ -33,11 +33,11 @@ steps:
     RESPONSE_VARIABLE: incidentResponse
     display: x=420,y=140,w=120,h=80
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=575,y=180,xs=544&606,ys=180&180
-    to: S2
-- id: S4
+    to: s2
+- id: s4
   name: |-
     Build
     Request
@@ -62,10 +62,10 @@ steps:
     SCRIPT: Groovy
     display: x=230,y=140,w=120,h=80
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=385,y=180,xs=354&416,ys=180&180
-    to: S3
+    to: s3
 variables:
   incident:
     type: io.limberest.json.Jsonable

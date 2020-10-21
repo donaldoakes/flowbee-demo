@@ -5,23 +5,23 @@ attributes:
   TRANSITION_RETRY_COUNT: '-1'
   display: x=50,y=50,w=134,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=29,y=209,w=60,h=40
   links:
-  - id: L10
+  - id: l10
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=126,y=229,xs=93&132,ys=229&229
-    to: S16
-- id: S2
+    to: s16
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=588,y=186,w=60,h=40
-- id: S3
+- id: s3
   name: "AutoForm Manual Task \r\nw Non Recurring Event"
   path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
@@ -33,11 +33,11 @@ steps:
     Wait for Task: 'TRUE'
     display: x=343,y=140,w=132,h=69
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=549,y=191,xs=479&584,ys=197&197
-    to: S2
-- id: S12
+    to: s2
+- id: s12
   name: "Custom Manual Task \r\nw Recurring Event"
   path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
@@ -49,24 +49,24 @@ steps:
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},NonTaskAction,true
     display: x=338,y=220,w=137,h=66
   links:
-  - id: L7
+  - id: l7
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=302,y=305,xs=405&405,ys=290&339
-    to: S14
+    to: s14
     result: NonTaskAction
-  - id: L9
+  - id: l9
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=566,y=223,xs=479&584,ys=223&223
-    to: S2
-  - id: L13
+    to: s2
+  - id: l13
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=512,y=262,xs=475&616&616,ys=265&265&230
-    to: S2
+    to: s2
     result: AnotherWay
-- id: S14
+- id: s14
   name: Check
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -77,12 +77,12 @@ steps:
     Unit: Seconds
     display: x=355,y=343,w=100,h=60
   links:
-  - id: L8
+  - id: l8
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=405,y=323,xs=405&405,ys=339&290
-    to: S12
-- id: S16
+    to: s12
+- id: s16
   name: Which Task?
   path: flowbee-demo.decision
   attributes:
@@ -90,42 +90,42 @@ steps:
     SCRIPT: Groovy
     display: x=136,y=175,w=112,h=85
   links:
-  - id: L11
+  - id: l11
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=268,y=168,xs=252&339,ys=192&192
-    to: S3
+    to: s3
     result: AutoForm
-  - id: L12
+  - id: l12
     attributes:
       TRANSITION_RETRY_COUNT: '-1'
       display: type=Elbow,x=266,y=217,xs=252&334,ys=240&240
-    to: S12
+    to: s12
     result: Custom
 subflows:
-- id: F5
+- id: f5
   name: TaskEventTest Correction Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Correction Handler
     PROCESS_VISIBILITY: EMBEDDED
     display: x=199,y=8,w=440,h=120
   steps:
-  - id: S6
+  - id: s6
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=239,y=48,w=60,h=40
     links:
-    - id: L4
+    - id: l4
       attributes:
         display: type=Elbow,x=336,y=76,xs=303&362,ys=68&68
-      to: S11
-  - id: S7
+      to: s11
+  - id: s7
     name: Stop
     path: flowbee-demo.stop
     attributes:
       display: x=539,y=48,w=60,h=40
-  - id: S11
+  - id: s11
     name: New Timer Wait
     path: flowbee-demo.timer.TimerWaitActivity
     attributes:
@@ -134,28 +134,28 @@ subflows:
       Unit: Seconds
       display: x=366,y=35,w=100,h=60
     links:
-    - id: L6
+    - id: l6
       attributes:
         display: type=Elbow,x=502,y=68,xs=470&535,ys=68&68
-      to: S7
-- id: F8
+      to: s7
+- id: f8
   name: Cancellation Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Cancellation Handler
     PROCESS_VISIBILITY: EMBEDDED
     display: x=657,y=12,w=440,h=120
   steps:
-  - id: S9
+  - id: s9
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=697,y=52,w=60,h=40
     links:
-    - id: L5
+    - id: l5
       attributes:
         display: type=Elbow,x=877,y=72,xs=761&993,ys=72&72
-      to: S10
-  - id: S10
+      to: s10
+  - id: s10
     name: Stop
     path: flowbee-demo.stop
     attributes:

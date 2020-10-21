@@ -8,28 +8,28 @@ attributes:
   Transition with no Label: Acts as Default
   display: x=34,y=46,w=182,h=27
 steps:
-- id: S13
+- id: s13
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=27,y=328,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=374,y=892,xs=59&59,ys=372&537
-    to: S5
-- id: S10
+    to: s5
+- id: s10
   name: update case value
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: $case = "good";
     display: x=554,y=320,w=100,h=60
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=755,y=445,xs=658&847,ys=350&482
-    to: S7
-- id: S3
+    to: s7
+- id: s3
   name: Set Variable in Main
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -40,16 +40,16 @@ steps:
     SCRIPT: Groovy
     display: x=462,y=200,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=685,y=323,xs=566&847,ys=230&482
-    to: S7
-- id: S7
+    to: s7
+- id: s7
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=851,y=462,w=60,h=40
-- id: S15
+- id: s15
   name: Wait for 3 min
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -60,11 +60,11 @@ steps:
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},CORRECT,true
     display: x=357,y=299,w=100,h=60
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=518,y=337,xs=461&550,ys=339&339
-    to: S10
-- id: S1
+    to: s10
+- id: s1
   name: Manual task with event wait
   path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
@@ -75,24 +75,24 @@ steps:
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},CORRECT,true
     display: x=354,y=676,w=100,h=60
   links:
-  - id: L15
+  - id: l15
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=760,y=465,xs=458&633&633&847,ys=709&709&506&506
-    to: S7
-- id: S12
+    to: s7
+- id: s12
   name: Sync arm1
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: print("Hello");
     display: x=352,y=476,w=100,h=60
   links:
-  - id: L11
+  - id: l11
     attributes:
       display: type=Elbow,x=478,y=529,xs=456&494,ys=530&530
-    to: S2
-- id: S4
+    to: s2
+- id: s4
   name: set up arg table
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -101,11 +101,11 @@ steps:
     SCRIPT: Groovy
     display: x=286,y=870,w=100,h=60
   links:
-  - id: L20
+  - id: l20
     attributes:
       display: type=Elbow,x=412,y=901,xs=390&433,ys=901&901
-    to: S11
-- id: S14
+    to: s11
+- id: s14
   name: timer wait - keep waiting
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -115,11 +115,11 @@ steps:
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},CORRECT,true
     display: x=352,y=776,w=100,h=60
   links:
-  - id: L17
+  - id: l17
     attributes:
       display: type=Elbow,x=651,y=644,xs=456&847,ys=806&482
-    to: S7
-- id: S8
+    to: s7
+- id: s8
   name: sum up
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -133,11 +133,11 @@ steps:
       then $case = $case + row.result;
     display: x=680,y=878,w=100,h=60
   links:
-  - id: L21
+  - id: l21
     attributes:
       display: type=Elbow,x=805,y=690,xs=730&881,ys=874&506
-    to: S7
-- id: S11
+    to: s7
+- id: s11
   name: 3 subproceses
   path: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
@@ -152,11 +152,11 @@ steps:
     processversion: '1005'
     synchronous: 'TRUE'
   links:
-  - id: L19
+  - id: l19
     attributes:
       display: type=Elbow,x=643,y=749,xs=541&676,ys=905&905
-    to: S8
-- id: S9
+    to: s8
+- id: s9
   name: Wait for some event
   path: flowbee-demo.event.EventWaitActivity
   attributes:
@@ -164,11 +164,11 @@ steps:
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},Hold::CORRECT,true;Signal-{$MasterRequestID},,false
     display: x=359,y=386,w=100,h=60
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=504,y=391,xs=463&550,ys=416&350
-    to: S10
-- id: S2
+    to: s10
+- id: s2
   name: Synch with Wait
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
@@ -181,13 +181,13 @@ steps:
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},CORRECT,true
     display: x=498,y=524,w=100,h=60
   links:
-  - id: L13
+  - id: l13
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=720,y=499,xs=602&847,ys=554&482
-    to: S7
-- id: S5
+    to: s7
+- id: s5
   name: which case?
   path: flowbee-demo.decision
   attributes:
@@ -195,58 +195,58 @@ steps:
     SCRIPT: Groovy
     display: x=32,y=541,w=60,h=40
   links:
-  - id: L3
+  - id: l3
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=296,y=247,xs=96&458,ys=561&230
-    to: S3
+    to: s3
     result: set-parameter-value
-  - id: L4
+  - id: l4
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=176,y=289,xs=96&353,ys=561&329
-    to: S15
+    to: s15
     result: correct-resume-on-hold
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=141,y=386,xs=96&355,ys=561&416
-    to: S9
+    to: s9
     result: correct-resume-on-wait
-  - id: L9
+  - id: l9
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=283,y=505,xs=96&202&202&348,ys=562&562&526&526
-    to: S12
+    to: s12
     result: sync-wait
-  - id: L14
+  - id: l14
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=254,y=681,xs=96&202&202&350,ys=562&562&708&708
-    to: S1
+    to: s1
     result: task-wait
-  - id: L16
+  - id: l16
     attributes:
       display: type=Elbow,x=197,y=776,xs=96&348,ys=561&806
-    to: S14
+    to: s14
     result: timer-wait-keep-waiting
-  - id: L18
+  - id: l18
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowH,x=124,y=879,xs=96&220&220&282,ys=571&571&909&909
-    to: S4
+    to: s4
     result: subproc-hold
-  - id: L26
+  - id: l26
     attributes:
       TRANSITION_DELAY: '2'
       display: type=Elbow,x=294,y=598,xs=96&368,ys=561&629
-    to: S22
+    to: s22
     result: sync-wait
-- id: S22
+- id: s22
   name: "sync arm2\r\n(delay 2 min)"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -254,12 +254,12 @@ steps:
     SCRIPT: Groovy
     display: x=372,y=599,w=100,h=60
   links:
-  - id: L27
+  - id: l27
     attributes:
       display: type=Elbow,x=486,y=592,xs=476&494,ys=629&554
-    to: S2
+    to: s2
 subflows:
-- id: F2
+- id: f2
   name: Exception Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Exception Handler
@@ -268,17 +268,17 @@ subflows:
     START_TRANSITION_ID: '2327578'
     display: x=709,y=45,w=333,h=105
   steps:
-  - id: S17
+  - id: s17
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=709,y=78,w=60,h=40
     links:
-    - id: L22
+    - id: l22
       attributes:
         display: type=Elbow,x=787,y=98,xs=773&822,ys=98&98
-      to: S18
-  - id: S18
+      to: s18
+  - id: s18
     name: Set Variable in Embedded
     path: flowbee-demo.script.ScriptExecutorActivity
     attributes:
@@ -286,11 +286,11 @@ subflows:
       SCRIPT: Groovy
       display: x=826,y=72,w=100,h=60
     links:
-    - id: L23
+    - id: l23
       attributes:
         display: type=Elbow,x=968,y=101,xs=930&978,ys=101&101
-      to: S16
-  - id: S16
+      to: s16
+  - id: s16
     name: Stop
     path: flowbee-demo.stop
     attributes:
@@ -298,7 +298,7 @@ subflows:
   variables:
     EmbeddedSubProcessTaskAction:
       type: java.lang.String
-- id: F3
+- id: f3
   name: Correction Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Correction Handler
@@ -307,22 +307,22 @@ subflows:
     START_TRANSITION_ID: '2327569'
     display: x=255,y=40,w=440,h=120
   steps:
-  - id: S20
+  - id: s20
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=295,y=80,w=60,h=40
     links:
-    - id: L24
+    - id: l24
       attributes:
         display: type=Elbow,x=441,y=92,xs=359&420,ys=100&100
-      to: S19
-  - id: S21
+      to: s19
+  - id: s21
     name: Stop
     path: flowbee-demo.stop
     attributes:
       display: x=617,y=80,w=60,h=40
-  - id: S19
+  - id: s19
     name: wait 1 min
     path: flowbee-demo.timer.TimerWaitActivity
     attributes:
@@ -330,10 +330,10 @@ subflows:
       Unit: Minutes
       display: x=424,y=71,w=100,h=60
     links:
-    - id: L25
+    - id: l25
       attributes:
         display: type=Elbow,x=573,y=100,xs=528&613,ys=100&100
-      to: S21
+      to: s21
   variables:
     EmbeddedSubProcessTaskAction:
       type: java.lang.String

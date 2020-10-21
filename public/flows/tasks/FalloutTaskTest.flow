@@ -4,51 +4,51 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=21,y=24,w=142,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=55,y=220,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=207,y=194,xs=119&216,ys=240&240
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=475,y=220,w=60,h=40
-- id: S3
+- id: s3
   name: "Throw\r\nException"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     Rule: throw new Exception("Fallout")
     display: x=220,y=210,w=101,h=74
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=397,y=240,xs=325&471,ys=240&240
-    to: S2
+    to: s2
 subflows:
-- id: F6
+- id: f6
   name: Exception Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Exception Handler
     PROCESS_VISIBILITY: EMBEDDED
     display: x=262,y=40,w=440,h=120
   steps:
-  - id: S7
+  - id: s7
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=302,y=80,w=60,h=40
     links:
-    - id: L3
+    - id: l3
       attributes:
         display: type=Elbow,x=392,y=100,xs=366&417,ys=100&100
-      to: S4
-  - id: S4
+      to: s4
+  - id: s4
     name: Fallout Test Task
     path: flowbee-demo.task.CustomManualTaskActivity
     attributes:
@@ -58,17 +58,17 @@ subflows:
       TASK_TEMPLATE_assetVersion: '[0.1,1)'
       display: x=421,y=70,w=111,h=62
     links:
-    - id: L4
+    - id: l4
       attributes:
         display: type=Elbow,x=567,y=100,xs=536&598,ys=100&100
-      to: S8
-  - id: S8
+      to: s8
+  - id: s8
     name: Stop
     path: flowbee-demo.stop
     attributes:
       display: x=602,y=80,w=60,h=40
 notes:
-- id: N5
+- id: n5
   attributes:
     display: x=29,y=64,w=197,h=22
   text: 'TODO: Test all features.'

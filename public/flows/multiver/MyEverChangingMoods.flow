@@ -5,22 +5,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=33,y=21,w=221,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=50,y=120,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=140,y=140,xs=114&166,ys=140&140
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=700,y=120,w=60,h=40
-- id: S3
+- id: s3
   name: Wait
   path: flowbee-demo.event.EventWaitActivity
   attributes:
@@ -29,11 +29,11 @@ steps:
     WAIT_EVENT_NAMES: '[["${masterRequestId}",""]]'
     display: x=350,y=110,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=490,y=140,xs=454&526,ys=140&140
-    to: S5
-- id: S4
+    to: s5
+- id: s4
   name: Init
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -43,11 +43,11 @@ steps:
     SCRIPT: Groovy
     display: x=170,y=110,w=100,h=60
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=310,y=140,xs=274&346,ys=140&140
-    to: S3
-- id: S5
+    to: s3
+- id: s5
   name: Update
   path: flowbee-demo.java.DynamicJavaActivity
   attributes:
@@ -75,10 +75,10 @@ steps:
       }
     display: x=530,y=110,w=100,h=60
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=665,y=140,xs=634&696,ys=140&140
-    to: S2
+    to: s2
 variables:
   after:
     type: java.lang.String

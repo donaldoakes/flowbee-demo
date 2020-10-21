@@ -3,22 +3,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=32,y=16,w=172,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=60,y=93,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=172,y=112,xs=124&220,ys=112&112
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=423,y=94,w=60,h=40
-- id: S3
+- id: s3
   name: Set Info
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -27,10 +27,10 @@ steps:
     SCRIPT: Groovy
     display: x=224,y=85,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=373,y=114,xs=328&418,ys=114&114
-    to: S2
+    to: s2
 variables:
   inputVar:
     type: java.lang.String

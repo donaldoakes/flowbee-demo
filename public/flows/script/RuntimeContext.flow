@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=28,y=21,w=147,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=52,y=79,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=184,y=98,xs=116&193,ys=99&99
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=405,y=82,w=60,h=40
-- id: S3
+- id: s3
   name: "Set mrid variable\r\nfrom runtimeContext"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -27,12 +27,12 @@ steps:
     SCRIPT: Groovy
     display: x=197,y=74,w=127,h=74
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=365,y=102,xs=328&401,ys=102&102
-    to: S2
+    to: s2
 notes:
-- id: N4
+- id: n4
   attributes:
     display: x=137,y=191,w=309,h=38
   text: "TODO: Test other runtimeContext access\r\nbesides masterRequestId."

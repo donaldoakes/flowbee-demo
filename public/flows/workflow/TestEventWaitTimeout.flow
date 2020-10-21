@@ -10,22 +10,22 @@ attributes:
   Transition with no Label: Acts as Default
   display: x=38,y=63,w=248,h=27
 steps:
-- id: S2
+- id: s2
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=36,y=208,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=188,y=195,xs=100&230,ys=228&228
-    to: S3
-- id: S4
+    to: s3
+- id: s4
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=490,y=212,w=60,h=40
-- id: S1
+- id: s1
   name: Check
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -33,13 +33,13 @@ steps:
     Unit: Minutes
     display: x=159,y=363,w=100,h=60
   links:
-  - id: L4
+  - id: l4
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=325,y=316,xs=263&263&320&320,ys=359&307&307&262
-    to: S3
-- id: S3
+    to: s3
+- id: s3
   name: Event Wait
   path: flowbee-demo.event.EventWaitActivity
   attributes:
@@ -49,19 +49,19 @@ steps:
     WAIT_EVENT_NAMES: NonTaskAction-{$MasterRequestID},NonTaskAction,false
     display: x=234,y=200,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=390,y=233,xs=338&486,ys=232&232
-    to: S4
-  - id: L3
+    to: s4
+  - id: l3
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=200,y=293,xs=246&246,ys=264&359
     event: Delay
-    to: S1
+    to: s1
 subflows:
-- id: F2
+- id: f2
   name: Exception Handler
   attributes:
     ENTRY_TRANSITION_ID: '2327303'
@@ -69,22 +69,22 @@ subflows:
     START_TRANSITION_ID: '2327293'
     display: x=358,y=31,w=440,h=120
   steps:
-  - id: S5
+  - id: s5
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=398,y=71,w=60,h=40
     links:
-    - id: L6
+    - id: l6
       attributes:
         display: type=Elbow,x=491,y=91,xs=462&519,ys=91&91
-      to: S7
-  - id: S6
+      to: s7
+  - id: s6
     name: Stop
     path: flowbee-demo.stop
     attributes:
       display: x=698,y=71,w=60,h=40
-  - id: S7
+  - id: s7
     name: Event Wait Fallout
     path: flowbee-demo.task.AutoFormManualTaskActivity
     attributes:
@@ -94,10 +94,10 @@ subflows:
       Wait for Task: 'TRUE'
       display: x=523,y=61,w=105,h=61
     links:
-    - id: L5
+    - id: l5
       attributes:
         display: type=Elbow,x=663,y=91,xs=632&694,ys=91&91
-      to: S6
+      to: s6
   variables:
     EmbeddedSubProcessTaskAction:
       type: java.lang.String

@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=50,y=50,w=159,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=157,y=294,xs=124&149,ys=280&280
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=461,y=118,w=60,h=40
-- id: S3
+- id: s3
   name: Which Case?
   path: flowbee-demo.decision
   attributes:
@@ -27,16 +27,16 @@ steps:
     SCRIPT: Groovy
     display: x=153,y=245,w=98,h=68
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=202,y=217,xs=202&202,ys=241&175
-    to: S5
-  - id: L3
+    to: s5
+  - id: l3
     attributes:
       display: type=Elbow,x=258,y=291,xs=255&399,ys=281&281
-    to: S6
+    to: s6
     result: error handler delegation
-- id: S5
+- id: s5
   name: Script with syntax Error
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -44,11 +44,11 @@ steps:
     SCRIPT: Groovy
     display: x=136,y=112,w=133,h=59
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=342,y=138,xs=273&457,ys=138&138
-    to: S2
-- id: S6
+    to: s2
+- id: s6
   name: Invoke Subprocess with Error
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -57,34 +57,34 @@ steps:
     processversion: '[0,1)'
     synchronous: 'TRUE'
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=491,y=197,xs=491&491,ys=245&162
-    to: S2
+    to: s2
 subflows:
-- id: F9
+- id: f9
   name: Exception Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Exception Handler
     PROCESS_VISIBILITY: EMBEDDED
     display: x=544,y=20,w=386,h=116
   steps:
-  - id: S7
+  - id: s7
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=557,y=60,w=60,h=40
     links:
-    - id: L6
+    - id: l6
       attributes:
         display: type=Elbow,x=652,y=80,xs=621&684,ys=80&80
-      to: S11
-  - id: S10
+      to: s11
+  - id: s10
     name: Stop
     path: flowbee-demo.stop
     attributes:
       display: x=857,y=60,w=60,h=40
-  - id: S11
+  - id: s11
     name: ActivityException Fallout
     path: flowbee-demo.task.AutoFormManualTaskActivity
     attributes:
@@ -95,10 +95,10 @@ subflows:
       Wait for Task: 'TRUE'
       display: x=688,y=51,w=100,h=60
     links:
-    - id: L7
+    - id: l7
       attributes:
         display: type=Elbow,x=822,y=80,xs=792&853,ys=80&80
-      to: S10
+      to: s10
 variables:
   exception:
     type: java.lang.Exception

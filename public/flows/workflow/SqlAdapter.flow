@@ -4,30 +4,30 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=21,y=21,w=101,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=250,y=11,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=253,y=9,xs=246&207,ys=31&161
-    to: S3
-  - id: L3
+    to: s3
+  - id: l3
     attributes:
       display: type=Elbow,x=283,y=63,xs=289&289,ys=55&84
-    to: S10
-  - id: L6
+    to: s10
+  - id: l6
     attributes:
       display: type=Elbow,x=322,y=28,xs=314&338,ys=32&32
-    to: S9
-- id: S2
+    to: s9
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=261,y=400,w=60,h=40
-- id: S3
+- id: s3
   name: "Query Using\r\nJDBC URL"
   path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
@@ -41,11 +41,11 @@ steps:
     queryType: Select
     sqlQuery: select * from USER_INFO where cuid = ?
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=181,y=246,xs=152&278,ys=203&289
-    to: S5
-- id: S4
+    to: s5
+- id: s4
   name: "Query Multiple Params,\r\nMultiple Results"
   path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
@@ -59,11 +59,11 @@ steps:
     queryType: Select
     sqlQuery: "select * from USER_INFO ui, USER_GROUP_MAPPING ugm, USER_GROUP ug\r\nwhere ui.user_info_id = ugm.user_info_id\r\nand ugm.user_group_id = ug.user_group_id\r\nand ug.group_name = 'Site Admin'\r\nand (ui.cuid = ? or ui.cuid = ?) \r\norder by cuid desc"
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=316,y=276,xs=316&316,ys=267&289
-    to: S5
-- id: S5
+    to: s5
+- id: s5
   name: Sync
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
@@ -71,11 +71,11 @@ steps:
     Synced Activities: "Query Using\r\nJDBC URL#Query Multiple Params,\r\nMultiple Results#Reset\r\nUser Name"
     display: x=228,y=293,w=100,h=60
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=291,y=344,xs=291&291,ys=357&396
-    to: S2
-- id: S6
+    to: s2
+- id: s6
   name: "Update\r\nUser Name"
   path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
@@ -85,11 +85,11 @@ steps:
     queryType: Update
     sqlQuery: update USER_INFO set name = 'Don Oakes' where cuid = 'dxoakes'
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=525,y=111,xs=525&525,ys=83&149
-    to: S7
-- id: S7
+    to: s7
+- id: s7
   name: "Select User\r\nAnd Bind Name"
   path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
@@ -101,12 +101,12 @@ steps:
     queryType: Select
     sqlQuery: select name from USER_INFO where cuid = 'dxoakes'
   links:
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=535,y=248,xs=527&527,ys=229&287
-    to: S8
+    to: s8
     result: Don Oakes
-- id: S8
+- id: s8
   name: "Reset\r\nUser Name"
   path: flowbee-demo.adapter.db.JdbcSqlAdapter
   attributes:
@@ -118,11 +118,11 @@ steps:
     queryType: Update
     sqlQuery: update USER_INFO set name = 'Donald Oakes' where cuid = 'dxoakes'
   links:
-  - id: L9
+  - id: l9
     attributes:
       display: type=Elbow,x=401,y=323,xs=470&332,ys=323&323
-    to: S5
-- id: S9
+    to: s5
+- id: s9
   name: Wait 60s
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -131,11 +131,11 @@ steps:
     Unit: Seconds
     display: x=342,y=13,w=100,h=60
   links:
-  - id: L10
+  - id: l10
     attributes:
       display: type=Elbow,x=457,y=43,xs=446&468,ys=43&43
-    to: S6
-- id: S10
+    to: s6
+- id: s10
   name: Wait 10s
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -144,10 +144,10 @@ steps:
     Unit: Seconds
     display: x=268,y=88,w=100,h=60
   links:
-  - id: L11
+  - id: l11
     attributes:
       display: type=Elbow,x=336,y=166,xs=336&336,ys=152&181
-    to: S4
+    to: s4
 variables:
   supportUsers:
     type: java.util.List<String>

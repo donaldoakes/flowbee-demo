@@ -5,26 +5,26 @@ attributes:
   PerformanceLevel: '0'
   display: x=50,y=50,w=0,h=0
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=75,y=153,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=199,y=128,xs=139&260,ys=173&84
-    to: S3
-  - id: L3
+    to: s3
+  - id: l3
     attributes:
       display: type=Elbow,x=199,y=220,xs=139&260,ys=173&268
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=450,y=64,w=60,h=40
-- id: S3
+- id: s3
   name: |-
     Wait
     Here
@@ -35,11 +35,11 @@ steps:
     WAIT_EVENT_NAMES: '[["never",""]]'
     display: x=264,y=50,w=111,h=70
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=413,y=84,xs=379&447,ys=84&84
-    to: S2
-- id: S4
+    to: s2
+- id: s4
   name: |-
     Task
     Here
@@ -49,11 +49,11 @@ steps:
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     display: x=264,y=233,w=110,h=68
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=410,y=260,xs=378&443,ys=260&260
-    to: S5
-- id: S5
+    to: s5
+- id: s5
   name: Stop
   path: flowbee-demo.stop
   attributes:

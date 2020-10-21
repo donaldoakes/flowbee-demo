@@ -4,30 +4,30 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=32,y=29,w=146,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=41,y=103,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=188,y=126,xs=105&211,ys=123&123
-    to: S3
-  - id: L3
+    to: s3
+  - id: l3
     attributes:
       display: type=Elbow,x=161,y=169,xs=105&213,ys=123&214
-    to: S4
-  - id: L5
+    to: s4
+  - id: l5
     attributes:
       display: type=Elbow,x=71,y=201,xs=71&71,ys=147&255
-    to: S5
-- id: S2
+    to: s5
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=461,y=103,w=60,h=40
-- id: S3
+- id: s3
   name: "AutoAssigned\r\nTask"
   path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
@@ -38,11 +38,11 @@ steps:
     Wait for Task: 'TRUE'
     display: x=215,y=88,w=114,h=74
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=398,y=123,xs=333&457,ys=123&123
-    to: S2
-- id: S4
+    to: s2
+- id: s4
   name: "AutoAssigned\r\nFrom JAB Elem"
   path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
@@ -52,11 +52,11 @@ steps:
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     display: x=217,y=181,w=115,h=66
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=397,y=167,xs=336&457,ys=214&123
-    to: S2
-- id: S5
+    to: s2
+- id: s5
   name: "AutoAssigned\r\nFrom JAXB Attr"
   path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
@@ -67,10 +67,10 @@ steps:
     Wait for Task: 'TRUE'
     display: x=29,y=259,w=112,h=66
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=205,y=288,xs=141&491&491,ys=292&292&143
-    to: S2
+    to: s2
 variables:
   jaxbWithAssignee:
     type: javax.xml.bind.JAXBElement

@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=61,y=26,w=63,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=342,y=24,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=470,y=78,xs=372&372,ys=68&147
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=174,y=475,w=60,h=40
-- id: S3
+- id: s3
   name: "Send\r\nVia"
   path: flowbee-demo.decision
   attributes:
@@ -27,17 +27,17 @@ steps:
     SCRIPT: javax.el
     display: x=325,y=151,w=94,h=71
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=292,y=164,xs=321&258,ys=186&266
-    to: S5
+    to: s5
     result: smtp
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=420,y=164,xs=423&490,ys=186&267
-    to: S4
+    to: s4
     result: sendgrid
-- id: S5
+- id: s5
   name: SMTP
   path: flowbee-demo.notification.EmailNotificationActivity
   attributes:
@@ -51,11 +51,11 @@ steps:
     template: base/emailTemplate.html
     template_assetVersion: '[0.1,1)'
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=204,y=322,xs=204&204,ys=300&345
-    to: S6
-- id: S4
+    to: s6
+- id: s4
   name: SendGrid
   path: flowbee-demo.sendgrid.SendgridActivity
   attributes:
@@ -68,11 +68,11 @@ steps:
     template: base/emailTemplate.html
     template_assetVersion: '[0.1,1)'
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=544,y=322,xs=544&544,ys=301&344
-    to: S7
-- id: S6
+    to: s7
+- id: s6
   name: "SMTP\r\nTask"
   path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
@@ -83,11 +83,11 @@ steps:
     Wait for Task: 'true'
     display: x=153,y=349,w=103,h=68
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=204,y=446,xs=204&204,ys=421&471
-    to: S2
-- id: S7
+    to: s2
+- id: s7
   name: "SendGrid\r\nTask"
   path: flowbee-demo.task.AutoFormManualTaskActivity
   attributes:
@@ -98,17 +98,17 @@ steps:
     Wait for Task: 'true'
     display: x=495,y=348,w=102,h=70
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=546,y=444,xs=546&546,ys=422&471
-    to: S8
-- id: S8
+    to: s8
+- id: s8
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=516,y=475,w=60,h=40
 notes:
-- id: N9
+- id: n9
   attributes:
     display: x=52,y=70,w=174,h=26
   text: For manual testing

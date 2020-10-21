@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=40,y=39,w=151,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=32,y=129,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=123,y=149,xs=95&152,ys=149&149
-    to: S5
-- id: S2
+    to: s5
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=494,y=299,w=60,h=40
-- id: S4
+- id: s4
   name: "Create\r\nServicePlan"
   path: flowbee-demo.kotlin.ScriptActivity
   attributes:
@@ -28,11 +28,11 @@ steps:
     SCRIPT: Kotlin Script
     display: x=322,y=118,w=105,h=71
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=478,y=224,xs=431&525,ys=153&295
-    to: S2
-- id: S5
+    to: s2
+- id: s5
   name: Which?
   path: flowbee-demo.decision
   attributes:
@@ -40,17 +40,17 @@ steps:
     SCRIPT: Kotlin Script
     display: x=156,y=122,w=85,h=55
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=264,y=156,xs=245&318,ys=148&148
-    to: S4
+    to: s4
     result: Kotlin
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=207,y=230,xs=198&198,ys=181&273
-    to: S6
+    to: s6
     result: Java
-- id: S6
+- id: s6
   name: |-
     Java
     ServicePlan
@@ -61,12 +61,12 @@ steps:
     Output Documents: '["servicePlan"]'
     display: x=145,y=277,w=106,h=68
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=372,y=319,xs=255&490,ys=319&319
-    to: S2
+    to: s2
 notes:
-- id: N3
+- id: n3
   attributes:
     display: x=232,y=45,w=149,h=22
   text: Just tests the DSL

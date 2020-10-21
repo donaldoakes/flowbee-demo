@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=26,y=31,w=115,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=25,y=300,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=126,y=309,xs=89&143,ys=320&320
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=968,y=221,w=60,h=40
-- id: S3
+- id: s3
   name: "Synchronous Cloud\r\nJMS Request"
   path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
@@ -32,11 +32,11 @@ steps:
     Wait for response?: 'True'
     display: x=403,y=10,w=125,h=72
   links:
-  - id: L16
+  - id: l16
     attributes:
       display: type=Elbow,x=648,y=69,xs=532&765,ys=69&69
-    to: S12
-- id: S4
+    to: s12
+- id: s4
   name: Synchronous?
   path: flowbee-demo.decision
   attributes:
@@ -44,17 +44,17 @@ steps:
     SCRIPT: Groovy
     display: x=147,y=284,w=95,h=74
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=365,y=205,xs=194&424,ys=286&155
-    to: S6
+    to: s6
     result: Synchronous
-  - id: L13
+  - id: l13
     attributes:
       display: type=Elbow,x=314,y=421,xs=194&429,ys=357&537
-    to: S9
+    to: s9
     result: Asynchronous
-- id: S6
+- id: s6
   name: Platform?
   path: flowbee-demo.decision
   attributes:
@@ -62,17 +62,17 @@ steps:
     SCRIPT: Groovy
     display: x=428,y=118,w=95,h=74
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=475,y=100,xs=475&475,ys=114&86
-    to: S3
+    to: s3
     result: Cloud
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=475,y=193,xs=475&475,ys=196&217
-    to: S7
+    to: s7
     result: OSGi
-- id: S7
+- id: s7
   name: "Synchronous OSGi\r\nJMS Request"
   path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
@@ -86,11 +86,11 @@ steps:
     Wait for response?: 'True'
     display: x=411,y=221,w=129,h=70
   links:
-  - id: L17
+  - id: l17
     attributes:
       display: type=Elbow,x=654,y=175,xs=544&765,ys=256&93
-    to: S12
-- id: S8
+    to: s12
+- id: s8
   name: "Asynchronous Cloud\r\nJMS Request"
   path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
@@ -103,11 +103,11 @@ steps:
     Wait for response?: 'False'
     display: x=413,y=385,w=125,h=72
   links:
-  - id: L14
+  - id: l14
     attributes:
       display: type=Elbow,x=769,y=349,xs=542&964,ys=421&241
-    to: S2
-- id: S9
+    to: s2
+- id: s9
   name: Platform?
   path: flowbee-demo.decision
   attributes:
@@ -115,17 +115,17 @@ steps:
     SCRIPT: Groovy
     display: x=433,y=500,w=95,h=74
   links:
-  - id: L11
+  - id: l11
     attributes:
       display: type=Elbow,x=480,y=469,xs=480&480,ys=496&461
-    to: S8
+    to: s8
     result: Cloud
-  - id: L12
+  - id: l12
     attributes:
       display: type=Elbow,x=486,y=591,xs=480&480,ys=578&598
-    to: S10
+    to: s10
     result: OSGi
-- id: S10
+- id: s10
   name: "Asynchronous OSGi\r\nJMS Request"
   path: flowbee-demo.adapter.jms.JmsAdapter
   attributes:
@@ -139,11 +139,11 @@ steps:
     Wait for response?: 'False'
     display: x=411,y=602,w=129,h=70
   links:
-  - id: L15
+  - id: l15
     attributes:
       display: type=Elbow,x=775,y=454,xs=544&964,ys=637&241
-    to: S2
-- id: S12
+    to: s2
+- id: s12
   name: "Set Response\r\nJMS Message Id"
   path: flowbee-demo.java.DynamicJavaActivity
   attributes:
@@ -151,10 +151,10 @@ steps:
     Java: ""
     display: x=769,y=57,w=100,h=73
   links:
-  - id: L18
+  - id: l18
     attributes:
       display: type=Elbow,x=935,y=154,xs=873&998,ys=93&217
-    to: S2
+    to: s2
 variables:
   asyncResponse:
     type: org.w3c.dom.Document

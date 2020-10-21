@@ -8,22 +8,22 @@ attributes:
   requestPath: Jsonable
   requestSummary: Because it's there
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=70,y=130,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=175,y=150,xs=134&216,ys=150&150
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=670,y=130,w=60,h=40
-- id: S4
+- id: s4
   name: Create/Update
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -45,11 +45,11 @@ steps:
     SCRIPT: Groovy
     display: x=220,y=110,w=120,h=80
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=385,y=150,xs=344&426,ys=150&150
-    to: S6
-- id: S6
+    to: s6
+- id: s6
   name: Further Updates
   path: flowbee-demo.java.DynamicJavaActivity
   attributes:
@@ -58,10 +58,10 @@ steps:
     Output Documents: '["input","local","request"]'
     display: x=430,y=110,w=120,h=80
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=610,y=150,xs=554&666,ys=150&150
-    to: S2
+    to: s2
 variables:
   input:
     type: io.limberest.json.Jsonable

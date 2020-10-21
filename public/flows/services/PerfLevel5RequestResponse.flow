@@ -7,22 +7,22 @@ attributes:
   requestMethod: POST
   requestPath: perf5req-resp
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=50,y=130,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=140,y=150,xs=114&166,ys=150&150
-    to: S5
-- id: S2
+    to: s5
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=670,y=130,w=60,h=40
-- id: S3
+- id: s3
   name: Respond
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -31,11 +31,11 @@ steps:
     SCRIPT: Groovy
     display: x=510,y=120,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=640,y=150,xs=614&666,ys=150&150
-    to: S2
-- id: S4
+    to: s2
+- id: s4
   name: Invoke
   path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
@@ -45,11 +45,11 @@ steps:
     RESPONSE_VARIABLE: serviceResponse
     display: x=340,y=120,w=100,h=60
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=475,y=150,xs=444&506,ys=150&150
-    to: S3
-- id: S5
+    to: s3
+- id: s5
   name: |-
     Create
     Request
@@ -66,10 +66,10 @@ steps:
     SCRIPT: Groovy
     display: x=170,y=120,w=100,h=60
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=305,y=150,xs=274&336,ys=150&150
-    to: S4
+    to: s4
 variables:
   request:
     type: org.json.JSONObject

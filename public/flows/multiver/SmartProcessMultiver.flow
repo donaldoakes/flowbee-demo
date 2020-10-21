@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=33,y=29,w=206,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=60,y=140,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=180,y=160,xs=124&236,ys=160&160
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=640,y=140,w=60,h=40
-- id: S3
+- id: s3
   name: Invoke v2.1
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -28,11 +28,11 @@ steps:
     processversion: '[2.1,3)'
     synchronous: 'true'
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=395,y=160,xs=344&446,ys=160&160
-    to: S4
-- id: S4
+    to: s4
+- id: s4
   name: Invoke v3.0
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -41,7 +41,7 @@ steps:
     processversion: '[3.0,4)'
     synchronous: 'true'
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=595,y=160,xs=554&636,ys=160&160
-    to: S2
+    to: s2

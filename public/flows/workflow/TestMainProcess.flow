@@ -9,17 +9,17 @@ attributes:
   Transition with no Label: Acts as Default
   display: x=50,y=40,w=199,h=27
 steps:
-- id: S6
+- id: s6
   name: Process Start
   path: flowbee-demo.start
   attributes:
     display: x=424,y=34,w=32,h=32
   links:
-  - id: L41
+  - id: l41
     attributes:
       display: type=Elbow,x=440,y=102,xs=440&440,ys=70&135
-    to: S33
-- id: S9
+    to: s33
+- id: s9
   name: N = 11
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -27,16 +27,16 @@ steps:
     SCRIPT: Groovy
     display: x=950,y=535,w=25,h=23
   links:
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=966,y=600,xs=962&1041,ys=562&654
-    to: S20
-- id: S11
+    to: s20
+- id: s11
   name: Process Finish
   path: flowbee-demo.stop
   attributes:
     display: x=488,y=880,w=32,h=32
-- id: S10
+- id: s10
   name: Invoke process that errs
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -45,11 +45,11 @@ steps:
     processversion: '[0,1)'
     synchronous: 'TRUE'
   links:
-  - id: L21
+  - id: l21
     attributes:
       display: type=ElbowV,x=491,y=774,xs=491&491,ys=647&876
-    to: S11
-- id: S25
+    to: s11
+- id: s25
   name: Get orderId
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -59,13 +59,13 @@ steps:
     SCRIPT: Groovy
     display: x=825,y=661,w=25,h=23
   links:
-  - id: L2
+  - id: l2
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=508,y=776,xs=837&504,ys=688&876
-    to: S11
-- id: S7
+    to: s11
+- id: s7
   name: Sum = 121
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -74,24 +74,24 @@ steps:
     SCRIPT: Groovy
     display: x=1092,y=533,w=25,h=23
   links:
-  - id: L10
+  - id: l10
     attributes:
       display: type=Elbow,x=1045,y=599,xs=1104&1041,ys=560&654
-    to: S20
-- id: S20
+    to: s20
+- id: s20
   name: Synch both branches
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     Synced Activities: N = 11#Sum = 121
     display: x=1029,y=658,w=24,h=24
   links:
-  - id: L9
+  - id: l9
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=507,y=775,xs=1041&504,ys=686&876
-    to: S11
-- id: S17
+    to: s11
+- id: s17
   name: Read order
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -102,13 +102,13 @@ steps:
     SCRIPT: Groovy
     display: x=827,y=366,w=25,h=23
   links:
-  - id: L3
+  - id: l3
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=841,y=533,xs=838&838,ys=393&657
-    to: S25
-- id: S8
+    to: s25
+- id: s8
   name: Another Dummy
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -117,17 +117,17 @@ steps:
     SCRIPT: Groovy
     display: x=1219,y=367,w=25,h=23
   links:
-  - id: L14
+  - id: l14
     attributes:
       display: type=Elbow,x=1189,y=457,xs=1231&1187,ys=394&524
-    to: S18
-  - id: L15
+    to: s18
+  - id: l15
     attributes:
       TRANSITION_DELAY: 5s
       TRANSITION_RETRY_COUNT: '0'
       display: type=Elbow,x=1235,y=452,xs=1231&1268,ys=394&526
-    to: S19
-- id: S26
+    to: s19
+- id: s26
   name: Display result
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -135,13 +135,13 @@ steps:
     SCRIPT: Groovy
     display: x=223,y=654,w=30,h=24
   links:
-  - id: L31
+  - id: l31
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=243,y=771,xs=238&504,ys=682&876
-    to: S11
-- id: S12
+    to: s11
+- id: s12
   name: Raise ABORT event
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -151,13 +151,13 @@ steps:
     SCRIPT: Groovy
     display: x=343,y=479,w=24,h=24
   links:
-  - id: L12
+  - id: l12
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=405,y=747,xs=371&371&484&484,ys=507&780&780&876
-    to: S11
-- id: S21
+    to: s11
+- id: s21
   name: Invoke remote process
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -167,13 +167,13 @@ steps:
     synchronous: 'TRUE'
     variables: argument=$N;newvar=;testxml=$xmldata;result=$Sum
   links:
-  - id: L34
+  - id: l34
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=198,y=667,xs=75&238,ys=523&650
-    to: S26
-- id: S16
+    to: s26
+- id: s16
   name: Another sync
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
@@ -181,13 +181,13 @@ steps:
     Synced Activities: N 13#Sum 169
     display: x=1220,y=659,w=24,h=24
   links:
-  - id: L18
+  - id: l18
     attributes:
       TRANSITION_DELAY: 7s
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=508,y=774,xs=1232&504,ys=687&876
-    to: S11
-- id: S22
+    to: s11
+- id: s22
   name: Invoke single process
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -197,13 +197,13 @@ steps:
     synchronous: 'TRUE'
     variables: argument=$N;testxml=$xmldata;result=$Sum
   links:
-  - id: L30
+  - id: l30
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=241,y=592,xs=237&237,ys=534&650
-    to: S26
-- id: S4
+    to: s26
+- id: s4
   name: Set remote argument
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -233,26 +233,26 @@ steps:
     SCRIPT: Groovy
     display: x=66,y=391,w=25,h=23
   links:
-  - id: L37
+  - id: l37
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=79,y=460,xs=78&78,ys=418&486
-    to: S21
-- id: S24
+    to: s21
+- id: s24
   name: Dummy Resume B
   path: flowbee-demo.ControlledActivityImpl
   attributes:
     Documentation: "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \r\n    </p>\r\n  </body>\r\n</html>\r\n"
     display: x=718,y=664,w=24,h=16
   links:
-  - id: L24
+  - id: l24
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=504,y=778,xs=730&504,ys=684&876
-    to: S11
-- id: S19
+    to: s11
+- id: s19
   name: Sum 169
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -261,11 +261,11 @@ steps:
     SCRIPT: Groovy
     display: x=1256,y=530,w=25,h=23
   links:
-  - id: L17
+  - id: l17
     attributes:
       display: type=Elbow,x=1236,y=598,xs=1268&1232,ys=557&655
-    to: S16
-- id: S23
+    to: s16
+- id: s23
   name: Set input argument
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -274,13 +274,13 @@ steps:
     SCRIPT: Groovy
     display: x=223,y=392,w=29,h=29
   links:
-  - id: L35
+  - id: l35
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=243,y=467,xs=237&237,ys=425&501
-    to: S22
-- id: S15
+    to: s22
+- id: s15
   name: Create argument
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -288,11 +288,11 @@ steps:
     SCRIPT: Groovy
     display: x=478,y=435,w=24,h=24
   links:
-  - id: L20
+  - id: l20
     attributes:
       display: type=ElbowV,x=486,y=533,xs=486&486,ys=463&619
-    to: S10
-- id: S13
+    to: s10
+- id: s13
   name: Scripts with syntax error
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -324,21 +324,21 @@ steps:
     SCRIPT: Groovy
     display: x=680,y=369,w=30,h=28
   links:
-  - id: L22
+  - id: l22
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=695,y=516,xs=695&730,ys=401&660
     event: Resume
-    to: S24
+    to: s24
     result: B
-  - id: L25
+  - id: l25
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=640,y=517,xs=695&627,ys=401&661
-    to: S14
-- id: S2
+    to: s14
+- id: s2
   name: Dummy - to fork out
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -346,30 +346,30 @@ steps:
     SCRIPT: Groovy
     display: x=1022,y=364,w=25,h=23
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=966,y=456,xs=1034&962,ys=391&531
-    to: S9
-  - id: L7
+    to: s9
+  - id: l7
     attributes:
       TRANSITION_DELAY: 5s
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=1032,y=439,xs=1032&1032&1102&1102,ys=391&463&463&529
-    to: S7
-- id: S14
+    to: s7
+- id: s14
   name: Dummy Resume A
   path: flowbee-demo.ControlledActivityImpl
   attributes:
     Documentation: "<html>\r\n  <head>\r\n\r\n  </head>\r\n  <body>\r\n    <p style=\"margin-top: 0\">\r\n      \r\n    </p>\r\n  </body>\r\n</html>\r\n"
     display: x=615,y=665,w=24,h=16
   links:
-  - id: L23
+  - id: l23
     attributes:
       TRANSITION_DELAY: '0'
       TRANSITION_RETRY_COUNT: '0'
       display: type=ElbowV,x=498,y=782,xs=627&504,ys=685&876
-    to: S11
-- id: S18
+    to: s11
+- id: s18
   name: N 13
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -378,11 +378,11 @@ steps:
     SCRIPT: Groovy
     display: x=1175,y=528,w=25,h=23
   links:
-  - id: L16
+  - id: l16
     attributes:
       display: type=Elbow,x=1191,y=597,xs=1187&1232,ys=555&655
-    to: S16
-- id: S33
+    to: s16
+- id: s33
   name: multiple processes ?
   path: flowbee-demo.decision
   attributes:
@@ -390,52 +390,52 @@ steps:
     SCRIPT: Groovy
     display: x=408,y=139,w=69,h=25
   links:
-  - id: L43
+  - id: l43
     attributes:
       display: type=ElbowV,x=81,y=344,xs=442&78,ys=168&387
-    to: S4
+    to: s4
     result: RemoteSubProcess
-  - id: L44
+  - id: l44
     attributes:
       display: type=ElbowV,x=633,y=311,xs=442&695,ys=168&365
-    to: S13
+    to: s13
     result: DEFAULT
-  - id: L45
+  - id: l45
     attributes:
       display: type=ElbowV,x=756,y=330,xs=442&839,ys=168&362
-    to: S17
+    to: s17
     result: ServiceOrder
-  - id: L46
+  - id: l46
     attributes:
       display: type=ElbowV,x=948,y=332,xs=442&1034,ys=168&360
-    to: S2
+    to: s2
     result: Synchronization
-  - id: L47
+  - id: l47
     attributes:
       display: type=ElbowV,x=1092,y=325,xs=442&1231,ys=168&363
-    to: S8
+    to: s8
     result: Sync with custom expr
-  - id: L48
+  - id: l48
     attributes:
       display: type=ElbowV,x=472,y=367,xs=442&490,ys=168&431
-    to: S15
+    to: s15
     result: error handler delegation
-  - id: L49
+  - id: l49
     attributes:
       display: type=ElbowV,x=376,y=396,xs=440&440&371&371,ys=168&349&349&475
-    to: S12
+    to: s12
     result: AbortEvent
-  - id: L50
+  - id: l50
     attributes:
       display: type=ElbowV,x=239,y=352,xs=442&237,ys=168&388
-    to: S23
+    to: s23
     result: SingleSubProcess
-  - id: L51
+  - id: l51
     attributes:
       display: type=ElbowV,x=980,y=170,xs=481&1356&1356,ys=168&168&693
-    to: S34
+    to: s34
     result: DocumentBinding
-- id: S34
+- id: s34
   name: Invoke service lvl9 process
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -445,12 +445,12 @@ steps:
     synchronous: 'TRUE'
     variables: processCase=$processCase
   links:
-  - id: L52
+  - id: l52
     attributes:
       display: type=ElbowV,x=910,y=730,xs=1342&504,ys=721&876
-    to: S11
+    to: s11
 subflows:
-- id: F3
+- id: f3
   name: Cancellation Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Cancellation Handler
@@ -459,17 +459,17 @@ subflows:
     START_TRANSITION_ID: '2325900'
     display: x=729,y=40,w=281,h=86
   steps:
-  - id: S31
+  - id: s31
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=770,y=72,w=32,h=32
     links:
-    - id: L40
+    - id: l40
       attributes:
         display: type=Elbow,x=869,y=87,xs=806&928,ys=87&87
-      to: S32
-  - id: S32
+      to: s32
+  - id: s32
     name: Stop
     path: flowbee-demo.stop
     attributes:
@@ -477,7 +477,7 @@ subflows:
   variables:
     EmbeddedSubProcessTaskAction:
       type: java.lang.String
-- id: F2
+- id: f2
   name: Exception Handler
   attributes:
     ENTRY_TRANSITION_ID: '2325979'
@@ -488,22 +488,22 @@ subflows:
     WORK_DISPLAY_INFO_TestMainProcess: x=494,y=29,w=24,h=24
     display: x=1053,y=39,w=310,h=84
   steps:
-  - id: S29
+  - id: s29
     name: Process Start
     path: flowbee-demo.start
     attributes:
       display: x=1073,y=64,w=32,h=32
     links:
-    - id: L39
+    - id: l39
       attributes:
         display: type=Straight,x=1145,y=80,xs=1105&1186,ys=80&80
-      to: S28
-  - id: S30
+      to: s28
+  - id: s30
     name: Process Finish
     path: flowbee-demo.stop
     attributes:
       display: x=1301,y=65,w=32,h=32
-  - id: S28
+  - id: s28
     name: My fallout task
     path: flowbee-demo.task.CustomManualTaskActivity
     attributes:
@@ -514,10 +514,10 @@ subflows:
       Task Name: General Fallout
       display: x=1186,y=66,w=30,h=28
     links:
-    - id: L38
+    - id: l38
       attributes:
         display: type=Straight,x=1258,y=80,xs=1216&1301,ys=80&81
-      to: S30
+      to: s30
   variables:
     EmbeddedSubProcessTaskAction:
       type: java.lang.String

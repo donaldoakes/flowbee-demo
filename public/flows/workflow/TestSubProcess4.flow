@@ -3,22 +3,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=41,y=30,w=202,h=27
 steps:
-- id: S34
+- id: s34
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=53,y=119,w=60,h=40
   links:
-  - id: L27
+  - id: l27
     attributes:
       display: type=Elbow,x=158,y=138,xs=117&199,ys=139&139
-    to: S31
-- id: S33
+    to: s31
+- id: s33
   name: Finish
   path: flowbee-demo.stop
   attributes:
     display: x=625,y=117,w=60,h=40
-- id: S31
+- id: s31
   name: Calculate cube
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -26,11 +26,11 @@ steps:
     SCRIPT: Groovy
     display: x=203,y=111,w=100,h=60
   links:
-  - id: L28
+  - id: l28
     attributes:
       display: type=Elbow,x=360,y=142,xs=307&412,ys=142&142
-    to: S35
-- id: S35
+    to: s35
+- id: s35
   name: "create output\r\ndocument"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -39,10 +39,10 @@ steps:
     SCRIPT: Groovy
     display: x=416,y=113,w=100,h=60
   links:
-  - id: L29
+  - id: l29
     attributes:
       display: type=Elbow,x=571,y=137,xs=520&621,ys=137&137
-    to: S33
+    to: s33
 variables:
   n:
     type: java.lang.Integer

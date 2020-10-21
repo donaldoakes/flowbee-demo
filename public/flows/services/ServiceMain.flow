@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: SERVICE
   display: x=39,y=43,w=112,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=69,y=118,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=258,y=101,xs=133&212,ys=138&138
-    to: S11
-- id: S2
+    to: s11
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=609,y=120,w=60,h=40
-- id: S7
+- id: s7
   name: "Async Invoke\r\nServiceSub"
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -29,11 +29,11 @@ steps:
     synchronous: 'FALSE'
     variables: testCase=$testCase
   links:
-  - id: L11
+  - id: l11
     attributes:
       display: type=Elbow,x=549,y=140,xs=492&605,ys=140&140
-    to: S2
-- id: S8
+    to: s2
+- id: s8
   name: "Async Multi\r\nServiceSub"
   path: flowbee-demo.process.InvokeHeterogeneousProcessActivity
   attributes:
@@ -44,11 +44,11 @@ steps:
     processmap: ServiceAsyncSub,tests.services/ServiceSub,[0.1\,1),
     synchronous: 'FALSE'
   links:
-  - id: L13
+  - id: l13
     attributes:
       display: type=Elbow,x=563,y=272,xs=524&603,ys=272&272
-    to: S12
-- id: S10
+    to: s12
+- id: s10
   name: Create Plan
   path: flowbee-demo.java.DynamicJavaActivity
   attributes:
@@ -56,11 +56,11 @@ steps:
     Output Documents: execPlan
     display: x=206,y=239,w=110,h=68
   links:
-  - id: L12
+  - id: l12
     attributes:
       display: type=Elbow,x=349,y=273,xs=320&378,ys=273&273
-    to: S8
-- id: S11
+    to: s8
+- id: s11
   name: "Test\r\nCase"
   path: flowbee-demo.decision
   attributes:
@@ -68,17 +68,17 @@ steps:
     SCRIPT: Groovy
     display: x=216,y=113,w=74,h=51
   links:
-  - id: L9
+  - id: l9
     attributes:
       display: type=Elbow,x=261,y=185,xs=253&253,ys=168&235
-    to: S10
+    to: s10
     result: multiple
-  - id: L10
+  - id: l10
     attributes:
       display: type=Elbow,x=307,y=117,xs=294&374,ys=138&138
-    to: S7
+    to: s7
     result: single
-- id: S12
+- id: s12
   name: Stop
   path: flowbee-demo.stop
   attributes:

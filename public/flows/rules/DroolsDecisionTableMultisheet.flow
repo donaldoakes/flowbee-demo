@@ -8,17 +8,17 @@ attributes:
   Transition with no Label: Acts as Default
   display: x=23,y=77,w=276,h=27
 steps:
-- id: S142
+- id: s142
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=304,y=38,w=60,h=40
   links:
-  - id: L113
+  - id: l113
     attributes:
       display: type=Elbow,x=306,y=98,xs=334&334,ys=82&117
-    to: S139
-- id: S140
+    to: s139
+- id: s140
   name: NorthSouth Decision Table
   path: flowbee-demo.drools.DroolsDecisionTableActivity
   attributes:
@@ -28,37 +28,37 @@ steps:
     Rules Language: Drools
     display: x=418,y=200,w=100,h=60
   links:
-  - id: L111
+  - id: l111
     attributes:
       display: type=Elbow,x=433,y=313,xs=433&433,ys=264&363
-    to: S138
+    to: s138
     result: NORTHERN
-  - id: L112
+  - id: l112
     attributes:
       display: type=Elbow,x=515,y=313,xs=515&515,ys=264&363
-    to: S141
+    to: s141
     result: SOUTHERN
-- id: S138
+- id: s138
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=389,y=367,w=60,h=40
-- id: S141
+- id: s141
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=513,y=367,w=60,h=40
-- id: S143
+- id: s143
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=95,y=370,w=60,h=40
-- id: S144
+- id: s144
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=229,y=370,w=60,h=40
-- id: S137
+- id: s137
   name: EastWest DecisionTable
   path: flowbee-demo.drools.DroolsDecisionTableActivity
   attributes:
@@ -68,17 +68,17 @@ steps:
     Rules Language: Drools
     display: x=143,y=202,w=100,h=60
   links:
-  - id: L109
+  - id: l109
     attributes:
       display: type=Elbow,x=149,y=315,xs=149&149,ys=266&366
-    to: S143
+    to: s143
     result: WESTERN
-  - id: L110
+  - id: l110
     attributes:
       display: type=Elbow,x=236,y=315,xs=236&236,ys=266&366
-    to: S144
+    to: s144
     result: EASTERN
-- id: S139
+- id: s139
   name: Geography
   path: flowbee-demo.decision
   attributes:
@@ -86,15 +86,15 @@ steps:
     SCRIPT: Groovy
     display: x=298,y=121,w=82,h=59
   links:
-  - id: L107
+  - id: l107
     attributes:
       display: type=Elbow,x=276,y=199,xs=294&247,ys=150&232
-    to: S137
+    to: s137
     result: EastWest
-  - id: L108
+  - id: l108
     attributes:
       display: type=Elbow,x=404,y=149,xs=384&414,ys=150&230
-    to: S140
+    to: s140
     result: NorthSouth
 variables:
   geography:

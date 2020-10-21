@@ -6,22 +6,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=26,y=14,w=76,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=70,y=70,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=162,y=90,xs=134&190,ys=90&90
-    to: S5
-- id: S2
+    to: s5
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=907,y=392,w=60,h=40
-- id: S6
+- id: s6
   name: |-
     Milestone
     One-One
@@ -30,11 +30,11 @@ steps:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=80,y=203,w=96,h=69
   links:
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=274,y=313,xs=180&369,ys=237&389
-    to: S7
-- id: S4
+    to: s7
+- id: s4
   name: |-
     Waiting
     Milestone
@@ -46,60 +46,60 @@ steps:
     WAIT_EVENT_NAMES: '[["milestoneWait-${masterRequestId}",""]]'
     display: x=577,y=115,w=108,h=67
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=718,y=191,xs=689&748,ys=148&235
-    to: S9
-- id: S5
+    to: s9
+- id: s5
   name: Unimportant
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=194,y=56,w=111,h=58
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=188,y=158,xs=249&128,ys=117&199
-    to: S6
-  - id: L5
+    to: s6
+  - id: l5
     attributes:
       display: type=Elbow,x=360,y=89,xs=309&412,ys=89&89
-    to: S3
-  - id: L9
+    to: s3
+  - id: l9
     attributes:
       display: type=Elbow,x=285,y=143,xs=285&285,ys=118&169
-    to: S8
-- id: S3
+    to: s8
+- id: s3
   name: Spellbinding
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java","Custom Label"],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=416,y=65,w=106,h=60
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=433,y=244,xs=433&433,ys=129&359
-    to: S7
-- id: S7
+    to: s7
+- id: s7
   name: Sync
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
     display: x=373,y=363,w=78,h=54
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=543,y=287,xs=455&631,ys=390&185
-    to: S4
-- id: S8
+    to: s4
+- id: s8
   name: Uninteresting
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=265,y=172,w=93,h=50
   links:
-  - id: L10
+  - id: l10
     attributes:
       display: type=Elbow,x=362,y=293,xs=312&412,ys=227&359
-    to: S7
-- id: S9
+    to: s7
+- id: s9
   name: |-
     Future
     Milestone
@@ -108,11 +108,11 @@ steps:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=752,y=206,w=96,h=59
   links:
-  - id: L11
+  - id: l11
     attributes:
       display: type=Elbow,x=803,y=281,xs=803&803,ys=269&293
-    to: S11
-- id: S10
+    to: s11
+- id: s10
   name: SubThree
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -122,21 +122,21 @@ steps:
     processversion: '[0.1,1)'
     synchronous: 'true'
   links:
-  - id: L12
+  - id: l12
     attributes:
       display: type=Elbow,x=880,y=412,xs=858&903,ys=412&412
-    to: S2
-- id: S11
+    to: s2
+- id: s11
   name: F2
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=760,y=297,w=84,h=47
   links:
-  - id: L13
+  - id: l13
     attributes:
       display: type=Elbow,x=802,y=368,xs=802&802,ys=348&389
-    to: S10
+    to: s10
 variables:
   inputVar:
     type: java.lang.String

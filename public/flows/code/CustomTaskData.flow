@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=36,y=27,w=155,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=60,y=130,w=60,h=40
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=180,y=150,xs=124&236,ys=150&150
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=450,y=130,w=60,h=40
-- id: S4
+- id: s4
   name: "Custom\r\nCategory Task"
   path: flowbee-demo.task.CustomManualTaskActivity
   attributes:
@@ -29,7 +29,7 @@ steps:
     TASK_TEMPLATE_assetVersion: '[0.1,1)'
     display: x=240,y=120,w=100,h=70
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=395,y=150,xs=344&446,ys=150&150
-    to: S2
+    to: s2

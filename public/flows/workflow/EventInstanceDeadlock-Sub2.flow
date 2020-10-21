@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=25,y=36,w=278,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=46,y=123,w=60,h=40
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=161,y=143,xs=110&212,ys=143&143
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=489,y=121,w=60,h=40
-- id: S3
+- id: s3
   name: "Microservice \r\nDependencies Wait"
   path: flowbee-demo.microservice.DependenciesWaitActivity
   attributes:
@@ -28,10 +28,10 @@ steps:
     WAIT_EVENT_NAMES: servicesummary-update-{$MasterRequestID},,false,
     display: x=216,y=107,w=157,h=82
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=377,y=170,xs=377&485,ys=141&141
-    to: S2
+    to: s2
 variables:
   serviceSummary:
     type: io.limberest.json.Jsonable

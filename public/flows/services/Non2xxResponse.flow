@@ -5,22 +5,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=48,y=43,w=164,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=69,y=171,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=158,y=191,xs=133&183,ys=191&191
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=537,y=175,w=60,h=40
-- id: S3
+- id: s3
   name: |-
     Create
     Request
@@ -33,11 +33,11 @@ steps:
     SCRIPT: Groovy
     display: x=188,y=157,w=108,h=73
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=325,y=193,xs=299&352,ys=193&193
-    to: S4
-- id: S4
+    to: s4
+- id: s4
   name: |-
     POST
     404
@@ -49,10 +49,10 @@ steps:
     RESPONSE_VARIABLE: serviceResponse
     display: x=356,y=156,w=112,h=74
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=502,y=195,xs=472&533,ys=195&195
-    to: S2
+    to: s2
 variables:
   serviceRequest:
     type: org.json.JSONObject

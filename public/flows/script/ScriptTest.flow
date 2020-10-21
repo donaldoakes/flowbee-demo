@@ -4,7 +4,7 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=50,y=34,w=97,h=26
 steps:
-- id: S1
+- id: s1
   name: Still Okay?
   path: flowbee-demo.decision
   attributes:
@@ -12,12 +12,12 @@ steps:
     SCRIPT: Groovy
     display: x=230,y=530,w=100,h=60
   links:
-  - id: L16
+  - id: l16
     attributes:
       display: type=Elbow,x=352,y=570,xs=334&406,ys=560&560
-    to: S17
+    to: s17
     result: Sure
-- id: S7
+- id: s7
   name: Groovy
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -26,12 +26,12 @@ steps:
     SCRIPT: Groovy
     display: x=64,y=234,w=90,h=60
   links:
-  - id: L9
+  - id: l9
     attributes:
       display: type=Elbow,x=114,y=312,xs=108&108,ys=298&340
-    to: S9
+    to: s9
     result: groovyOutcome
-- id: S9
+- id: s9
   name: Access Library
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -39,12 +39,12 @@ steps:
     SCRIPT: Groovy
     display: x=64,y=344,w=90,h=70
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=ElbowV,x=109,y=441,xs=107&107&226,ys=416&467&467
-    to: S6
+    to: s6
     result: Valid
-- id: S4
+- id: s4
   name: JavaScript
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -53,12 +53,12 @@ steps:
     SCRIPT: JavaScript
     display: x=230,y=240,w=100,h=70
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=280,y=370,xs=280&280,ys=314&426
-    to: S6
+    to: s6
     result: javaScriptOutcome
-- id: S6
+- id: s6
   name: Looking Good?
   path: flowbee-demo.decision
   attributes:
@@ -66,12 +66,12 @@ steps:
     SCRIPT: Groovy
     display: x=230,y=430,w=100,h=70
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=293,y=515,xs=280&280,ys=504&526
-    to: S1
+    to: s1
     result: Yep
-- id: S8
+- id: s8
   name: Script Flavor?
   path: flowbee-demo.decision
   attributes:
@@ -79,71 +79,71 @@ steps:
     SCRIPT: Groovy
     display: x=230,y=110,w=100,h=80
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=107,y=150,xs=226&104&104,ys=154&154&230
-    to: S7
+    to: s7
     result: Groovy
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=280,y=215,xs=280&280,ys=194&236
-    to: S4
+    to: s4
     result: JavaScript
-  - id: L11
+  - id: l11
     attributes:
       display: type=Elbow,x=440,y=217,xs=334&546,ys=150&285
-    to: S10
+    to: s10
     result: Unknown
-- id: S10
+- id: s10
   name: Unknown
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
     SCRIPT: Groovy
     display: x=550,y=250,w=80,h=70
   links:
-  - id: L15
+  - id: l15
     attributes:
       display: type=Elbow,x=590,y=345,xs=590&590,ys=324&366
-    to: S16
-- id: S15
+    to: s16
+- id: s15
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=250,y=30,w=60,h=40
   links:
-  - id: L14
+  - id: l14
     attributes:
       display: type=Elbow,x=280,y=90,xs=280&280,ys=74&106
-    to: S8
-- id: S16
+    to: s8
+- id: s16
   name: Stop3
   path: flowbee-demo.stop
   attributes:
     display: x=560,y=370,w=60,h=40
-- id: S17
+- id: s17
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=410,y=540,w=60,h=40
 subflows:
-- id: F1
+- id: f1
   name: Exception Handler
   attributes:
     EMBEDDED_PROCESS_TYPE: Exception Handler
     PROCESS_VISIBILITY: EMBEDDED
     display: x=520,y=50,w=330,h=120
   steps:
-  - id: S18
+  - id: s18
     name: Start
     path: flowbee-demo.start
     attributes:
       display: x=560,y=90,w=60,h=40
     links:
-    - id: L17
+    - id: l17
       attributes:
         display: type=Elbow,x=680,y=110,xs=624&736,ys=110&110
-      to: S20
-  - id: S20
+      to: s20
+  - id: s20
     name: Stop2
     path: flowbee-demo.stop
     attributes:

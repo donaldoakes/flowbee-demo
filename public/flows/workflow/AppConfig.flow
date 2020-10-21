@@ -5,22 +5,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=46,y=56,w=96,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=60,y=260,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=219,y=232,xs=124&244,ys=280&280
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=480,y=260,w=60,h=40
-- id: S3
+- id: s3
   name: Log Props
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -35,7 +35,7 @@ steps:
     SCRIPT: Groovy
     display: x=248,y=249,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=414,y=280,xs=352&476,ys=280&280
-    to: S2
+    to: s2

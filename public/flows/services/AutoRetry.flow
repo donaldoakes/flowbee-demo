@@ -5,22 +5,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=48,y=41,w=95,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=82,y=121,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=168,y=141,xs=146&190,ys=141&141
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=504,y=120,w=60,h=40
-- id: S3
+- id: s3
   name: |-
     Invoke
     Retryable
@@ -34,11 +34,11 @@ steps:
     max_tries: '3'
     retry_interval: '10'
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=472,y=140,xs=445&500,ys=140&140
-    to: S2
-- id: S4
+    to: s2
+- id: s4
   name: |-
     Create
     Request
@@ -51,10 +51,10 @@ steps:
     SCRIPT: Groovy
     display: x=194,y=111,w=100,h=60
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=317,y=141,xs=298&337,ys=141&141
-    to: S3
+    to: s3
 variables:
   serviceRequest:
     type: org.json.JSONObject

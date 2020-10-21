@@ -4,26 +4,26 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=29,y=21,w=210,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=26,y=76,w=60,h=40
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=155,y=96,xs=90&220,ys=96&96
-    to: S3
-  - id: L8
+    to: s3
+  - id: l8
     attributes:
       display: type=Elbow,x=157,y=141,xs=90&223,ys=96&188
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=493,y=269,w=60,h=40
-- id: S3
+- id: s3
   name: Wait 20s
   path: flowbee-demo.timer.TimerWaitActivity
   attributes:
@@ -32,11 +32,11 @@ steps:
     Unit: Seconds
     display: x=224,y=68,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=348,y=101,xs=328&365,ys=98&98
-    to: S6
-- id: S4
+    to: s6
+- id: s4
   name: "Should Finish\r\nQuickly"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -44,11 +44,11 @@ steps:
     SCRIPT: Groovy
     display: x=227,y=154,w=98,h=68
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=404,y=168,xs=329&468,ys=192&192
-    to: S5
-- id: S5
+    to: s5
+- id: s5
   name: Sync
   path: flowbee-demo.sync.SynchronizationActivity
   attributes:
@@ -56,11 +56,11 @@ steps:
     Synced Activities: New Execute Script
     display: x=472,y=162,w=100,h=60
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=523,y=245,xs=523&523,ys=226&265
-    to: S2
-- id: S6
+    to: s2
+- id: s6
   name: "Update\r\nResult"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -68,10 +68,10 @@ steps:
     SCRIPT: Groovy
     display: x=369,y=61,w=106,h=68
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=444,y=74,xs=479&522&522,ys=90&90&162
-    to: S5
+    to: s5
 variables:
   cumulativeResult:
     type: java.lang.String

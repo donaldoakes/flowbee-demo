@@ -4,18 +4,18 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=29,y=25,w=135,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=64,y=102,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       TRANSITION_DELAY: 360s
       display: type=Elbow,x=257,y=122,xs=128&386,ys=122&122
-    to: S2
-- id: S2
+    to: s2
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:

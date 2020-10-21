@@ -8,22 +8,22 @@ attributes:
   requestPath: Gson
   requestSummary: Because it's there
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=70,y=110,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=175,y=130,xs=134&216,ys=130&130
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=640,y=110,w=60,h=40
-- id: S3
+- id: s3
   name: Further Updates
   path: flowbee-demo.java.DynamicJavaActivity
   attributes:
@@ -32,11 +32,11 @@ steps:
     Output Documents: '["input","local","request"]'
     display: x=430,y=90,w=120,h=80
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=595,y=130,xs=554&636,ys=130&130
-    to: S2
-- id: S4
+    to: s2
+- id: s4
   name: Create/Update
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -58,10 +58,10 @@ steps:
     SCRIPT: Groovy
     display: x=220,y=90,w=120,h=80
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=385,y=130,xs=344&426,ys=130&130
-    to: S3
+    to: s3
 variables:
   input:
     type: com.google.gson.Gson

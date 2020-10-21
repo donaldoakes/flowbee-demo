@@ -5,22 +5,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=31,y=22,w=108,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=50,y=90,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=140,y=110,xs=114&166,ys=110&110
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=680,y=90,w=60,h=40
-- id: S3
+- id: s3
   name: Exec
   path: flowbee-demo.python.ScriptActivity
   attributes:
@@ -47,12 +47,12 @@ steps:
     SCRIPT: Python
     display: x=320,y=80,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=434,y=88,xs=424&496,ys=110&110
-    to: S5
+    to: s5
     result: onward
-- id: S4
+- id: s4
   name: Which?
   path: flowbee-demo.decision
   attributes:
@@ -60,17 +60,17 @@ steps:
     SCRIPT: Python
     display: x=170,y=80,w=80,h=60
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=264,y=89,xs=254&316,ys=110&110
-    to: S3
+    to: s3
     result: exec
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=216,y=153,xs=210&210,ys=144&176
-    to: S6
+    to: s6
     result: decide
-- id: S5
+- id: s5
   name: Use Module
   path: flowbee-demo.python.ScriptActivity
   attributes:
@@ -85,11 +85,11 @@ steps:
     SCRIPT: Python
     display: x=500,y=80,w=100,h=60
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=640,y=110,xs=604&676,ys=110&110
-    to: S2
-- id: S6
+    to: s2
+- id: s6
   name: Boolean
   path: flowbee-demo.decision
   attributes:
@@ -97,22 +97,22 @@ steps:
     SCRIPT: Python
     display: x=170,y=180,w=80,h=60
   links:
-  - id: L6
+  - id: l6
     attributes:
       display: type=Elbow,x=255,y=191,xs=254&296,ys=210&210
-    to: S7
+    to: s7
     result: 'false'
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=218,y=249,xs=210&210,ys=244&276
-    to: S8
+    to: s8
     result: 'true'
-- id: S7
+- id: s7
   name: No Way
   path: flowbee-demo.stop
   attributes:
     display: x=300,y=190,w=60,h=40
-- id: S8
+- id: s8
   name: Stop
   path: flowbee-demo.stop
   attributes:

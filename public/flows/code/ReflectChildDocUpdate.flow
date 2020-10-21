@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=27,y=21,w=207,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=35,y=86,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=139,y=88,xs=99&161,ys=106&106
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=463,y=90,w=60,h=40
-- id: S3
+- id: s3
   name: "Invoke\r\nJaxbDocument"
   path: flowbee-demo.process.InvokeSubProcessActivity
   attributes:
@@ -29,11 +29,11 @@ steps:
     synchronous: 'TRUE'
     variables: actionRequest=$actionRequest;assetDefinedJaxb=$assetDefinedJaxbIn
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=299,y=86,xs=270&320,ys=109&109
-    to: S4
-- id: S4
+    to: s4
+- id: s4
   name: "Pull\r\nValues"
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -41,10 +41,10 @@ steps:
     SCRIPT: Groovy
     display: x=324,y=73,w=106,h=71
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=443,y=110,xs=434&459,ys=110&110
-    to: S2
+    to: s2
 variables:
   actionName:
     type: java.lang.String

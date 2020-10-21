@@ -5,22 +5,22 @@ attributes:
   PerformanceLevel: '0'
   display: x=50,y=50,w=0,h=0
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=63,y=138,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=156,y=159,xs=128&184,ys=159&159
-    to: S4
-- id: S2
+    to: s4
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=533,y=248,w=60,h=40
-- id: S3
+- id: s3
   name: increment n
   path: flowbee-demo.script.ScriptExecutorActivity
   attributes:
@@ -32,21 +32,21 @@ steps:
     SCRIPT: Groovy
     display: x=328,y=133,w=100,h=60
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=381,y=217,xs=381&381,ys=197&237
-    to: S5
-- id: S4
+    to: s5
+- id: s4
   name: dummy
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     display: x=188,y=140,w=60,h=40
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=288,y=160,xs=252&324,ys=160&160
-    to: S3
-- id: S5
+    to: s3
+- id: s5
   name: stop?
   path: flowbee-demo.decision
   attributes:
@@ -54,17 +54,17 @@ steps:
     SCRIPT: Groovy
     display: x=340,y=241,w=85,h=56
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=459,y=249,xs=428&529,ys=268&268
-    to: S2
+    to: s2
     result: 'true'
-  - id: L5
+  - id: l5
     attributes:
       TRANSITION_DELAY: ${delay}s
       TRANSITION_RETRY_COUNT: ${max}
       display: type=Elbow,x=269,y=249,xs=340&218&218,ys=269&269&180
-    to: S4
+    to: s4
     result: 'false'
 variables:
   delay:

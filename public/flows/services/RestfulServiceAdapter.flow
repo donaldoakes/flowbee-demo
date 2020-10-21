@@ -2,27 +2,27 @@ attributes:
   NodeStyle: BoxIcon
   display: x=39,y=38,w=202,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=72,y=117,w=60,h=40
   links:
-  - id: L13
+  - id: l13
     attributes:
       display: type=Elbow,x=179,y=137,xs=136&202,ys=137&137
-    to: S10
-- id: S6
+    to: s10
+- id: s6
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=595,y=119,w=60,h=40
-- id: S5
+- id: s5
   name: Stop
   path: flowbee-demo.stop
   attributes:
     display: x=680,y=229,w=60,h=40
-- id: S9
+- id: s9
   name: "POST\r\nRequest"
   path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
@@ -38,11 +38,11 @@ steps:
     ReadTimeout: '60000'
     display: x=442,y=213,w=121,h=76
   links:
-  - id: L12
+  - id: l12
     attributes:
       display: type=Elbow,x=633,y=247,xs=567&676,ys=249&249
-    to: S5
-- id: S8
+    to: s5
+- id: s8
   name: "GET\r\nRequest"
   path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
@@ -55,11 +55,11 @@ steps:
     RESPONSE_VARIABLE: responseDoc
     display: x=412,y=104,w=116,h=74
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=566,y=143,xs=532&591,ys=139&139
-    to: S6
-- id: S10
+    to: s6
+- id: s10
   name: Set Request
   path: flowbee-demo.java.DynamicJavaActivity
   attributes:
@@ -68,22 +68,22 @@ steps:
     Output Documents: requestDoc#patchRequest#headersMap
     display: x=206,y=104,w=120,h=74
   links:
-  - id: L14
+  - id: l14
     attributes:
       display: type=Elbow,x=358,y=149,xs=330&408,ys=141&141
-    to: S8
+    to: s8
     result: GET
-  - id: L15
+  - id: l15
     attributes:
       display: type=ElbowV,x=337,y=226,xs=310&310&438,ys=182&250&250
-    to: S9
+    to: s9
     result: POST
-  - id: L16
+  - id: l16
     attributes:
       display: type=Elbow,x=272,y=271,xs=266&266,ys=182&317
-    to: S11
+    to: s11
     result: PATCH
-- id: S11
+- id: s11
   name: "PATCH\r\nRequest"
   path: flowbee-demo.adapter.rest.RestServiceAdapter
   attributes:
@@ -98,11 +98,11 @@ steps:
     ReadTimeout: '30000'
     display: x=205,y=321,w=126,h=79
   links:
-  - id: L17
+  - id: l17
     attributes:
       display: type=Elbow,x=394,y=361,xs=335&453,ys=361&361
-    to: S12
-- id: S12
+    to: s12
+- id: s12
   name: Stop
   path: flowbee-demo.stop
   attributes:

@@ -5,23 +5,23 @@ attributes:
   PerformanceLevel: '0'
   display: x=35,y=34,w=149,h=26
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=60,y=100,w=60,h=40
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=158,y=119,xs=124&192,ys=119&119
-    to: S3
-- id: S2
+    to: s3
+- id: s2
   name: Stop
   path: flowbee-demo.stop
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=735,y=212,w=60,h=40
-- id: S3
+- id: s3
   name: |-
     Milestone
     One
@@ -32,11 +32,11 @@ steps:
     SCRIPT: Groovy
     display: x=196,y=89,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=245,y=178,xs=245&245,ys=154&202
-    to: S4
-- id: S4
+    to: s4
+- id: s4
   name: |-
     Create
     Plan
@@ -71,11 +71,11 @@ steps:
     SCRIPT: Groovy
     display: x=195,y=205,w=100,h=60
   links:
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=349,y=236,xs=299&399,ys=236&236
-    to: S5
-- id: S5
+    to: s5
+- id: s5
   name: |-
     Invoke
     Subs
@@ -88,21 +88,21 @@ steps:
     processmap: '[["SubOne","tests.milestones/SubOne.proc","[0,1)"],["SubTwo","tests.milestones/SubTwo.proc","[0.1,1)"]]'
     synchronous: 'true'
   links:
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=545,y=235,xs=507&584,ys=235&235
-    to: S6
-- id: S6
+    to: s6
+- id: s6
   name: Lastly
   path: flowbee-demo.DefaultActivityImpl
   attributes:
     Monitors: '[["true","Milestone","milestones/ActivityMilestone.java",""],["true","Test Cases","testing/TestCaseActivityMonitor.java",""],["true","Zipkin Activity","zipkin/TraceActivityMonitor.java",""]]'
     display: x=588,y=214,w=60,h=40
   links:
-  - id: L5
+  - id: l5
     attributes:
       display: type=Elbow,x=691,y=233,xs=652&731,ys=233&233
-    to: S2
+    to: s2
 variables:
   executionPlan:
     type: org.apache.xmlbeans.XmlObject

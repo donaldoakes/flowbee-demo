@@ -4,22 +4,22 @@ attributes:
   PROCESS_VISIBILITY: PUBLIC
   display: x=41,y=46,w=93,h=27
 steps:
-- id: S1
+- id: s1
   name: Start
   path: flowbee-demo.start
   attributes:
     display: x=33,y=108,w=60,h=40
   links:
-  - id: L7
+  - id: l7
     attributes:
       display: type=Elbow,x=111,y=150,xs=97&134,ys=128&187
-    to: S10
-- id: S2
+    to: s10
+- id: s2
   name: Right
   path: flowbee-demo.stop
   attributes:
     display: x=387,y=404,w=60,h=40
-- id: S3
+- id: s3
   name: Decide
   path: flowbee-demo.kotlin.ScriptActivity
   attributes:
@@ -27,22 +27,22 @@ steps:
     SCRIPT: Kotlin Script
     display: x=126,y=391,w=100,h=60
   links:
-  - id: L2
+  - id: l2
     attributes:
       display: type=Elbow,x=281,y=406,xs=230&383,ys=424&424
-    to: S2
+    to: s2
     result: Chocolate
-  - id: L3
+  - id: l3
     attributes:
       display: type=Elbow,x=183,y=480,xs=176&176,ys=455&515
-    to: S4
+    to: s4
     result: Vanilla
-- id: S4
+- id: s4
   name: Wrong
   path: flowbee-demo.stop
   attributes:
     display: x=146,y=519,w=60,h=40
-- id: S5
+- id: s5
   name: Exec
   path: flowbee-demo.kotlin.ScriptActivity
   attributes:
@@ -51,16 +51,16 @@ steps:
     SCRIPT: Kotlin Script
     display: x=289,y=160,w=100,h=65
   links:
-  - id: L10
+  - id: l10
     attributes:
       display: type=Elbow,x=425,y=193,xs=393&448,ys=193&193
-    to: S13
-- id: S9
+    to: s13
+- id: s9
   name: Finish
   path: flowbee-demo.stop
   attributes:
     display: x=620,y=286,w=60,h=40
-- id: S10
+- id: s10
   name: Which
   path: flowbee-demo.decision
   attributes:
@@ -68,17 +68,17 @@ steps:
     SCRIPT: Kotlin Script
     display: x=138,y=156,w=79,h=63
   links:
-  - id: L1
+  - id: l1
     attributes:
       display: type=Elbow,x=188,y=242,xs=177&177,ys=223&279
-    to: S11
+    to: s11
     result: decide
-  - id: L4
+  - id: l4
     attributes:
       display: type=Elbow,x=249,y=173,xs=221&285,ys=189&189
-    to: S5
+    to: s5
     result: exec
-- id: S11
+- id: s11
   name: Boolean
   path: flowbee-demo.decision
   attributes:
@@ -86,22 +86,22 @@ steps:
     SCRIPT: Kotlin Script
     display: x=135,y=283,w=83,h=60
   links:
-  - id: L8
+  - id: l8
     attributes:
       display: type=Elbow,x=182,y=351,xs=176&176,ys=347&387
-    to: S3
+    to: s3
     result: 'true'
-  - id: L9
+  - id: l9
     attributes:
       display: type=Elbow,x=234,y=298,xs=222&281,ys=316&316
-    to: S12
+    to: s12
     result: 'false'
-- id: S12
+- id: s12
   name: No Way
   path: flowbee-demo.stop
   attributes:
     display: x=285,y=296,w=60,h=40
-- id: S13
+- id: s13
   name: Use Class
   path: flowbee-demo.kotlin.ScriptActivity
   attributes:
@@ -110,11 +110,11 @@ steps:
     SCRIPT: Kotlin Script
     display: x=452,y=162,w=100,h=62
   links:
-  - id: L11
+  - id: l11
     attributes:
       display: type=Elbow,x=552,y=253,xs=504&504,ys=228&273
-    to: S14
-- id: S14
+    to: s14
+- id: s14
   name: "Access\r\nfrom Java"
   path: flowbee-demo.java.DynamicJavaActivity
   attributes:
@@ -122,10 +122,10 @@ steps:
     Output Documents: '["unfound"]'
     display: x=457,y=277,w=99,h=66
   links:
-  - id: L12
+  - id: l12
     attributes:
       display: type=Elbow,x=589,y=306,xs=560&616,ys=306&306
-    to: S9
+    to: s9
 variables:
   flavor:
     type: java.lang.String
