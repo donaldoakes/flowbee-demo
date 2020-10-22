@@ -21,10 +21,10 @@
       <input id="zoom-in" type="image" class="zoom" src="img/zoom-in.svg" title="Zoom in" style="margin-left:0"/>
     </div>
     <div id="flow-actions" class="actions">
-      <input id="save" type="image" src="img/save.svg" title="Save" />
-      <input id="download" type="image" src="img/download.svg" title="Download" />
+      <input id="save" type="image" src="img/save.svg" title="Save" disabled="true" />
+      <input id="download" type="image" src="img/download.svg" title="Download" disabled="true" />
       <input id="new" type="image" src="img/new.svg" title="New" />
-      <input id="run" type="image" src="img/run.svg" title="Run" style="width:19px" />
+      <input id="run" type="image" src="img/run.svg" title="Run" style="width:19px" disabled="true" />
     </div>
     <div>
       <a href="https://github.com/donaldoakes/flowbee#readme">Docs</a>
@@ -37,6 +37,23 @@
       <canvas id="diagram-canvas"></canvas>
     </div>
     <div id="flow-toolbox"></div>
+  </div>
+  <div id="popup" class="popup popup-slide" aria-hidden="true" >
+    <div class="popup-overlay" tabindex="-1" data-micromodal-close="">
+      <div class="popup-container" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+        <header class="popup-header">
+          <h2 id="popup-title" class="popup-title"></h2>
+          <button class="popup-close" aria-label="Close" data-micromodal-close></button>
+        </header>
+        <div id="popup-content" class="popup-content">
+          <textarea id="popup-text" class="popup-text" rows="25" cols="80"></textarea>
+        </div>
+        <footer class="popup-footer">
+          <button id="popup-ok" class="popup-btn popup-btn-primary">OK</button>
+          <button id="popup-cancel" class="popup-btn" data-micromodal-close="" aria-label="Close">Cancel</button>
+        </footer>
+      </div>
+    </div>
   </div>
   <script src="js/index.js"></script>
 </body>

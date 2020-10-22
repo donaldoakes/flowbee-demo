@@ -28,7 +28,8 @@
   "homepage": "https://github.com/donaldoakes/flowbee-demo#readme",
   "dependencies": {
     "directory-tree": "^2.2.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "micromodal": "^0.4.6"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^15.1.0",

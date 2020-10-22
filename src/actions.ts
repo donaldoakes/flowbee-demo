@@ -41,10 +41,32 @@ export class FlowActions {
         this._onFlowAction.on(listener);
     }
 
+    private save: HTMLInputElement;
+    private download: HTMLInputElement;
+    private new: HTMLInputElement;
+    private run: HTMLInputElement;
+
     constructor(container: HTMLElement) {
-        const saveAction = container.querySelector('#save') as HTMLInputElement;
-        saveAction.onclick = e => {
+        const actionClick = (e: MouseEvent) => {
             this._onFlowAction.emit({ action: (e.target as HTMLElement).id });
         };
+
+        this.save = container.querySelector('#save');
+        this.save.onclick = actionClick;
+        this.download = container.querySelector('#download');
+        this.download.onclick = actionClick;
+        this.new = container.querySelector('#new');
+        this.new.onclick = actionClick;
+        this.run = container.querySelector('#run');
+        this.run.onclick = actionClick;
     }
+
+    enable(isEnabled: boolean) {
+        console.log("DISABLING: " + isEnabled);
+        this.save.disabled = !isEnabled;
+        this.download.disabled = !isEnabled;
+        this.new.disabled = !isEnabled;
+        this.run.disabled = !isEnabled;
+    }
+
 }
