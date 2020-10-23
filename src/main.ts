@@ -6,18 +6,20 @@ import { Splitters } from './splitters';
 import { Options } from './options';
 import { Storage } from './storage';
 
+// TODO: stub flowbiz api to run in browser (on public site)
 window.addEventListener('load', async () => {
     const base = '';
-    const options = new Options(base);
-    const readonly = false;
     const flowbizBase = 'http://localhost:8080';
+    const webSocketUrl = 'ws://localhost:8080/websocket';
+    const options = new Options(base, webSocketUrl);
+
+    const readonly = false;
     let flowPath: string;
     let flowDiagram: flowbee.FlowDiagram;
     const storage = new Storage(options.storagePath);
 
     const instance = undefined;
     const step: string | undefined = undefined;
-    const animate = false;
     const editInstanceId: string | undefined = undefined;
 
     const descriptors = await Descriptors.getDescriptors(base);
@@ -101,18 +103,29 @@ window.addEventListener('load', async () => {
                 document.getElementById('popup-title').innerHTML = `Run ${name}`;
                 const popupText = document.getElementById('popup-text') as HTMLTextAreaElement;
                 popupText.setAttribute('placeholder', 'Values JSON');
+                const values = storage.loadValues(flowPath);
+                if (values) {
+                    popupText.value = values;
+                }
                 const popupOk = document.getElementById('popup-ok');
                 popupOk.innerHTML = 'Run';
                 popupOk.onclick = async (e: MouseEvent) => {
                     const url = `${flowbizBase}/runs${flowPath}`;
-                    const body = popupText.value ? `{ "values": ${popupText.value} }` : '{}';
+                    let body = '{\n}';
+                    if (popupText.value) {
+                        body = `{\n "values": ${popupText.value}\n  }`;
+                        storage.saveValues(flowPath, popupText.value);
+                    }
                     const resp = await fetch(url, {
                         method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
+                        headers: {'Content-Type': 'application/json', 'X-Flow-Synchronous': 'true'},
                         body
                     });
                     if (resp.ok) {
-                        console.info(`Run success: flowInstance ID = ${(await resp.json()).id}`);
+                        flowDiagram.instance = await resp.json();
+                        console.info(`Run success: flowInstance ID = ${flowDiagram.instance.id}`);
+                        // TODO retrieve the instance instead of making synchronous
+                        flowDiagram.render(options.diagramOptions, true);
                         MicroModal.close('popup');
                     } else {
                         // TODO error handling

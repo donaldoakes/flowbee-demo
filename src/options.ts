@@ -12,13 +12,14 @@ export class Options {
     get iconBase() { return `${this.base}/icons`; }
     storagePath = '/flows/localStorage';
 
-    constructor(readonly base: string) {}
+    constructor(readonly base: string, readonly websocketUrl) {}
 
     get diagramOptions(): flowbee.DiagramOptions & flowbee.DrawingOptions {
         return {
             theme: this.theme,
             iconBase: `${this.iconBase}`,
-            grid: { visibility: this.grid ? 'visible' : 'hidden' }
+            grid: { visibility: this.grid ? 'visible' : 'hidden' },
+            webSocketUrl: this.websocketUrl
         };
     }
 

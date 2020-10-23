@@ -21,19 +21,25 @@ export class Storage {
         return flows;
     }
 
-    loadFlow(flowPath: string): string {
-        return localStorage.getItem(flowPath);
-    }
-
     isLocal(flowPath: string): boolean {
         return flowPath.startsWith(`${this.path}/`);
     }
 
+    loadFlow(flowPath: string): string {
+        return localStorage.getItem(flowPath);
+    }
     saveFlow(name: string, contents: string) {
         if (!name.endsWith('.flow')) {
             name += '.flow';
         }
         console.debug(`save: ${this.path}/${name}`);
         localStorage.setItem(`${this.path}/${name}`, contents);
+    }
+
+    loadValues(flowPath: string) {
+        return localStorage.getItem(`-values-${flowPath}`);
+    }
+    saveValues(flowPath: string, values: string) {
+        localStorage.setItem(`-values-${flowPath}`, values);
     }
 }
