@@ -62,7 +62,6 @@ export class FlowActions {
     }
 
     enable(isEnabled: boolean) {
-        console.log("DISABLING: " + isEnabled);
         this.save.disabled = !isEnabled;
         this.download.disabled = !isEnabled;
         this.new.disabled = !isEnabled;

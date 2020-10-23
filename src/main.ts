@@ -28,18 +28,21 @@ window.addEventListener('load', async () => {
     const flowActions = new FlowActions(document.getElementById('flow-actions'));
 
     const flowTreeElement = document.getElementById('flow-tree') as HTMLDivElement;
-    const root = await (await fetch(`${base}/flows`)).json() as flowbee.FileTree;
-    const localFlows = storage.loadFlows();
-    if (localFlows.length > 0) {
-        root.children.unshift({
-            path: 'localStorage',
-            name: 'localStorage',
-            children: localFlows,
-            type: 'directory'
-        });
-    }
+    const buildFileTree = async () => {
+        const root = await (await fetch(`${base}/flows`)).json() as flowbee.FileTree;
+        const localFlows = storage.loadFlows();
+        if (localFlows.length > 0) {
+            root.children.unshift({
+                path: 'localStorage',
+                name: 'localStorage',
+                children: localFlows,
+                type: 'directory'
+            });
+        }
+        return root;
+    };
 
-    const flowTree = new flowbee.FlowTree(root, flowTreeElement);
+    const flowTree = new flowbee.FlowTree(await buildFileTree(), flowTreeElement);
     flowTree.render(options.flowTreeOptions);
     flowTree.onFlowSelect(async (selectEvent: flowbee.FlowTreeSelectEvent) => {
         const canvasElement = document.getElementById('diagram-canvas') as HTMLCanvasElement;
@@ -57,6 +60,20 @@ window.addEventListener('load', async () => {
         flowDiagram.instance = instance;
         flowDiagram.step = step;
         flowDiagram.editInstanceId = editInstanceId;
+        flowDiagram.onFlowElementSelect(selectEvent => {
+            const flowElement = selectEvent.element;
+            const name = (flowElement as any).name || flowElement.id || flowDiagram.flowName;
+            document.getElementById('popup-title').innerHTML = `"${name}" properties`;
+            const popupText = document.getElementById('popup-text') as HTMLTextAreaElement;
+            popupText.setAttribute('readonly', 'true');
+            const popupOk = document.getElementById('popup-ok');
+            popupOk.style.display = 'none';
+            const obj = selectEvent.instances ? selectEvent.instances[0] : flowElement;
+            if (obj) {
+                popupText.value = JSON.stringify(obj, null, options.indent);
+            }
+            MicroModal.show('popup');
+        });
         flowDiagram.render(options.diagramOptions);
         flowActions.enable(true);
     });
@@ -87,7 +104,7 @@ window.addEventListener('load', async () => {
         }
     });
 
-    flowActions.onFlowAction((e: FlowActionEvent) => {
+    flowActions.onFlowAction(async (e: FlowActionEvent) => {
         const flowAction = e.action;
         if (flowDiagram) {
             let name = flowDiagram.flowName;
@@ -98,35 +115,41 @@ window.addEventListener('load', async () => {
                 if (name) {
                     const contents = options.yaml ? flowDiagram.toYaml(options.indent) : flowDiagram.toJson(options.indent);
                     storage.saveFlow(name, contents);
+                    flowTree.fileTree = await buildFileTree();
+                    flowTree.render(options.flowTreeOptions);
                 }
             } else if (flowAction === 'run') {
                 document.getElementById('popup-title').innerHTML = `Run ${name}`;
                 const popupText = document.getElementById('popup-text') as HTMLTextAreaElement;
                 popupText.setAttribute('placeholder', 'Values JSON');
+                popupText.removeAttribute('readonly');
                 const values = storage.loadValues(flowPath);
                 if (values) {
                     popupText.value = values;
                 }
                 const popupOk = document.getElementById('popup-ok');
+                popupOk.style.display = 'inline-block';
                 popupOk.innerHTML = 'Run';
                 popupOk.onclick = async (e: MouseEvent) => {
-                    const url = `${flowbizBase}/runs${flowPath}`;
                     let body = '{\n}';
                     if (popupText.value) {
                         body = `{\n "values": ${popupText.value}\n  }`;
                         storage.saveValues(flowPath, popupText.value);
                     }
-                    const resp = await fetch(url, {
+                    let resp = await fetch(`${flowbizBase}/runs${flowPath}`, {
                         method: 'POST',
-                        headers: {'Content-Type': 'application/json', 'X-Flow-Synchronous': 'true'},
+                        headers: {'Content-Type': 'application/json', 'X-Flow-Synchronous': 'true' },
                         body
                     });
                     if (resp.ok) {
                         flowDiagram.instance = await resp.json();
-                        console.info(`Run success: flowInstance ID = ${flowDiagram.instance.id}`);
-                        // TODO retrieve the instance instead of making synchronous
-                        flowDiagram.render(options.diagramOptions, true);
+                        console.info(`Run success: runId = ${flowDiagram.instance.runId}`);
                         MicroModal.close('popup');
+                        resp = await fetch(`${flowbizBase}/instances?runId=${flowDiagram.instance.runId}`);
+                        if (resp.ok) {
+                            flowDiagram.instance = await resp.json();
+                            flowDiagram.render(options.diagramOptions, true);
+                        }
                     } else {
                         // TODO error handling
                     }

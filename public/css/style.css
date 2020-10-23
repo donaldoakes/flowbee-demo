@@ -189,6 +189,8 @@ h1 {
 }
 .popup-text {
   padding: 5px;
+  overflow-x: auto;
+  white-space: pre;
 }
 .popup-footer {
   text-align: right;
