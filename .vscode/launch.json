@@ -6,7 +6,7 @@
             "type": "pwa-chrome",
             "request": "launch",
             "sourceMaps": true,
-            "url": "http://localhost:8080",
+            "url": "http://localhost:8000",
             "webRoot": "${workspaceFolder}/public"
         }
     ]

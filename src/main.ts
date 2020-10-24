@@ -69,9 +69,7 @@ window.addEventListener('load', async () => {
             const popupOk = document.getElementById('popup-ok');
             popupOk.style.display = 'none';
             const obj = selectEvent.instances ? selectEvent.instances[0] : flowElement;
-            if (obj) {
-                popupText.value = JSON.stringify(obj, null, options.indent);
-            }
+            popupText.value = obj ? JSON.stringify(obj, null, options.indent): '';
             MicroModal.show('popup');
         });
         flowDiagram.render(options.diagramOptions);
@@ -123,10 +121,7 @@ window.addEventListener('load', async () => {
                 const popupText = document.getElementById('popup-text') as HTMLTextAreaElement;
                 popupText.setAttribute('placeholder', 'Values JSON');
                 popupText.removeAttribute('readonly');
-                const values = storage.loadValues(flowPath);
-                if (values) {
-                    popupText.value = values;
-                }
+                popupText.value = storage.loadValues(flowPath);
                 const popupOk = document.getElementById('popup-ok');
                 popupOk.style.display = 'inline-block';
                 popupOk.innerHTML = 'Run';
