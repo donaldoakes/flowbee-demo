@@ -19,7 +19,8 @@ export class Options {
             theme: this.theme,
             iconBase: `${this.iconBase}`,
             grid: { visibility: this.grid ? 'visible' : 'hidden' },
-            webSocketUrl: this.websocketUrl
+            webSocketUrl: this.websocketUrl,
+            resizeWithContainer: true
         };
     }
 
