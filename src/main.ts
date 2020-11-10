@@ -5,6 +5,7 @@ import { DrawingActions, ThemeChangeEvent, OptionToggleEvent, FlowActions, FlowA
 import { Splitters } from './splitters';
 import { Options } from './options';
 import { Storage } from './storage';
+import { MenuProvider } from './menu';
 
 // TODO: stub flowbiz api to run in browser (on public site)
 window.addEventListener('load', async () => {
@@ -60,18 +61,7 @@ window.addEventListener('load', async () => {
         flowDiagram.instance = instance;
         flowDiagram.step = step;
         flowDiagram.editInstanceId = editInstanceId;
-        flowDiagram.onFlowElementSelect(selectEvent => {
-            const flowElement = selectEvent.element;
-            const name = (flowElement as any).name || flowElement.id || flowDiagram.flowName;
-            document.getElementById('popup-title').innerHTML = `"${name}" properties`;
-            const popupText = document.getElementById('popup-text') as HTMLTextAreaElement;
-            popupText.setAttribute('readonly', 'true');
-            const popupOk = document.getElementById('popup-ok');
-            popupOk.style.display = 'none';
-            const obj = selectEvent.instances ? selectEvent.instances[0] : flowElement;
-            popupText.value = obj ? JSON.stringify(obj, null, options.indent): '';
-            MicroModal.show('popup');
-        });
+        flowDiagram.contextMenuProvider = new MenuProvider(flowDiagram, options);
         flowDiagram.render(options.diagramOptions);
         flowActions.enable(true);
     });

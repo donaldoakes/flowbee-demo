@@ -116,6 +116,7 @@ h1 {
   flex-grow: 1;
   overflow: auto;
   padding: 3px;
+  user-select: none;
 }
 .diagram > canvas {
   height: 100%;
