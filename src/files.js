@@ -36,5 +36,13 @@ app.get('/descriptors', async (req, res) => {
     res.set('Content-Type', 'application/json');
     res.send(JSON.stringify(descriptors, null, 2));
 });
+app.get('/templates', async (req, res) => {
+    const templates = dirTree("public/templates", {
+        extensions: /\.yaml/,
+        normalizePath: true
+    }, trimPath);
+    res.set('Content-Type', 'application/json');
+    res.send(JSON.stringify(templates, null, 2));
+});
 
 app.listen(8000);

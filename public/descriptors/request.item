@@ -1,0 +1,6 @@
+{
+  "icon": "request.svg",
+  "path": "request.ts",
+  "name": "Request",
+  "template": "request.yaml"
+}

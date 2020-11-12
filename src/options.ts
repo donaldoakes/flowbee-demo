@@ -37,4 +37,11 @@ export class Options {
             iconBase: `${this.iconBase}`
         };
     }
+
+    get configuratorOptions(): flowbee.ConfiguratorOptions {
+        return {
+            theme: this.theme,
+            sourceTab: this.yaml ? 'yaml' : 'json'
+        };
+    }
 }
