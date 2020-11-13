@@ -99,6 +99,9 @@ window.addEventListener('load', async () => {
         options.theme = e.theme;
         flowTree.render(options.flowTreeOptions);
         toolbox.render(options.toolboxOptions);
+        if (configurator.isOpen) {
+            configurator.render(configurator.flowElement, configurator.template, options.configuratorOptions);
+        }
         flowDiagramElement.style.backgroundColor = options.theme === 'dark' ? '#1e1e1e' : '#ffffff';
         if (flowDiagram) {
             flowDiagram.render(options.diagramOptions);
