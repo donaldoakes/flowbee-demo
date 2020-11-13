@@ -135,6 +135,12 @@ h1 {
 .flowbee-diagram-light .title {
   visibility: visible; /* temp until header */
 }
+.flowbee-configurator {
+  width: 850px;
+  height: 200px;
+  left: 355px;
+  bottom: 35px;
+}
 
 .popup {
   display: none;
