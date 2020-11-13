@@ -6,6 +6,7 @@ import { Splitters } from './splitters';
 import { Options } from './options';
 import { Storage } from './storage';
 import { MenuProvider } from './menu';
+import { Step } from 'flowbee';
 
 // TODO: stub flowbiz api to run in browser (on public site)
 window.addEventListener('load', async () => {
@@ -13,6 +14,14 @@ window.addEventListener('load', async () => {
     const flowbizBase = 'http://localhost:8080';
     const webSocketUrl = 'ws://localhost:8080/websocket';
     const options = new Options(base, webSocketUrl);
+    const configurator = new flowbee.Configurator();
+    // TODO: flowbee will embed this icon
+    for (const toolIcon of (document.querySelectorAll('input[type=image]') as any)) {
+        if (!toolIcon.getAttribute('src') && toolIcon.hasAttribute('data-icon')) {
+            const icon = toolIcon.getAttribute('data-icon') as string;
+            toolIcon.setAttribute('src', `img/${icon}`);
+        }
+    }
 
     const readonly = false;
     let flowPath: string;
@@ -46,6 +55,7 @@ window.addEventListener('load', async () => {
     const flowTree = new flowbee.FlowTree(await buildFileTree(), flowTreeElement);
     flowTree.render(options.flowTreeOptions);
     flowTree.onFlowSelect(async (selectEvent: flowbee.FlowTreeSelectEvent) => {
+        configurator.close();
         const canvasElement = document.getElementById('diagram-canvas') as HTMLCanvasElement;
         let text: string;
         if (storage.isLocal(selectEvent.path)) {
@@ -61,7 +71,18 @@ window.addEventListener('load', async () => {
         flowDiagram.instance = instance;
         flowDiagram.step = step;
         flowDiagram.editInstanceId = editInstanceId;
-        flowDiagram.contextMenuProvider = new MenuProvider(flowDiagram, options);
+        flowDiagram.contextMenuProvider = new MenuProvider(flowDiagram, options, configurator);
+        flowDiagram.onFlowElementSelect(async flowElementSelect => {
+            if (flowElementSelect.element && configurator.isOpen) {
+                const flowElement = flowElementSelect.element;
+                // TODO templates cache (convert existing?)
+                let template = '{}';
+                if (flowElement?.type === 'step' && (flowElement as Step).path === 'request.ts') {
+                    template = await (await fetch('/templates/request.yaml')).text();
+                }
+                configurator.render(flowElement, template, options.configuratorOptions);
+            }
+        });
         flowDiagram.render(options.diagramOptions);
         flowActions.enable(true);
     });
