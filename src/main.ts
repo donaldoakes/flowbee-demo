@@ -83,6 +83,17 @@ window.addEventListener('load', async () => {
                 configurator.render(flowElement, template, options.configuratorOptions);
             }
         });
+        flowDiagram.onFlowElementUpdate(async flowElementUpdate => {
+            const flowElement = flowElementUpdate.element;
+            if (configurator.isOpen && configurator.flowElement.id === flowElement.id) {
+                // TODO templates cache (convert existing?)
+                let template = '{}';
+                if (flowElement?.type === 'step' && (flowElement as Step).path === 'request.ts') {
+                    template = await (await fetch('/templates/request.yaml')).text();
+                }
+                configurator.render(flowElement, template, options.configuratorOptions);
+            }
+        });
         flowDiagram.render(options.diagramOptions);
         flowActions.enable(true);
     });
