@@ -123,14 +123,6 @@ h1 {
   width: 100%;
 }
 
-.config {
-  position: fixed;
-  width: 850px;
-  height: 200px;
-  left: 350px;
-  bottom: 30px;
-}
-
 /* customized flowbee styles */
 .flowbee-tree {
   border-right: 2px ridge #e7e7e7;

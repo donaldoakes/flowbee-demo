@@ -31,8 +31,7 @@ export class MenuProvider extends flowbee.DefaultMenuProvider {
     private static configurator: flowbee.Configurator | undefined = undefined;
     show(flowElement: flowbee.FlowElement, template: string) {
         if (!MenuProvider.configurator) {
-            const container = document.getElementById('flow-config');
-            MenuProvider.configurator = new flowbee.Configurator(container);
+            MenuProvider.configurator = new flowbee.Configurator();
             // TODO: flowbee will embed this icon
             for (const toolIcon of (document.querySelectorAll('input[type=image]') as any)) {
                 if (!toolIcon.getAttribute('src') && toolIcon.hasAttribute('data-icon')) {
@@ -42,6 +41,6 @@ export class MenuProvider extends flowbee.DefaultMenuProvider {
             }
 
         }
-        MenuProvider.configurator.render(flowElement, template, this.options);
+        MenuProvider.configurator.render(flowElement, template, this.options.configuratorOptions);
     }
 }
