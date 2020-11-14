@@ -1,5 +1,7 @@
 {
   "path": "flowbee-demo.stop",
   "name": "Stop",
-  "icon": "shape:stop"
+  "type": "step",
+  "icon": "shape:stop",
+  "category": "stop"
 }

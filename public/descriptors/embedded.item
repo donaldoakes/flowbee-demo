@@ -1,0 +1,7 @@
+{
+  "icon": "embedded.png",
+  "path": "subflow",
+  "name": "Embedded Subflow",
+  "category": "embedded",
+  "type": "subflow"
+}

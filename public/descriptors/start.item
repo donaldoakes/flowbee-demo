@@ -1,5 +1,7 @@
 {
   "path": "flowbee-demo.start",
   "name": "Start",
-  "icon": "shape:start"
+  "type": "step",
+  "icon": "shape:start",
+  "category": "start"
 }

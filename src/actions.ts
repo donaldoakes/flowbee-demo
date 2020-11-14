@@ -1,4 +1,5 @@
 import * as flowbee from 'flowbee';
+import { Options } from './options';
 
 export interface ThemeChangeEvent {
     theme: string;
@@ -22,13 +23,18 @@ export class DrawingActions {
         this._onOptionToggle.on(listener);
     }
 
-    constructor(container: HTMLElement) {
+    constructor(container: HTMLElement, readonly options: Options) {
         const themeSelect = container.querySelector('#theme-select') as HTMLSelectElement;
+        themeSelect.value = options.theme;
         themeSelect.onchange = e => {
             this._onThemeChange.emit({ theme: (e.target as HTMLSelectElement).value });
         };
         const gridToggle = container.querySelector('#grid') as HTMLInputElement;
         gridToggle.onclick = e => {
+            this._onOptionToggle.emit({ option: (e.target as HTMLElement).id });
+        };
+        const snapToggle = container.querySelector('#snap') as HTMLInputElement;
+        snapToggle.onclick = e => {
             this._onOptionToggle.emit({ option: (e.target as HTMLElement).id });
         };
     }

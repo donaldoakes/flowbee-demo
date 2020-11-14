@@ -2,9 +2,10 @@ import * as flowbee from 'flowbee';
 
 export class Options {
 
-    theme = 'light';
+    theme: string;
     grid = true;
     snap = true;
+    title = true;
     zoom = 100;
     yaml = true;
     indent = 2;
@@ -12,15 +13,19 @@ export class Options {
     get iconBase() { return `${this.base}/icons`; }
     storagePath = '/flows/localStorage';
 
-    constructor(readonly base: string, readonly websocketUrl) {}
+    constructor(readonly base: string, readonly websocketUrl) {
+        this.theme = localStorage.getItem('flowbee-theme') || 'light';
+    }
 
     get diagramOptions(): flowbee.DiagramOptions & flowbee.DrawingOptions {
         return {
             theme: this.theme,
             iconBase: `${this.iconBase}`,
-            grid: { visibility: this.grid ? 'visible' : 'hidden' },
             webSocketUrl: this.websocketUrl,
-            resizeWithContainer: true
+            resizeWithContainer: true,
+            showGrid: this.grid,
+            snapToGrid: this.snap,
+            showTitle: this.title
         };
     }
 

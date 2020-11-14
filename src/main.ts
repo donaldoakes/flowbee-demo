@@ -34,7 +34,7 @@ window.addEventListener('load', async () => {
 
     const descriptors = await Descriptors.getDescriptors(base);
 
-    const drawingActions = new DrawingActions(document.getElementById('drawing-actions'));
+    const drawingActions = new DrawingActions(document.getElementById('drawing-actions'), options);
     const flowActions = new FlowActions(document.getElementById('flow-actions'));
 
     const flowTreeElement = document.getElementById('flow-tree') as HTMLDivElement;
@@ -106,6 +106,7 @@ window.addEventListener('load', async () => {
 
     new Splitters(flowTreeElement, toolboxElement);
 
+
     drawingActions.onThemeChange((e: ThemeChangeEvent) => {
         options.theme = e.theme;
         flowTree.render(options.flowTreeOptions);
@@ -117,7 +118,9 @@ window.addEventListener('load', async () => {
         if (flowDiagram) {
             flowDiagram.render(options.diagramOptions);
         }
+        localStorage.setItem('flowbee-theme', options.theme);
     });
+
     drawingActions.onOptionToggle((e: OptionToggleEvent) => {
         const drawingOption = e.option;
         document.getElementById(`${drawingOption}`).classList.toggle('unselected');
