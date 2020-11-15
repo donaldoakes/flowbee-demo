@@ -1,7 +1,7 @@
 import * as flowbee from 'flowbee';
 import MicroModal from 'micromodal';
 import { Descriptors } from './descriptors';
-import { DrawingActions, ThemeChangeEvent, OptionToggleEvent, FlowActions, FlowActionEvent } from './actions';
+import { DrawingActions, ThemeChangeEvent, OptionToggleEvent, FlowActions, FlowActionEvent, ZoomChangeEvent } from './actions';
 import { Splitters } from './splitters';
 import { Options } from './options';
 import { Storage } from './storage';
@@ -56,6 +56,7 @@ window.addEventListener('load', async () => {
     flowTree.render(options.flowTreeOptions);
     flowTree.onFlowSelect(async (selectEvent: flowbee.FlowTreeSelectEvent) => {
         configurator.close();
+        (document.getElementById('zoom-range') as HTMLInputElement).value = '100';
         const canvasElement = document.getElementById('diagram-canvas') as HTMLCanvasElement;
         let text: string;
         if (storage.isLocal(selectEvent.path)) {
@@ -128,6 +129,10 @@ window.addEventListener('load', async () => {
         if (flowDiagram) {
             flowDiagram.render(options.diagramOptions);
         }
+    });
+
+    drawingActions.onZoomChange((e: ZoomChangeEvent) => {
+        flowDiagram.zoom = e.zoom;
     });
 
     flowActions.onFlowAction(async (e: FlowActionEvent) => {

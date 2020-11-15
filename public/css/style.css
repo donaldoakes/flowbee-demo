@@ -72,17 +72,18 @@ h1 {
 }
 .actions input[type=range] {
   width: 80px;
-  height: 1px;
+  height: 2px;
   position: relative;
   top: -9px;
   background-color: black;
+  cursor: pointer;
   -webkit-appearance: none;
 }
 .actions input[type=range]:focus {
   outline: none;
 }
 .actions input[type=range]::-webkit-slider-runnable-track {
-  height: 1px;
+  height: 2px;
   background: black;
 }
 .actions input[type=range]::-webkit-slider-thumb {

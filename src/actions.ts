@@ -7,6 +7,9 @@ export interface ThemeChangeEvent {
 export interface OptionToggleEvent {
     option: string;
 }
+export interface ZoomChangeEvent {
+    zoom: number;
+}
 export interface FlowActionEvent {
     action: string;
 }
@@ -23,6 +26,11 @@ export class DrawingActions {
         this._onOptionToggle.on(listener);
     }
 
+    private _onZoomChange = new flowbee.TypedEvent<ZoomChangeEvent>();
+    onZoomChange(listener: flowbee.Listener<ZoomChangeEvent>) {
+        this._onZoomChange.on(listener);
+    }
+
     constructor(container: HTMLElement, readonly options: Options) {
         const themeSelect = container.querySelector('#theme-select') as HTMLSelectElement;
         themeSelect.value = options.theme;
@@ -37,6 +45,37 @@ export class DrawingActions {
         snapToggle.onclick = e => {
             this._onOptionToggle.emit({ option: (e.target as HTMLElement).id });
         };
+        const zoomSlider = container.querySelector('#zoom-range') as HTMLInputElement;
+        zoomSlider.oninput = e => {
+            this._onZoomChange.emit({ zoom: parseInt((e.target as HTMLInputElement).value) });
+        };
+        const zoomOut = container.querySelector('#zoom-out') as HTMLInputElement;
+        zoomOut.onclick = e => {
+            const zoom = Math.max(parseInt(zoomSlider.value) - 20, 20);
+            zoomSlider.value = '' + zoom;
+            this._onZoomChange.emit({ zoom });
+        };
+        const zoomIn = container.querySelector('#zoom-in') as HTMLInputElement;
+        zoomIn.onclick = e => {
+            const zoom = Math.min(parseInt(zoomSlider.value) + 20, 200);
+            zoomSlider.value = '' + zoom;
+            this._onZoomChange.emit({ zoom });
+        };
+        // pinch gesture
+        window.addEventListener('wheel', e => {
+            if (e.ctrlKey && document.activeElement === document.getElementById('diagram-canvas')) {
+                e.preventDefault();
+                let zoom = parseInt(zoomSlider.value) - e.deltaY;
+                if (zoom < 20) {
+                    zoom = 20;
+                }
+                else if (zoom > 200) {
+                    zoom = 200;
+                }
+                zoomSlider.value = '' + zoom;
+                this._onZoomChange.emit({ zoom });
+            }
+        }, { passive: false });
     }
 }
 
