@@ -7,6 +7,7 @@ export class Options {
     snap = true;
     title = true;
     zoom = 100;
+    mode: 'select' | 'connect' = 'select';
     yaml = true;
     indent = 2;
 

@@ -76,6 +76,10 @@ export class DrawingActions {
                 this._onZoomChange.emit({ zoom });
             }
         }, { passive: false });
+        const modeToggle = container.querySelector('#mode-toggle') as HTMLSpanElement;
+        modeToggle.onclick = e => {
+            this._onOptionToggle.emit({ option: 'mode' });
+        };
     }
 }
 

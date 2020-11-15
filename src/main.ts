@@ -107,7 +107,6 @@ window.addEventListener('load', async () => {
 
     new Splitters(flowTreeElement, toolboxElement);
 
-
     drawingActions.onThemeChange((e: ThemeChangeEvent) => {
         options.theme = e.theme;
         flowTree.render(options.flowTreeOptions);
@@ -124,10 +123,17 @@ window.addEventListener('load', async () => {
 
     drawingActions.onOptionToggle((e: OptionToggleEvent) => {
         const drawingOption = e.option;
-        document.getElementById(`${drawingOption}`).classList.toggle('unselected');
-        options[drawingOption] = !options[drawingOption];
-        if (flowDiagram) {
-            flowDiagram.render(options.diagramOptions);
+        if (drawingOption === 'mode') {
+            options.mode = options.mode === 'select' ? 'connect' : 'select';
+            document.getElementById('select').classList.toggle('unselected');
+            document.getElementById('connect').classList.toggle('unselected');
+            console.log("MODE: " + options.mode);
+        } else {
+            document.getElementById(`${drawingOption}`).classList.toggle('unselected');
+            options[drawingOption] = !options[drawingOption];
+            if (flowDiagram) {
+                flowDiagram.render(options.diagramOptions);
+            }
         }
     });
 
