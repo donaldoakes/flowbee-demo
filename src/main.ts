@@ -68,6 +68,7 @@ window.addEventListener('load', async () => {
         flowPath = selectEvent.path;
         console.debug(`rendering ${flowPath} to canvas`);
         flowDiagram = new flowbee.FlowDiagram(text, canvasElement, flowPath, descriptors);
+        flowDiagram.mode = options.mode;
         flowDiagram.readonly = readonly;
         flowDiagram.instance = instance;
         flowDiagram.step = step;
@@ -127,7 +128,7 @@ window.addEventListener('load', async () => {
             options.mode = options.mode === 'select' ? 'connect' : 'select';
             document.getElementById('select').classList.toggle('unselected');
             document.getElementById('connect').classList.toggle('unselected');
-            console.log("MODE: " + options.mode);
+            flowDiagram.mode = options.mode;
         } else {
             document.getElementById(`${drawingOption}`).classList.toggle('unselected');
             options[drawingOption] = !options[drawingOption];
