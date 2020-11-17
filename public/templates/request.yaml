@@ -13,6 +13,7 @@ Request:
     - PUT
     - PATCH
     - DELETE
+    default: GET
 
 Headers:
   widgets:
@@ -27,4 +28,5 @@ Headers:
 Body:
   widgets:
   - attribute: body
+    label: Body content
     type: textarea
