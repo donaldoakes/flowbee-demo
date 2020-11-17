@@ -29,6 +29,7 @@
   "dependencies": {
     "directory-tree": "^2.2.5",
     "express": "^4.17.1",
+    "flowbee": "^0.1.1-beta.3",
     "micromodal": "^0.4.6"
   },
   "devDependencies": {
