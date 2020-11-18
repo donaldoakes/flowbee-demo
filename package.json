@@ -2,6 +2,10 @@
   "name": "flowbee-demo",
   "version": "0.0.1",
   "description": "Flow Diagramming Live Demo",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/donaldoakes/flowbee-demo.git"
+  },
   "type": "module",
   "main": "public/js/src/index.js",
   "module": "public/js/src/main.js",
@@ -10,10 +14,6 @@
     "build": "rollup -c",
     "watch": "rollup --watch -c",
     "start": "node src/files.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/donaldoakes/flowbee-demo.git"
   },
   "keywords": [
     "flow",

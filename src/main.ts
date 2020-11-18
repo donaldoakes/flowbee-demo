@@ -54,7 +54,7 @@ window.addEventListener('load', async () => {
 
     const flowTree = new flowbee.FlowTree(await buildFileTree(), flowTreeElement);
     flowTree.render(options.flowTreeOptions);
-    flowTree.onFlowSelect(async (selectEvent: flowbee.FlowTreeSelectEvent) => {
+    const onFlowSelect = async (selectEvent: flowbee.FlowTreeSelectEvent) => {
         configurator.close();
         (document.getElementById('zoom-range') as HTMLInputElement).value = '100';
         const canvasElement = document.getElementById('diagram-canvas') as HTMLCanvasElement;
@@ -98,7 +98,8 @@ window.addEventListener('load', async () => {
         });
         flowDiagram.render(options.diagramOptions);
         flowActions.enable(true);
-    });
+    };
+    flowTree.onFlowSelect(onFlowSelect);
 
     const flowDiagramElement = document.getElementById('flow-diagram') as HTMLDivElement;
     flowDiagramElement.style.backgroundColor = options.theme === 'dark' ? '#1e1e1e' : '#ffffff';
@@ -152,9 +153,10 @@ window.addEventListener('load', async () => {
                 }
                 if (name) {
                     const contents = options.yaml ? flowDiagram.toYaml(options.indent) : flowDiagram.toJson(options.indent);
-                    storage.saveFlow(name, contents);
+                    flowPath = flowDiagram.flow.path = storage.saveFlow(name, contents);
                     flowTree.fileTree = await buildFileTree();
                     flowTree.render(options.flowTreeOptions);
+                    flowDiagram.render(options.diagramOptions, false);
                 }
             } else if (flowAction === 'run') {
                 document.getElementById('popup-title').innerHTML = `Run ${name}`;

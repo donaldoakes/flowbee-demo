@@ -28,12 +28,13 @@ export class Storage {
     loadFlow(flowPath: string): string {
         return localStorage.getItem(flowPath);
     }
-    saveFlow(name: string, contents: string) {
+    saveFlow(name: string, contents: string): string {
         if (!name.endsWith('.flow')) {
             name += '.flow';
         }
         console.debug(`save: ${this.path}/${name}`);
         localStorage.setItem(`${this.path}/${name}`, contents);
+        return `${this.path}/${name}`; // new path
     }
 
     loadValues(flowPath: string) {
