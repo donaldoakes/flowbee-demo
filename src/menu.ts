@@ -12,9 +12,15 @@ export class MenuProvider extends flowbee.DefaultMenuProvider {
         super(flowDiagram);
     }
 
-    getItems(flowElementEvent: flowbee.FlowElementEvent): flowbee.MenuItem[] | undefined {
-        const items = super.getItems(flowElementEvent) || [];
-        items.unshift({ id: 'configure', label: 'Configure' });
+    getItems(flowElementEvent: flowbee.FlowElementEvent): (flowbee.MenuItem | 'separator')[] | undefined {
+        let items = super.getItems(flowElementEvent) || [];
+        if (flowElementEvent.element) {
+            items = [
+                { id: 'configure', label: 'Configure' },
+                'separator',
+                ...items
+            ];
+        }
         return items;
     }
 
