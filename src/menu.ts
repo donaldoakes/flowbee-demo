@@ -32,7 +32,7 @@ export class MenuProvider extends flowbee.DefaultMenuProvider {
                 if (flowElement.type === 'step' && (flowElement as Step).path === 'request.ts') {
                     template = await (await fetch('/templates/request.yaml')).text();
                 }
-                this.configurator.render(flowElement, template, this.options.configuratorOptions);
+                this.configurator.render(flowElement, [], template, this.options.configuratorOptions);
                 return true;
             }
         }

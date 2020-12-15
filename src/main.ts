@@ -30,7 +30,6 @@ window.addEventListener('load', async () => {
 
     const instance = undefined;
     const step: string | undefined = undefined;
-    const editInstanceId: string | undefined = undefined;
 
     const descriptors = await Descriptors.getDescriptors(base);
 
@@ -72,7 +71,6 @@ window.addEventListener('load', async () => {
         flowDiagram.readonly = readonly;
         flowDiagram.instance = instance;
         flowDiagram.step = step;
-        flowDiagram.editInstanceId = editInstanceId;
         flowDiagram.contextMenuProvider = new MenuProvider(flowDiagram, options, configurator);
         flowDiagram.onFlowElementSelect(async flowElementSelect => {
             if (flowElementSelect.element && configurator.isOpen) {
@@ -82,7 +80,7 @@ window.addEventListener('load', async () => {
                 if (flowElement?.type === 'step' && (flowElement as Step).path === 'request.ts') {
                     template = await (await fetch('/templates/request.yaml')).text();
                 }
-                configurator.render(flowElement, template, options.configuratorOptions);
+                configurator.render(flowElement, flowElementSelect.instances || [], template, options.configuratorOptions);
             }
         });
         flowDiagram.onFlowElementUpdate(async flowElementUpdate => {
@@ -93,7 +91,7 @@ window.addEventListener('load', async () => {
                 if (flowElement?.type === 'step' && (flowElement as Step).path === 'request.ts') {
                     template = await (await fetch('/templates/request.yaml')).text();
                 }
-                configurator.render(flowElement, template, options.configuratorOptions);
+                configurator.render(flowElement, [], template, options.configuratorOptions);
             }
         });
         flowDiagram.render(options.diagramOptions);
@@ -114,7 +112,7 @@ window.addEventListener('load', async () => {
         flowTree.render(options.flowTreeOptions);
         toolbox.render(options.toolboxOptions);
         if (configurator.isOpen) {
-            configurator.render(configurator.flowElement, configurator.template, options.configuratorOptions);
+            configurator.render(configurator.flowElement, [], configurator.template, options.configuratorOptions);
         }
         flowDiagramElement.style.backgroundColor = options.theme === 'dark' ? '#1e1e1e' : '#ffffff';
         if (flowDiagram) {
