@@ -11,7 +11,7 @@
       "noUnusedLocals": false
     },
     "exclude": [
-      "public",
+      "public/js",
       "node_modules"
     ]
   }
