@@ -29,6 +29,7 @@ app.get('/flows', async (req, res) => {
     res.send(JSON.stringify(flowTree, null, 2));
 });
 app.get('/descriptors', async (req, res) => {
+    const flowbizBase = 'http://localhost:8080';
     const descriptors = dirTree("public/descriptors", {
         extensions: /\.item/,
         normalizePath: true

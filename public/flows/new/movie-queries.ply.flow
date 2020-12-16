@@ -5,7 +5,7 @@ attributes:
 steps:
   - id: s1
     name: Start
-    path: start
+    path: 'steps/start.ts#Start'
     attributes:
       display: 'x=60,y=110,w=60,h=40'
     links:
@@ -15,14 +15,14 @@ steps:
         to: s3
   - id: s2
     name: Stop
-    path: stop
+    path: 'steps/stop.ts#Stop'
     attributes:
       display: 'x=722,y=112,w=60,h=40'
   - id: s3
     name: |-
       Movies by
       Year & Rating
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
       display: 'x=190,y=90,w=100,h=80'
       method: GET
@@ -39,7 +39,7 @@ steps:
     name: |-
       Movie by
       ID
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
       display: 'x=370,y=90,w=100,h=80'
       method: GET
@@ -56,7 +56,7 @@ steps:
     name: |-
       Great Films
       of 1935
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
       display: 'x=550,y=90,w=100,h=80'
       method: GET

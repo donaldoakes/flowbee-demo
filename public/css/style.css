@@ -144,7 +144,8 @@ h1 {
 }
 .flowbee-toolbox {
   border-left: 3px ridge #e7e7e7;
-  padding: 3px 0;
+  padding: 3px;
+  min-width: 120px;
 }
 .flowbee-configurator {
   width: 850px;

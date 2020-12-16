@@ -1,11 +1,11 @@
 attributes:
   NodeStyle: BoxIcon
-  display: 'x=23,y=18,w=156,h=27'
+  display: 'x=640,y=18,w=156,h=27'
   values: '[["id","435b30ad"]]'
 steps:
   - id: s1
     name: Start
-    path: start
+    path: 'steps/start.ts#Start'
     attributes:
       display: 'x=36,y=250,w=60,h=40'
     links:
@@ -16,14 +16,14 @@ steps:
           display: 'type=Elbow,x=192,y=262,xs=100&146,ys=270&270'
   - id: s2
     name: Stop
-    path: stop
+    path: 'steps/stop.ts#Stop'
     attributes:
-      display: 'x=1043,y=325,w=60,h=40'
+      display: 'x=850,y=250,w=60,h=40'
   - id: s7
     name: |-
       Create
       Movie
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
       display: 'x=150,y=230,w=100,h=80'
       url: '${baseUrl}'
@@ -76,7 +76,7 @@ steps:
     name: |-
       Update
       Rating
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
       display: 'x=290,y=230,w=100,h=80'
       url: '${baseUrl}/${id}'
@@ -91,15 +91,15 @@ steps:
         to: s9
         type: link
         attributes:
-          display: 'type=Elbow,x=424,y=543,xs=340&500,ys=314&716'
+          display: 'type=Elbow,x=410,y=270,xs=394&426,ys=270&270'
     type: step
   - id: s9
     name: |-
       Confirm
       Update
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
-      display: 'x=450,y=720,w=100,h=80'
+      display: 'x=430,y=230,w=100,h=80'
       url: '${baseUrl}/${id}'
       method: GET
       headers: '[["Accept","application/json"]]'
@@ -108,15 +108,15 @@ steps:
         to: s10
         type: link
         attributes:
-          display: 'type=Elbow,x=669,y=507,xs=554&833,ys=760&399'
+          display: 'type=Elbow,x=552,y=270,xs=534&566,ys=270&270'
     type: step
   - id: s10
     name: |-
       Delete
       Movie
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
-      display: 'x=783,y=315,w=100,h=80'
+      display: 'x=570,y=230,w=100,h=80'
       url: '${baseUrl}/${id}'
       method: DELETE
       headers: '[["Accept","application/json"]]'
@@ -125,15 +125,15 @@ steps:
         to: s11
         type: link
         attributes:
-          display: 'type=Elbow,x=900,y=355,xs=887&909,ys=355&355'
+          display: 'type=Elbow,x=691,y=270,xs=674&706,ys=270&270'
     type: step
   - id: s11
     name: |-
       Confirm
       Delete
-    path: request
+    path: 'steps/request.ts#Request'
     attributes:
-      display: 'x=913,y=315,w=100,h=80'
+      display: 'x=710,y=230,w=100,h=80'
       url: '${baseUrl}/${id}'
       method: GET
       headers: '[["Accept","application/json"]]'
@@ -142,13 +142,13 @@ steps:
         to: s2
         type: link
         attributes:
-          display: 'type=Elbow,x=1029,y=345,xs=1017&1039,ys=345&345'
+          display: 'type=Elbow,x=832,y=270,xs=814&846,ys=270&270'
     type: step
 subflows:
   - steps:
       - id: s4
         name: Start
-        path: start
+        path: 'steps/start.ts#Start'
         attributes:
           display: 'x=60,y=70,w=60,h=40'
         links:
@@ -162,7 +162,7 @@ subflows:
         name: |-
           Delete
           Movie
-        path: request
+        path: 'steps/request.ts#Request'
         attributes:
           display: 'x=180,y=50,w=100,h=80'
           method: DELETE
@@ -178,7 +178,7 @@ subflows:
         type: step
       - id: s6
         name: Stop
-        path: stop
+        path: 'steps/stop.ts#Stop'
         attributes:
           display: 'x=350,y=70,w=60,h=40'
           url: '${baseUrl}/${id}'
@@ -198,5 +198,5 @@ notes:
       Clean up any leftover
       test data
     attributes:
-      display: 'x=470,y=50,w=171.82666015625,h=40'
+      display: 'x=470,y=70,w=171.82666015625,h=40'
     type: note

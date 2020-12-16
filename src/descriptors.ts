@@ -12,8 +12,9 @@ export class Descriptors {
     }
 
     private static async load(base: string): Promise<flowbee.Descriptor[]> {
-        const dirItem = await (await fetch(`${base}/descriptors`)).json();
-        Descriptors._descriptors = await Descriptors.collect(dirItem, []);
+        Descriptors._descriptors = await (await fetch(`${base}/descriptors`)).json();
+        // const dirItem = await (await fetch(`${base}/descriptors`)).json();
+        // Descriptors._descriptors = await Descriptors.collect(dirItem, []);
         return Descriptors._descriptors;
     }
 

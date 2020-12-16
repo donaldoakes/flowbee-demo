@@ -31,7 +31,7 @@ window.addEventListener('load', async () => {
     const instance = undefined;
     const step: string | undefined = undefined;
 
-    const descriptors = await Descriptors.getDescriptors(base);
+    const descriptors = await Descriptors.getDescriptors(flowbizBase);
 
     const drawingActions = new DrawingActions(document.getElementById('drawing-actions'), options);
     const flowActions = new FlowActions(document.getElementById('flow-actions'));

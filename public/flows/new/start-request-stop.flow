@@ -1,30 +1,36 @@
 attributes:
   NodeStyle: BoxIcon
-  display: x=39,y=37,w=129,h=26
+  display: 'x=23,y=18,w=156,h=27'
+  bail: 'false'
+  values: '[["id","38a917a5"]]'
 steps:
-- id: S1
-  name: Start
-  path: 'steps/start.ts#Start'
-  attributes:
-    display: x=63,y=107,w=60,h=40
-  links:
-  - id: L1
+  - id: s1
+    name: Start
+    path: 'steps/start.ts#Start'
     attributes:
-      display: type=Elbow,x=150,y=127,xs=127&173,ys=127&127
-    to: S2
-- id: S2
-  name: Request
-  path: 'steps/request.ts#Request'
-  attributes:
-    display: x=326,y=111,w=60,h=40
-    implementor_assetVersion: '[0.2,1)'
-  links:
-  - id: L2
+      display: 'x=60,y=110,w=60,h=40'
+    links:
+      - id: l1
+        attributes:
+          display: 'type=Elbow,x=171,y=130,xs=124&216,ys=130&130'
+        to: s3
+  - id: s2
+    name: Stop
+    path: 'steps/stop.ts#Stop'
     attributes:
-      display: type=Elbow,x=417,y=131,xs=390&444,ys=131&131
-    to: S3
-- id: S3
-  name: Stop
-  path: 'steps/stop.ts#Stop'
-  attributes:
-    display: x=611,y=113,w=60,h=40
+      display: 'x=440,y=110,w=60,h=40'
+  - id: s3
+    name: Get Movie
+    path: 'steps/request.ts#Request'
+    attributes:
+      display: 'x=220,y=90,w=100,h=80'
+      method: GET
+      url: '${baseUrl}/${id}'
+      headers: '[["Accept","application/json"]]'
+    links:
+      - id: l2
+        to: s2
+        type: link
+        attributes:
+          display: 'type=Elbow,x=380,y=130,xs=324&436,ys=130&130'
+    type: step
