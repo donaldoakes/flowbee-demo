@@ -1,7 +1,7 @@
 import { step, exec } from '../../src/decorator/step.ts';
 import { StepContext } from '../../src/runtime/context.ts';
 
-@step('Decision')
+@step('Decision', 'shape:decision')
 export class Decision {
 
     @exec

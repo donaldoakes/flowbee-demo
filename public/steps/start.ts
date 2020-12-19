@@ -1,11 +1,8 @@
 import { step, exec } from '../../src/decorator/step.ts';
 import { StepContext } from '../../src/runtime/context.ts';
 
-@step('Start')
+@step('Start', 'shape:start')
 export class Start {
-
-    // @icon
-    // icon: string = 'start.png';
 
     @exec
     startFlow(context: StepContext) {

@@ -1,7 +1,7 @@
 import { step, exec } from '../../src/decorator/step.ts';
 import { StepContext } from '../../src/runtime/context.ts';
 
-@step('Dummy Step' /*, 'dummy.png'*/)
+@step('Dummy', 'dummy.png')
 export class Dummy {
 
     // @icon
