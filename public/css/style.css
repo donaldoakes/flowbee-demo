@@ -136,6 +136,9 @@ h1 {
   height: 100%;
   width: 100%;
 }
+.toolbox {
+  min-width: 150px;
+}
 
 /* customized flowbee styles */
 .flowbee-tree {
@@ -146,12 +149,6 @@ h1 {
   border-left: 3px ridge #e7e7e7;
   padding: 3px;
   min-width: 120px;
-}
-.flowbee-configurator {
-  width: 850px;
-  height: 200px;
-  left: 355px;
-  bottom: 35px;
 }
 
 .popup {

@@ -1,0 +1,6 @@
+{
+  "type": "step",
+  "path": "steps/dummy.ts#Dummy",
+  "name": "Dummy",
+  "icon": "dummy.png"
+}

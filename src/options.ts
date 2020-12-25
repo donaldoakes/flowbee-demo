@@ -10,6 +10,7 @@ export class Options {
     mode: 'select' | 'connect' = 'select';
     yaml = true;
     indent = 2;
+    descriptorsViaFlowbiz = false;
 
     get iconBase() { return `${this.base}/icons`; }
     storagePath = '/flows/localStorage';
@@ -47,7 +48,8 @@ export class Options {
     get configuratorOptions(): flowbee.ConfiguratorOptions {
         return {
             theme: this.theme,
-            sourceTab: this.yaml ? 'yaml' : 'json'
+            sourceTab: this.yaml ? 'yaml' : 'json',
+            movable: true
         };
     }
 }

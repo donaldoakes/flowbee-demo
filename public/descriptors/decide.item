@@ -1,0 +1,6 @@
+{
+  "type": "step",
+  "path": "steps/decide.ts#Decision",
+  "name": "Decision",
+  "icon": "shape:decision"
+}

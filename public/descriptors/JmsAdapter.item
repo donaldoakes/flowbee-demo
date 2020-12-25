@@ -1,5 +1,0 @@
-{
-  "icon": "adapter.png",
-  "path": "flowbee-demo.adapter.jms.JmsAdapter",
-  "name": "JmsAdapter"
-}

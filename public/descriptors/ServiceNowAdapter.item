@@ -1,5 +1,0 @@
-{
-  "icon": "servicenow.png",
-  "path": "flowbee-demo.servicenow.ServiceNowAdapter",
-  "name": "ServiceNowAdapter"
-}

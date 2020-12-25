@@ -1,5 +1,0 @@
-{
-  "icon": "adapter.png",
-  "path": "flowbee-demo.adapter.ldap.LdapAdapter",
-  "name": "LdapAdapter"
-}

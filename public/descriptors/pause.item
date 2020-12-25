@@ -1,7 +1,0 @@
-{
-  "path": "flowbee-demo.pause",
-  "name": "Pause",
-  "type": "step",
-  "icon": "shape:pause",
-  "category": "pause"
-}

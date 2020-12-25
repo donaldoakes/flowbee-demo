@@ -1,5 +1,0 @@
-{
-  "icon": "adapter.png",
-  "path": "flowbee-demo.adapter.soap.RpcWebServiceAdapter",
-  "name": "RpcWebServiceAdapter"
-}

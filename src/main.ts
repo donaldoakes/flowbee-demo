@@ -14,7 +14,10 @@ window.addEventListener('load', async () => {
     const flowbizBase = 'http://localhost:8080';
     const webSocketUrl = 'ws://localhost:8080/websocket';
     const options = new Options(base, webSocketUrl);
-    const configurator = new flowbee.Configurator();
+
+    const flowDiagramElement = document.getElementById('flow-diagram') as HTMLDivElement;
+    const configurator = new flowbee.Configurator(flowDiagramElement);
+
     // TODO: flowbee will embed this icon
     for (const toolIcon of (document.querySelectorAll('input[type=image]') as any)) {
         if (!toolIcon.getAttribute('src') && toolIcon.hasAttribute('data-icon')) {
@@ -31,7 +34,7 @@ window.addEventListener('load', async () => {
     const instance = undefined;
     const step: string | undefined = undefined;
 
-    const descriptors = await Descriptors.getDescriptors(flowbizBase);
+    const descriptors = await Descriptors.getDescriptors(options.descriptorsViaFlowbiz ? flowbizBase : undefined);
 
     const drawingActions = new DrawingActions(document.getElementById('drawing-actions'), options);
     const flowActions = new FlowActions(document.getElementById('flow-actions'));
@@ -99,7 +102,6 @@ window.addEventListener('load', async () => {
     };
     flowTree.onFlowSelect(onFlowSelect);
 
-    const flowDiagramElement = document.getElementById('flow-diagram') as HTMLDivElement;
     flowDiagramElement.style.backgroundColor = options.theme === 'dark' ? '#1e1e1e' : '#ffffff';
     const toolboxElement = document.getElementById('flow-toolbox') as HTMLDivElement;
     const toolbox = new flowbee.Toolbox(descriptors, toolboxElement);

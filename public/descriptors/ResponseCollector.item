@@ -1,5 +1,0 @@
-{
-  "icon": "collector.png",
-  "path": "flowbee-demo.microservice.ResponseCollector",
-  "name": "ResponseCollector"
-}

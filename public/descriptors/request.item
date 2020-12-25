@@ -1,6 +1,6 @@
 {
-  "icon": "request.svg",
-  "path": "request.ts",
+  "type": "step",
+  "path": "steps/request.ts#Request",
   "name": "Request",
-  "template": "request.yaml"
+  "icon": "request.svg"
 }
