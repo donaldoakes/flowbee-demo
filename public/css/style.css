@@ -150,6 +150,9 @@ h1 {
   padding: 3px;
   min-width: 120px;
 }
+.flowbee-configurator {
+  height: 167px;
+}
 
 .popup {
   display: none;
