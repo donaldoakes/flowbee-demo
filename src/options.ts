@@ -49,7 +49,7 @@ export class Options {
         return {
             theme: this.theme,
             sourceTab: this.yaml ? 'yaml' : 'json',
-            movable: true
+            moveAndResize: true
         };
     }
 }
