@@ -198,6 +198,7 @@ window.addEventListener('load', async () => {
                     }
                 };
                 MicroModal.show('popup');
+                popupOk.focus();
             }
         }
     });
