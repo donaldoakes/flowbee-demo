@@ -25,16 +25,16 @@ export class MenuProvider extends flowbee.DefaultMenuProvider {
     }
 
     async onSelectItem(selectEvent: flowbee.ContextMenuSelectEvent): Promise<boolean> {
-        if (!super.onSelectItem(selectEvent)) {
-            if (selectEvent.item.id === 'configure') {
-                const flowElement = selectEvent.element || this.flowDiagram.flow;
-                let template = '{}';
-                if (flowElement.type === 'step' && (flowElement as Step).path === 'request.ts') {
-                    template = await (await fetch('/templates/request.yaml')).text();
-                }
-                this.configurator.render(flowElement, [], template, this.options.configuratorOptions);
-                return true;
+        if (selectEvent.item.id === 'configure') {
+            const flowElement = selectEvent.element || this.flowDiagram.flow;
+            let template = '{}';
+            if (flowElement.type === 'step' && (flowElement as Step).path === 'request.ts') {
+                template = await (await fetch('/templates/request.yaml')).text();
             }
+            this.configurator.render(flowElement, [], template, this.options.configuratorOptions);
+            return true;
+        } else {
+            return super.onSelectItem(selectEvent);
         }
     }
 }
