@@ -114,7 +114,13 @@ window.addEventListener('load', async () => {
         flowTree.render(options.flowTreeOptions);
         toolbox.render(options.toolboxOptions);
         if (configurator.isOpen) {
-            configurator.render(configurator.flowElement, [], configurator.template, options.configuratorOptions);
+            configurator.render(
+                configurator.flowElement,
+                configurator.instance ? [configurator.instance] : [],
+                configurator.template,
+                options.configuratorOptions
+            );
+            flowDiagram.select(configurator.flowElement.id);
         }
         flowDiagramElement.style.backgroundColor = options.theme === 'dark' ? '#1e1e1e' : '#ffffff';
         if (flowDiagram) {
