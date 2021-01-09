@@ -1,13 +1,13 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Chrome localhost",
-            "type": "pwa-chrome",
-            "request": "launch",
-            "sourceMaps": true,
-            "url": "http://localhost:8000",
-            "webRoot": "${workspaceFolder}/public"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Chrome localhost",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "sourceMaps": true,
+      "url": "http://localhost:8000",
+      "webRoot": "${workspaceFolder}/public"
+    }
+  ]
 }
